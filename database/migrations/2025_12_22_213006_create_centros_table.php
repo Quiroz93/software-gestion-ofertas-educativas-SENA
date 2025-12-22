@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('centros', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('direccion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('correo')->nullable();
             $table->timestamps();
         });
     }
