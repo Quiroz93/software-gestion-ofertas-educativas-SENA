@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\centro;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CentroController extends Controller
 {
@@ -36,18 +37,18 @@ class CentroController extends Controller
     /**
      * Desplegar el recurso especificado.
      */
-    public function show(centro $centro)
+    public function show(Required $id)
     {
-        $centro->find($centro->id);
+        $centro = Centro::find($id);
         return view('centro.show', compact('centro'));
     }
 
     /**
      * Mostrar el formulario para editar el recurso especificado.
      */
-    public function edit(centro $centro)
+    public function edit(Required $id)
     {
-        $centro->find($centro->id);
+        $centro = Centro::find($id);
         return view('centro.edit', compact('centro'));
     }
 
@@ -63,9 +64,10 @@ class CentroController extends Controller
     /**
      * Remover el recurso especificado de almacenamiento.
      */
-    public function destroy(centro $centro)
+    public function destroy(Required $id)
     {
-        $centro::find($centro->id)->delete();
-        return redirect()->route('centro.index');
+        $centro = Centro::find($id);
+        $centro->delete();
+        return redirect()->route('centro.index')->with('success','Elemento eliminado con exito');
     }
 }
