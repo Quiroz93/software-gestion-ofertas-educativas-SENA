@@ -13,13 +13,29 @@
 
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <div class="container">
-        <a class="navbar-brand" href="">
-            Gestión de Ofertas
-    </div>
-</nav>
 
+    @extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@endsection
+
+@section('content')
+    <p>Bienvenido al sistema.</p>
+@endsection
+    @extends('adminlte::page')
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@endsection
+
+@section('content')
+    <p>Bienvenido al sistema.</p>
+@endsection
 
 <div class="container">
     @yield('content')
