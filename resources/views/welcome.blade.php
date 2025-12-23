@@ -1,1 +1,2 @@
-//disponible para nueva vista principal
+@extends('layouts.app')
+
