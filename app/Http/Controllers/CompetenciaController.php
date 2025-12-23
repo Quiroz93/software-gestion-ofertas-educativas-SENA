@@ -4,51 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Models\competencia;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CompetenciaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Desplegar una lista de los recursos.
      */
     public function index()
     {
-        //
+        $competencia = Competencia::all();
+        return view('competencia.index', compact('competencia'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario para crear un nuevo recurso.
      */
     public function create()
     {
-        //
+        return view('competencia.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear y almacenar un nuevo recurso en almacenamiento.
      */
     public function store(Request $request)
     {
-        //
+        $competencia = Competencia::create($request->all());
+        return redirect()->route('competencia.index');
     }
 
     /**
-     * Display the specified resource.
+     * Desplegar el recurso especificado.
      */
     public function show(competencia $competencia)
     {
-        //
+        $competencia->find($competencia->id);
+        return view('competencia.show', compact('competencia'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario para editar el recurso especificado.
      */
-    public function edit(competencia $competencia)
+    public function edit(Required $id)
     {
-        //
+        $competencia = Competencia::find($id);
+        return view('competencia.edit', compact('competencia'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar el recurso especificado en almacenamiento.
      */
     public function update(Request $request, competencia $competencia)
     {
@@ -56,7 +61,7 @@ class CompetenciaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remover el recurso especificado de almacenamiento.
      */
     public function destroy(competencia $competencia)
     {

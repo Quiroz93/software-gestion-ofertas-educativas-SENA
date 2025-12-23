@@ -40,24 +40,32 @@ Route::delete('centros/{centro}', [CentroController::class, 'destroy'])
 //__________________________________________________________________________________________
 
     //rutas para la gestion de competencias
+
+    // ruta para ver todas las competencias
 Route::get('competencias', [CompetenciaController::class, 'index'])
     ->name('competencia.index');
 
+    // ruta para ver el formulario de creacion de competencias
 Route::get('competencias/create', [CompetenciaController::class,'create'])
     ->name('competencia.create');
 
+    // ruta para guardar una nueva competencia
 Route::post('competencias', [CompetenciaController::class, 'store'])
     ->name('competencia.store');
 
+    // ruta para ver una competencia en particular
 Route::get('competencias/{competencia}', [CompetenciaController::class, 'show'])
     ->name('competencia.show');
 
+    // ruta para ver el formulario de edicion de una competencia
 Route::get('competencias/{competencia}/edit', [CompetenciaController::class, 'edit'])
     ->name('competencia.edit');
 
+    // ruta para actualizar una competencia
 Route::put('competencias/{competencia}', [CompetenciaController::class, 'update'])
     ->name('competencia.update');
 
+    // ruta para eliminar una competencia
 Route::delete('competencias/{competencia}', [CompetenciaController::class, 'destroy'])
     ->name('competencia.destroy');
 
