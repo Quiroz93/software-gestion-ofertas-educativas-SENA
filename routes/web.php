@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CentroController;
+use App\Http\Controllers\CompetenciaController;
 use Illuminate\Support\Facades\Route;
 
 //Rutas para la gestion de centros
@@ -35,3 +36,31 @@ Route::put('centros/{centro}', [CentroController::class, 'update'])
 // ruta para eliminar un centro
 Route::delete('centros/{centro}', [CentroController::class, 'destroy'])
     ->name('centro.destroy');
+
+//__________________________________________________________________________________________
+
+    //rutas para la gestion de competencias
+Route::get('competencias', [CompetenciaController::class, 'index'])
+    ->name('competencia.index');
+
+Route::get('competencias/create', [CompetenciaController::class,'create'])
+    ->name('competencia.create');
+
+Route::post('competencias', [CompetenciaController::class, 'store'])
+    ->name('competencia.store');
+
+Route::get('competencias/{competencia}', [CompetenciaController::class, 'show'])
+    ->name('competencia.show');
+
+Route::get('competencias/{competencia}/edit', [CompetenciaController::class, 'edit'])
+    ->name('competencia.edit');
+
+Route::put('competencias/{competencia}', [CompetenciaController::class, 'update'])
+    ->name('competencia.update');
+
+Route::delete('competencias/{competencia}', [CompetenciaController::class, 'destroy'])
+    ->name('competencia.destroy');
+
+//__________________________________________________________________________________________
+
+//Rutas para la gestion de programas
