@@ -4,63 +4,70 @@ namespace App\Http\Controllers;
 
 use App\Models\centro;
 use Illuminate\Http\Request;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CentroController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Desplegar una lista de los recursos.
      */
     public function index()
     {
         $centro = Centro::all();
-        return view("", compact(""));
+        return view('centros.index', compact('centro'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario para crear un nuevo recurso.
      */
     public function create()
     {
-        //
+            return view('centro.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear y almacenar un nuevo recurso en almacenamiento.
      */
     public function store(Request $request)
     {
-        //
+        $centro = Centro::create($request->all());
+        return redirect()->route('centro.index');
     }
 
     /**
-     * Display the specified resource.
+     * Desplegar el recurso especificado.
      */
-    public function show(centro $centro)
+    public function show(Required $id)
     {
-        //
+        $centro = Centro::find($id);
+        return view('centro.show', compact('centro'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario para editar el recurso especificado.
      */
-    public function edit(centro $centro)
+    public function edit(Required $id)
     {
-        //
+        $centro = Centro::find($id);
+        return view('centro.edit', compact('centro'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar el recurso especificado en almacenamiento.
      */
-    public function update(Request $request, centro $centro)
+    public function update(Request $request, centro $id)
     {
-        //
+        $id->update($request->all());
+        return redirect()->route('centro.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remover el recurso especificado de almacenamiento.
      */
-    public function destroy(centro $centro)
+    public function destroy(Required $id)
     {
-        //
+        $centro = Centro::find($id);
+        $centro->delete();
+        return redirect()->route('centro.index')->with('success','Elemento eliminado con exito');
     }
 }
