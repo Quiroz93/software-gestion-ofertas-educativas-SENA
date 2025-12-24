@@ -34,6 +34,9 @@ Thumbs.db
 /.zed/
 /.nova/
 
+/public/vendor/
+
+
 # Homestead
 Homestead.json
 Homestead.yaml
