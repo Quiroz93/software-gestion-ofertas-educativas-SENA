@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -60,7 +59,7 @@ Swal.fire({
 
 </body>
 </html>
-=======
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,5 +79,4 @@ Swal.fire({
     </main>
     <footer>
         <p>&copy; 2025 SENA-CATA</p>
-    </footer>   
->>>>>>> 7a339ed4bc2bb97ee1962c7d4121114af46f2790
+    </footer>
