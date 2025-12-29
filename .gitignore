@@ -76,3 +76,5 @@ Homestead.json
 Homestead.yaml
 /.vagrant/
 /vendor/bin/sail
+
+# =========================
