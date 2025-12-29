@@ -1,3 +1,13 @@
+@extends('adminlte::page')
 @section('title')
-index    
+Centros   
 @endsection
+@section('content')
+<div class="container-fluid">
+    <button class="btn btn-success">Agregar Centro</button>
+    <button class="btn btn-primary">Volver</button>
+    
+
+@endsection
+
+
