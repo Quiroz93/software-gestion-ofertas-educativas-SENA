@@ -63,11 +63,8 @@ return [
     |
     */
 
-<<< HEAD
+
     'logo' => '<b>SOES</b>',
-=======
-    'logo' => '<b>Admin</b>LTE',
->>>>>>> d1d5f44e90278b22bcfa571ae85034e81b3c015b
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
