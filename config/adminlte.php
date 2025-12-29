@@ -63,7 +63,7 @@ return [
     |
     */
 
-<<<<<<< HEAD
+<<< HEAD
     'logo' => '<b>SOES</b>',
 =======
     'logo' => '<b>Admin</b>LTE',
