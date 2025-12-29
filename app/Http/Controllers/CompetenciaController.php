@@ -31,7 +31,7 @@ class CompetenciaController extends Controller
     public function store(Request $request)
     {
         $competencia = Competencia::create($request->all());
-        return redirect()->route('competencia.index');
+        return redirect()->route('competencia.index')->with('success', 'Competencia creada correctamente');
     }
 
     /**
@@ -49,22 +49,25 @@ class CompetenciaController extends Controller
     public function edit(Required $id)
     {
         $competencia = Competencia::find($id);
-        return view('competencia.edit', compact('competencia'));
+        return view('competencia.edit', compact('competencia'))->with('success', 'Competencia cargada correctamente para editar');
     }
 
     /**
      * Actualizar el recurso especificado en almacenamiento.
      */
-    public function update(Request $request, competencia $competencia)
+    public function update(Request $request, competencia $id)
     {
-        //
+        $id->update($request->all());
+        return redirect()->route('competencia.index')->with('success', 'Competencia actualizada correctamente');
     }
 
     /**
      * Remover el recurso especificado de almacenamiento.
      */
-    public function destroy(competencia $competencia)
+    public function destroy(competencia $id)
     {
-        //
+        $competencia = Competencia::find($id);
+        $competencia->delete();
+        return redirect()->route('competencia.index')->with('success', 'Competencia eliminada correctamente');
     }
 }
