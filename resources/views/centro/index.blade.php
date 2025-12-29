@@ -4,8 +4,9 @@ Centros
 @endsection
 @section('content')
 <div class="container-fluid">
-    <button class="btn btn-success">Agregar Centro</button>
-    <button class="btn btn-primary">Volver</button>
+
+    <a href="{{-- enlace hacia vista crear--}}" class="btn btn-success">Agregar Centro</a>
+    <a href="{{-- enlace hacia vista incex--}}" class="btn btn-primary">Volver</a>
 
     <table class="table">
         <thead>
@@ -19,14 +20,14 @@ Centros
             </tr>
         </thead>
         <tbody>
+            {{-- logica de foreach --}}
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                </td>
+                <td>{{-- logica de id --}}</td>
+                <td>{{-- logica de nombre --}}</td>
+                <td>{{-- logica de direccion --}}</td>
+                <td>{{-- logica de telefono --}}</td>
+                <td>{{-- logica de correo --}}</td>
+                <td>{{-- se debe agregar botones eliminar y editar--}}</td>
             </tr>
         </tbody>
     </table>
