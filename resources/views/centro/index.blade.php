@@ -26,8 +26,6 @@ Centros
                 <td></td>
                 <td></td>
                 <td>
-                    <button class="btn btn-info">Editar</button>
-                    <button class="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
         </tbody>
