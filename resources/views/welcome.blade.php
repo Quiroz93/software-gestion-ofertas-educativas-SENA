@@ -49,7 +49,6 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Programas</span>
                     <a href="" class="small text-white">
-                    class="small text-white">
                         Ver programas
                     </a>
                 </div>
