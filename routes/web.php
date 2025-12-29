@@ -72,3 +72,6 @@ Route::delete('competencias/{competencia}', [CompetenciaController::class, 'dest
 //__________________________________________________________________________________________
 
 //Rutas para la gestion de programas
+
+// ruta para ver todos los programas
+//Route::get('programas', [ProgramaController::class, 'index'])->name('programas.index');

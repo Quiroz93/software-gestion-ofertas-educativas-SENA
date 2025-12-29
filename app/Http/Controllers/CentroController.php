@@ -14,7 +14,7 @@ class CentroController extends Controller
     public function index()
     {
         $centro = Centro::all();
-        return view('centros.index', compact('centro'));
+        return view('centro.index', compact('centro'));
     }
 
     /**
