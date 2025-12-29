@@ -30,7 +30,7 @@ class CentroController extends Controller
      */
     public function store(Request $request)
     {
-        $centro = Centro::create($request->all());
+        Centro::create($request->all());
         return redirect()->route('centro.index');
     }
 
