@@ -1,43 +1,78 @@
+# =========================
 # Logs
+# =========================
 *.log
 
+# =========================
 # OS files
+# =========================
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
 
+# =========================
 # Environment
+# =========================
 .env
 .env.*
 .auth.json
 
+# =========================
 # PHP / Composer
+# =========================
 /vendor/
 .phpunit.result.cache
 /.phpunit.cache
 .phpactor.json
 
-# Node / Vite
+# =========================
+# Node / Vite / Mix
+# =========================
 /node_modules/
 /public/build/
 /public/hot/
+/public/mix-manifest.json
 /.vite/
+npm-debug.log
+yarn-error.log
+yarn-debug.log*
 
+# =========================
+# Public vendor assets
+# (AdminLTE, Bootstrap, etc.)
+# =========================
+/public/vendor/
+
+# =========================
 # Laravel
+# =========================
 /storage/*.key
 /storage/pail
 /bootstrap/cache/*
 
-# IDEs
+# =========================
+# IDEs / Editors
+# =========================
 /.idea/
 /.vscode/
 /.fleet/
 /.zed/
 /.nova/
+*.sublime-project
+*.sublime-workspace
+/nbproject/private/
+/.settings/
+/.project
+/.cproject
+*.swp
+*~~
 
-/public/vendor/
-
-
-# Homestead
+# =========================
+# Homestead / Sail
+# =========================
 Homestead.json
 Homestead.yaml
-
+/.vagrant/
+/vendor/bin/sail
