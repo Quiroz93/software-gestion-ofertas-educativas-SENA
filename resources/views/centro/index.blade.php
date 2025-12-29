@@ -4,7 +4,6 @@ Centros
 @endsection
 @section('content')
 <div class="container-fluid">
-    <h1>Gestionar Centros</h1>
 
     <a href="{{-- enlace hacia vista crear--}}" class="btn btn-success">Agregar Centro</a>
     <a href="{{-- enlace hacia vista incex--}}" class="btn btn-primary">Volver</a>
