@@ -1,82 +1,33 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-      @yield('title')
-    </title>
+@extends('adminlte::page')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+{{-- Título por defecto --}}
+@section('title', 'SOES | Sistema de Ofertas Educativas')
 
-
-<body class="bg-light">
-
-    @extends('adminlte::page')
-
-@section('title', 'Dashboard')
-
+{{-- Header común para todas las vistas --}}
 @section('content_header')
-    <h1>Dashboard</h1>
-@endsection
+    <div class="container-fluid">
+        <h1 class="mb-1 font-weight-bold">
+            @yield('page_title', 'Panel principal')
+        </h1>
+        <p class="text-muted mb-0">
+            @yield('page_subtitle', 'Sistema de Gestión de Ofertas Educativas – SENA')
+        </p>
+    </div>
+@stop
 
+{{-- Contenido principal --}}
 @section('content')
-    <p>Bienvenido al sistema.</p>
-@endsection
-    @extends('adminlte::page')
+    <div class="container-fluid">
+        @yield('content_body')
+    </div>
+@stop
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Dashboard</h1>
-@endsection
-
-@section('content')
-    <p>Bienvenido al sistema.</p>
-@endsection
-
-<div class="container">
-    @yield('content')
-</div>
-
-<!-- SweetAlert2 -->
-<script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
-
-<!-- Mensajes automáticos -->
-@if(session('success'))
-<script>
-Swal.fire({
-    icon: 'success',
-    title: 'Operación exitosa',
-    text: '{{ session("success") }}',
-    timer: 2000,
-    showConfirmButton: false
-});
-</script>
-@endif
-
-</body>
-</html>
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>layout</title>
-</head>
-<body>
-    
-</body>
-</html>
-    <header>
-        <h1>Welcome to SENA-CATA</h1>
-        <h2>Contenedor de layout app standard</h2>
-    </header>
-    <main>
-        @yield('content')
-    </main>
-    <footer>
-        <p>&copy; 2025 SENA-CATA</p>
-    </footer>
+{{-- Footer opcional --}}
+@section('footer')
+    <div class="text-center text-muted">
+        <small>
+            © {{ date('Y') }} SOES – Servicio Nacional de Aprendizaje (SENA)
+        </small>
+    </div>
+@stop
+{{-- Sección para incluir estilos adicionales --}}
