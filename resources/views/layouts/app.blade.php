@@ -3,6 +3,8 @@
 {{-- Título por defecto --}}
 @section('title', 'SOES | Sistema de Ofertas Educativas')
 
+
+
 {{-- Header común para todas las vistas --}}
 @section('content_header')
     <div class="container-fluid">
