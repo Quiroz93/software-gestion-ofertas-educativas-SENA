@@ -18,10 +18,25 @@
     <div class="container">
 
         <!-- Logo / Nombre -->
-        <a class="navbar-brand" href="#" style="color:rgb(57, 169, 0) ;font-size:1.5rem;font-family:worksans, sans-serif;">
-            <img src="img/Logosimbolo-SENA.svg" alt="Logo" width="40" height="40" class="me-2">
+        <a href="{{ route('dashboard') }}" class="brand-link">
+    <span class="brand-image">
+        {!! file_get_contents(public_path('images/logosimbolo-SENA.svg')) !!}
+    </span>
+    {{--estilo del logo--}}
+    <style>
+        .brand-image svg {
+            width: 40px;
+            height: 40px;
+            display: block;
+            color: #39A900; 
+            margin-right: 1.8rem/* Verde SENA */
+        }
+    </style>
+</a>
+        <a class="navbar-brand " href="#" style="color:#ffff ;font-size:1rem;font-family:worksans, sans-serif;">
             SOE | SENA
         </a>
+        
 
         <!-- Botón responsive -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -37,17 +52,27 @@
             <div class="ms-auto">
                 <div class="d-flex gap-3 flex-wrap">
 
-                    <ul class="navbar-nav flex-row gap-3" style="font-size:12px; font-family:worksans,sans-serif; color: rgb(255, 255, 255)">
+                    <ul class="navbar-nav flex-row gap-3" style="font-size:12px; font-family:worksans,sans-serif">
                         <li class="nav-item">
-                            <a class="nav-link text-decoration-underline" href="#">Inicio</a>
+                            <a class="nav-link text-decoration-underline texto-hover" href="#">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-decoration-underline" href="#">Servicios</a>
+                            <a class="nav-link text-decoration-underline texto-hover" href="#">Servicios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-decoration-underline" href="#">Contacto</a>
+                            <a class="nav-link text-decoration-underline texto-hover" href="#">Contacto</a>
                         </li>
                     </ul>
+                    <style>
+                        .texto-hover {
+                            color:#ffff ;
+                            transition: color 0.3s ease;
+                        }
+
+                        .texto-hover:hover {
+                            color: #39A900; /* azul */
+                        }   
+                    </style>
 
                     <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
                         <i class="fas fa-sign-in-alt me-2"></i> Iniciar sesión
@@ -88,14 +113,15 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active" style="height: 350px;">
-                            <img src="https://www.inci.gov.co/sites/default/files/styles/imagen_internas_1110x624_/public/2020-12/nota-5-el-inci-desarrolla-alianzas-claves-para-impulsar-la-empleabilidad-de-colombianos-condiscapacidad-visual.jpg?itok=p2AzdWQP" class="d-block w-100" alt="...">
+                            <img src="{{ asset('images/oferta1.jpeg') }}" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item" style="height: 350px;">
-                            <img src="https://www.sena.edu.co/es-co/Noticias/PublishingImages/Denuncia_12042024.jpg" class="d-block w-100" alt="...">
+                            <img src="{{ asset('images/oferta2.jpeg') }}" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item" style="height: 350px;">
-                            <img src="https://www.sena.edu.co/es-co/Noticias/NoticiasImg/FormacionVirtual-121125.jpg" class="d-block w-100" alt="...">
+                            <img src="{{ asset('images/oferta3.jpeg') }}" class="d-block w-100" alt="...">
                             </div>
+                            
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
