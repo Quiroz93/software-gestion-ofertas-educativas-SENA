@@ -13,9 +13,58 @@
 
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+    <div class="container">
 
+        <!-- Logo / Nombre -->
+        <a class="navbar-brand" href="#" style="color:rgb(57, 169, 0) ;font-size:1.5rem;font-family:worksans, sans-serif;">
+            <img src="img/Logosimbolo-SENA.svg" alt="Logo" width="40" height="40" class="me-2">
+            SOE | SENA
+        </a>
+
+        <!-- Botón responsive -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarAuth" aria-controls="navbarAuth"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenido -->
+        <div class="collapse navbar-collapse" id="navbarAuth">
+
+            <!-- Espaciador para centrar -->
+            <div class="ms-auto">
+                <div class="d-flex gap-3 flex-wrap">
+
+                    <ul class="navbar-nav flex-row gap-3" style="font-size:12px; font-family:worksans,sans-serif; color: rgb(255, 255, 255)">
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" href="#">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-decoration-underline" href="#">Contacto</a>
+                        </li>
+                    </ul>
+
+                    <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-sign-in-alt me-2"></i> Iniciar sesión
+                    </a>
+
+                    <a href="{{ route('register') }}" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-user-plus me-2"></i> Registrarse
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>
 {{-- HERO --}}
-<section class="hero d-flex align-items-center">
+<section class="hero  align-items-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -23,29 +72,44 @@
                 <div class="hero-card text-center">
 
                     <h1 class="fw-bold mb-3">
-                        Sistema de Gestión de Ofertas Educativas
+                        Sistema de Ofertas Educativas
                     </h1>
 
                     <p class="text-muted fs-5 mb-4">
                         Plataforma institucional para la administración, control y publicación
                         de ofertas educativas del SENA.
                     </p>
-
-                    {{-- Acciones --}}
-                    <div class="d-flex justify-content-center gap-3 flex-wrap mb-5">
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-sign-in-alt me-2"></i> Iniciar sesión
-                        </a>
-
-                        <a href="{{ route('register') }}" class="btn btn-outline-success btn-lg">
-                            <i class="fas fa-user-plus me-2"></i> Registrarse
-                        </a>
+                    <div class="container">
+                        <div id="carouselExampleIndicators" class="carousel slide" style="height: 350px;">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="height: 350px;">
+                            <img src="https://www.inci.gov.co/sites/default/files/styles/imagen_internas_1110x624_/public/2020-12/nota-5-el-inci-desarrolla-alianzas-claves-para-impulsar-la-empleabilidad-de-colombianos-condiscapacidad-visual.jpg?itok=p2AzdWQP" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" style="height: 350px;">
+                            <img src="https://www.sena.edu.co/es-co/Noticias/PublishingImages/Denuncia_12042024.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" style="height: 350px;">
+                            <img src="https://www.sena.edu.co/es-co/Noticias/NoticiasImg/FormacionVirtual-121125.jpg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
                     </div>
-
                     {{-- Características --}}
                     <div class="row g-4">
-
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <i class="fas fa-building feature-icon mb-3"></i>
                             <h6 class="fw-bold">Centros</h6>
                             <p class="text-muted small">
@@ -53,7 +117,7 @@
                             </p>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <i class="fas fa-book feature-icon mb-3"></i>
                             <h6 class="fw-bold">Programas</h6>
                             <p class="text-muted small">
@@ -61,19 +125,11 @@
                             </p>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <i class="fas fa-graduation-cap feature-icon mb-3"></i>
                             <h6 class="fw-bold">Ofertas</h6>
                             <p class="text-muted small">
                                 Control de ofertas educativas vigentes.
-                            </p>
-                        </div>
-
-                        <div class="col-md-3">
-                            <i class="fas fa-users feature-icon mb-3"></i>
-                            <h6 class="fw-bold">Usuarios</h6>
-                            <p class="text-muted small">
-                                Roles y permisos del sistema.
                             </p>
                         </div>
 
@@ -124,6 +180,13 @@
             font-size: .9rem;
             opacity: .8;
         }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            font-family: wordmark, sans-serif;
+        }
+        
     </style>
 
 @stop
