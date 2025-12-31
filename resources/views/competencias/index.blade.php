@@ -17,4 +17,30 @@
     </div>
 </section>
 
+<section>
+    <div class="container mt-4">
+        {{-- seccion de tabla de datos --}}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de la Competencia</th>
+                    <th>Descripcion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{-- Ejemplo de fila de datos --}}
+                <tr>
+                    <td>{{-- logica de id --}}</td>
+                    <td>{{-- logica de nombre --}}</td>
+                    <td>{{-- logica de descripcion --}}</td>
+                    <td>{{-- se debe agregar botones eliminar y editar--}}</td>   
+                    </tr>
+                {{-- Agregar mas filas segun los datos disponibles --}}
+            </tbody>
+        </table>
+    </div>
+</section>
+
 @endsection
