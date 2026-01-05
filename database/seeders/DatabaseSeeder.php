@@ -2,24 +2,36 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
+        // Permisos
+        $permissions = [
+            'view centros',
+            'create centros',
+            'update centros',
+            'delete centros',
+            'manage users',
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // Roles
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $instructor = Role::firstOrCreate(['name' => 'instructor']);
+
+        // Asignar permisos
+        $admin->givePermissionTo(Permission::all());
+
+        $instructor->givePermissionTo([
+            'view centros',
         ]);
     }
 }

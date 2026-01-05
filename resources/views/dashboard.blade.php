@@ -70,13 +70,13 @@
 
                 <div class="d-flex gap-2 flex-wrap">
 
-                    @can('create centros')
+                    @can('crear centros')
                     <a href="{{ route('centro.index') }}" class="btn btn-success">
                         {{ __('Crear centro') }}
                     </a>
                     @endcan
 
-                    @can('manage users')
+                    @can('gestionar usuarios')
                     <a href="#" class="btn btn-outline-primary">
                         {{ __('Gestionar usuarios') }}
                     </a>
