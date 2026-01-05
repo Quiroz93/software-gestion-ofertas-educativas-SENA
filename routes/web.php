@@ -13,6 +13,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+//Home
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
 //Rutas de perfil
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,7 +31,8 @@ require __DIR__ . '/auth.php';
 //Rutas de centros educativos
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('centros/index', [CentroController::class, 'index'])->name('centro.index');
-    Route::post('centros/create', [CentroController::class, 'store'])->name('centro.store');
+    Route::get('centros/create', [CentroController::class, 'create'])->name('centro.create');
+    Route::post('centros/store', [CentroController::class, 'store'])->name('centro.store');
     Route::get('centros/{id}/edit', [CentroController::class, 'edit'])->name('centro.edit');
     Route::put('centros/{id}/update', [CentroController::class, 'update'])->name('centro.update');
     Route::delete('centros/{id}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');

@@ -13,7 +13,7 @@
 
         {{-- Botón volver --}}
         <div class="col-12 mb-3">
-            <a href="{{ route('centros.index') }}" class="btn btn-primary">
+            <a href="{{ route('centro.index') }}" class="btn btn-primary">
                 Volver
             </a>
         </div>
@@ -33,13 +33,13 @@
 
         {{-- Formulario --}}
         <div class="col-12">
-            <form action="{{ route('centros.store') }}" method="POST">
+            <form action="{{ route('centro.store') }}" method="POST">
                 @csrf
 
                 <div class="row">
                     <div class="col-6">
                         <label class="form-label mt-3">Nombre del Centro</label>
-                        <input type="text" class="form-control" name="nombre"
+                        <input type="text" class="form-control" name="nombre" for="nombre"
                                value="{{ old('nombre') }}" required>
                     </div>
 
