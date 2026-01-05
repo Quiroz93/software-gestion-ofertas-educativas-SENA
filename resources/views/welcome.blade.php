@@ -113,13 +113,13 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active" style="height: 350px;">
-                            <img src="{{ asset('images/oferta1.jpeg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('') }}" class="d-block w-100" alt="Imagen-reprecentativa-1">
                             </div>
                             <div class="carousel-item" style="height: 350px;">
-                            <img src="{{ asset('images/oferta2.jpeg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('') }}" class="d-block w-100" alt="Imagen-reprecentativa-2">
                             </div>
                             <div class="carousel-item" style="height: 350px;">
-                            <img src="{{ asset('images/oferta3.jpeg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('') }}" class="d-block w-100" alt="Imagen-reprecentativa-3">
                             </div>
                             
                         </div>
