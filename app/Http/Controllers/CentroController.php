@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\centro;
 use Illuminate\Http\Request;
+use Psy\Util\Str;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CentroController extends Controller
@@ -13,8 +14,8 @@ class CentroController extends Controller
      */
     public function index()
     {
-        $centro = Centro::all();
-        return view('centro.index', compact('centro'));
+        $centros = Centro::all();
+        return view('centro.index', compact('centros'));
     }
 
     /**
@@ -31,13 +32,13 @@ class CentroController extends Controller
     public function store(Request $request)
     {
         Centro::create($request->all());
-        return redirect()->route('centro.index');
+        return redirect()->route('centro.index')->with('success','Elemento creado con exito');
     }
 
     /**
      * Desplegar el recurso especificado.
      */
-    public function show(Required $id)
+    public function show(String $id)
     {
         $centro = Centro::find($id);
         return view('centro.show', compact('centro'));
@@ -46,25 +47,26 @@ class CentroController extends Controller
     /**
      * Mostrar el formulario para editar el recurso especificado.
      */
-    public function edit(Required $id)
+    public function edit(string $id)
     {
         $centro = Centro::find($id);
-        return view('centro.edit', compact('centro'));
+        return view('centro.edit', compact('centro'))->with('success','Elemento editado con exito');
     }
 
     /**
      * Actualizar el recurso especificado en almacenamiento.
      */
-    public function update(Request $request, centro $id)
+    public function update(Request $request, String $id)
     {
-        $id->update($request->all());
-        return redirect()->route('centro.index');
+        $centro = Centro::find($id);
+        $centro->update($request->all());
+        return redirect()->route('centro.index')->with('success','Elemento actualizado con exito');
     }
 
     /**
      * Remover el recurso especificado de almacenamiento.
      */
-    public function destroy(Required $id)
+    public function destroy(String $id)
     {
         $centro = Centro::find($id);
         $centro->delete();
