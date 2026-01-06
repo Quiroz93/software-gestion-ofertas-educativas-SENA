@@ -6,7 +6,12 @@ Centros
 <x-app-layout>
     <div class="container-fluid">
 
+        <h1 class="mt-4 mb-4">Lista de Centros</h1>
+
+
+        @can('create_centros')
         <a href="{{ route('centro.create') }}" class="btn btn-success mt-4 mb-4">Agregar Centro</a>
+        @endcan
         <a href="{{route('dashboard')}}" class="btn btn-primary mt-4 mb-4">Volver</a>
 
         <table class="table table-striped mt-2 mb-2">
