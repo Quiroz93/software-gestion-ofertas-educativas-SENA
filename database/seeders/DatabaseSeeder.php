@@ -5,43 +5,53 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // Permisos
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
+
         $permissions = [
-            'view.centros',
-            'create.centros',
-            'update.centros',
-            'delete.centros',
-            'manage.users',
+            'view_centros',
+            'create_centros',
+            'update_centros',
+            'delete_centros',
+            'manage_users',
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web',
+            ]);
         }
 
-        // Roles
-        $admin = Role::firstOrCreate(['name' => 'admin']);
-        $instructor = Role::firstOrCreate(['name' => 'instructor']);
-        $user = Role::firstOrCreate(['name' => 'user']);
-        $aprendiz = Role::firstOrCreate(['name' => 'aprendiz']);
-
-        // Asignar permisos
-        $admin->givePermissionTo(Permission::all());
-
-        $instructor->givePermissionTo([
-            'view.centros',
+        $admin = Role::firstOrCreate([
+            'name' => 'admin',
+            'guard_name' => 'web',
         ]);
 
-        $user->givePermissionTo([
-            'view.centros',
+        $instructor = Role::firstOrCreate([
+            'name' => 'instructor',
+            'guard_name' => 'web',
         ]);
 
-        $aprendiz->givePermissionTo([
-            'view.centros',
+        $user = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
         ]);
+
+        $aprendiz = Role::firstOrCreate([
+            'name' => 'aprendiz',
+            'guard_name' => 'web',
+        ]);
+
+        $admin->givePermissionTo($permissions);
+
+        $instructor->givePermissionTo(['view_centros']);
+        $user->givePermissionTo(['view_centros']);
+        $aprendiz->givePermissionTo(['view_centros']);
     }
 }
