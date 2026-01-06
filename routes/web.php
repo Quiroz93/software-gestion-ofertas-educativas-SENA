@@ -29,11 +29,20 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 //Rutas de centros educativos
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('centros/index', [CentroController::class, 'index'])->name('centro.index')->middleware('view centros');
-    Route::get('centros/create', [CentroController::class, 'create'])->name('centro.create')->middleware('create centros');
-    Route::post('centros/store', [CentroController::class, 'store'])->name('centro.store')->middleware('create centros');
-    Route::get('centros/{id}/edit', [CentroController::class, 'edit'])->name('centro.edit')->middleware('update centros');
-    Route::put('centros/{id}/update', [CentroController::class, 'update'])->name('centro.update')->middleware('update centros');
-    Route::delete('centros/{id}/delete', [CentroController::class, 'destroy'])->name('centro.destroy')->middleware('delete centros');
+Route::middleware(['auth', 'verified', 'can:centros.view'])->group(function () {
+    Route::get('centros', [CentroController::class, 'index'])->name('centro.index');
+});
+
+Route::middleware(['auth', 'verified', 'can:centros.create'])->group(function () {
+    Route::get('centros/create', [CentroController::class, 'create'])->name('centro.create');
+    Route::post('centros', [CentroController::class, 'store'])->name('centro.store');
+});
+
+Route::middleware(['auth', 'verified', 'can:centros.update'])->group(function () {
+    Route::get('centros/{id}/edit', [CentroController::class, 'edit'])->name('centro.edit');
+    Route::put('centros/{id}/update', [CentroController::class, 'update'])->name('centro.update');
+});
+
+Route::middleware(['auth', 'verified', 'can:centros.delete'])->group(function () {
+    Route::delete('centros/{id}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');
 });
