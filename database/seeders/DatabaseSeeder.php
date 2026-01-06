@@ -12,11 +12,11 @@ class DatabaseSeeder extends Seeder
     {
         // Permisos
         $permissions = [
-            'view centros',
-            'create centros',
-            'update centros',
-            'delete centros',
-            'manage users',
+            'view.centros',
+            'create.centros',
+            'update.centros',
+            'delete.centros',
+            'manage.users',
         ];
 
         foreach ($permissions as $permission) {
@@ -26,12 +26,22 @@ class DatabaseSeeder extends Seeder
         // Roles
         $admin = Role::firstOrCreate(['name' => 'admin']);
         $instructor = Role::firstOrCreate(['name' => 'instructor']);
+        $user = Role::firstOrCreate(['name' => 'user']);
+        $aprendiz = Role::firstOrCreate(['name' => 'aprendiz']);
 
         // Asignar permisos
         $admin->givePermissionTo(Permission::all());
 
         $instructor->givePermissionTo([
-            'view centros',
+            'view.centros',
+        ]);
+
+        $user->givePermissionTo([
+            'view.centros',
+        ]);
+
+        $aprendiz->givePermissionTo([
+            'view.centros',
         ]);
     }
 }
