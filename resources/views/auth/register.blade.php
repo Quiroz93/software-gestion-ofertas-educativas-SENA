@@ -14,7 +14,7 @@
 
         <!-- Nombre -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nombre')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text"
                 name="name" :value="old('name')" required autofocus />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -22,7 +22,7 @@
 
         <!-- Email -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('Correo Electrónico')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email"
                 name="email" :value="old('email')" required />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -30,7 +30,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Contraseña')" />
             <x-text-input id="password" class="block mt-1 w-full"
                 type="password" name="password" required />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
@@ -38,7 +38,7 @@
 
         <div class="block mt-4">
             <label for="pasword" class="inline-flex items-center"></label>
-            <input type="checkbox" onclick="myFunction()">Show Password
+            <input type="checkbox" onclick="myFunction()">Ver Contraseña
             <script>
             function myFunction() {
               var x = document.getElementById("password");
@@ -53,24 +53,10 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirmar Contraseña')" />
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                 type="password" name="password_confirmation" required />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <!-- ✅ CHECK ADMINISTRATIVO -->
-        <div class="mt-5 flex items-center gap-2 mt-6">
-            <input
-                id="is_admin"
-                name="is_admin"
-                type="checkbox"
-                value="1"
-                class="h-4 w-4 text-[#39A900] focus:ring-[#39A900] border-gray-300 rounded"
-            >
-            <label for="is_admin" class="text-sm text-gray-700">
-                Registrarse como <span class="font-semibold text-[#39A900]">administrativo</span>
-            </label>
         </div>
 
         <!-- Acciones -->
@@ -79,11 +65,11 @@
                 href="{{ route('login') }}"
                 class="text-sm text-gray-600 hover:text-gray-900 underline"
             >
-                {{ __('Already registered?') }}
+                {{ __('¿Ya tienes una cuenta?') }}
             </a>
 
             <x-primary-button class="bg-[#39A900] hover:bg-green-700">
-                {{ __('Register') }}
+                {{ __('Resgistrarse') }}
             </x-primary-button>
         </div>
     </form>

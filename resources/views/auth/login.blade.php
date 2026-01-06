@@ -15,7 +15,7 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Contraseña')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -27,7 +27,7 @@
 
         <div class="block mt-4">
             <label for="pasword" class="inline-flex items-center"></label>
-            <input type="checkbox" onclick="myFunction()">Show Password
+            <input type="checkbox" onclick="myFunction()">Ver Contraseña
             <script>
             function myFunction() {
               var x = document.getElementById("password");
