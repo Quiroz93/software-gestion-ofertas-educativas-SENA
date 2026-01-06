@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller
 {
@@ -12,23 +13,22 @@ class LoginController extends Controller
     | Login Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
+    | este controlador maneja la autenticación de usuarios para la aplicación y
+    | redirige a los usuarios a su pantalla de inicio después de iniciar sesión. El controlador utiliza un
+    | rasgo para proporcionar su funcionalidad de inicio de sesión.
     */
 
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * después de iniciar sesión, a dónde redirigir a los usuarios.
      *
      * @var string
      */
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
+     * Crear una nueva instancia del controlador.
      *
      * @return void
      */
@@ -36,5 +36,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->hasRole('coordinador')) {
+            return redirect()->route('coordinador.dashboard');
+        }
+
+        return redirect()->route('dashboard');
     }
 }
