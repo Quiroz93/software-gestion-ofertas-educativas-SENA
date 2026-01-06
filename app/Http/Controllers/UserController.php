@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $this->authorize("view", User::class);
+        $this->authorize("viewAny", User::class);
         $users = User::all();
         return view('users.index', compact('users'));
     }
@@ -76,4 +76,5 @@ class UserController extends Controller
         $this->authorize("restore", $user);
         // Lógica para restaurar el usuario
     }
+
 }
