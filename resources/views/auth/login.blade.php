@@ -25,6 +25,21 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        <div class="block mt-4">
+            <label for="pasword" class="inline-flex items-center"></label>
+            <input type="checkbox" onclick="myFunction()">Show Password
+            <script>
+            function myFunction() {
+              var x = document.getElementById("password");
+              if (x.type === "password") {
+                x.type = "text";        
+              } else {
+                x.type = "password";
+              }
+            }   
+            </script>
+        </div>
+
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">

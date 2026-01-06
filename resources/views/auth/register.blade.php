@@ -36,6 +36,21 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        <div class="block mt-4">
+            <label for="pasword" class="inline-flex items-center"></label>
+            <input type="checkbox" onclick="myFunction()">Show Password
+            <script>
+            function myFunction() {
+              var x = document.getElementById("password");
+              if (x.type === "password") {
+                x.type = "text";        
+              } else {
+                x.type = "password";
+              }
+            }   
+            </script>
+        </div>
+
         <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
@@ -45,7 +60,7 @@
         </div>
 
         <!-- ✅ CHECK ADMINISTRATIVO -->
-        <div class="mt-5 flex items-center gap-2">
+        <div class="mt-5 flex items-center gap-2 mt-6">
             <input
                 id="is_admin"
                 name="is_admin"
