@@ -69,6 +69,11 @@ return [
          */
 
         'role_has_permissions' => 'role_has_permissions',
+
+        /*
+         * Pivot table for users and roles
+         */
+        'users_has_roles' => 'users_has_roles',
     ],
 
     'column_names' => [
