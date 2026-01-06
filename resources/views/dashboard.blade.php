@@ -42,7 +42,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ __('Usuarios') }}</h5>
                         <p class="display-6"></p>
-                        <a href="#" class="btn btn-secondary btn-sm">
+                        <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">
                             {{ __('Ver usuarios') }}
                         </a>
                     </div>
