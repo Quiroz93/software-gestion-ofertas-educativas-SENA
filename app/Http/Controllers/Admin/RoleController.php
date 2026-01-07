@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -64,17 +66,31 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Role $role)
-    {
-        $role->update(['name' => $request->name]);
-        $role->syncPermissions($request->permissions ?? []);
-        return redirect()->route('roles.index');
+{
+    $request->validate([
+        'name' => 'required|string|unique:roles,name,' . $role->id,
+    ]);
+
+    $role->update(['name' => $request->name]);
+    $role->syncPermissions($request->permissions ?? []);
+
+    return redirect()->route('roles.index')
+        ->with('success', 'Rol actualizado correctamente');
+}
+
+public function destroy(Role $role)
+{
+    $this->authorize('delete_roles'); // o middleware
+
+    if (in_array($role->name, ['admin', 'super-admin'])) {
+        return back()->with('error', 'No se puede eliminar este rol');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    $role->delete();
+
+    return redirect()
+        ->route('roles.index')
+        ->with('success', 'Rol eliminado exitosamente');
+}
+
 }
