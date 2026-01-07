@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             'view_centros',
             'create_centros',
             'update_centros',
+            'edit_centros',
             'delete_centros',
             'manage_users',
         ];
