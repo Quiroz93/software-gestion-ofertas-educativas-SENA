@@ -13,6 +13,20 @@ Route::get('/', function () {
 
 
 
+//Home
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
+
+
+
+
+//Panel de Control
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 //Rutas de gestión de permisos por medio de Resource Controller
 Route::middleware(['auth', 'verified',])->prefix('admin')->group(function () {
@@ -29,23 +43,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::patch('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
     Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
 });
-
-
-
-
-//Panel de Control
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-
-//Home
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('home');
-
 
 
 
