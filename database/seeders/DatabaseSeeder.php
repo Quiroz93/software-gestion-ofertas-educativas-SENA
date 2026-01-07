@@ -14,13 +14,19 @@ class DatabaseSeeder extends Seeder
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $permissions = [
-            'view_centros',
-            'create_centros',
-            'update_centros',
-            'edit_centros',
-            'delete_centros',
-            'manage_users',
+            'view_permissions',
+            'create_permissions',
+            'update_permissions',
+            'delete_permissions',
+
+            'view_roles',
+            'create_roles',
+            'update_roles',
+            'delete_roles',
+
+            'assign_roles',
         ];
+
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate([
@@ -33,6 +39,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'guard_name' => 'web',
         ]);
+
+        $admin->givePermissionTo($permissions);
 
         $instructor = Role::firstOrCreate([
             'name' => 'instructor',

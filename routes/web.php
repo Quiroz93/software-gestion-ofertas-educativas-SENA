@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CentroController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -9,15 +11,43 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+//Rutas de gestión de permisos por medio de Resource Controller
+Route::middleware(['auth', 'verified',])->prefix('admin')->group(function () {
+    Route::resource('permissions', PermissionController::class);
+});
+
+
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/edit/{role}', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::patch('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
+});
+
+
+
+
 //Panel de Control
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
+
 //Home
 Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
+
+
+
 
 //Rutas de perfil
 Route::middleware('auth')->group(function () {
@@ -26,8 +56,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+
 //Rutas de autenticación
 require __DIR__ . '/auth.php';
+
+
+
 
 //Rutas de centros educativos
 Route::middleware(['auth', 'verified', 'can:view_centros'])->group(function () {
@@ -49,6 +85,9 @@ Route::middleware(['auth', 'verified', 'can:update_centros'])->group(function ()
 Route::middleware(['auth', 'verified', 'can:delete_centros'])->group(function () {
     Route::delete('centros/{id}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');
 });
+
+
+
 
 //Rutas de gestión de usuarios
 Route::middleware(['auth', 'verified', 'can:usuarios.ver'])->group(function () {
@@ -79,8 +118,12 @@ Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
     Route::get('usuarios/{user}/roles', [UserController::class, 'editRoles'])->name('users.roles');
 });
 
- //Rutas de gestión de permisos
- Route::put('/usuarios/{user}/permisos', 
+
+
+
+//Rutas de gestión de permisos
+Route::put(
+    '/usuarios/{user}/permisos',
     [UserController::class, 'updatePermisos']
 )->name('usuarios.updatepermisos');
 
@@ -91,6 +134,9 @@ Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
     Route::get('usuarios/{user}/permisos', [UserController::class, 'editPermissions'])->name('users.permisos');
     Route::put('usuarios/{user}/permisos', [UserController::class, 'updatePermissions'])->name('users.updatepermisos');
 });
+
+
+
 
 //Ruta de panel de administrador
 Route::middleware(['auth', 'verified', 'can:access_admin_dashboard'])->group(function () {
