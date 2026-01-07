@@ -109,7 +109,7 @@
 
                     <div>
                         <div class="d-grid gap-2">
-                            <a href="#" class="btn btn-secondary btn-sm" id="acciones">
+                            <a href="{{ route('roles.index') }}" class="btn btn-secondary btn-sm" id="acciones">
                                 {{ __('Roles') }}
                             </a>
                         </div>
@@ -130,7 +130,7 @@
 
                     <div>
                         <div class="d-grid gap-2">
-                            <a href="#" class="btn btn-secondary btn-sm" id="acciones">
+                            <a href="{{ route('permissions.index') }}" class="btn btn-secondary btn-sm" id="acciones">
                                 {{ __('Permisos') }}
                             </a>
                         </div>
@@ -160,11 +160,11 @@
         @endcan
 
         @can('view_roles')
-        <a href="#" class="btn btn-outline-primary">Roles</a>
+        <a href="{{ route('roles.index') }}" class="btn btn-outline-primary">Roles</a>
         @endcan
 
         @can('view_permissions')
-        <a href="#" class="btn btn-outline-primary">Permisos</a>
+        <a href="{{ route('permissions.index') }}" class="btn btn-outline-primary">Permisos</a>
         @endcan
 
     </div>
