@@ -1,5 +1,6 @@
 <x-app-layout>
 
+@extends('adminlte::page')
     {{-- Bootstrap (puedes cambiar a Vite si ya lo tienes compilado) --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,6 +22,18 @@
     </x-slot>
     @endrole
 
+
+    <!-- Botones de acción -->
+
+    
+
+@can('view_roles')
+<a href="{{ route('roles.index') }}" class="btn btn-primary mb-4 mt-3">Roles</a>
+@endcan
+
+@can('view_permissions')
+<a href="{{ route('permissions.index') }}" class="btn btn-primary mb-4 mt-3">Permisos</a>
+@endcan
 
     @can('view_centros')
     <div class="col-md-4">
