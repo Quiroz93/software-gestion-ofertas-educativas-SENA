@@ -29,9 +29,9 @@
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->guard_name }}</td>
                                 <td>
-                                    @can('edit_roles')
+                                    
                                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning btn-sm">{{ __('Editar') }}</a>
-                                    @endcan
+                                    
                                     @can('delete_roles')
                                     <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline" onsubmit="confirmarEliminacion(event)">
                                         @csrf
