@@ -58,8 +58,9 @@ class CentroController extends Controller
     /**
      * Mostrar el formulario para editar el recurso especificado.
      */
-    public function edit(Centro $centro)
+    public function edit(String $id)
     {
+        $centro = Centro::findOrFail($id);
         $this->authorize('update', $centro);
         return view('centro.edit', compact('centro'));
     }
@@ -67,8 +68,9 @@ class CentroController extends Controller
     /**
      * Actualizar el recurso especificado en almacenamiento.
      */
-    public function update(Request $request, Centro $centro)
+    public function update(Request $request, String $id)
     {
+        $centro = Centro::findOrFail($id);
         $this->authorize('update', $centro);
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
