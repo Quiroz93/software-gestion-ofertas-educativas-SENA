@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Noticia;
 use Illuminate\Http\Request;
 use illuminate\Routing\Controller as BaseController;
 
-class HomeController extends BaseController
+class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -24,6 +17,11 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        return view('home');
+        $noticias = Noticia::where('activa', true)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('home', compact('noticias'));
     }
 }

@@ -172,8 +172,8 @@
     <style>
         #acciones {
             color: #fff;
-            background-color: #007832;
-            border-color: #007832;
+            background-color: #39A900;
+            border-color: #39A900;
         }
 
         .container {
