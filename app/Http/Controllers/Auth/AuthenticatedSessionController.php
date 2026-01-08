@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         $totalCentros = centro::count();
         $totalUsuarios = User::count();
 
-        return redirect()->route('dashboard', compact('totalCentros', 'totalUsuarios'));
+        return redirect()->route('home', compact('totalCentros', 'totalUsuarios'));
     }
 
     /**

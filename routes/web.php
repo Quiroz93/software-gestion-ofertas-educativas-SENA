@@ -24,7 +24,7 @@ Route::get('/home', function () {
 //Panel de Control
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 
 
