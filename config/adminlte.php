@@ -30,8 +30,8 @@ return [
     |
     */
 
-    'use_ico_only' => false,
-    'use_full_favicon' => true,
+    'use_ico_only' => true,
+    'use_full_favicon' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Soe</b>Software',
+    'logo_img' => ('images/Logosimbolo-SENA.svg'),
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'SENA Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -136,7 +136,7 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => true,
+    'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -153,7 +153,7 @@ return [
     */
 
     'layout_topnav' =>  false,
-    'layout_boxed' =>   true,
+    'layout_boxed' =>   false,
     'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => true,
     'layout_fixed_footer' => true,
@@ -304,7 +304,7 @@ return [
 
         [
             'text' => 'Dashboard',
-            'route' => 'home',
+            'route' => 'dashboard',
             'icon' => 'fas fa-home',
         ],
 
@@ -312,28 +312,28 @@ return [
             'text' => 'Centros',
             'route' => 'centro.index',
             'icon' => 'fas fa-building',
-            'can' => 'centros.ver',
+            /*'can' => 'centros.view',*/
         ],
 
         [
             'text' => 'Usuarios',
             'route' => 'users.index',
             'icon' => 'fas fa-users',
-            'can' => 'usuarios.view',
+            /*'can' => 'usuarios.manage',*/
         ],
 
         [
             'text' => 'Roles',
             'route' => 'roles.index',
             'icon' => 'fas fa-user-tag',
-            'can' => 'view_roles',
+            /*'can' => 'roles.view',*/
         ],
 
         [
             'text' => 'Permisos',
             'route' => 'permissions.index',
             'icon' => 'fas fa-key',
-            'can' => 'view_permissions',
+            /*'can' => 'permission.view',*/
         ],
     ],
 

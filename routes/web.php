@@ -63,23 +63,23 @@ require __DIR__ . '/auth.php';
 
 
 //Rutas de centros educativos
-Route::middleware(['auth', 'verified', 'can:view_centros'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:centros.view'])->group(function () {
     Route::get('centros', [CentroController::class, 'index'])->name('centro.index');
 });
 
-Route::middleware(['auth', 'verified', 'can:create_centros'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:centros.create'])->group(function () {
     Route::get('centros/create', [CentroController::class, 'create'])->name('centro.create');
     Route::post('centros', [CentroController::class, 'store'])->name('centro.store');
 });
 
-Route::middleware(['auth', 'verified', 'can:edit_centros'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:centros.edit'])->group(function () {
     Route::get('centros/edit/{id}', [CentroController::class, 'edit'])->name('centro.edit');
 });
-Route::middleware(['auth', 'verified', 'can:update_centros'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:centros.update'])->group(function () {
     Route::put('centros/update/{id}', [CentroController::class, 'update'])->name('centro.update');
 });
 
-Route::middleware(['auth', 'verified', 'can:delete_centros'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:centros.delete'])->group(function () {
     Route::delete('centros/{id}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');
 });
 
@@ -87,31 +87,35 @@ Route::middleware(['auth', 'verified', 'can:delete_centros'])->group(function ()
 
 
 //Rutas de gestión de usuarios
-Route::middleware(['auth', 'verified', 'can:usuarios.ver'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.view'])->group(function () {
     Route::get('usuarios/{user}/roles', [UserController::class, 'editRoles'])->name('users.roles');
 });
 
-Route::middleware(['auth', 'verified', 'can:usuarios.crear'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.view'])->group(function () {
+    Route::get('usuarios/{user}', [UserController::class, 'show'])->name('users.show');
+});
+
+Route::middleware(['auth', 'verified', 'can:usuarios.create'])->group(function () {
     Route::get('usuarios/create', [UserController::class, 'create'])->name('users.create');
 });
 
-Route::middleware(['auth', 'verified', 'can:usuarios.crear'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.create'])->group(function () {
     Route::post('usuarios', [UserController::class, 'store'])->name('users.store');
 });
 
-Route::middleware(['auth', 'verified', 'can:usuarios.editar'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.edit'])->group(function () {
     Route::get('usuarios/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 });
 
-Route::middleware(['auth', 'verified', 'can:usuarios.actualizar'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.update'])->group(function () {
     Route::put('usuarios/{user}', [UserController::class, 'update'])->name('users.update');
 });
 
-Route::middleware(['auth', 'verified', 'can:usuarios.eliminar'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.delete'])->group(function () {
     Route::delete('usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.manage'])->group(function () {
     Route::get('usuarios/{user}/roles', [UserController::class, 'editRoles'])->name('users.roles');
 });
 
@@ -126,7 +130,7 @@ Route::put(
 
 
 
-Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:usuarios.manage'])->group(function () {
     Route::get('usuarios', [UserController::class, 'index'])->name('users.index');
     Route::get('usuarios/{user}/permisos', [UserController::class, 'editPermissions'])->name('users.permisos');
     Route::put('usuarios/{user}/permisos', [UserController::class, 'updatePermissions'])->name('users.updatepermisos');

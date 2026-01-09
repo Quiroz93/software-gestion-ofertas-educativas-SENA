@@ -59,8 +59,8 @@ class DatabaseSeeder extends Seeder
 
         $admin->givePermissionTo($permissions);
 
-        $instructor->givePermissionTo(['view_centros']);
-        $user->givePermissionTo(['view_centros']);
-        $aprendiz->givePermissionTo(['view_centros']);
+        $instructor->givePermissionTo(['centros.view']);
+        $user->givePermissionTo(['centros.view']);
+        $aprendiz->givePermissionTo(['centros.view']);
     }
 }

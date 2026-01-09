@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::create('noticias', function (Blueprint $table) {
-        $table->id();
-        $table->string('titulo');
-        $table->text('descripcion');
-        $table->string('imagen')->nullable();
-        $table->boolean('activa')->default(true);
-        $table->timestamps();
-    });
+    if (!Schema::hasTable('noticias')) {
+        Schema::create('noticias', function (Blueprint $table) {
+            $table->id();
+            $table->string('titulo');
+            $table->text('descripcion');
+            $table->string('imagen')->nullable();
+            $table->boolean('activa')->default(true);
+            $table->timestamps();
+        });
+    }
 }
 
 

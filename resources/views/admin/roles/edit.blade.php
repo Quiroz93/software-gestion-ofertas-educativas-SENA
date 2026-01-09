@@ -1,69 +1,73 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Editar Rol
-        </h2>
-    </x-slot>
+@extends('adminlte::page')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm rounded-lg">
-                <div class="p-6">
+@section('title', 'Editar Rol')
 
-                    <form method="POST" action="{{ route('roles.update', $role) }}">
-                        @csrf
-                        @method('PUT')
+@section('content_header')
+    <h1 class="m-0">Editar Rol</h1>
+@stop
 
-                        {{-- Nombre del rol --}}
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nombre del rol</label>
-                            <input type="text"
-                                   name="name"
-                                   id="name"
-                                   class="form-control"
-                                   value="{{ old('name', $role->name) }}"
-                                   required>
+@section('content')
 
-                            @error('name')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
 
-                        {{-- Permisos --}}
-                        <div class="mb-3">
-                            <label class="form-label">Permisos</label>
-                            <div class="row">
-                                @foreach($permissions as $permission)
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input"
-                                                   type="checkbox"
-                                                   name="permissions[]"
-                                                   value="{{ $permission->name }}"
-                                                   id="perm_{{ $permission->id }}"
-                                                   {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Actualizar Rol</h3>
+            </div>
 
-                                            <label class="form-check-label"
-                                                   for="perm_{{ $permission->id }}">
-                                                {{ $permission->name }}
-                                            </label>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
+            <form method="POST" action="{{ route('roles.update', $role->id) }}">
+                @csrf
+                @method('PUT')
 
-                        {{-- Botón --}}
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-success">
-                                Actualizar rol
-                            </button>
-                        </div>
+                <div class="card-body">
 
-                    </form>
+                    <div class="form-group">
+                        <label for="name">Nombre del Rol</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            class="form-control @error('name') is-invalid @enderror"
+                            value="{{ old('name', $role->name) }}"
+                            required
+                            autofocus
+                        >
+                        @error('name')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guard_name">Guard</label>
+                        <input
+                            type="text"
+                            name="guard_name"
+                            id="guard_name"
+                            class="form-control @error('guard_name') is-invalid @enderror"
+                            value="{{ old('guard_name', $role->guard_name) }}"
+                            required
+                        >
+                        @error('guard_name')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                 </div>
-            </div>
+
+                <div class="card-footer text-right">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Actualizar Rol
+                    </button>
+                    <a href="{{ route('roles.index') }}" class="btn btn-secondary">
+                        Cancelar
+                    </a>
+                </div>
+
+            </form>
         </div>
+
     </div>
-</x-app-layout>
+</div>
+
+@stop
