@@ -14,13 +14,13 @@ class UserController extends Controller
     {
         $this->authorize("viewAny", User::class);
         $users = User::all();
-        return view('users.index', compact('users'));
+        return view('user.index', compact('users'));
     }
 
     public function create()
     {
         $this->authorize("create", User::class);
-        return view('users.create');
+        return view('user.create');
     }
 
     public function store(Request $request)
@@ -32,13 +32,13 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->authorize("view", $user);
-        return view('users.show', compact('user'));
+        return view('user.show', compact('user'));
     }
 
     public function edit(User $user)
     {
         $this->authorize("update", $user);
-        return view('users.edit', compact('user'));
+        return view('user.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function editPermissions(User $user)
     {
         $this->authorize("managePermissions", User::class);
-        return view('users.permisos', compact('user'));
+        return view('user.permisos', compact('user'));
     }
 
     public function updatePermissions(Request $request, User $user)
