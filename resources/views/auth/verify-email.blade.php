@@ -1,4 +1,8 @@
-<x-guest-layout>
+@extends('layouts.auth')
+
+@section('title', __('Verificar Correo Electrónico'))
+
+@section('content')
     <div class="mb-4 text-sm text-gray-600">
         {{ __('gracias por registrarte! Antes de comenzar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que acabamos de enviarte? Si no recibiste el correo electrónico, ¡nosotros te enviaremos otro!') }}
     </div>
@@ -28,4 +32,4 @@
             </button>
         </form>
     </div>
-</x-guest-layout>
+@endsection

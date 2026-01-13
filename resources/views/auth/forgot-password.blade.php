@@ -1,4 +1,8 @@
-<x-guest-layout>
+@extends('layouts.auth')
+
+@section('title', __('Recuperar Contraseña'))
+
+@section('content')
     <div class="mb-4 text-sm text-gray-600">
         {{ __('¿Olvidaste tu contraseña? No hay problema. Solo haznos saber tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.') }}
     </div>
@@ -22,4 +26,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+@endsection

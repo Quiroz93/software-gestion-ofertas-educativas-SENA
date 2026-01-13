@@ -1,5 +1,8 @@
-@section('title', 'Registro | SoeSoftware')
-<x-guest-layout>
+@extends('layouts.auth')
+
+@section('title', __('Registro de Usuario'))
+
+@section('content')
     <form
         method="POST"
         action="{{ route('register') }}"
@@ -73,4 +76,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+@endsection
