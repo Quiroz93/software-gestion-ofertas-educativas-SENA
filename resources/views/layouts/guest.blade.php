@@ -10,6 +10,8 @@
         @yield('title', config('app.name', 'SoeSoftware'))
     </title>
 
+    <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
+
     <div class="logosimbolo">
         <a href="/">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-20 h-20">
