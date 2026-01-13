@@ -3,77 +3,85 @@
 @section('title', __('Registro de Usuario'))
 
 @section('content')
-    <form
-        method="POST"
-        action="{{ route('register') }}"
-        class="bg-white border-2 border-[#39A900] rounded-xl p-6 shadow-sm"
-    >
+    <form method="POST" action="{{ route('register') }}" class="bg-white border border-success rounded-3 p-4 shadow-sm">
         @csrf
 
         <!-- Título -->
-        <h2 class="text-2xl font-bold text-center text-[#39A900] mb-6">
-            Registro de Usuario
+        <h2 class="h4 text-center text-success mb-4">
+            {{ __('Registro de Usuario') }}
         </h2>
 
         <!-- Nombre -->
-        <div>
-            <x-input-label for="name" :value="__('Nombre')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text"
-                name="name" :value="old('name')" required autofocus />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div class="mb-3">
+            <label for="name" class="form-label">{{ __('Nombre') }}</label>
+            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
+                name="name" value="{{ old('name') }}" required autofocus />
+            @error('name')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Email -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Correo Electrónico')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email"
-                name="email" :value="old('email')" required />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="mb-3">
+            <label for="email" class="form-label">{{ __('Correo Electrónico') }}</label>
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
+                name="email" value="{{ old('email') }}" required />
+            @error('email')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Contraseña')" />
-            <x-text-input id="password" class="block mt-1 w-full"
-                type="password" name="password" required />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="mb-3">
+            <label for="password" class="form-label">{{ __('Contraseña') }}</label>
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                name="password" required />
+            @error('password')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
         </div>
 
-        <div class="block mt-4">
-            <label for="pasword" class="inline-flex items-center"></label>
-            <input type="checkbox" onclick="myFunction()">Ver Contraseña
-            <script>
-            function myFunction() {
-              var x = document.getElementById("password");
-              if (x.type === "password") {
-                x.type = "text";        
-              } else {
-                x.type = "password";
-              }
-            }   
-            </script>
+        <!-- Toggle Password -->
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="togglePassword">
+            <label class="form-check-label" for="togglePassword">{{ __('Ver Contraseña') }}</label>
         </div>
 
         <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirmar Contraseña')" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                type="password" name="password_confirmation" required />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">{{ __('Confirmar Contraseña') }}</label>
+            <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" 
+                name="password_confirmation" required />
+            @error('password_confirmation')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Acciones -->
-        <div class="flex items-center justify-between mt-6">
-            <a
-                href="{{ route('login') }}"
-                class="text-sm text-gray-600 hover:text-gray-900 underline"
-            >
+        <div class="d-flex align-items-center justify-content-between mt-4">
+            <a href="{{ route('login') }}" class="link-secondary text-decoration-none small">
                 {{ __('¿Ya tienes una cuenta?') }}
             </a>
-
-            <x-primary-button class="bg-[#39A900] hover:bg-green-700">
-                {{ __('Resgistrarse') }}
-            </x-primary-button>
+            <button type="submit" class="btn btn-success">
+                {{ __('Registrarse') }}
+            </button>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleCheckbox = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            if (toggleCheckbox && passwordInput) {
+                toggleCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        passwordInput.type = 'text';
+                    } else {
+                        passwordInput.type = 'password';
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
