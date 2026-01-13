@@ -29,10 +29,10 @@
         </div>
 
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="togglePassword" onclick="togglePassword()">
+            <input type="checkbox" class="form-check-input" id="togglePassword" onclick="myFunction()">
             <label class="form-check-label" for="togglePassword">Ver Contraseña</label>
             <script>
-            function togglePassword() {
+            function myFunction() {
               var x = document.getElementById("password");
               if (x.type === "password") {
                 x.type = "text";        
