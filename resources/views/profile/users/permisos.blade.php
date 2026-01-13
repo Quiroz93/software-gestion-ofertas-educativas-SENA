@@ -1,4 +1,9 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('title', 'Permisos')
+
+@section('content')
+
 <form method="POST" action="{{ route('usuarios.updatepermisos', $user) }}">
     @csrf
     @method('PUT')
@@ -31,4 +36,5 @@
 
     <button class="btn btn-success mt-3">Guardar</button>
 </form>
-</x-app-layout>
+
+@endsection
