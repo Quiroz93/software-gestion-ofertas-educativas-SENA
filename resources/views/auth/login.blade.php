@@ -4,51 +4,41 @@
 
 @section('content')
     <!-- Session Status -->
-    <x-auth-session-status class="mb-3" :status="session('status')" />
+    @if ($status = session('status'))
+        <div class="alert alert-success mb-3">{{ $status }}</div>
+    @endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
         <div class="mb-3">
-            <x-input-label for="email" :value="__('Correo electrónico')" />
-            <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="invalid-feedback d-block" />
+            <label for="email" class="form-label">{{ __('Correo electrónico') }}</label>
+            <input id="email" class="form-control @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" />
+            @error('email')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Password -->
         <div class="mb-3">
-            <x-input-label for="password" :value="__('Contraseña')" />
-
-            <x-text-input id="password" class="form-control"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="invalid-feedback d-block" />
+            <label for="password" class="form-label">{{ __('Contraseña') }}</label>
+            <input id="password" class="form-control @error('password') is-invalid @enderror" type="password" name="password" required autocomplete="current-password" />
+            @error('password')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
         </div>
 
+        <!-- Toggle Password -->
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="togglePassword" onclick="myFunction()">
-            <label class="form-check-label" for="togglePassword">Ver Contraseña</label>
-            <script>
-            function myFunction() {
-              var x = document.getElementById("password");
-              if (x.type === "password") {
-                x.type = "text";        
-              } else {
-                x.type = "password";
-              }
-            }   
-            </script>
+            <input type="checkbox" class="form-check-input" id="togglePassword">
+            <label class="form-check-label" for="togglePassword">{{ __('Ver Contraseña') }}</label>
         </div>
 
         <!-- Remember Me -->
         <div class="mb-3 form-check">
             <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
-            <label class="form-check-label" for="remember_me">
-                {{ __('Recordar usuario') }}
-            </label>
+            <label class="form-check-label" for="remember_me">{{ __('Recordar usuario') }}</label>
         </div>
 
         <div class="d-flex align-items-center justify-content-between mt-3">
@@ -58,9 +48,26 @@
                 </a>
             @endif
 
-            <x-primary-button>
+            <button type="submit" class="btn btn-primary">
                 {{ __('Iniciar sesión') }}
-            </x-primary-button>
+            </button>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleCheckbox = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            if (toggleCheckbox && passwordInput) {
+                toggleCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        passwordInput.type = 'text';
+                    } else {
+                        passwordInput.type = 'password';
+                    }
+                });
+            }
+        });
+    </script>
 @endsection
