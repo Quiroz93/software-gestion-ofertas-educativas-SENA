@@ -3,8 +3,20 @@
 @section('title', config('app.name', 'SENA'))
 
 @section('content')
-<div class="container-fluid">
-    @yield('content')
+<div class="container-fluid py-3">
+    @hasSection('content_header')
+    <div class="row mb-2">
+        <div class="col-12">
+            @yield('content_header')
+        </div>
+    </div>
+    @endif
+
+    <div class="row">
+        <div class="col-12">
+            @yield('content')
+        </div>
+    </div>
 </div>
 @endsection
 
