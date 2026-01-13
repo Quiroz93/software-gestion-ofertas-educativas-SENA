@@ -145,9 +145,7 @@
                                 <h6 class="fw-bold">Noticias</h6>
                                 <p class="text-muted small">Últimas noticias y novedades.</p>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -155,49 +153,49 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-{{-- FOOTER --}}
-<footer class="bg-light py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <h5>Centro</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-muted">Sobre nosotros</a></li>
-          <li><a href="#" class="text-decoration-none text-muted">Programas</a></li>
-          <!-- more links -->
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <h5>Servicios</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-muted">Características</a></li>
-          <li><a href="#" class="text-decoration-none text-muted">información</a></li>
-          <!-- more links -->
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <h5>Recursos</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-muted">Blog</a></li>
-          <li><a href="#" class="text-decoration-none text-muted">Centro de ayuda</a></li>
-          <!-- more links -->
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <h5>Contactanos</h5>
-        <p class="text-muted">Cra. 11 No. 13-13</p>
-        <p class="text-muted">Linea de atención: 018000 910270</p>
-        <p class="text-muted">Email: servicioalciudadano@sena.udu.co</p>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col">
-        <p class="text-center text-muted border-top pt-3">&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.</p>
-      </div>
-    </div>
-  </div>
-</footer>
 
+    {{-- FOOTER --}}
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Centro</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Sobre nosotros</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Programas</a></li>
+                        <!-- more links -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Servicios</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Características</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">información</a></li>
+                        <!-- more links -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Blog</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Centro de ayuda</a></li>
+                        <!-- more links -->
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contactanos</h5>
+                    <p class="text-muted">Cra. 11 No. 13-13</p>
+                    <p class="text-muted">Linea de atención: 018000 910270</p>
+                    <p class="text-muted">Email: servicioalciudadano@sena.udu.co</p>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <p class="text-center text-muted border-top pt-3">&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
 
 </html>

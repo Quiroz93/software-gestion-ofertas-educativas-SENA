@@ -33,16 +33,25 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $role = Role::create([
-            'name' => $request->name,
-            'guard_name' => 'web'
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255|unique:roles,name',
+        'guard_name' => 'required|string',
+        'permissions' => 'array'
+    ]);
 
-        $role->syncPermissions($request->permissions ?? []);
+    $role = Role::create([
+        'name' => $request->name,
+        'guard_name' => $request->guard_name,
+    ]);
 
-        return redirect()->route('roles.index');
-    }
+    $role->syncPermissions($request->permissions ?? []);
+
+    return redirect()
+        ->route('roles.index')
+        ->with('success', 'Rol creado correctamente');
+}
+
 
     /**
      * Display the specified resource.
@@ -59,24 +68,20 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
-        return view('admin.roles.edit', compact( 'role', 'permissions'));
+        $rolePermissions = $role->permissions->pluck('id')->toArray();
+        return view('admin.roles.edit', compact( 'role', 'permissions','rolePermissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Role $role)
-{
-    $request->validate([
-        'name' => 'required|string|unique:roles,name,' . $role->id,
-    ]);
+ public function update(Request $request, Role $role)
+    {
+        $role->update(['name' => $request->name]);
+        $role->syncPermissions($request->permissions ?? []);
+        return redirect()->route('roles.index');
+    }
 
-    $role->update(['name' => $request->name]);
-    $role->syncPermissions($request->permissions ?? []);
-
-    return redirect()->route('roles.index')
-        ->with('success', 'Rol actualizado correctamente');
-}
 
 public function destroy(Role $role)
 {
