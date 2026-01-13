@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $permissions = [
+            // Permisos de sistema
             'view_permissions',
             'create_permissions',
             'update_permissions',
@@ -25,6 +26,12 @@ class DatabaseSeeder extends Seeder
             'delete_roles',
 
             'assign_roles',
+
+            // Permisos de centros
+            'centros.view',
+            'centros.create',
+            'centros.update',
+            'centros.delete',
         ];
 
 
@@ -57,9 +64,11 @@ class DatabaseSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        // Asignar todos los permisos al admin
         $admin->givePermissionTo($permissions);
 
-        $instructor->givePermissionTo(['centros.view']);
+        // Permisos específicos por rol
+        $instructor->givePermissionTo(['centros.view', 'centros.create', 'centros.update', 'centros.delete']);
         $user->givePermissionTo(['centros.view']);
         $aprendiz->givePermissionTo(['centros.view']);
     }
