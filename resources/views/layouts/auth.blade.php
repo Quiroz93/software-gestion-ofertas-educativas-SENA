@@ -13,26 +13,6 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            min-height: 100vh;
-        }
-        .auth-container {
-            min-height: 100vh;
-        }
-        .auth-left {
-            background: linear-gradient(135deg, #198754, #20c997);
-            color: #fff;
-        }
-        .auth-card {
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-    </style>
-
     @stack('styles')
 </head>
 <body>
@@ -42,7 +22,7 @@
     <div class="col-12 col-md-8 col-lg-5">
         <!-- Logo + Title -->
         <div class="text-center mb-4">
-            <div class="mb-3">
+            <div class="brand-image mb-3">
                 {!! file_get_contents(public_path('images/logosimbolo-SENA.svg')) !!}
             </div>
             <h4 class="fw-bold mb-1">{{ config('app.name') }}</h4>
@@ -58,7 +38,38 @@
     </div>
 </div>
 </div>
-
+<!-- Custom styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            min-height: 100vh;
+        }
+        .auth-container {
+            min-height: 100vh;
+        }
+        .auth-card {
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        /* Logo SENA */
+        .brand-image svg {
+                    width: 80px;
+                    height: 80px;
+                    color: #39A900;
+                    margin-right: 1rem;
+                }
+        /* Divider */
+        .auth-divider {
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.08);
+            margin: 1.5rem 0;
+        }
+        /* Bootstrap error helpers */
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
