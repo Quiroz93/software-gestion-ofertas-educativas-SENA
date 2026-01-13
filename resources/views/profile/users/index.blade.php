@@ -1,4 +1,8 @@
-<x-app-layout>
+@extends('layouts.app')
+
+@section('title', 'Usuarios')
+
+@section('content')
 
     <div class="row row-cols-1 mt-4">
         <div class="col-md-8 offset-md-2">
@@ -39,4 +43,6 @@
             </div>
         </div>
     </div>
+
+@endsection
 </x-app-layout>

@@ -49,4 +49,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the user's profile image for AdminLTE.
+     *
+     * @return string
+     */
+    public function adminlte_image()
+    {
+        return 'https://i.pravatar.cc/300?u=' . urlencode($this->email);
+    }
 }

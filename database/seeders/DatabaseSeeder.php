@@ -20,11 +20,13 @@ class DatabaseSeeder extends Seeder
             'update_permissions',
             'delete_permissions',
 
+            // Permisos de roles
             'view_roles',
             'create_roles',
             'update_roles',
             'delete_roles',
 
+            // Permisos de asignación de roles
             'assign_roles',
 
             // Permisos de centros
