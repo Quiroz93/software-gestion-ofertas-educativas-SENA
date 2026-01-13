@@ -30,7 +30,7 @@
                 <tr>
                     <th>Nombre del Rol</th>
                     <th>Guard</th>
-                    <th style="width: 160px">Acciones</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,8 +40,8 @@
                         <td>{{ $role->guard_name }}</td>
                         <td>
                             <a href="{{ route('roles.edit', $role->id) }}"
-                               class="btn btn-warning btn-sm">
-                                <i class="fas fa-edit"></i>
+                               class="btn btn-warning ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px me-2 ms-2">
+                                <i class="fas fa-edit"></i>Editar
                             </a>
 
                             @can('delete_roles')
@@ -51,8 +51,8 @@
                                       onsubmit="confirmarEliminacion(event)">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
+                                    <button type="submit" class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px">
+                                        <i class="fas fa-trash"></i>Eliminar
                                     </button>
                                 </form>
                             @endcan
@@ -61,6 +61,7 @@
                 @endforeach
             </tbody>
         </table>
+        
     </div>
 
 </div>

@@ -14,22 +14,22 @@
     </h2>
 </div>
 
-<div class="container my-4">
-    <div id="carouselDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div class="container my-4 container-fluid">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="height: 400px;"> {{-- tamaño temporal. --}}
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
+            <div class="carousel-item active">
                 <img src="..." class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>First slide label</h5>
                     <p>Some representative placeholder content for the first slide.</p>
                 </div>
             </div>
-            <div class="carousel-item" data-bs-interval="2000">
+            <div class="carousel-item">
                 <img src="..." class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
@@ -44,11 +44,11 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDark" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselDark" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -160,11 +160,16 @@
         </div>
     </div>
 
+    {{-- FOOTER --}}
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col">
+                    <p class="text-center text-muted border-top pt-3">&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </section>
-@endsection
 
-@section('footer')
-<div class="text-center mt-4">
-    © 2026 SENA · Centro Agroempresarial y turístico de los Andes
-</div>
 @endsection
