@@ -4,33 +4,33 @@
 
 @section('content')
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-session-status class="mb-3" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
-        <div>
+        <div class="mb-3">
             <x-input-label for="email" :value="__('Correo electrónico')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="invalid-feedback d-block" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
+        <div class="mb-3">
             <x-input-label for="password" :value="__('Contraseña')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="password" class="form-control"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('password')" class="invalid-feedback d-block" />
         </div>
 
-        <div class="block mt-4">
-            <label for="pasword" class="inline-flex items-center"></label>
-            <input type="checkbox" onclick="myFunction()">Ver Contraseña
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="togglePassword" onclick="myFunction()">
+            <label class="form-check-label" for="togglePassword">Ver Contraseña</label>
             <script>
             function myFunction() {
               var x = document.getElementById("password");
@@ -44,21 +44,21 @@
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Recordar usuario') }}</span>
+        <div class="mb-3 form-check">
+            <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+            <label class="form-check-label" for="remember_me">
+                {{ __('Recordar usuario') }}
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="d-flex align-items-center justify-content-between mt-3">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                <a class="link-secondary text-decoration-none" href="{{ route('password.request') }}">
                     {{ __('¿Olvidaste tu contraseña?') }}
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button>
                 {{ __('Iniciar sesión') }}
             </x-primary-button>
         </div>
