@@ -1,6 +1,14 @@
 @extends('adminlte::page')
 
 @section('title', config('app.name', 'SENA'))
+{{-- Favicon --}}
+<link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
+
+{{-- Bootstrap 5 --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+{{-- Bootstrap Icons --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
 @section('content')
 <div class="container-fluid py-3">
@@ -75,4 +83,6 @@
         });
     });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

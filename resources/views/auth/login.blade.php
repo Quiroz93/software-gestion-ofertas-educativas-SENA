@@ -8,7 +8,7 @@
         <div class="alert alert-success mb-3">{{ $status }}</div>
     @endif
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" class="bg-white border border-success rounded-3 p-4 shadow-sm">
         @csrf
 
         <!-- Email Address -->

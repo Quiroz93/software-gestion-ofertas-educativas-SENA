@@ -7,6 +7,8 @@
 
     <title>@yield('title', config('app.name') . ' | Autenticación')</title>
 
+    <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700" rel="stylesheet" />
@@ -27,8 +29,8 @@
                     <div class="brand-image mb-3">
                         {!! file_get_contents(public_path('images/logosimbolo-SENA.svg')) !!}
                     </div>
-                    <h4 class="fw-bold mb-1">{{ config('app.name') }}</h4>
-                    <span class="text-muted">SENA</span>
+                    <h4 class="fw-bold mb-1 mt-3">{{ config('app.name') }}</h4>
+                    <span class="text-muted mb-5">SENA</span>
                 </div>
 
                 <!-- Auth Card -->

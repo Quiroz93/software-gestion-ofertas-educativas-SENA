@@ -6,6 +6,9 @@
     <title>Sistema de Gestión de Ofertas Educativas | SENA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
+
     {{-- Bootstrap 5 --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -79,7 +82,7 @@
 
                     <div class="hero-card text-center">
 
-                        <h1 class="fw-bold mb-3">
+                        <h1 class="fw-bold mb-3 mt-5">
                             Sistema de Ofertas Educativas SENA - CATA
                         </h1>
 
