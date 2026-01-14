@@ -19,21 +19,34 @@ class DatabaseSeeder extends Seeder
             'create_permissions',
             'update_permissions',
             'delete_permissions',
+            'edit_permissions',
 
             // Permisos de roles
             'view_roles',
             'create_roles',
             'update_roles',
             'delete_roles',
+            'edit_roles',
 
             // Permisos de asignación de roles
             'assign_roles',
 
             // Permisos de centros
-            'centros.view',
-            'centros.create',
-            'centros.update',
-            'centros.delete',
+            'view_centros',
+            'create_centros',
+            'update_centros',
+            'delete_centros',
+            'edit_centros',
+
+            // Permisos de usuarios
+            'view_users',
+            'create_users',
+            'update_users',
+            'delete_users',
+            'edit_users',
+
+            // Permisos de asignación de centros
+            'assign_centros',
         ];
 
 
@@ -70,8 +83,8 @@ class DatabaseSeeder extends Seeder
         $admin->givePermissionTo($permissions);
 
         // Permisos específicos por rol
-        $instructor->givePermissionTo(['centros.view', 'centros.create', 'centros.update', 'centros.delete']);
-        $user->givePermissionTo(['centros.view']);
-        $aprendiz->givePermissionTo(['centros.view']);
+        $instructor->givePermissionTo(['view_centros', 'create_centros', 'update_centros', 'delete_centros', 'edit_centros', 'assign_centros']);
+        $user->givePermissionTo(['view_centros']);
+        $aprendiz->givePermissionTo(['view_centros']);
     }
 }
