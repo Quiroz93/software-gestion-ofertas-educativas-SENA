@@ -310,39 +310,46 @@ return [
     'menu' => [
 
         ['header' => 'ADMINISTRACIÓN'],
-
+        
+        [
+            'text' => 'Home',
+            'route' => 'home',
+            'icon' => 'fas fa-home',
+        ],
+        
         [
             'text' => 'Dashboard',
             'route' => 'dashboard',
-            'icon' => 'fas fa-home',
+            'icon' => 'fas fa-toolbox',
+            'can' => 'access_dashboard',
         ],
 
         [
             'text' => 'Centros',
             'route' => 'centro.index',
             'icon' => 'fas fa-building',
-            /*'can' => 'centros.view',*/
+            'can' => 'view_centros',
         ],
 
         [
             'text' => 'Usuarios',
             'route' => 'users.index',
             'icon' => 'fas fa-users',
-            /*'can' => 'usuarios.manage',*/
+            'can' => 'manage_usuarios',
         ],
 
         [
             'text' => 'Roles',
             'route' => 'roles.index',
             'icon' => 'fas fa-user-tag',
-            /*'can' => 'roles.view',*/
+            'can' => 'view_roles',
         ],
 
         [
             'text' => 'Permisos',
             'route' => 'permissions.index',
             'icon' => 'fas fa-key',
-            /*'can' => 'permission.view',*/
+            'can' => 'view_permissions',
         ],
     ],
 
