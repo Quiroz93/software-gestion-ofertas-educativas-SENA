@@ -6,16 +6,34 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
+
+//Rutas de bienvenida
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Rutas de gestión de usuarios por medio de Resource Controller
+Route::middleware(['auth', 'verified', 'can:manage_usuarios'])->prefix('admin')->group(function () {
+    Route::resource('users', UserController::class);
+});
+
+//Rutas de asignación de roles a usuarios
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('users/{user}/roles', [UserRoleController::class, 'edit'])
+        ->name('users.roles.edit')
+        ->middleware('can:assign_roles');
+
+    Route::put('users/{user}/roles', [UserRoleController::class, 'update'])
+        ->name('users.roles.update')
+        ->middleware('can:assign_roles');
+});
 
 
 //Home
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
