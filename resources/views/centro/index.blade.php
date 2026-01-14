@@ -98,7 +98,6 @@
                                             @method('DELETE')
                                             <button type="submit"
                                                 class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px"
-                                                type="button"
                                                 title="Eliminar">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </button>
@@ -137,13 +136,5 @@
 @endsection
 
 @section('js')
-<script>
-    function confirmarEliminacion(event) {
-        if (!confirm('¿Está seguro de que desea eliminar este centro?')) {
-            event.preventDefault();
-            return false;
-        }
-        return true;
-    }
-</script>
+@parent
 @endsection
