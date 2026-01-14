@@ -80,7 +80,7 @@ Route::middleware(['auth', 'verified', 'can:update_centros'])->group(function ()
 });
 
 Route::middleware(['auth', 'verified', 'can:delete_centros'])->group(function () {
-    Route::delete('centros/{id}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');
+    Route::delete('centros/{centro}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');
 });
 
 
