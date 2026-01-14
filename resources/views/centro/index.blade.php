@@ -25,16 +25,16 @@
             {{-- Botones de acción --}}
             <div class="mb-3">
 
+                @can('create_centros')
                 <a href="{{ route('centro.create') }}" class="btn btn-success">
                     <i class="fas fa-plus"></i> Agregar Centro
                 </a>
+                @endcan
 
                 <a href="{{ route('dashboard') }}" class="btn btn-primary">
                     <i class="fas fa-arrow-left"></i> Volver
                 </a>
             </div>
-
-            {{-- Tarjeta con tabla --}}
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -53,7 +53,9 @@
                                     <th style="width: 25%">Dirección</th>
                                     <th style="width: 15%">Teléfono</th>
                                     <th style="width: 20%">Correo</th>
+                                    @canany(['edit_centros','update_centros','delete_centros'])
                                     <th style="width: 15%">Acciones</th>
+                                    @endcanany
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,30 +78,33 @@
                                             {{ $centro->correo ?? 'N/A' }}
                                         </a>
                                     </td>
+                                    @canany(['edit_centros','update_centros','delete_centros'])
                                     <td>
-                                        
-                                            <a href="{{ route('centro.edit', $centro->id) }}"
-                                                class="btn btn-info ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px"
-                                                type="button"
-                                                title="Editar">
-                                                <i class="fas fa-edit"></i> Editar
-                                            </a>
+                                        @canany(['edit_centros','update_centros'])
+                                        <a href="{{ route('centro.edit', $centro->id) }}"
+                                            class="btn btn-info ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px"
+                                            type="button"
+                                            title="Editar">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        @endcanany
 
-                                            <form action="{{ route('centro.destroy', $centro->id) }}"
-                                                method="POST"
-                                                class="d-inline"
-                                                onsubmit="return confirmarEliminacion(event)">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px"
-                                                    type="button"
-                                                    title="Eliminar">
-                                                    <i class="fas fa-trash"></i> Eliminar
-                                                </button>
-                                            </form>
-                                        
+                                        @can('delete_centros')
+                                        <form action="{{ route('centro.destroy', $centro->id) }}"
+                                            method="POST"
+                                            class="d-inline"
+                                            onsubmit="return confirmarEliminacion(event)">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px"
+                                                title="Eliminar">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                        @endcan
                                     </td>
+                                    @endcanany
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -109,7 +114,9 @@
                     <div class="alert alert-info" role="alert">
                         <i class="fas fa-info-circle"></i> No hay centros registrados.
 
+                        @can('create_centros')
                         <a href="{{ route('centro.create') }}" class="alert-link">Crear uno ahora</a>
+                        @endcan
 
                     </div>
                     @endif
@@ -129,13 +136,5 @@
 @endsection
 
 @section('js')
-<script>
-    function confirmarEliminacion(event) {
-        if (!confirm('¿Está seguro de que desea eliminar este centro?')) {
-            event.preventDefault();
-            return false;
-        }
-        return true;
-    }
-</script>
+@parent
 @endsection

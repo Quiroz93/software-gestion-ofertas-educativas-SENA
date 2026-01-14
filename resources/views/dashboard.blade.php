@@ -21,6 +21,7 @@
     <div class="row">
 
         {{-- Centros --}}
+        @can('view_centros')
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">
@@ -34,6 +35,7 @@
                 </div>
             </div>
         </div>
+        @endcan
 
         {{-- Usuarios --}}
         <div class="col-md-4 mt-4">
