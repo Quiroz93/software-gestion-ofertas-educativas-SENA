@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-12">
             <div class="mb-3">
-                @can('usuarios.create')
+                @can('create_users')
                 <a href="{{ route('users.create') }}" class="btn btn-success">
                     <i class="fas fa-user-plus"></i> Crear Usuario
                 </a>
@@ -58,12 +58,12 @@
                                     <td><a href="mailto:{{ $u->email }}">{{ $u->email }}</a></td>
 
                                     <td>
-                                        @can('edit_usuarios')
+                                        @can('edit_users')
                                         <a href="{{ route('users.edit', $u) }}" class="btn btn-warning ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px me-2 ms-2">
                                             <i class="fas fa-edit"></i> Editar
                                         </a>
                                         @endcan
-                                        @can('delete_usuarios')
+                                        @can('delete_users')
                                         <form action="{{ route('users.destroy', $u) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Eliminar usuario?')">
                                             @csrf
                                             @method('DELETE')
@@ -72,7 +72,7 @@
                                             </button>
                                         </form>
                                         @endcan
-                                        @can('view_usuarios')
+                                        @can('view_users')
                                         <a href="{{ route('users.show', $u) }}" class="btn btn-info ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px">
                                             <i class="fas fa-eye"></i> Ver
                                         </a>

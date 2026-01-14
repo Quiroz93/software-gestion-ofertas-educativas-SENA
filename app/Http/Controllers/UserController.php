@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -12,68 +13,68 @@ class UserController extends Controller
 
     public function index()
     {
-        $this->authorize("viewAny", User::class);
+        Gate::authorize("view_users");
         $users = User::all();
         return view('user.index', compact('users'));
     }
 
     public function create()
     {
-        $this->authorize("create", User::class);
+        Gate::authorize("create_users");
         return view('user.create');
     }
 
     public function store(Request $request)
     {
-        $this->authorize("create", User::class);
+        Gate::authorize("create_users");
         // Lógica para almacenar un nuevo usuario
     }
 
     public function show(User $user)
     {
-        $this->authorize("view", $user);
+        Gate::authorize("view_users");
         return view('user.show', compact('user'));
     }
 
     public function edit(User $user)
     {
-        $this->authorize("update", $user);
+        Gate::authorize("edit_users");
         return view('user.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
     {
-        $this->authorize("update", $user);
+        Gate::authorize("update_users");
         // Lógica para actualizar el usuario
     }
 
     public function destroy(User $user)
     {
-        $this->authorize("delete", $user);
+        Gate::authorize("delete_users");
         // Lógica para eliminar el usuario
     }
 
     public function editPermissions(User $user)
     {
-        $this->authorize("managePermissions", User::class);
+        Gate::authorize("manage_users");
         return view('user.permisos', compact('user'));
     }
 
     public function updatePermissions(Request $request, User $user)
     {
-        $this->authorize("managePermissions", User::class);
+        Gate::authorize("manage_users");
         // Lógica para actualizar los permisos del usuario
     }
 
     public function destroyPermissions(User $user)
     {
-        $this->authorize("managePermissions", User::class);
+        Gate::authorize("manage_users");
         // Lógica para eliminar los permisos del usuario
     }
 
     public function restore(User $user)
     {
-        $this->authorize("restore", $user);
+        Gate::authorize("manage_users");
         // Lógica para restaurar el usuario
     }
 

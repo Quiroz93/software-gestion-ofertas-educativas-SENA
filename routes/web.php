@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 //Rutas de gestión de usuarios por medio de Resource Controller
-Route::middleware(['auth', 'verified', 'can:manage_usuarios'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'verified', 'can:manage_users'])->prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
 });
 
@@ -105,35 +105,35 @@ Route::middleware(['auth', 'verified', 'can:delete_centros'])->group(function ()
 
 
 //Rutas de gestión de usuarios
-Route::middleware(['auth', 'verified', 'can:view_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
     Route::get('usuarios/{user}/roles', [UserController::class, 'editRoles'])->name('users.roles');
 });
 
-Route::middleware(['auth', 'verified', 'can:view_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:view_users'])->group(function () {
     Route::get('usuarios/{user}', [UserController::class, 'show'])->name('users.show');
 });
 
-Route::middleware(['auth', 'verified', 'can:create_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:create_users'])->group(function () {
     Route::get('usuarios/create', [UserController::class, 'create'])->name('users.create');
 });
 
-Route::middleware(['auth', 'verified', 'can:create_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:create_users'])->group(function () {
     Route::post('usuarios', [UserController::class, 'store'])->name('users.store');
 });
 
-Route::middleware(['auth', 'verified', 'can:edit_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:edit_users'])->group(function () {
     Route::get('usuarios/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 });
 
-Route::middleware(['auth', 'verified', 'can:update_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:update_users'])->group(function () {
     Route::put('usuarios/{user}', [UserController::class, 'update'])->name('users.update');
 });
 
-Route::middleware(['auth', 'verified', 'can:delete_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:delete_users'])->group(function () {
     Route::delete('usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'can:manage_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
     Route::get('usuarios/{user}/roles', [UserController::class, 'editRoles'])->name('users.roles');
 });
 
@@ -148,7 +148,7 @@ Route::put(
 
 
 
-Route::middleware(['auth', 'verified', 'can:manage_usuarios'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:manage_users'])->group(function () {
     Route::get('usuarios', [UserController::class, 'index'])->name('users.index');
     Route::get('usuarios/{user}/permisos', [UserController::class, 'editPermissions'])->name('users.permisos');
     Route::put('usuarios/{user}/permisos', [UserController::class, 'updatePermissions'])->name('users.updatepermisos');
