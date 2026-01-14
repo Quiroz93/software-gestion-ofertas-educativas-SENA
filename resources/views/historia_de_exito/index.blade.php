@@ -15,7 +15,7 @@
 
         <a href="{{-- enlace al controller --}}" class="btn btn-success">Agregar Historia</a>
 
-        <a href="{{-- enlace al controller --}}" class="btn btn-primary">Volver</a>
+        <a href="{{-- enlace al controller --}}" class="btn btn-secondary">Volver</a>
     </div>
 </section>
 
@@ -25,24 +25,20 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre </th>
                     <th>Titulo</th>
                     <th>Descripcion</th>
-                    <th>Año</th>
-                    <th>Correo</th>
+                    <th>Fecha</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {{-- Ejemplo de fila de datos --}}
                 <tr>
-                    <td>{{-- logica de id --}}</td>
                     <td>{{-- logica de nombre --}}</td>
                     <td>{{-- logica de titulo --}}</td>
                     <td>{{-- logica de descripcion --}}</td>
-                    <td>{{-- logica de año --}}</td>
-                    <td>{{-- logica de correo --}}</td>
+                    <td>{{-- logica de fecha --}}</td>
                     <td>
                         {{-- configurar logica de acciones --}}
                     </td>
