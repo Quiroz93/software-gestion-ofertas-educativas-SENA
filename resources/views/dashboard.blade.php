@@ -52,6 +52,21 @@
             </div>
         </div>
 
+        {{-- Roles --}}
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-user-tag fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Roles</h5>
+                    <a href="{{ route('roles.index') }}" class="btn btn-info btn-sm mt-3">
+                        Ver roles
+                    </a>
+                </div>
+            </div>
+        </div>
+
         {{-- Permisos --}}
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
