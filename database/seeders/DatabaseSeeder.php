@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'assign_centros',
 
             // permisos acceso de dashboard
-            'access_dashboard',
+            'view_dashboard',
         ];
 
 
