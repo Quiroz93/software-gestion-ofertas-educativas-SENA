@@ -321,7 +321,7 @@ return [
             'text' => 'Dashboard',
             'route' => 'dashboard',
             'icon' => 'fas fa-toolbox',
-            'can' => 'access_dashboard',
+            'can' => 'view_dashboard',
         ],
 
         [
