@@ -30,7 +30,7 @@
                     <h3 class="card-title">Información de la Competencia</h3>
                 </div>
 
-                <form action="{{ route('centro.store') }}" method="POST" class="form-horizontal">
+                <form action="{{-- logica de crear competencias --}}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">
@@ -60,7 +60,7 @@
                     {{-- Pie del formulario --}}
                     <div class="card-footer">
                         <div class="float-right">
-                            <a href="{{ route('centro.index') }}" class="btn btn-secondary">
+                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary">
