@@ -47,6 +47,9 @@ class DatabaseSeeder extends Seeder
 
             // Permisos de asignación de centros
             'assign_centros',
+
+            // permisos acceso de dashboard
+            'view_dashboard',
         ];
 
 

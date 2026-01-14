@@ -310,11 +310,18 @@ return [
     'menu' => [
 
         ['header' => 'ADMINISTRACIÓN'],
-
+        
+        [
+            'text' => 'Home',
+            'route' => 'home',
+            'icon' => 'fas fa-home',
+        ],
+        
         [
             'text' => 'Dashboard',
             'route' => 'dashboard',
-            'icon' => 'fas fa-home',
+            'icon' => 'fas fa-toolbox',
+            'can' => 'view_dashboard',
         ],
 
         [
@@ -329,6 +336,7 @@ return [
             'route' => 'users.index',
             'icon' => 'fas fa-users',
             'can' => 'view_usuarios',
+
         ],
 
         [
