@@ -335,7 +335,8 @@ return [
             'text' => 'Usuarios',
             'route' => 'users.index',
             'icon' => 'fas fa-users',
-            'can' => 'manage_usuarios',
+            'can' => 'view_usuarios',
+
         ],
 
         [

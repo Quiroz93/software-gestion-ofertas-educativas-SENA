@@ -11,36 +11,36 @@ class UserPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->can('usuarios.manage') || $user->can('usuarios.view');
+        return $user->can('view_usuarios') || $user->can('view_usuarios');
     }
 
     public function view(User $user, User $model): bool
     {
-        return $user->can('usuarios.view') || $user->can('usuarios.manage');
+        return $user->can('view_usuarios') || $user->can('manage_usuarios');
     }
 
     public function create(User $user): bool
     {
-        return $user->can('usuarios.create');
+        return $user->can('create_usuarios');
     }
 
     public function update(User $user, User $model): bool
     {
-        return $user->can('usuarios.edit') || $user->can('usuarios.update');
+        return $user->can('edit_usuarios') || $user->can('update_usuarios');
     }
 
     public function delete(User $user, User $model): bool
     {
-        return $user->can('usuarios.delete');
+        return $user->can('delete_usuarios');
     }
 
     public function managePermissions(User $user): bool
     {
-        return $user->can('usuarios.manage');
+        return $user->can('manage_usuarios');
     }
 
     public function restore(User $user, User $model): bool
     {
-        return $user->can('usuarios.manage');
+        return $user->can('manage_usuarios');
     }
 }
