@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Agregar Centro')
+@section('title', 'Competencias')
 
 @section('content_header')
 <div class="container-fluid">
@@ -24,7 +24,7 @@
         <div class="col-md-8 offset-md-2">
             
             {{-- Tarjeta del Formulario --}}
-            @can('create_centros')
+            @can('create_competencias')
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Información de la Competencia</h3>

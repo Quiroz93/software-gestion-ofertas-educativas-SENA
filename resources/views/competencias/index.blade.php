@@ -12,7 +12,9 @@
 <section>
     <div class="container">
         {{-- seccion de botones de accion --}}
-        <a href="{{-- enlace al controller --}}" class="btn btn-success">Agregar Competencia</a>
+        @can('create_competencias')
+            <a href="{{-- enlace al controller --}}" class="btn btn-success">Agregar Competencia</a>
+        @endcan
         <a href="{{-- enlace al controller --}}" class="btn btn-primary">Volver</a>
     </div>
 </section>
@@ -35,7 +37,29 @@
                     <td>{{-- logica de id --}}</td>
                     <td>{{-- logica de nombre --}}</td>
                     <td>{{-- logica de descripcion --}}</td>
-                    <td>{{-- se debe agregar botones eliminar y editar--}}</td>   
+                    <td>
+                        @can('view_competencias')
+                            <a href="{{-- enlace show --}}" class="btn btn-info btn-sm" title="Ver">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        @endcan
+
+                        @can('edit_competencias')
+                            <a href="{{-- enlace edit --}}" class="btn btn-primary btn-sm" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        @endcan
+
+                        @can('delete_competencias')
+                            <form action="{{-- enlace delete --}}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar competencia?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        @endcan
+                    </td>
                     </tr>
                 {{-- Agregar mas filas segun los datos disponibles --}}
             </tbody>
