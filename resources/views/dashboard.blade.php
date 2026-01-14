@@ -8,7 +8,8 @@
 
 @section('content')
 
-<div class="alert alert-info alert-dismissible mb-3">
+@can('access_admin_panel')
+<div class="alert alert-info alert-dismissible mb-3"> 
     <strong>
         {{ __('Bienvenido, :name', ['name' => auth()->user()->name]) }}
     </strong>
@@ -16,6 +17,8 @@
         {{ __('Acceso administrativo') }}
     </div>
 </div>
+@endcan
+
 
 <div class="container-fluid">
     <div class="row">
@@ -38,6 +41,7 @@
         @endcan
 
         {{-- Usuarios --}}
+        @can('view_users')
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">
@@ -51,8 +55,10 @@
                 </div>
             </div>
         </div>
+        @endcan
 
         {{-- Permisos --}}
+        @can('view_permissions')
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">
@@ -66,8 +72,10 @@
                 </div>
             </div>
         </div>
+        @endcan
 
         {{-- Configuración --}}
+        
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">
@@ -81,6 +89,7 @@
                 </div>
             </div>
         </div>
+        
 
     </div>
 </div>
