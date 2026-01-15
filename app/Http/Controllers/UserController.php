@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function index()
     {
-        Gate::authorize("users.index");
+        Gate::authorize("users.view");
         $users = User::all();
         return view('user.index', compact('users'));
     }

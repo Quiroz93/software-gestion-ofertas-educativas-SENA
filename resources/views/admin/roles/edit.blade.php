@@ -63,10 +63,10 @@
                     <div class="form-check">
                         <input
                             type="checkbox"
-                            class="form-check-input permission-checkbox"
+                            class="form-check-input check-category"
                             data-category="{{ $category }}"
-
                             id="check_{{ $category }}">
+
                         <label class="form-check-label" for="check_{{ $category }}">
                             Seleccionar todo
                         </label>
@@ -86,11 +86,11 @@
                                 type="checkbox"
                                 name="permissions[]"
                                 value="{{ $permission->id }}"
-                                id="perm_{{ $permission->id }}"
-                                class="form-check-input permission-checkbox cat-{{ $category }}"
+                                class="form-check-input permission-checkbox"
+                                data-category="{{ $category }}"
                                 {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="perm_{{ $permission->id }}">
-                                {{ ucfirst(str_replace('_', ' ', $label)) }}
+
+                            {{ ucfirst(str_replace('_', ' ', $label)) }}
                             </label>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
 
 <script>
     document.querySelectorAll('.check-category').forEach(masterCheck => {
-        masterCheck.addEventListener('change', function () {
+        masterCheck.addEventListener('change', function() {
             const category = this.dataset.category;
 
             document.querySelectorAll(
@@ -140,4 +140,3 @@
         });
     });
 </script>
-

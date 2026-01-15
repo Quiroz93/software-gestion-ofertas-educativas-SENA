@@ -33,24 +33,24 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255|unique:roles,name',
-        'guard_name' => 'required|string',
-        'permissions' => 'array'
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name',
+            'guard_name' => 'required|string',
+            'permissions' => 'array'
+        ]);
 
-    $role = Role::create([
-        'name' => $request->name,
-        'guard_name' => $request->guard_name,
-    ]);
+        $role = Role::create([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name,
+        ]);
 
-    $role->syncPermissions($request->permissions ?? []);
+        $role->syncPermissions($request->permissions ?? []);
 
-    return redirect()
-        ->route('roles.index')
-        ->with('success', 'Rol creado correctamente');
-}
+        return redirect()
+            ->route('roles.index')
+            ->with('success', 'Rol creado correctamente');
+    }
 
 
     /**
@@ -65,51 +65,52 @@ class RoleController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Role $role)
-{
-    $permissions = Permission::orderBy('name')->get()
-        ->groupBy(fn($p) => explode('.', $p->name)[0]);
+    {
+        $permissions = Permission::orderBy('name')->get()
+            ->groupBy(fn($p) => explode('.', $p->name)[0]);
 
-    $rolePermissions = $role->permissions->pluck('id')->toArray();
+        $rolePermissions = $role->permissions->pluck('id')->toArray();
 
-    return view('admin.roles.edit', compact('role', 'permissions', 'rolePermissions'));
-}
+        return view('admin.roles.edit', compact('role', 'permissions', 'rolePermissions'));
+    }
 
     /**
      * Update the specified resource in storage.
      */
- public function update(Request $request, Role $role)
-{
-    $request->validate([
-        'name' => 'required|string|max:50|unique:roles,name,' . $role->id,
-        'permissions' => 'array',
-    ]);
+    public function update(Request $request, Role $role)
+    {
+        $role->update([
+            'name' => $request->name,
+        ]);
 
-    $role->update([
-        'name' => $request->name,
-    ]);
+        $permissionIds = $request->permissions ?? [];
 
-    $role->syncPermissions($request->permissions ?? []);
+        // Convertir IDs → modelos Permission
+        $permissions = Permission::whereIn('id', $permissionIds)->get();
 
-    return redirect()
-        ->route('roles.edit', $role->id)
-        ->with('success', 'Rol actualizado correctamente');
-}
+        // Spatie acepta modelos
+        $role->syncPermissions($permissions);
 
-
-
-public function destroy(Role $role)
-{
-    $this->authorize('roles.delete'); // o middleware
-
-    if (in_array($role->name, ['admin', 'super-admin'])) {
-        return back()->with('error', 'No se puede eliminar este rol');
+        return redirect()
+            ->route('roles.edit', $role->id)
+            ->with('success', 'Rol actualizado correctamente');
     }
 
-    $role->delete();
 
-    return redirect()
-        ->route('roles.index')
-        ->with('success', 'Rol eliminado exitosamente');
-}
 
+
+    public function destroy(Role $role)
+    {
+        $this->authorize('roles.delete'); // o middleware
+
+        if (in_array($role->name, ['admin', 'super-admin'])) {
+            return back()->with('error', 'No se puede eliminar este rol');
+        }
+
+        $role->delete();
+
+        return redirect()
+            ->route('roles.index')
+            ->with('success', 'Rol eliminado exitosamente');
+    }
 }

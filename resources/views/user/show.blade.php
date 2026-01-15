@@ -47,7 +47,7 @@
                     @can('users.edit')
                     <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm float-right">Editar</a>
                     @endcan
-                    @can('users.roles.edit')
+                    @can('roles.manage')
                     <a href="{{ route('users.roles.edit', $user->id) }}"
                         class="btn btn-sm btn-info">
                         Roles

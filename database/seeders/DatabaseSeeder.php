@@ -14,12 +14,14 @@ class DatabaseSeeder extends Seeder
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
         $permissions = [
+            
             // Permisos de sistema
             'permissions.view',
             'permissions.create',
             'permissions.update',
             'permissions.delete',
             'permissions.edit',
+            'permissions.manage',
 
             // Permisos de roles
             'roles.view',
@@ -27,6 +29,7 @@ class DatabaseSeeder extends Seeder
             'roles.update',
             'roles.delete',
             'roles.edit',
+            'roles.manage',
 
             // Permisos de centros
             'centros.view',
@@ -34,6 +37,7 @@ class DatabaseSeeder extends Seeder
             'centros.update',
             'centros.delete',
             'centros.edit',
+            'centros.manage',
 
             // Permisos de usuarios
             'users.view',
@@ -41,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'users.update',
             'users.delete',
             'users.edit',
+            'users.show',
             'users.manage',
 
             // permisos acceso de dashboard
@@ -55,6 +60,7 @@ class DatabaseSeeder extends Seeder
             'noticias.update',
             'noticias.delete',
             'noticias.edit',
+            'noticias.manage',
 
             // historias de exito
             'historias_exito.view',
@@ -62,6 +68,7 @@ class DatabaseSeeder extends Seeder
             'historias_exito.update',
             'historias_exito.delete',
             'historias_exito.edit',
+            'historias_exito.manage',
 
             //instructores
             'instructores.view',
@@ -69,6 +76,7 @@ class DatabaseSeeder extends Seeder
             'instructores.update',
             'instructores.delete',
             'instructores.edit',
+            'instructores.manage',
 
             //permisos nivel de formacion
             'nivel_formacion.view',
@@ -76,6 +84,7 @@ class DatabaseSeeder extends Seeder
             'nivel_formacion.update',
             'nivel_formacion.delete',
             'nivel_formacion.edit',
+            'nivel_formacion.manage',
 
             //permisos ofertas
             'ofertas.view',
@@ -83,6 +92,7 @@ class DatabaseSeeder extends Seeder
             'ofertas.update',
             'ofertas.delete',
             'ofertas.edit',
+            'ofertas.manage',
 
             //permisos de programas
             'programas.view',
@@ -90,13 +100,14 @@ class DatabaseSeeder extends Seeder
             'programas.update',
             'programas.delete',
             'programas.edit',
-
+            'programas.manage',
             //permisos redes de conocimiento
             'redes_conocimiento.view',
             'redes_conocimiento.create',
             'redes_conocimiento.update',
             'redes_conocimiento.delete',
             'redes_conocimiento.edit',
+            'redes_conocimiento.manage',
         ];
 
 
