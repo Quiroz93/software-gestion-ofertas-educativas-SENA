@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Nivel de formacion')
+@section('title', 'Redes')
 
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Agregar Nivel de Formación</h1>
+            <h1 class="m-0">Agregar Red</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Nivel de Formación</a></li>
+                <li class="breadcrumb-item"><a href="">Redes</a></li>
                 <li class="breadcrumb-item active">Crear</li>
             </ol>
         </div>
@@ -27,7 +27,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Información del Nivel de formación</h3>
+                    <h3 class="card-title">Información de Redes</h3>
                 </div>
 
                 <form action="{{-- logica de crear niveles de formacion --}}" method="POST" class="form-horizontal">
@@ -39,7 +39,7 @@
                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
                                 <input type="text"
-                                    placeholder="Ingrese el nombre del Nivel de Formación"
+                                    placeholder="Ingrese el nombre de la Red"
                                     name="nombre"
                                     id="nombre"
                                     class="form-control">
@@ -49,7 +49,7 @@
                         <div class="form-group row">
                             <label for="perfil" class="col-sm-2 col-form-label">Perfil</label>
                             <div class="col-sm-10">
-                                <textarea placeholder="descripción del Nivel de Formación"
+                                <textarea placeholder="descripción de la Red"
                                     name="perfil"
                                     id="perfil"
                                     class="form-control"></textarea>
@@ -65,7 +65,7 @@
                                 <i class="fas fa-arrow-left"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Nivel
+                                <i class="fas fa-save"></i> Guardar red
                             </button>
                         </div>
                     </div>
