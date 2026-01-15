@@ -25,11 +25,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('users/{user}/roles', [UserRoleController::class, 'edit'])
         ->name('users.roles.edit')
-        ->middleware('can:users.assign.roles');
+        ->middleware('can:roles.manage');
 
     Route::put('users/{user}/roles', [UserRoleController::class, 'update'])
         ->name('users.roles.update')
-        ->middleware('can:users.assign.roles');
+        ->middleware('can:roles.manage');
 });
 
 
