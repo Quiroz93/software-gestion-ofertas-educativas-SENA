@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Historias de éxito')
+@section('title', 'instructores')
 
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="m-0">Agregar Historia</h1>
+            <h1 class="m-0">Agregar instructor</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Información de la Historia</h3>
+                    <h3 class="card-title">Información del instructor</h3>
                 </div>
 
                 <form action="{{-- logica de crear instructores --}}" method="POST" class="form-horizontal">
