@@ -62,9 +62,16 @@
             <a href="{{ route('login') }}" class="link-secondary text-decoration-none small">
                 {{ __('¿Ya tienes una cuenta?') }}
             </a>
-            <button type="submit" class="btn btn-success">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-success btn-sm">
                 {{ __('Registrarse') }}
             </button>
+            </div>
+            <div class="col-6">
+                <a href="" class="btn btn-secondary float-end btn-sm">Cancelar</a>
+            </div>
         </div>
     </form>
 
