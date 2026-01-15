@@ -47,10 +47,16 @@
                     {{ __('¿Olvidaste tu contraseña?') }}
                 </a>
             @endif
-
-            <button type="submit" class="btn btn-primary">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary btn-sm">
                 {{ __('Iniciar sesión') }}
             </button>
+            </div>
+            <div class="col-6">
+                <a href="" class="btn btn-secondary float-end btn-sm">Cancelar</a>
+            </div>
         </div>
     </form>
 
