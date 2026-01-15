@@ -15,41 +15,88 @@ class DatabaseSeeder extends Seeder
 
         $permissions = [
             // Permisos de sistema
-            'view_permissions',
-            'create_permissions',
-            'update_permissions',
-            'delete_permissions',
-            'edit_permissions',
+            'permissions.view',
+            'permissions.create',
+            'permissions.update',
+            'permissions.delete',
+            'permissions.edit',
 
             // Permisos de roles
-            'view_roles',
-            'create_roles',
-            'update_roles',
-            'delete_roles',
-            'edit_roles',
-
-            // Permisos de asignación de roles
-            'assign_roles',
+            'roles.view',
+            'roles.create',
+            'roles.update',
+            'roles.delete',
+            'roles.edit',
 
             // Permisos de centros
-            'view_centros',
-            'create_centros',
-            'update_centros',
-            'delete_centros',
-            'edit_centros',
+            'centros.view',
+            'centros.create',
+            'centros.update',
+            'centros.delete',
+            'centros.edit',
 
             // Permisos de usuarios
-            'view_users',
-            'create_users',
-            'update_users',
-            'delete_users',
-            'edit_users',
-
-            // Permisos de asignación de centros
-            'assign_centros',
+            'users.view',
+            'users.create',
+            'users.update',
+            'users.delete',
+            'users.edit',
+            'users.manage',
 
             // permisos acceso de dashboard
-            'view_dashboard',
+            'dashboard.view',
+
+            // Permisos de asignación de roles a usuarios
+            'users.assign.roles',
+
+            // Permisos de noticias
+            'noticias.view',
+            'noticias.create',
+            'noticias.update',
+            'noticias.delete',
+            'noticias.edit',
+
+            // historias de exito
+            'historias_exito.view',
+            'historias_exito.create',
+            'historias_exito.update',
+            'historias_exito.delete',
+            'historias_exito.edit',
+
+            //instructores
+            'instructores.view',
+            'instructores.create',
+            'instructores.update',
+            'instructores.delete',
+            'instructores.edit',
+
+            //permisos nivel de formacion
+            'nivel_formacion.view',
+            'nivel_formacion.create',
+            'nivel_formacion.update',
+            'nivel_formacion.delete',
+            'nivel_formacion.edit',
+
+            //permisos ofertas
+            'ofertas.view',
+            'ofertas.create',
+            'ofertas.update',
+            'ofertas.delete',
+            'ofertas.edit',
+
+            //permisos de programas
+            'programas.view',
+            'programas.create',
+            'programas.update',
+            'programas.delete',
+            'programas.edit',
+
+            //permisos redes de conocimiento
+            'redes_conocimiento.view',
+            'redes_conocimiento.create',
+            'redes_conocimiento.update',
+            'redes_conocimiento.delete',
+            'redes_conocimiento.edit',
         ];
 
 
@@ -86,8 +133,8 @@ class DatabaseSeeder extends Seeder
         $admin->givePermissionTo($permissions);
 
         // Permisos específicos por rol
-        $instructor->givePermissionTo(['view_centros', 'create_centros', 'update_centros', 'delete_centros', 'edit_centros', 'assign_centros']);
-        $user->givePermissionTo(['view_centros']);
-        $aprendiz->givePermissionTo(['view_centros']);
+        $instructor->givePermissionTo(['centros.view', 'centros.create', 'centros.update', 'centros.delete', 'centros.edit']);
+        $user->givePermissionTo(['centros.view']);
+        $aprendiz->givePermissionTo(['centros.view']);
     }
 }

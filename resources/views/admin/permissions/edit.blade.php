@@ -22,24 +22,42 @@
 
                 <div class="card-body">
 
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
+                    {{-- Categoría --}}
+                    <div class="form-group mb-3">
+                        <label for="category">Categoría</label>
                         <input
-                            id="name"
+                            id="category"
                             type="text"
-                            name="name"
-                            class="form-control @error('name') is-invalid @enderror"
-                            value="{{ old('name', $permission->name) }}"
+                            name="category"
+                            class="form-control @error('category') is-invalid @enderror"
+                            value="{{ old('category', $category) }}"
+                            placeholder="usuarios, roles, reportes"
                             required
-                            autofocus
                         >
-
-                        @error('name')
+                        @error('category')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <div class="form-group">
+                    {{-- Acción --}}
+                    <div class="form-group mb-3">
+                        <label for="action">Acción</label>
+                        <input
+                            id="action"
+                            type="text"
+                            name="action"
+                            class="form-control @error('action') is-invalid @enderror"
+                            value="{{ old('action', $action) }}"
+                            placeholder="create, edit, delete, view"
+                            required
+                        >
+                        @error('action')
+                            <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    {{-- Guard --}}
+                    <div class="form-group mb-3">
                         <label for="guard_name">Guard Name</label>
                         <input
                             id="guard_name"
@@ -49,7 +67,6 @@
                             value="{{ old('guard_name', $permission->guard_name) }}"
                             required
                         >
-
                         @error('guard_name')
                             <span class="invalid-feedback">{{ $message }}</span>
                         @enderror

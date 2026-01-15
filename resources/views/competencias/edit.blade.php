@@ -24,7 +24,7 @@
         <div class="col-md-8 offset-md-2">
             
             {{-- Tarjeta del Formulario --}}
-            @can('edit_competencias')
+            @can('competencias.edit')
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Información de la Competencia</h3>

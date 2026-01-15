@@ -1,59 +1,91 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
-
-
-class PermissionController extends  Controller
+class PermissionController extends Controller
 {
-
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::orderBy('name')->get()
+            ->groupBy(fn($p) => explode('.', $p->name)[0]);
+
         return view('admin.permissions.index', compact('permissions'));
     }
 
     public function create()
     {
-        return view('admin.permissions.create');
+        $categories = Permission::all()
+            ->map(fn($p) => explode('.', $p->name)[0])
+            ->unique()
+            ->values();
+
+        return view('admin.permissions.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:permissions,name'
+            'category' => 'required|string|max:50',
+            'guard_name' => 'required|string',
         ]);
 
-        Permission::create([
-            'name' => $request->name,
-            'guard_name' => 'web'
-        ]);
+        $category = strtolower($request->category);
+        $guard = $request->guard_name;
 
-        return redirect()->route('permissions.index')->with('success', 'Permiso creado');
+        $actions = [];
+
+        // Acciones rápidas
+        if ($request->filled('quick_actions')) {
+            $actions = $request->quick_actions;
+        }
+
+        // Acción principal
+        if ($request->action && $request->action !== 'custom') {
+            $actions[] = $request->action;
+        }
+
+        // Acción personalizada
+        if ($request->action === 'custom' && $request->filled('custom_action')) {
+            $actions[] = $request->custom_action;
+        }
+
+        $actions = array_unique($actions);
+
+        foreach ($actions as $action) {
+            Permission::firstOrCreate([
+                'name' => $category . '.' . strtolower($action),
+                'guard_name' => $guard,
+            ]);
+        }
+
+        return redirect()->route('permissions.index')
+            ->with('success', 'Permiso(s) creado(s) correctamente');
     }
+
 
     public function edit(Permission $permission)
     {
-        return view('admin.permissions.edit', compact('permission'));
+        [$category, $action] = explode('.', $permission->name);
+
+        return view('admin.permissions.edit', compact('permission', 'category', 'action'));
     }
 
     public function update(Request $request, Permission $permission)
     {
         $request->validate([
-            'name' => 'required|unique:permissions,name,' . $permission->id
+            'category' => 'required|string|max:50',
+            'action' => 'required|string|max:50',
         ]);
 
-        $permission->update(['name' => $request->name]);
+        $permission->update([
+            'name' => strtolower($request->category) . '.' . strtolower($request->action),
+        ]);
 
-        return redirect()->route('permissions.index')->with('success', 'Permiso actualizado');
-    }
-
-    public function destroy(Permission $permission)
-    {
-        $permission->delete();
-        return back()->with('success', 'Permiso eliminado');
+        return redirect()->route('permissions.index')
+            ->with('success', 'Permiso actualizado correctamente');
     }
 }

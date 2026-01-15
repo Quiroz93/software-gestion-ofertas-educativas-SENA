@@ -34,7 +34,7 @@
 
         {{-- Formulario --}}
         <div class="col-12 md-4">
-            @canany(['edit_centros','update_centros'])
+            @canany(['centros.edit','centros.update'])
             <form action="{{ route('centro.update', $centro->id) }}" method="POST">
                 @csrf
                 @method('PUT')

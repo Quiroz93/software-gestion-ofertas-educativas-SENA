@@ -12,7 +12,7 @@
 <section>
     <div class="container">
         {{-- seccion de botones de accion --}}
-        @can('create_competencias')
+        @can('competencias.create')
             <a href="{{-- enlace al controller --}}" class="btn btn-success">Agregar Competencia</a>
         @endcan
         <a href="{{-- enlace al controller --}}" class="btn btn-primary">Volver</a>
@@ -36,19 +36,19 @@
                     <td>{{-- logica de nombre --}}</td>
                     <td>{{-- logica de descripcion --}}</td>
                     <td>
-                        @can('view_competencias')
+                        @can('competencias.view')
                             <a href="{{-- enlace show --}}" class="btn btn-info btn-sm" title="Ver">
                                 <i class="fas fa-eye"></i>
                             </a>
                         @endcan
 
-                        @can('edit_competencias')
+                        @can('competencias.edit')
                             <a href="{{-- enlace edit --}}" class="btn btn-primary btn-sm" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </a>
                         @endcan
 
-                        @can('delete_competencias')
+                        @can('competencias.delete')
                             <form action="{{-- enlace delete --}}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

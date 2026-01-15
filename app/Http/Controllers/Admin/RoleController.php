@@ -64,28 +64,42 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $role = Role::findOrFail($id);
-        $permissions = Permission::all();
-        $rolePermissions = $role->permissions->pluck('id')->toArray();
-        return view('admin.roles.edit', compact( 'role', 'permissions','rolePermissions'));
-    }
+    public function edit(Role $role)
+{
+    $permissions = Permission::orderBy('name')->get()
+        ->groupBy(fn($p) => explode('.', $p->name)[0]);
+
+    $rolePermissions = $role->permissions->pluck('id')->toArray();
+
+    return view('admin.roles.edit', compact('role', 'permissions', 'rolePermissions'));
+}
 
     /**
      * Update the specified resource in storage.
      */
  public function update(Request $request, Role $role)
-    {
-        $role->update(['name' => $request->name]);
-        $role->syncPermissions($request->permissions ?? []);
-        return redirect()->route('roles.index');
-    }
+{
+    $request->validate([
+        'name' => 'required|string|max:50|unique:roles,name,' . $role->id,
+        'permissions' => 'array',
+    ]);
+
+    $role->update([
+        'name' => $request->name,
+    ]);
+
+    $role->syncPermissions($request->permissions ?? []);
+
+    return redirect()
+        ->route('roles.edit', $role->id)
+        ->with('success', 'Rol actualizado correctamente');
+}
+
 
 
 public function destroy(Role $role)
 {
-    $this->authorize('delete_roles'); // o middleware
+    $this->authorize('roles.delete'); // o middleware
 
     if (in_array($role->name, ['admin', 'super-admin'])) {
         return back()->with('error', 'No se puede eliminar este rol');
