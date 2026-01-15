@@ -30,7 +30,7 @@
                     <h3 class="card-title">Información de la oferta</h3>
                 </div>
 
-                <form action="{{-- logica de crear oferta--}}" method="POST" class="form-horizontal">
+                <form action="{{-- logica de editar oferta--}}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">

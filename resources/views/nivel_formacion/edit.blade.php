@@ -30,7 +30,7 @@
                     <h3 class="card-title">Información del Nivel de formación</h3>
                 </div>
 
-                <form action="{{-- logica de crear niveles de formacion --}}" method="POST" class="form-horizontal">
+                <form action="{{-- logica de editar niveles de formacion --}}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">
