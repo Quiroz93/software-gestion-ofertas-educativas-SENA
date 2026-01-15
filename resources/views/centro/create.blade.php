@@ -38,7 +38,7 @@
             @endif
 
             {{-- Tarjeta del Formulario --}}
-            @can('create_centros')
+            @can('centros.create')
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Información del Centro</h3>
