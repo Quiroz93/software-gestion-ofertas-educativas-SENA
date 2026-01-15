@@ -34,23 +34,23 @@
                     @csrf
 
                     <div class="card-body">
-                        {{-- Nombre del Centro --}}
+                        {{-- Nombre de la competencia --}}
                         <div class="form-group row">
                             <label for="nombre" class="col-sm-2 col-form-label">Nombre de la competencia</label>
                             <div class="col-sm-10">
                                 <input type="text"
-                                    placeholder="Ingrese el nombre de la Competencia"
+                                    value="{{-- valor mostrar nombre de la competencia --}}"
                                     name="nombre"
                                     id="nombre"
                                     class="form-control">
                         </div>
                     </div>
 
-                    {{-- Descripción del Centro --}}
+                    {{-- Descripción de la competencia --}}
                     <div class="form-group row">
                         <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                         <div class="col-sm-10">
-                            <textarea placeholder="Descripcion de la competencia"
+                            <textarea value="{{-- valor mostrar descripcion de la competencia --}}"
                             name="descripcion" 
                             id="descripcion" 
                             class="form-control"></textarea>

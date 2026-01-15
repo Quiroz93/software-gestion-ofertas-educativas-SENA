@@ -25,7 +25,6 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre de la Competencia</th>
                     <th>Descripcion</th>
                     <th>Acciones</th>
@@ -34,7 +33,6 @@
             <tbody>
                 {{-- Ejemplo de fila de datos --}}
                 <tr>
-                    <td>{{-- logica de id --}}</td>
                     <td>{{-- logica de nombre --}}</td>
                     <td>{{-- logica de descripcion --}}</td>
                     <td>

@@ -48,7 +48,6 @@
                         <table class="table table-hover table-striped">
                             <thead class="thead-light">
                                 <tr>
-                                    <th style="width: 5%">ID</th>
                                     <th style="width: 20%">Nombre</th>
                                     <th style="width: 25%">Dirección</th>
                                     <th style="width: 15%">Teléfono</th>
@@ -61,9 +60,6 @@
                             <tbody>
                                 @foreach ($centros as $centro)
                                 <tr>
-                                    <td>
-                                        <span class="badge badge-info">{{ $centro->id }}</span>
-                                    </td>
                                     <td>
                                         <strong>{{ $centro->nombre }}</strong>
                                     </td>
