@@ -48,7 +48,7 @@
                 </a>
             @endif
         </div>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-6">
                 <button type="submit" class="btn btn-primary btn-sm">
                 {{ __('Iniciar sesión') }}
