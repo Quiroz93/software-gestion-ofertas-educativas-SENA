@@ -97,7 +97,7 @@
                                 <i class="fas fa-arrow-left"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Historia
+                                <i class="fas fa-save"></i> Guardar Oferta
                             </button>
                         </div>
                     </div>
