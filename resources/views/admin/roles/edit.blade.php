@@ -3,10 +3,16 @@
 @section('title', 'Editar Rol')
 
 @section('content_header')
-<h1 class="m-0">
-    Editar Rol
-    <small class="text-muted">— {{ $role->name }}</small>
-</h1>
+<div class="row">
+    <div class="col-6">
+        <h1 class="m-0">
+            Editar Rol
+            <small class="text-muted">— {{ $role->name }}</small>
+        </h1>
+    </div>
+
+</div>
+
 @stop
 
 @section('content')
@@ -15,6 +21,14 @@
     @csrf
     @method('PUT')
 
+    <div class=" text-right mb-3">
+        <button type="submit" class="btn btn-primary ">
+            <i class="fas fa-save"></i> Guardar cambios
+        </button>
+        <a href="{{ route('roles.index') }}" class="btn btn-secondary">
+            Cancelar
+        </a>
+    </div>
     {{-- ================= INFO DEL ROL ================= --}}
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -101,28 +115,17 @@
             @endforeach
 
         </div>
-
-        {{-- ================= FOOTER ================= --}}
-        <div class="card-footer text-right">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Guardar cambios
-            </button>
-            <a href="{{ route('roles.index') }}" class="btn btn-secondary">
-                Cancelar
-            </a>
-        </div>
     </div>
-
 </form>
-
-{{-- ================= CONFIRMACIÓN VISUAL ================= --}}
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-    <i class="fas fa-check-circle"></i>
-    {{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+<div class="row">
+    <div class="col-12 text-end">
+        <a href="#" class="btn btn-outline-warning text-right mt-3">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
 </div>
-@endif
+
+
 
 @endsection
 
