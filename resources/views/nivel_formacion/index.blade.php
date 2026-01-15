@@ -6,7 +6,7 @@
 
 <section>
     {{-- Esta es la seccion del titulo de la vista index --}}
-    <h1 class="text-center font-weight-bold mb-3">gestion Nivel de formación</h1>
+    <h1 class="text-center font-weight-bold mb-3">Gestión Nivel de formación</h1>
 </section>
 
 <section>
