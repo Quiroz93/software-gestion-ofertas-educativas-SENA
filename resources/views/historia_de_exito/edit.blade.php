@@ -39,7 +39,7 @@
                             <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                             <div class="col-sm-10">
                                 <input type="text"
-                                    placeholder="Ingrese el nombre de la Historia de Éxito"
+                                    value="{{-- valor mostrar nombre --}}"
                                     name="nombre"
                                     id="nombre"
                                     class="form-control">
@@ -51,7 +51,7 @@
                             <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
                             <div class="col-sm-10">
                                 <input type="text"
-                                    placeholder="Ingrese el titulo de la Historia de Éxito"
+                                    value="{{-- valor mostrar titulo --}}"
                                     name="titulo"
                                     id="titulo"
                                     class="form-control">
@@ -62,7 +62,7 @@
                     <div class="form-group row">
                         <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
                         <div class="col-sm-10">
-                            <textarea placeholder="Descripcion de la Historia de exito"
+                            <textarea value="{{-- valor mostrar descripcion --}}"
                             name="descripcion" 
                             id="descripcion" 
                             class="form-control"></textarea>
@@ -74,7 +74,7 @@
                             <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
                             <div class="col-sm-10">
                                 <input type="date"
-                                    placeholder="Ingrese la fecha de la Historia de Éxito"
+                                    value="{{-- valor mostrar fecha --}}"
                                     name="fecha"
                                     id="fecha"
                                     class="form-control">
