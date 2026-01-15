@@ -64,7 +64,7 @@
                                         </a>
                                         @endcan
                                         @can('users.delete')
-                                        <form action="{{ route('users.destroy', $u) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Eliminar usuario?')">
+                                        <form action="{{ route('users.destroy', $u) }}" method="POST" class="d-inline" onsubmit="return confirmarEliminacion(event);">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px">
@@ -100,7 +100,5 @@
 @endsection
 
 @section('js')
-<script>
-    // placeholder for page JS
-</script>
+@parent
 @endsection
