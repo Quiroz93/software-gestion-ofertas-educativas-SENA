@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             'dashboard.view',
 
             // Permisos de asignación de roles a usuarios
-            'assign_roles_to_users',
+            'users.assign.roles',
 
             // Permisos de noticias
             'noticias.view',

@@ -321,36 +321,35 @@ return [
             'text' => 'Panel de control',
             'route' => 'dashboard',
             'icon' => 'fas fa-toolbox',
-            /*'can' => 'view_dashboard',*/
+            'can' => 'dashboard.view',
         ],
 
         [
             'text' => 'Centros',
             'route' => 'centro.index',
             'icon' => 'fas fa-building',
-            'can' => 'view_centros',
+            'can' => 'centros.view',
         ],
 
         [
             'text' => 'Usuarios',
             'route' => 'users.index',
             'icon' => 'fas fa-users',
-            /*'can' => 'view_users',*/
-
+            'can' => 'users.view',
         ],
 
         [
             'text' => 'Roles',
             'route' => 'roles.index',
             'icon' => 'fas fa-user-tag',
-            /*'can' => 'view_roles',*/
+            'can' => 'roles.view',
         ],
 
         [
             'text' => 'Permisos',
             'route' => 'permissions.index',
             'icon' => 'fas fa-key',
-            /*'can' => 'view_permissions',*/
+            'can' => 'permissions.view',
         ],
     ],
 

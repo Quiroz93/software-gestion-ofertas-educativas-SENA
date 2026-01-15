@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 //Rutas de gestión de usuarios por medio de Resource Controller
-Route::middleware(['auth', 'verified', 'can:manage_users'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'verified', 'can:users.manage'])->prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
 });
 
@@ -25,11 +25,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('users/{user}/roles', [UserRoleController::class, 'edit'])
         ->name('users.roles.edit')
-        ->middleware('can:assign_roles');
+        ->middleware('can:users.assign.roles');
 
     Route::put('users/{user}/roles', [UserRoleController::class, 'update'])
         ->name('users.roles.update')
-        ->middleware('can:assign_roles');
+        ->middleware('can:users.assign.roles');
 });
 
 
