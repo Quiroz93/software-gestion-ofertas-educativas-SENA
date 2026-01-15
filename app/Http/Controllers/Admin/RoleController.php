@@ -71,18 +71,30 @@ class RoleController extends Controller
 
     $rolePermissions = $role->permissions->pluck('id')->toArray();
 
-    return view('roles.edit', compact('role', 'permissions', 'rolePermissions'));
+    return view('admin.roles.edit', compact('role', 'permissions', 'rolePermissions'));
 }
 
     /**
      * Update the specified resource in storage.
      */
  public function update(Request $request, Role $role)
-    {
-        $role->update(['name' => $request->name]);
-        $role->syncPermissions($request->permissions ?? []);
-        return redirect()->route('roles.index');
-    }
+{
+    $request->validate([
+        'name' => 'required|string|max:50|unique:roles,name,' . $role->id,
+        'permissions' => 'array',
+    ]);
+
+    $role->update([
+        'name' => $request->name,
+    ]);
+
+    $role->syncPermissions($request->permissions ?? []);
+
+    return redirect()
+        ->route('roles.edit', $role->id)
+        ->with('success', 'Rol actualizado correctamente');
+}
+
 
 
 public function destroy(Role $role)

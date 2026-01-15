@@ -24,7 +24,7 @@
     <div class="row">
 
         {{-- Centros --}}
-        @can('view_centros')
+        @can('centros.view')
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">
@@ -41,7 +41,7 @@
         @endcan
 
         {{-- Usuarios --}}
-        @can('view_users')
+        @can('users.view')
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">
@@ -73,7 +73,7 @@
         </div>
 
         {{-- Permisos --}}
-        @can('view_permissions')
+        @can('permissions.view')
         <div class="col-md-4 mt-4">
             <div class="card text-center shadow-sm">
                 <div class="card-header">

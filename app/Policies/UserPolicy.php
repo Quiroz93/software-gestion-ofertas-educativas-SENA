@@ -11,12 +11,12 @@ class UserPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->can('users.index') || $user->can('manage_users');
+        return $user->can('users.index') || $user->can('users.manage');
     }
 
     public function view(User $user, User $model): bool
     {
-        return $user->can('users.show') || $user->can('manage_users');
+        return $user->can('users.show') || $user->can('users.manage');
     }
 
     public function create(User $user): bool
