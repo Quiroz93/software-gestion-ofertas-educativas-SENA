@@ -25,7 +25,7 @@
             {{-- Botones de acción --}}
             <div class="mb-3">
 
-                @can('create_centros')
+                @can('centros.create')
                 <a href="{{ route('centro.create') }}" class="btn btn-success">
                     <i class="fas fa-plus"></i> Agregar Centro
                 </a>
@@ -52,7 +52,7 @@
                                     <th style="width: 25%">Dirección</th>
                                     <th style="width: 15%">Teléfono</th>
                                     <th style="width: 20%">Correo</th>
-                                    @canany(['edit_centros','update_centros','delete_centros'])
+                                    @canany(['centros.edit','centros.update','centros.delete'])
                                     <th style="width: 15%">Acciones</th>
                                     @endcanany
                                 </tr>
@@ -74,9 +74,9 @@
                                             {{ $centro->correo ?? 'N/A' }}
                                         </a>
                                     </td>
-                                    @canany(['edit_centros','update_centros','delete_centros'])
+                                    @canany(['centros.edit','centros.update','centros.delete'])
                                     <td>
-                                        @canany(['edit_centros','update_centros'])
+                                        @canany(['centros.edit','centros.update'])
                                         <a href="{{ route('centro.edit', $centro->id) }}"
                                             class="btn btn-info ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px"
                                             type="button"
@@ -85,7 +85,7 @@
                                         </a>
                                         @endcanany
 
-                                        @can('delete_centros')
+                                        @can('centros.delete')
                                         <form action="{{ route('centro.destroy', $centro->id) }}"
                                             method="POST"
                                             class="d-inline"
@@ -110,7 +110,7 @@
                     <div class="alert alert-info" role="alert">
                         <i class="fas fa-info-circle"></i> No hay centros registrados.
 
-                        @can('create_centros')
+                        @can('centros.create')
                         <a href="{{ route('centro.create') }}" class="alert-link">Crear uno ahora</a>
                         @endcan
 

@@ -12,7 +12,7 @@ class CentroPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_centros');
+        return $user->can('centros.view');
     }
 
     /**
@@ -20,7 +20,7 @@ class CentroPolicy
      */
     public function view(User $user, Centro $centro): bool
     {
-        return $user->can('view_centros');
+        return $user->can('centros.view');
     }
 
     /**
@@ -28,7 +28,7 @@ class CentroPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_centros');
+        return $user->can('centros.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class CentroPolicy
      */
     public function update(User $user, Centro $centro): bool
     {
-        return $user->can('update_centros');
+        return $user->can('centros.update');
     }
 
     /**
@@ -44,6 +44,6 @@ class CentroPolicy
      */
     public function delete(User $user, Centro $centro): bool
     {
-        return $user->can('delete_centros');
+        return $user->can('centros.delete');
     }
 }

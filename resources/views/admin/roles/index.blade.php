@@ -12,7 +12,7 @@
 
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>
-            @can('create_roles')
+            @can('roles.create')
                 <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">
                     <i class="fas fa-plus"></i> Crear Nuevo Rol
                 </a>
@@ -44,7 +44,7 @@
                                 <i class="fas fa-edit"></i>Editar
                             </a>
 
-                            @can('delete_roles')
+                            @can('roles.delete')
                                 <form action="{{ route('roles.destroy', $role->id) }}"
                                       method="POST"
                                       class="d-inline"

@@ -3,68 +3,37 @@
 @section('title', 'Permisos')
 
 @section('content_header')
-    <h1 class="m-0">Permisos</h1>
+<h1 class="m-0">Permisos por categoría</h1>
 @stop
 
 @section('content')
 
-<div class="card">
+<a href="{{ route('permissions.create') }}" class="btn btn-primary mb-3">
+    Crear permiso
+</a>
 
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <div>
-            @can('create_permissions')
-                <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i> Crear Nuevo Permiso
-                </a>
-            @endcan
+@foreach($permissions as $category => $items)
+    <div class="card mb-3">
+        <div class="card-header">
+            <strong>{{ strtoupper($category) }}</strong>
         </div>
 
-        <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">
-            <i class="fas fa-arrow-left"></i> Volver
-        </a>
-    </div>
-
-    <div class="card-body">
-        <table id="permissionsTable" class="table table-bordered table-hover">
-            <thead class="thead-light">
-                <tr>
-                    <th>Nombre del Permiso</th>
-                    <th>Guard</th>
-                    <th style="width: 160px">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($permissions as $permission)
-                    <tr>
-                        <td>{{ $permission->name }}</td>
-                        <td>{{ $permission->guard_name }}</td>
-                        <td>
-                            @can('edit_permissions')
-                                <a href="{{ route('permissions.edit', $permission->id) }}"
-                                   class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            @endcan
-
-                            @can('delete_permissions')
-                                <form action="{{ route('permissions.destroy', $permission->id) }}"
-                                      method="POST"
-                                      class="d-inline"
-                                      onsubmit="confirmarEliminacion(event)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            @endcan
-                        </td>
-                    </tr>
+        <div class="card-body">
+            <div class="row">
+                @foreach($items as $permission)
+                    <div class="col-md-4 mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>{{ $permission->name }}</span>
+                            <a href="{{ route('permissions.edit', $permission) }}"
+                               class="btn btn-sm btn-outline-secondary">
+                                Editar
+                            </a>
+                        </div>
+                    </div>
                 @endforeach
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
+@endforeach
 
-</div>
-
-@stop
+@endsection

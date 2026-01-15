@@ -64,13 +64,15 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $role = Role::findOrFail($id);
-        $permissions = Permission::all();
-        $rolePermissions = $role->permissions->pluck('id')->toArray();
-        return view('admin.roles.edit', compact( 'role', 'permissions','rolePermissions'));
-    }
+    public function edit(Role $role)
+{
+    $permissions = Permission::orderBy('name')->get()
+        ->groupBy(fn($p) => explode('.', $p->name)[0]);
+
+    $rolePermissions = $role->permissions->pluck('id')->toArray();
+
+    return view('roles.edit', compact('role', 'permissions', 'rolePermissions'));
+}
 
     /**
      * Update the specified resource in storage.
@@ -85,7 +87,7 @@ class RoleController extends Controller
 
 public function destroy(Role $role)
 {
-    $this->authorize('delete_roles'); // o middleware
+    $this->authorize('roles.delete'); // o middleware
 
     if (in_array($role->name, ['admin', 'super-admin'])) {
         return back()->with('error', 'No se puede eliminar este rol');

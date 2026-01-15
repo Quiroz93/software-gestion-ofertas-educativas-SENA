@@ -8,126 +8,74 @@
 
 @section('content')
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
+<div class="card mt-4">
+    <div class="card-header">
+        <h3 class="card-title">Permisos del rol</h3>
+    </div>
 
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Actualizar Rol</h3>
-            </div>
+    <div class="card-body">
 
-            <form method="POST" action="{{ route('roles.update', $role->id) }}">
-                @csrf
-                @method('PUT')
+        @foreach($permissions as $category => $items)
+            <div class="mb-3 border rounded p-3">
 
-                <div class="card-body">
+                {{-- Header de categoría --}}
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong class="text-uppercase">{{ $category }}</strong>
 
-                    {{-- Nombre del rol --}}
-                    <div class="form-group">
-                        <label for="name">Nombre del Rol</label>
+                    {{-- Check rápido por categoría --}}
+                    <div class="form-check">
                         <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            class="form-control @error('name') is-invalid @enderror"
-                            value="{{ old('name', $role->name) }}"
-                            required
-                            autofocus
+                            type="checkbox"
+                            class="form-check-input check-category"
+                            data-category="{{ $category }}"
+                            id="check_{{ $category }}"
                         >
-                        @error('name')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    {{-- Guard --}}
-                    <div class="form-group">
-                        <label for="guard_name">Guard</label>
-                        <input
-                            type="text"
-                            name="guard_name"
-                            id="guard_name"
-                            class="form-control @error('guard_name') is-invalid @enderror"
-                            value="{{ old('guard_name', $role->guard_name) }}"
-                            required
-                        >
-                        @error('guard_name')
-                            <span class="invalid-feedback">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    {{-- Permisos --}}
-                    <div class="form-group mt-4">
-                        <label class="font-weight-bold">
-                            Permisos asignados al rol
+                        <label class="form-check-label" for="check_{{ $category }}">
+                            Seleccionar todo
                         </label>
-
-                        {{-- Check seleccionar todos --}}
-                        <div class="form-check mb-3">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                id="checkAllPermissions"
-                                {{ count($rolePermissions) === $permissions->count() ? 'checked' : '' }}
-                            >
-                            <label class="form-check-label font-weight-bold" for="checkAllPermissions">
-                                Seleccionar todos los permisos
-                            </label>
-                        </div>
-
-                        <div class="row">
-                            @foreach($permissions as $permission)
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input
-                                            class="form-check-input permission-checkbox"
-                                            type="checkbox"
-                                            name="permissions[]"
-                                            value="{{ $permission->name }}"
-                                            id="permission_{{ $permission->id }}"
-                                            {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}
-                                        >
-                                        <label
-                                            class="form-check-label"
-                                            for="permission_{{ $permission->id }}"
-                                        >
-                                            {{ $permission->name }}
-                                        </label>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
                     </div>
-
                 </div>
 
-                <div class="card-footer text-right">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Actualizar Rol
-                    </button>
-                    <a href="{{ route('roles.index') }}" class="btn btn-secondary">
-                        Cancelar
-                    </a>
+                <div class="row">
+                    @foreach($items as $permission)
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    name="permissions[]"
+                                    value="{{ $permission->id }}"
+                                    id="perm_{{ $permission->id }}"
+                                    class="form-check-input permission-checkbox cat-{{ $category }}"
+                                    {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="perm_{{ $permission->id }}">
+                                    {{ explode('.', $permission->name)[1] }}
+                                </label>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
-            </form>
-        </div>
+            </div>
+        @endforeach
 
     </div>
+
+@endpush
+
 </div>
+
 
 @stop
 
-@section('js')
+    @push('scripts')
 <script>
-    document.getElementById('checkAllPermissions')
-        .addEventListener('change', function () {
-
-            const isChecked = this.checked;
-
-            document.querySelectorAll('.permission-checkbox')
-                .forEach(function (checkbox) {
-                    checkbox.checked = isChecked;
-                });
+    document.querySelectorAll('.check-category').forEach(check => {
+        check.addEventListener('change', function () {
+            const category = this.dataset.category;
+            document.querySelectorAll('.cat-' + category)
+                .forEach(cb => cb.checked = this.checked);
         });
+    });
 </script>
-@endsection
+@endpush

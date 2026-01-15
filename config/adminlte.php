@@ -335,7 +335,7 @@ return [
             'text' => 'Usuarios',
             'route' => 'users.index',
             'icon' => 'fas fa-users',
-            'can' => 'view_users',
+            /*'can' => 'view_users',*/
 
         ],
 
@@ -343,14 +343,14 @@ return [
             'text' => 'Roles',
             'route' => 'roles.index',
             'icon' => 'fas fa-user-tag',
-            'can' => 'view_roles',
+            /*'can' => 'view_roles',*/
         ],
 
         [
             'text' => 'Permisos',
             'route' => 'permissions.index',
             'icon' => 'fas fa-key',
-            'can' => 'view_permissions',
+            /*'can' => 'view_permissions',*/
         ],
     ],
 
