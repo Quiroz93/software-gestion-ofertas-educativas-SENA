@@ -318,10 +318,10 @@ return [
         ],
         
         [
-            'text' => 'Dashboard',
+            'text' => 'Panel de control',
             'route' => 'dashboard',
             'icon' => 'fas fa-toolbox',
-            'can' => 'view_dashboard',
+            /*'can' => 'view_dashboard',*/
         ],
 
         [
