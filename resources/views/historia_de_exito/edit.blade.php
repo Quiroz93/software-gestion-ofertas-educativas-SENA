@@ -30,7 +30,7 @@
                     <h3 class="card-title">Información de la Historia</h3>
                 </div>
 
-                <form action="{{-- logica de crear historias de exito --}}" method="POST" class="form-horizontal">
+                <form action="{{-- logica de editar historias de exito --}}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">

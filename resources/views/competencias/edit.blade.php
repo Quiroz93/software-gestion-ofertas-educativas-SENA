@@ -11,7 +11,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('centro.index') }}">Competencias</a></li>
-                <li class="breadcrumb-item active">Crear</li>
+                <li class="breadcrumb-item active">Editar</li>
             </ol>
         </div>
     </div>
@@ -30,7 +30,7 @@
                     <h3 class="card-title">Información de la Competencia</h3>
                 </div>
 
-                <form action="{{-- logica de crear competencias --}}" method="POST" class="form-horizontal">
+                <form action="{{-- logica de editar competencias --}}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">

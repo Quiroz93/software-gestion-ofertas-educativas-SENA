@@ -63,7 +63,7 @@
                 {{ __('¿Ya tienes una cuenta?') }}
             </a>
         </div>
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-6">
                 <button type="submit" class="btn btn-success btn-sm">
                 {{ __('Registrarse') }}

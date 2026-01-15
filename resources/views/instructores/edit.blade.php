@@ -30,7 +30,7 @@
                     <h3 class="card-title">Información del instructor</h3>
                 </div>
 
-                <form action="{{-- logica de crear instructores --}}" method="POST" class="form-horizontal">
+                <form action="{{-- logica de editar instructores --}}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">
