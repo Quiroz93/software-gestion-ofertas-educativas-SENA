@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class nivel_formacion extends Model
 {
-    protected $table = "nivel_formaciones";
-    protected $fillable = ["nombre","descripcion"];
+    // Definir la tabla si no sigue la convención plural
+    protected $table = 'nivel_formaciones';
+
+    // Definir los campos que se pueden asignar masivamente
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+    ];
 }

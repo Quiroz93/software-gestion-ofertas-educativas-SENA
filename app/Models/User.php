@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar masivamente.
      *
      * @var list<string>
      */
@@ -28,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Los atributos que deben ocultarse para la serialización.
      *
      * @var list<string>
      */
@@ -38,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Los atributos que deben ser convertidos a tipos nativos.
      *
      * @return array<string, string>
      */
@@ -51,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the user's profile image for AdminLTE.
+     * Obtener la imagen de perfil del usuario para AdminLTE.
      *
      * @return string
      */
