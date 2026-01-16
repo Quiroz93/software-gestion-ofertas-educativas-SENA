@@ -383,7 +383,7 @@ return [
         ],
         [
             'text'=>'Redes',
-            'route'=>'redes.index',
+            'route'=>'redes_conocimiento.index',
             'icon'=>'fas fa-network-wired',
         ]
         

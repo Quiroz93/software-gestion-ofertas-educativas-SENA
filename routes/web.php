@@ -259,8 +259,8 @@ Route::middleware(['auth', 'can:programas.view'])->group(function () {
 | Redes
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'can:redes.view'])->group(function () {
-    Route::get('redes', [RedController::class, 'index'])
-        ->name('redes.index');
+Route::middleware(['auth', 'can:redes_conocimiento.view'])->group(function () {
+    Route::get('redes-conocimiento', [RedController::class, 'index'])
+        ->name('redes_conocimiento.index');
 });
 
