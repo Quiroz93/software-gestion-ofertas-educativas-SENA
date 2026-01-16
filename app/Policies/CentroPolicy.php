@@ -8,7 +8,7 @@ use App\Models\User;
 class CentroPolicy
 {
     /**
-     * Ver listado de centros
+     * Determinar si el usuario puede ver listado de centros
      */
     public function viewAny(User $user): bool
     {
@@ -16,7 +16,7 @@ class CentroPolicy
     }
 
     /**
-     * Ver un centro específico
+     * Determinar si el usuario puede ver un centro específico
      */
     public function view(User $user, Centro $centro): bool
     {
@@ -24,7 +24,7 @@ class CentroPolicy
     }
 
     /**
-     * Crear centros
+     * Determinar si el usuario puede crear centros
      */
     public function create(User $user): bool
     {
@@ -32,7 +32,7 @@ class CentroPolicy
     }
 
     /**
-     * Actualizar centros
+     * Determinar si el usuario puede actualizar centros
      */
     public function update(User $user, Centro $centro): bool
     {
@@ -40,7 +40,7 @@ class CentroPolicy
     }
 
     /**
-     * Eliminar centros
+     * Determinar si el usuario puede eliminar centros
      */
     public function delete(User $user, Centro $centro): bool
     {
