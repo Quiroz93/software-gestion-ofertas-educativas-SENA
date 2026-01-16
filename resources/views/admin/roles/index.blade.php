@@ -10,7 +10,7 @@
     </h1>
 
     @can('roles.create')
-    <a href="{{ route('roles.create') }}" class="btn btn-primary">
+    <a href="{{ route('roles.create') }}" class="btn btn-success">
         <i class="fas fa-plus-circle"></i>
         Crear rol
     </a>
@@ -63,7 +63,7 @@
                 <div class="">
                     @can('roles.edit')
                     <a href="{{ route('roles.edit', $role->id) }}"
-                        class="btn btn-sm btn-warning">
+                        class="btn btn-sm btn-outline-warning">
                         <i class="fas fa-edit"></i>
                         Editar
                     </a>
@@ -77,7 +77,7 @@
                     @csrf
                     @method('DELETE')
 
-                    <button type="submit" class="btn btn-sm btn-danger">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
                         <i class="fas fa-trash"></i>
                         Eliminar
                     </button>

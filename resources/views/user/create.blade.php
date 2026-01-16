@@ -44,7 +44,7 @@
 
                         <div class="card-footer">
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
-                            <button type="submit" class="btn btn-primary float-right">Crear Usuario</button>
+                            <button type="submit" class="btn btn-success float-right">Crear Usuario</button>
                         </div>
                     </form>
                 </div>

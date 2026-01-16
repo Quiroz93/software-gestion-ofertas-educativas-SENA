@@ -33,7 +33,7 @@
         </a>
         @endcan
 
-        <a href="{{ route('dashboard') }}" class="btn btn-primary">
+        <a href="{{ route('dashboard') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left"></i> Volver
         </a>
     </div>
@@ -85,7 +85,7 @@
                     <div class="">
                         @canany(['centros.edit','centros.update'])
                         <a href="{{ route('centro.edit', $centro->id) }}"
-                            class="btn btn-info btn-sm min-width-100px">
+                            class="btn btn-outline-warning btn-sm min-width-100px">
                             <i class="fas fa-edit"></i> Editar
                         </a>
                     </div>
@@ -98,7 +98,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="btn btn-danger btn-sm min-width-100px">
+                            class="btn btn-outline-danger btn-sm min-width-100px">
                             <i class="fas fa-trash"></i> Eliminar
                         </button>
                     </form>

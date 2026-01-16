@@ -17,7 +17,7 @@
         </a>
         @endcan
 
-        <a href="{{ route('dashboard') }}" class="btn btn-primary">
+        <a href="{{ route('dashboard') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>
