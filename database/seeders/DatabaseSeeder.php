@@ -79,12 +79,12 @@ class DatabaseSeeder extends Seeder
             'instructores.manage',
 
             //permisos nivel de formacion
-            'nivel_formacion.view',
-            'nivel_formacion.create',
-            'nivel_formacion.update',
-            'nivel_formacion.delete',
-            'nivel_formacion.edit',
-            'nivel_formacion.manage',
+            'niveles_formacion.view',
+            'niveles_formacion.create',
+            'niveles_formacion.update',
+            'niveles_formacion.delete',
+            'niveles_formacion.edit',
+            'niveles_formacion.manage',
 
             //permisos ofertas
             'ofertas.view',
