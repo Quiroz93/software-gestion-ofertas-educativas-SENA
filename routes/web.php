@@ -209,7 +209,7 @@ Route::middleware(['auth', 'can:competencias.view'])->group(function () {
 | Historias de éxito
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'can:historias.view'])->group(function () {
+Route::middleware(['auth', 'can:historias_exito.view'])->group(function () {
     Route::get('historias', [HistoriaExitoController::class, 'index'])
         ->name('historias.index');
 });

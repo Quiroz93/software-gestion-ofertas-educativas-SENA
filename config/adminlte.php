@@ -358,7 +358,7 @@ return [
         ],
         [
             'text' => 'Historias de éxito',
-            'route' => 'historia_de_exito.index',
+            'route' => 'historias.index',
             'icon' => 'fas fa-book-open',
         ],
         [
@@ -368,7 +368,7 @@ return [
         ],
         [
             'text' => 'nivel de formación',
-            'route' => 'nivel_formacion.index',
+            'route' => 'niveles_formacion.index',
             'icon' => 'fa-solid fa-ranking-star',
         ],
         [

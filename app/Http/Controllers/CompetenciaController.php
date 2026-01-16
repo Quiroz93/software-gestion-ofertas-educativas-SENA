@@ -14,7 +14,7 @@ class CompetenciaController extends Controller
     public function index()
     {
         $competencia = Competencia::all();
-        return view('competencia.index', compact('competencia'));
+        return view('competencias.index', compact('competencia'));
     }
 
     /**
@@ -22,7 +22,7 @@ class CompetenciaController extends Controller
      */
     public function create()
     {
-        return view('competencia.create');
+        return view('competencias.create');
     }
 
     /**
@@ -31,7 +31,7 @@ class CompetenciaController extends Controller
     public function store(Request $request)
     {
         $competencia = Competencia::create($request->all());
-        return redirect()->route('competencia.index')->with('success', 'Competencia creada correctamente');
+        return redirect()->route('competencias.index')->with('success', 'Competencia creada correctamente');
     }
 
     /**
@@ -40,7 +40,7 @@ class CompetenciaController extends Controller
     public function show(competencia $competencia)
     {
         $competencia->find($competencia->id);
-        return view('competencia.show', compact('competencia'));
+        return view('competencias.show', compact('competencia'));
     }
 
     /**
@@ -49,7 +49,7 @@ class CompetenciaController extends Controller
     public function edit(Required $id)
     {
         $competencia = Competencia::find($id);
-        return view('competencia.edit', compact('competencia'))->with('success', 'Competencia cargada correctamente para editar');
+        return view('competencias.edit', compact('competencia'))->with('success', 'Competencia cargada correctamente para editar');
     }
 
     /**
@@ -58,7 +58,7 @@ class CompetenciaController extends Controller
     public function update(Request $request, competencia $id)
     {
         $id->update($request->all());
-        return redirect()->route('competencia.index')->with('success', 'Competencia actualizada correctamente');
+        return redirect()->route('competencias.index')->with('success', 'Competencia actualizada correctamente');
     }
 
     /**
@@ -68,6 +68,6 @@ class CompetenciaController extends Controller
     {
         $competencia = Competencia::find($id);
         $competencia->delete();
-        return redirect()->route('competencia.index')->with('success', 'Competencia eliminada correctamente');
+        return redirect()->route('competencias.index')->with('success', 'Competencia eliminada correctamente');
     }
 }
