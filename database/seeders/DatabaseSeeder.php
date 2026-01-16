@@ -9,151 +9,254 @@ use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Limpiar caché de permisos
+        |--------------------------------------------------------------------------
+        */
         app(PermissionRegistrar::class)->forgetCachedPermissions();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Definición centralizada de permisos del sistema
+        |--------------------------------------------------------------------------
+        | Convención:
+        | modulo.accion
+        |--------------------------------------------------------------------------
+        */
         $permissions = [
-            
-            // Permisos de sistema
-            'permissions.view',
-            'permissions.create',
-            'permissions.update',
-            'permissions.delete',
-            'permissions.edit',
-            'permissions.manage',
 
-            // Permisos de roles
-            'roles.view',
-            'roles.create',
-            'roles.update',
-            'roles.delete',
-            'roles.edit',
-            'roles.manage',
-
-            // Permisos de centros
-            'centros.view',
-            'centros.create',
-            'centros.update',
-            'centros.delete',
-            'centros.edit',
-            'centros.manage',
-
-            // Permisos de usuarios
-            'users.view',
-            'users.create',
-            'users.update',
-            'users.delete',
-            'users.edit',
-            'users.show',
-            'users.manage',
-
-            // permisos acceso de dashboard
+            /*
+            |--------------------------------------------------------------------------
+            | Dashboard
+            |--------------------------------------------------------------------------
+            */
             'dashboard.view',
 
-            // Permisos de asignación de roles a usuarios
+            /*
+            |--------------------------------------------------------------------------
+            | Usuarios
+            |--------------------------------------------------------------------------
+            */
+            'users.view',
+            'users.show',
+            'users.create',
+            'users.edit',
+            'users.update',
+            'users.delete',
+            'users.manage',
             'users.assign.roles',
 
-            // Permisos de noticias
-            'noticias.view',
-            'noticias.create',
-            'noticias.update',
-            'noticias.delete',
-            'noticias.edit',
-            'noticias.manage',
+            /*
+            |--------------------------------------------------------------------------
+            | Roles
+            |--------------------------------------------------------------------------
+            */
+            'roles.view',
+            'roles.create',
+            'roles.edit',
+            'roles.update',
+            'roles.delete',
+            'roles.manage',
 
-            // historias de exito
-            'historias_exito.view',
-            'historias_exito.create',
-            'historias_exito.update',
-            'historias_exito.delete',
-            'historias_exito.edit',
-            'historias_exito.manage',
+            /*
+            |--------------------------------------------------------------------------
+            | Permisos
+            |--------------------------------------------------------------------------
+            */
+            'permissions.view',
+            'permissions.create',
+            'permissions.edit',
+            'permissions.update',
+            'permissions.delete',
+            'permissions.manage',
 
-            //instructores
-            'instructores.view',
-            'instructores.create',
-            'instructores.update',
-            'instructores.delete',
-            'instructores.edit',
-            'instructores.manage',
+            /*
+            |--------------------------------------------------------------------------
+            | Centros educativos
+            |--------------------------------------------------------------------------
+            */
+            'centros.view',
+            'centros.create',
+            'centros.edit',
+            'centros.update',
+            'centros.delete',
+            'centros.manage',
 
-            //permisos nivel de formacion
-            'niveles_formacion.view',
-            'niveles_formacion.create',
-            'niveles_formacion.update',
-            'niveles_formacion.delete',
-            'niveles_formacion.edit',
-            'niveles_formacion.manage',
-
-            //permisos ofertas
-            'ofertas.view',
-            'ofertas.create',
-            'ofertas.update',
-            'ofertas.delete',
-            'ofertas.edit',
-            'ofertas.manage',
-
-            //permisos de programas
-            'programas.view',
-            'programas.create',
-            'programas.update',
-            'programas.delete',
-            'programas.edit',
-            'programas.manage',
-            //permisos redes de conocimiento
-            'redes_conocimiento.view',
-            'redes_conocimiento.create',
-            'redes_conocimiento.update',
-            'redes_conocimiento.delete',
-            'redes_conocimiento.edit',
-            'redes_conocimiento.manage',
-
-            //permisos competencias
+            /*
+            |--------------------------------------------------------------------------
+            | Competencias
+            |--------------------------------------------------------------------------
+            */
             'competencias.view',
             'competencias.create',
+            'competencias.edit',
             'competencias.update',
             'competencias.delete',
-            'competencias.edit',
             'competencias.manage',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Historias de éxito
+            |--------------------------------------------------------------------------
+            */
+            'historias_exito.view',
+            'historias_exito.create',
+            'historias_exito.edit',
+            'historias_exito.update',
+            'historias_exito.delete',
+            'historias_exito.manage',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Instructores
+            |--------------------------------------------------------------------------
+            */
+            'instructores.view',
+            'instructores.create',
+            'instructores.edit',
+            'instructores.update',
+            'instructores.delete',
+            'instructores.manage',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Niveles de formación
+            |--------------------------------------------------------------------------
+            */
+            'niveles_formacion.view',
+            'niveles_formacion.create',
+            'niveles_formacion.edit',
+            'niveles_formacion.update',
+            'niveles_formacion.delete',
+            'niveles_formacion.manage',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Ofertas educativas
+            |--------------------------------------------------------------------------
+            */
+            'ofertas.view',
+            'ofertas.create',
+            'ofertas.edit',
+            'ofertas.update',
+            'ofertas.delete',
+            'ofertas.manage',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Programas de formación
+            |--------------------------------------------------------------------------
+            */
+            'programas.view',
+            'programas.create',
+            'programas.edit',
+            'programas.update',
+            'programas.delete',
+            'programas.manage',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Redes de conocimiento
+            |--------------------------------------------------------------------------
+            */
+            'redes_conocimiento.view',
+            'redes_conocimiento.create',
+            'redes_conocimiento.edit',
+            'redes_conocimiento.update',
+            'redes_conocimiento.delete',
+            'redes_conocimiento.manage',
         ];
 
-
+        /*
+        |--------------------------------------------------------------------------
+        | Creación de permisos
+        |--------------------------------------------------------------------------
+        */
         foreach ($permissions as $permission) {
             Permission::firstOrCreate([
-                'name' => $permission,
+                'name'       => $permission,
                 'guard_name' => 'web',
             ]);
         }
 
+        /*
+        |--------------------------------------------------------------------------
+        | Creación de roles del sistema
+        |--------------------------------------------------------------------------
+        */
         $admin = Role::firstOrCreate([
-            'name' => 'admin',
+            'name'       => 'admin',
             'guard_name' => 'web',
         ]);
 
-        $admin->givePermissionTo($permissions);
-
         $instructor = Role::firstOrCreate([
-            'name' => 'instructor',
+            'name'       => 'instructor',
             'guard_name' => 'web',
         ]);
 
         $user = Role::firstOrCreate([
-            'name' => 'user',
+            'name'       => 'user',
             'guard_name' => 'web',
         ]);
 
         $aprendiz = Role::firstOrCreate([
-            'name' => 'aprendiz',
+            'name'       => 'aprendiz',
             'guard_name' => 'web',
         ]);
 
-        // Asignar todos los permisos al admin
-        $admin->givePermissionTo($permissions);
+        /*
+        |--------------------------------------------------------------------------
+        | Asignación de permisos a roles
+        |--------------------------------------------------------------------------
+        */
 
-        // Permisos específicos por rol
-        $instructor->givePermissionTo(['centros.view', 'centros.create', 'centros.update', 'centros.delete', 'centros.edit']);
-        $user->givePermissionTo(['centros.view']);
-        $aprendiz->givePermissionTo(['centros.view']);
+        // 🔐 Administrador: acceso total
+        $admin->syncPermissions($permissions);
+
+        // 👨‍🏫 Instructor: gestión académica parcial
+        $instructor->syncPermissions([
+            'dashboard.view',
+
+            'centros.view',
+            'competencias.view',
+            'competencias.create',
+            'competencias.edit',
+            'competencias.update',
+
+            'programas.view',
+            'programas.create',
+            'programas.edit',
+            'programas.update',
+
+            'ofertas.view',
+            'ofertas.create',
+            'ofertas.edit',
+            'ofertas.update',
+
+            'instructores.view',
+        ]);
+
+        // 👤 Usuario: acceso informativo
+        $user->syncPermissions([
+            'dashboard.view',
+
+            'centros.view',
+            'programas.view',
+            'ofertas.view',
+            'historias_exito.view',
+            'redes_conocimiento.view',
+        ]);
+
+        // 🎓 Aprendiz: acceso público / académico
+        $aprendiz->syncPermissions([
+            'dashboard.view',
+
+            'programas.view',
+            'ofertas.view',
+            'historias_exito.view',
+        ]);
     }
 }
