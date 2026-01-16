@@ -16,8 +16,6 @@ class CompetenciaController extends Controller
     public function index()
     {
         Gate::authorize("viewAny", Competencia::class);
-        $competencia = Competencia::all();
-        return view('competencias.index', compact('competencia'));
         $competencias = Competencia::all();
         return view('competencias.index', compact('competencias'));
     }

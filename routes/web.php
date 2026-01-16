@@ -38,22 +38,14 @@ require __DIR__ . '/auth.php';
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Panel de administrador
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'verified', 'can:admin.dashboard'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    })
+    ->middleware('can:dashboard.view')
+    ->name('dashboard');
 });
 
 /*
@@ -64,26 +56,28 @@ Route::middleware(['auth', 'verified', 'can:admin.dashboard'])->group(function (
 Route::middleware(['auth', 'verified', 'can:users.manage'])
     ->prefix('admin')
     ->group(function () {
-
         Route::resource('users', UserController::class);
     });
 
 /*
 |--------------------------------------------------------------------------
-| Roles y permisos (ADMIN)
+| Roles (ADMIN)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'verified', 'can:roles.manage'])
     ->prefix('admin')
     ->group(function () {
-
         Route::resource('roles', RoleController::class);
     });
 
+/*
+|--------------------------------------------------------------------------
+| Permisos (ADMIN)
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth', 'verified', 'can:permissions.manage'])
     ->prefix('admin')
     ->group(function () {
-
         Route::resource('permissions', PermissionController::class);
     });
 
@@ -92,38 +86,13 @@ Route::middleware(['auth', 'verified', 'can:permissions.manage'])
 | Asignación de roles a usuarios
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified', 'can:users.roles.edit'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:users.assign.roles'])->group(function () {
 
     Route::get('users/{user}/roles', [UserRoleController::class, 'edit'])
         ->name('users.roles.assign');
 
     Route::put('users/{user}/roles', [UserRoleController::class, 'update'])
-        ->name('users.roles.update.assigned');
-});
-
-
-/*
-|--------------------------------------------------------------------------
-| Gestión de usuarios (ESPAÑOL - vistas operativas)
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'verified', 'can:users.view'])->group(function () {
-    Route::get('usuarios', [UserController::class, 'index'])->name('users.index');
-    Route::get('usuarios/{user}', [UserController::class, 'show'])->name('users.show');
-});
-
-Route::middleware(['auth', 'verified', 'can:users.create'])->group(function () {
-    Route::get('usuarios/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('usuarios', [UserController::class, 'store'])->name('users.store');
-});
-
-Route::middleware(['auth', 'verified', 'can:users.edit'])->group(function () {
-    Route::get('usuarios/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('usuarios/{user}', [UserController::class, 'update'])->name('users.update');
-});
-
-Route::middleware(['auth', 'verified', 'can:users.delete'])->group(function () {
-    Route::delete('usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        ->name('users.roles.update');
 });
 
 /*
@@ -131,13 +100,13 @@ Route::middleware(['auth', 'verified', 'can:users.delete'])->group(function () {
 | Permisos directos por usuario
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified', 'can:users.roles.edit'])->group(function () {
+Route::middleware(['auth', 'verified', 'can:users.assign.roles'])->group(function () {
 
     Route::get('usuarios/{user}/permisos', [UserController::class, 'editPermissions'])
-        ->name('users.permisos');
+        ->name('users.permissions.edit');
 
     Route::put('usuarios/{user}/permisos', [UserController::class, 'updatePermissions'])
-        ->name('users.updatepermisos');
+        ->name('users.permissions.update');
 });
 
 /*
@@ -145,25 +114,159 @@ Route::middleware(['auth', 'verified', 'can:users.roles.edit'])->group(function 
 | Centros educativos
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified', 'can:centros.view'])->group(function () {
-    Route::get('centros', [CentroController::class, 'index'])->name('centro.index');
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('centros', [CentroController::class, 'index'])
+        ->middleware('can:centros.view')->name('centros.index');
+
+    Route::get('centros/create', [CentroController::class, 'create'])
+        ->middleware('can:centros.create')->name('centros.create');
+
+    Route::post('centros', [CentroController::class, 'store'])
+        ->middleware('can:centros.create')->name('centros.store');
+
+    Route::get('centros/{centro}/edit', [CentroController::class, 'edit'])
+        ->middleware('can:centros.edit')->name('centros.edit');
+
+    Route::put('centros/{centro}', [CentroController::class, 'update'])
+        ->middleware('can:centros.update')->name('centros.update');
+
+    Route::delete('centros/{centro}', [CentroController::class, 'destroy'])
+        ->middleware('can:centros.delete')->name('centros.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'can:centros.create'])->group(function () {
-    Route::get('centros/create', [CentroController::class, 'create'])->name('centro.create');
-    Route::post('centros', [CentroController::class, 'store'])->name('centro.store');
+/*
+|--------------------------------------------------------------------------
+| Competencias
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('competencias', [CompetenciaController::class, 'index'])
+        ->middleware('can:competencias.view')->name('competencias.index');
+
+    Route::get('competencias/create', [CompetenciaController::class, 'create'])
+        ->middleware('can:competencias.create')->name('competencias.create');
+
+    Route::post('competencias', [CompetenciaController::class, 'store'])
+        ->middleware('can:competencias.create')->name('competencias.store');
+
+    Route::get('competencias/{competencia}/edit', [CompetenciaController::class, 'edit'])
+        ->middleware('can:competencias.edit')->name('competencias.edit');
+
+    Route::put('competencias/{competencia}', [CompetenciaController::class, 'update'])
+        ->middleware('can:competencias.update')->name('competencias.update');
+
+    Route::delete('competencias/{competencia}', [CompetenciaController::class, 'destroy'])
+        ->middleware('can:competencias.delete')->name('competencias.destroy');
 });
 
-Route::middleware(['auth', 'verified', 'can:centros.edit'])->group(function () {
-    Route::get('centros/edit/{id}', [CentroController::class, 'edit'])->name('centro.edit');
+/*
+|--------------------------------------------------------------------------
+| Historias de éxito
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('historias-exito', HistoriaExitoController::class)
+        ->middleware([
+            'index'   => 'can:historias_exito.view',
+            'create'  => 'can:historias_exito.create',
+            'store'   => 'can:historias_exito.create',
+            'edit'    => 'can:historias_exito.edit',
+            'update'  => 'can:historias_exito.update',
+            'destroy' => 'can:historias_exito.delete',
+        ]);
 });
 
-Route::middleware(['auth', 'verified', 'can:centros.update'])->group(function () {
-    Route::put('centros/update/{id}', [CentroController::class, 'update'])->name('centro.update');
+/*
+|--------------------------------------------------------------------------
+| Instructores
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('instructores', InstructorController::class)
+        ->middleware([
+            'index'   => 'can:instructores.view',
+            'create'  => 'can:instructores.create',
+            'store'   => 'can:instructores.create',
+            'edit'    => 'can:instructores.edit',
+            'update'  => 'can:instructores.update',
+            'destroy' => 'can:instructores.delete',
+        ]);
 });
 
-Route::middleware(['auth', 'verified', 'can:centros.delete'])->group(function () {
-    Route::delete('centros/{centro}/delete', [CentroController::class, 'destroy'])->name('centro.destroy');
+/*
+|--------------------------------------------------------------------------
+| Niveles de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('niveles-formacion', NivelFormacionController::class)
+        ->middleware([
+            'index'   => 'can:niveles_formacion.view',
+            'create'  => 'can:niveles_formacion.create',
+            'store'   => 'can:niveles_formacion.create',
+            'edit'    => 'can:niveles_formacion.edit',
+            'update'  => 'can:niveles_formacion.update',
+            'destroy' => 'can:niveles_formacion.delete',
+        ]);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Ofertas educativas
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('ofertas', OfertaController::class)
+        ->middleware([
+            'index'   => 'can:ofertas.view',
+            'create'  => 'can:ofertas.create',
+            'store'   => 'can:ofertas.create',
+            'edit'    => 'can:ofertas.edit',
+            'update'  => 'can:ofertas.update',
+            'destroy' => 'can:ofertas.delete',
+        ]);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Programas de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('programas', ProgramaController::class)
+        ->middleware([
+            'index'   => 'can:programas.view',
+            'create'  => 'can:programas.create',
+            'store'   => 'can:programas.create',
+            'edit'    => 'can:programas.edit',
+            'update'  => 'can:programas.update',
+            'destroy' => 'can:programas.delete',
+        ]);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Redes de conocimiento
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('redes-conocimiento', RedController::class)
+        ->middleware([
+            'index'   => 'can:redes_conocimiento.view',
+            'create'  => 'can:redes_conocimiento.create',
+            'store'   => 'can:redes_conocimiento.create',
+            'edit'    => 'can:redes_conocimiento.edit',
+            'update'  => 'can:redes_conocimiento.update',
+            'destroy' => 'can:redes_conocimiento.delete',
+        ]);
 });
 
 /*
@@ -172,95 +275,8 @@ Route::middleware(['auth', 'verified', 'can:centros.delete'])->group(function ()
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-/*
-|--------------------------------------------------------------------------
-| Gestión de roles y permisos por usuario
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware(['auth', 'can:users.edit'])->group(function () {
-
-    Route::get('users/{user}/roles-permissions',
-        [UserController::class, 'editRolesPermissions']
-    )->name('users.roles.edit');
-
-    Route::put('users/{user}/roles-permissions',
-        [UserController::class, 'updateRolesPermissions']
-    )->name('users.roles.update');
-
-});
-
-/*
-|--------------------------------------------------------------------------
-| Competencias
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:competencias.view'])->group(function () {
-    Route::get('competencias', [CompetenciaController::class, 'index'])
-        ->name('competencias.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Historias de éxito
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:historias_exito.view'])->group(function () {
-    Route::get('historias', [HistoriaExitoController::class, 'index'])
-        ->name('historias.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Instructores
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:instructores.view'])->group(function () {
-    Route::get('instructores', [InstructorController::class, 'index'])
-        ->name('instructores.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Niveles de formación
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:niveles_formacion.view'])->group(function () {
-    Route::get('niveles-formacion', [NivelFormacionController::class, 'index'])
-        ->name('niveles_formacion.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Ofertas educativas
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:ofertas.view'])->group(function () {
-    Route::get('ofertas', [OfertaController::class, 'index'])
-        ->name('ofertas.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Programas de formación
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:programas.view'])->group(function () {
-    Route::get('programas', [ProgramaController::class, 'index'])
-        ->name('programas.index');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Redes
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'can:redes_conocimiento.view'])->group(function () {
-    Route::get('redes-conocimiento', [RedController::class, 'index'])
-        ->name('redes_conocimiento.index');
-});
-
