@@ -7,9 +7,9 @@ return [
     | Title
     |--------------------------------------------------------------------------
     |
-    | Here you can change the default title of your admin panel.
+    | Aquí puede cambiar el título predeterminado de su panel de administración.
     |
-    | For detailed instructions you can look the title section here:
+    | Para instrucciones detalladas, consulte la sección de título aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -23,9 +23,9 @@ return [
     | Favicon
     |--------------------------------------------------------------------------
     |
-    | Here you can activate the favicon.
+    | Aquí puede activar el favicon.
     |
-    | For detailed instructions you can look the favicon section here:
+    | Para instrucciones detalladas, consulte la sección de favicon aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -39,11 +39,11 @@ return [
     | Google Fonts
     |--------------------------------------------------------------------------
     |
-    | Here you can allow or not the use of external google fonts. Disabling the
-    | google fonts may be useful if your admin panel internet access is
-    | restricted somehow.
+    | Aquí puede permitir o no el uso de fuentes de Google externas. Desactivar las
+    | fuentes de Google puede ser útil si el acceso a Internet de su panel de
+    | administración está restringido de alguna manera.
     |
-    | For detailed instructions you can look the google fonts section here:
+    | Para instrucciones detalladas, consulte la sección de fuentes de Google aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -57,9 +57,9 @@ return [
     | Admin Panel Logo
     |--------------------------------------------------------------------------
     |
-    | Here you can change the logo of your admin panel.
+    | Aquí puede cambiar el logo de su panel de administración.
     |
-    | For detailed instructions you can look the logo section here:
+    | Para instrucciones detalladas, consulte la sección de logo aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -84,10 +84,10 @@ return [
     | Authentication Logo
     |--------------------------------------------------------------------------
     |
-    | Here you can setup an alternative logo to use on your login and register
-    | screens. When disabled, the admin panel logo will be used instead.
+    | Aquí puede configurar un logo alternativo para usar en sus pantallas de inicio de sesión y registro.
+    | Cuando se desactiva, se usará el logo del panel de administración en su lugar.
     |
-    | For detailed instructions you can look the auth logo section here:
+    | Para instrucciones detalladas, consulte la sección de logo de autenticación aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -108,12 +108,12 @@ return [
     | Preloader Animation
     |--------------------------------------------------------------------------
     |
-    | Here you can change the preloader animation configuration. Currently, two
-    | modes are supported: 'fullscreen' for a fullscreen preloader animation
-    | and 'cwrapper' to attach the preloader animation into the content-wrapper
-    | element and avoid overlapping it with the sidebars and the top navbar.
+    | Aquí puede cambiar la configuración de la animación de preloader. Actualmente, dos
+    | modos están soportados: 'fullscreen' para una animación de preloader en pantalla completa
+    | y 'cwrapper' para adjuntar la animación de preloader al elemento content-wrapper
+    | y evitar superponerla con los sidebars y la navbar superior.
     |
-    | For detailed instructions you can look the preloader section here:
+    | Para instrucciones detalladas, consulte la sección de animación de preloader aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -135,9 +135,9 @@ return [
     | User Menu
     |--------------------------------------------------------------------------
     |
-    | Here you can activate and change the user menu.
+    | Aquí puede activar y cambiar el menú de usuario.
     |
-    | For detailed instructions you can look the user menu section here:
+    | Para instrucciones detalladas, consulte la sección de menú de usuario aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -154,9 +154,9 @@ return [
     | Layout
     |--------------------------------------------------------------------------
     |
-    | Here we change the layout of your admin panel.
+    | Aquí puede cambiar el diseño de su panel de administración.
     |
-    | For detailed instructions you can look the layout section here:
+    | Para instrucciones detalladas, consulte la sección de diseño y estilos aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
@@ -173,9 +173,9 @@ return [
     | Authentication Views Classes
     |--------------------------------------------------------------------------
     |
-    | Here you can change the look and behavior of the authentication views.
+    | Aquí puede cambiar la apariencia y el comportamiento de las vistas de autenticación.
     |
-    | For detailed instructions you can look the auth classes section here:
+    | Para instrucciones detalladas, consulte la sección de clases de autenticación aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
@@ -192,9 +192,9 @@ return [
     | Admin Panel Classes
     |--------------------------------------------------------------------------
     |
-    | Here you can change the look and behavior of the admin panel.
+    | Aquí puede cambiar la apariencia y el comportamiento del panel de administración.
     |
-    | For detailed instructions you can look the admin panel classes here:
+    | Para instrucciones detalladas, consulte la sección de clases de panel de administración aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
@@ -216,9 +216,9 @@ return [
     | Sidebar
     |--------------------------------------------------------------------------
     |
-    | Here we can modify the sidebar of the admin panel.
+    | Aquí puede modificar la barra lateral del panel de administración.
     |
-    | For detailed instructions you can look the sidebar section here:
+    | Para instrucciones detalladas, consulte la sección de barra lateral aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
@@ -238,9 +238,9 @@ return [
     | Control Sidebar (Right Sidebar)
     |--------------------------------------------------------------------------
     |
-    | Here we can modify the right sidebar aka control sidebar of the admin panel.
+    | Aquí puede modificar la barra lateral derecha aka control sidebar del panel de administración.
     |
-    | For detailed instructions you can look the right sidebar section here:
+    | Para instrucciones detalladas, consulte la sección de barra lateral derecha aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Layout-and-Styling-Configuration
     |
     */
@@ -258,9 +258,9 @@ return [
     | URLs
     |--------------------------------------------------------------------------
     |
-    | Here we can modify the url settings of the admin panel.
+    | Aquí podemos modificar las URLs del panel de administración.
     |
-    | For detailed instructions you can look the urls section here:
+    | Para instrucciones detalladas, consulte la sección de URLs aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
     |
     */
@@ -280,13 +280,13 @@ return [
     | Laravel Asset Bundling
     |--------------------------------------------------------------------------
     |
-    | Here we can enable the Laravel Asset Bundling option for the admin panel.
-    | Currently, the next modes are supported: 'mix', 'vite' and 'vite_js_only'.
-    | When using 'vite_js_only', it's expected that your CSS is imported using
-    | JavaScript. Typically, in your application's 'resources/js/app.js' file.
-    | If you are not using any of these, leave it as 'false'.
+    | Aquí podemos habilitar la opción de empaquetado de activos de Laravel para el panel de administración.
+    | Actualmente, se admiten los siguientes modos: 'mix', 'vite' y 'vite_js_only'.
+    | Cuando se utiliza 'vite_js_only', se espera que su CSS se importe usando
+    | JavaScript. Normalmente, en el archivo 'resources/js/app.js' de su aplicación.
+    | Si no está utilizando ninguno de estos, déjelo como 'false'.
     |
-    | For detailed instructions you can look the asset bundling section here:
+    | Para instrucciones detalladas, consulte la sección de empaquetado de activos aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Other-Configuration
     |
     */
@@ -300,9 +300,9 @@ return [
     | Menu Items
     |--------------------------------------------------------------------------
     |
-    | Here we can modify the sidebar/top navigation of the admin panel.
+    | Aquí puede modificar la barra lateral/barra de navegación superior del panel de administración.
     |
-    | For detailed instructions you can look here:
+    | Para instrucciones detalladas, consulte la sección de configuración de menú aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
@@ -395,9 +395,9 @@ return [
     | Menu Filters
     |--------------------------------------------------------------------------
     |
-    | Here we can modify the menu filters of the admin panel.
+    | Aquí puede modificar los filtros de menú del panel de administración.
     |
-    | For detailed instructions you can look the menu filters section here:
+    | Para instrucciones detalladas, consulte la sección de filtros de menú aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
@@ -417,9 +417,9 @@ return [
     | Plugins Initialization
     |--------------------------------------------------------------------------
     |
-    | Here we can modify the plugins used inside the admin panel.
+    | Aquí puede modificar los plugins utilizados dentro del panel de administración.
     |
-    | For detailed instructions you can look the plugins section here:
+    | Para instrucciones detalladas, consulte la sección de plugins aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Plugins-Configuration
     |
     */
@@ -502,10 +502,9 @@ return [
     | IFrame
     |--------------------------------------------------------------------------
     |
-    | Here we change the IFrame mode configuration. Note these changes will
-    | only apply to the view that extends and enable the IFrame mode.
+    | Aquí puede cambiar la configuración del modo IFrame. Tenga en cuenta que estos cambios solo se aplicarán a la vista que extienda y habilite el modo IFrame.
     |
-    | For detailed instructions you can look the iframe mode section here:
+    | Para instrucciones detalladas, consulte la sección de configuración de modo IFrame aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/IFrame-Mode-Configuration
     |
     */
@@ -535,9 +534,9 @@ return [
     | Livewire
     |--------------------------------------------------------------------------
     |
-    | Here we can enable the Livewire support.
+    | Aquí puede habilitar el soporte de Livewire.
     |
-    | For detailed instructions you can look the livewire here:
+    | Para instrucciones detalladas, consulte la sección de configuración de Livewire aquí:
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Other-Configuration
     |
     */
