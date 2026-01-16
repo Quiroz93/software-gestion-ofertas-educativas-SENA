@@ -4,62 +4,87 @@ namespace App\Http\Controllers;
 
 use App\Models\OfertaPrograma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OfertaProgramaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega la lista de ofertas de programa
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        Gate::authorize('ofertasProgramas.view', OfertaPrograma::class);
+        $ofertasProgramas = OfertaPrograma::all();
+        return view('ofertasProgramas.index', compact('ofertasProgramas'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear una nueva oferta de programa
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        Gate::authorize('ofertasProgramas.create', OfertaPrograma::class);
+        return view('ofertasProgramas.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crea una nueva oferta de programa
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        Gate::authorize('ofertasProgramas.create', OfertaPrograma::class);
+        OfertaPrograma::create($request->all());
+        return redirect()->route('ofertasProgramas.index')->with('success', 'Oferta Programa creada exitosamente');
     }
 
     /**
-     * Display the specified resource.
+     * Despliega los detalles de una oferta de programa
+     * @param OfertaPrograma $ofertaPrograma
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(OfertaPrograma $ofertaPrograma)
     {
-        //
+        Gate::authorize('ofertasProgramas.view', $ofertaPrograma);
+        return view('ofertasProgramas.show', compact('ofertaPrograma'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Despliega el formulario para editar una oferta de programa
+     * @param OfertaPrograma $ofertaPrograma
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(OfertaPrograma $ofertaPrograma)
     {
-        //
+        Gate::authorize('ofertasProgramas.update', $ofertaPrograma);
+        return view('ofertasProgramas.edit', compact('ofertaPrograma'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una oferta de programa
+     * @param Request $request
+     * @param OfertaPrograma $ofertaPrograma
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, OfertaPrograma $ofertaPrograma)
     {
-        //
+        Gate::authorize('ofertasProgramas.update', $ofertaPrograma);
+        $ofertaPrograma->update($request->all());
+        return redirect()->route('ofertasProgramas.index')->with('success', 'Oferta Programa actualizada exitosamente');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una oferta de programa
+     * @param OfertaPrograma $ofertaPrograma
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(OfertaPrograma $ofertaPrograma)
     {
-        //
+        Gate::authorize('ofertasProgramas.delete', $ofertaPrograma);
+        $ofertaPrograma->delete();
+        return redirect()->route('ofertasProgramas.index')->with('success', 'Oferta Programa eliminada exitosamente');
     }
 }
