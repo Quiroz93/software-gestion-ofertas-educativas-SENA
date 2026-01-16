@@ -8,58 +8,75 @@ use Illuminate\Http\Request;
 class ProgramaCompetenciaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega la lista de programas competencias
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        $programasCompetencias = ProgramaCompetencia::all();
+        return view('programasCompetencias.index', compact('programasCompetencias'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear un programa competencia
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('programasCompetencias.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crea un programa competencia
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        ProgramaCompetencia::create($request->all());
+        return redirect()->route('programasCompetencias.index')->with('success', 'Programa Competencia creada exitosamente');
     }
 
     /**
-     * Display the specified resource.
+     * Despliega los detalles de un programa competencia
+     * @param ProgramaCompetencia $programaCompetencia
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(ProgramaCompetencia $programaCompetencia)
     {
-        //
+        return view('programasCompetencias.show', compact('programaCompetencia'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Despliega el formulario para editar un programa competencia
+     * @param ProgramaCompetencia $programaCompetencia
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(ProgramaCompetencia $programaCompetencia)
     {
-        //
+        return view('programasCompetencias.edit', compact('programaCompetencia'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza un programa competencia
+     * @param Request $request
+     * @param ProgramaCompetencia $programaCompetencia
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, ProgramaCompetencia $programaCompetencia)
     {
-        //
+        $programaCompetencia->update($request->all());
+        return redirect()->route('programasCompetencias.index')->with('success', 'Programa Competencia actualizada exitosamente');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un programa competencia
+     * @param ProgramaCompetencia $programaCompetencia
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(ProgramaCompetencia $programaCompetencia)
     {
-        //
+        $programaCompetencia->delete();
+        return redirect()->route('programasCompetencias.index')->with('success', 'Programa Competencia eliminada exitosamente');
     }
 }

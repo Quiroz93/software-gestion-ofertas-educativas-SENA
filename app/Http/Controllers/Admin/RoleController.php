@@ -12,28 +12,41 @@ class RoleController extends Controller
 {
     use AuthorizesRequests;
     /**
-     * Display a listing of the resource.
+     * Despliega la lista de roles.
+     *
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
+        $this->authorize('roles.view'); // o middleware
+
         $roles = Role::with('permissions')->get();
         return view('admin.roles.index', compact('roles'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear un nuevo rol.
+     *
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
+        $this->authorize('roles.create'); // o middleware
+
         $permissions = Permission::all();
         return view('admin.roles.create', compact('permissions'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena un nuevo rol en la base de datos.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+        $this->authorize('roles.create'); // o middleware
+
         $request->validate([
             'name' => 'required|string|max:255|unique:roles,name',
             'guard_name' => 'required|string',
@@ -54,18 +67,28 @@ class RoleController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * Despliega la información detallada de un rol.
+     *
+     * @param Role $role
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show(string $id)
+    public function show(Role $role)
     {
-        //
+        $this->authorize('roles.view'); // o middleware
+
+        return view('admin.roles.show', compact('role'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Despliega el formulario para editar un rol existente.
+     *
+     * @param Role $role
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Role $role)
     {
+        $this->authorize('roles.edit'); // o middleware
+
         $permissions = Permission::orderBy('name')->get()
             ->groupBy(fn($p) => explode('.', $p->name)[0]);
 
@@ -75,12 +98,27 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza un rol existente en la base de datos.
+     *
+     * @param Request $request
+     * @param Role $role
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Role $role)
     {
+        $this->authorize('roles.edit'); // o middleware
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name,' . $role->id,
+            'guard_name' => 'required|string',
+            'permissions' => 'array'
+        ]);
+
         $role->update([
             'name' => $request->name,
+            /*'guard_name' => $request->guard_name,
+            'permissions' => $request->permissions ?? []
+            */
         ]);
 
         $permissionIds = $request->permissions ?? [];
@@ -98,13 +136,23 @@ class RoleController extends Controller
 
 
 
-
+    /**
+     * Elimina un rol existente de la base de datos.
+     *
+     * @param Role $role
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Role $role)
     {
         $this->authorize('roles.delete'); // o middleware
 
+
         if (in_array($role->name, ['admin', 'super-admin'])) {
-            return back()->with('error', 'No se puede eliminar este rol');
+            return back()->with('error', 'No se puede eliminar este rol porque es el rol más alto de la jerarquía');
+        }
+
+        if ($role->users()->count() > 0) {
+            return back()->with('error', 'No se puede eliminar este rol porque está asignado a usuarios');
         }
 
         $role->delete();

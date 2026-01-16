@@ -8,24 +8,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Gate;
 
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Despliega el formulario para editar el perfil del usuario
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Request $request): View
     {
+        Gate::authorize('profile.update', $request->user());
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Actualiza la información del perfil del usuario
+     * @param ProfileUpdateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        Gate::authorize('profile.update', $request->user());
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -38,10 +45,13 @@ class ProfileController extends Controller
     }
 
     /**
-     * Delete the user's account.
+     * Elimina la cuenta del usuario
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request): RedirectResponse
     {
+        Gate::authorize('profile.delete', $request->user());
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);

@@ -5,37 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\Centro;
-use App\Models\centro as ModelsCentro;
+use Illuminate\Support\Facades\Gate;
 
 class CentroController extends Controller
 {
     use AuthorizesRequests;
 
     /**
-     * Desplegar una lista de los recursos.
+     * Despliega una lista de recursos
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $this->authorize("viewAny", Centro::class);
+        Gate::authorize("viewAny", Centro::class);
         $centros = Centro::all();
         return view('centro.index', compact('centros'));
     }
 
     /**
-     * Mostrar el formulario para crear un nuevo recurso.
+     * Despliega el formulario para crear un nuevo recurso
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        $this->authorize('create', Centro::class);
+        Gate::authorize('centros.create', Centro::class);
             return view('centro.create');
     }
 
     /**
-     * Crear y almacenar un nuevo recurso en almacenamiento.
+     * Crea y almacena un nuevo recurso en almacenamiento
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Centro::class);
+        Gate::authorize('centros.create', Centro::class);
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
@@ -47,31 +51,38 @@ class CentroController extends Controller
     }
 
     /**
-     * Desplegar el recurso especificado.
+     * Despliega el recurso especificado
+     * @param Centro $centro
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Centro $centro)
     {
-        $this->authorize('view', $centro);
+        Gate::authorize('centros.view', $centro);
         return view('centro.show', compact('centro'));
     }
 
     /**
-     * Mostrar el formulario para editar el recurso especificado.
+     * Despliega el formulario para editar el recurso especificado
+     * @param string $id
+     * @return \Illuminate\Contracts\View\View
      */
-    public function edit(String $id)
+    public function edit(string $id)
     {
+        Gate::authorize('centros.update', $id);
         $centro = Centro::findOrFail($id);
-        $this->authorize('update', $centro);
         return view('centro.edit', compact('centro'));
     }
 
     /**
-     * Actualizar el recurso especificado en almacenamiento.
+     * Actualiza el recurso especificado en almacenamiento
+     * @param Request $request
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, String $id)
+    public function update(Request $request, string $id)
     {
+        Gate::authorize('centros.update', $id);
         $centro = Centro::findOrFail($id);
-        $this->authorize('update', $centro);
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
@@ -83,11 +94,13 @@ class CentroController extends Controller
     }
 
     /**
-     * Remover el recurso especificado de almacenamiento.
+     * Elimina el recurso especificado de almacenamiento
+     * @param Centro $centro
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Centro $centro)
     {
-        $this->authorize('delete', $centro);
+        Gate::authorize('centros.delete', $centro);
         $centro->delete();
         return redirect()->route('centro.index')->with('success','Elemento eliminado con exito');
     }

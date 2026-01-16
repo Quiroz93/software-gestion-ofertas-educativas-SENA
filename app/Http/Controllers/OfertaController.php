@@ -3,64 +3,95 @@
 namespace App\Http\Controllers;
 
 use App\Models\Oferta;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class OfertaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+     /**
+     * Despliega la lista de ofertas
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
+        Gate::authorize('ofertas.view', Oferta::class);
         $ofertas = Oferta::all();
         return view('ofertas.index', compact('ofertas'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega el formulario para crear una nueva oferta
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        Gate::authorize('ofertas.create', Oferta::class);
+        return view('ofertas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
+     /**
+     * Crea una nueva oferta
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        Gate::authorize('ofertas.create', Oferta::class);
+        Oferta::create($request->all());
+        return redirect()->route('ofertas.index')->with('success', 'Oferta creada exitosamente');
     }
 
     /**
-     * Display the specified resource.
+     * Despliega los detalles de una oferta
+     * @param Oferta $oferta
+     * @return \Illuminate\Contracts\View\View
      */
     public function show(Oferta $oferta)
     {
-        //
+        Gate::authorize('ofertas.view', $oferta);
+        return view('ofertas.show', compact('oferta'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Despliega el formulario para editar una oferta
+     * @param Oferta $oferta
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit(Oferta $oferta)
     {
-        //
+        Gate::authorize('ofertas.update', $oferta);
+        return view('ofertas.edit', compact('oferta'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una oferta
+     * @param Request $request
+     * @param Oferta $oferta
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Oferta $oferta)
     {
-        //
+        Gate::authorize('ofertas.update', $oferta);
+        $oferta->update($request->all());
+        return redirect()->route('ofertas.index')->with('success', 'Oferta actualizada exitosamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
+     /**
+     * Despliega el formulario para eliminar una oferta
+     * @param Oferta $oferta
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Oferta $oferta)
     {
-        //
+        Gate::authorize('ofertas.delete', $oferta);
+
+        // Verificar si la oferta tiene ofertas de programa asociadas
+        if ($oferta->ofertasProgramas()->count() > 0) {
+            return redirect()->route('ofertas.index')->with('error', 'No se puede eliminar la oferta porque tiene ofertas de programa asociadas');
+        }
+
+        $oferta->delete();
+        return redirect()->route('ofertas.index')->with('success', 'Oferta eliminada exitosamente');
     }
 }
+
