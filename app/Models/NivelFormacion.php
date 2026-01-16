@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NivelFormacion extends Model
+class nivel_formacion extends Model
 {
     // Definir la tabla si no sigue la convención plural
     protected $table = 'nivel_formaciones';
