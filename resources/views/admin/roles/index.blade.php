@@ -3,19 +3,16 @@
 @section('title', 'Roles')
 
 @section('content_header')
-<div class="d-flex justify-content-between align-items-center">
-    <h1 class="m-0">
-        <i class="fas fa-user-shield text-primary"></i>
-        Roles del sistema
-    </h1>
+<h1 class="m-0">Roles</h1>
 
-    @can('roles.create')
-    <a href="{{ route('roles.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus-circle"></i>
-        Crear rol
-    </a>
-    @endcan
+{{-- ================= CONFIRMACIÓN VISUAL ================= --}}
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    <i class="fas fa-check-circle"></i>
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
+@endif
 @stop
 
 @section('content')
@@ -27,34 +24,58 @@
 </div>
 @endif
 
-<div class="row">
-    @foreach($roles as $role)
-    <div class="col-md-6 col-lg-4">
-        <div class="card card-outline card-primary shadow-sm h-100">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            @can('roles.create')
+            <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Crear Nuevo Rol
+            </a>
+            @endcan
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+        </div>
+    </div>
 
-            {{-- HEADER --}}
-            <div class="card-header">
-                <h3 class="card-title text-uppercase fw-bold">
-                    {{ $role->name }}
-                </h3>
-            </div>
+    <div class="card-body">
+        <table id="rolesTable" class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Nombre del Rol</th>
+                    <th>Guard</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($roles as $role)
+                <tr>
+                    <td>{{ $role->name }}</td>
+                    <td>{{ $role->guard_name }}</td>
+                    <td>
+                        <a href="{{ route('roles.edit', $role->id) }}"
+                            class="btn btn-warning ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px me-2 ms-2">
+                            <i class="fas fa-edit"></i>Editar
+                        </a>
 
-            {{-- BODY --}}
-            <div class="card-body">
+                        @can('roles.delete')
+                        <form action="{{ route('roles.destroy', $role->id) }}"
+                            method="POST"
+                            class="d-inline"
+                            onsubmit="confirmarEliminacion(event)">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px">
+                                <i class="fas fa-trash"></i>Eliminar
+                            </button>
+                        </form>
+                        @endcan
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-                <p class="mb-2">
-                    <strong>Guard:</strong>
-                    <span class="badge badge-secondary">
-                        {{ $role->guard_name }}
-                    </span>
-                </p>
-
-                <p class="mb-0">
-                    <strong>Permisos:</strong>
-                    <span class="badge badge-info">
-                        {{ $role->permissions->count() }}
-                    </span>
-                </p>
+    </div>
 
             </div>
 
@@ -91,4 +112,4 @@
     @endforeach
 </div>
 
-@endsection
+@stop

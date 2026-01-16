@@ -104,7 +104,110 @@
                 </div>
             </div>
         </div>
-        
+
+        {{-- competencias --}}
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-trophy fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Competencias</h5>
+                    <a href="#" class="btn btn-dark btn-sm mt-3">
+                        Ver competencias
+                    </a>    
+                </div>
+            </div>
+        </div>
+
+        {{-- Historias de exito --}}
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-book-open fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Historias de Éxito</h5>
+                    <a href="#" class="btn btn-secondary btn-sm mt-3">
+                        Ver historias de éxito
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{-- instructores --}}  
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-chalkboard-teacher fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Instructores</h5>
+                    <a href="#" class="btn btn-primary btn-sm mt-3">
+                        Ver instructores
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{-- nivel de formacion --}}
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fa-solid fa-ranking-star fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Niveles de Formación</h5>
+                    <a href="#" class="btn btn-success btn-sm mt-3">
+                        Ver niveles de formación
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{-- ofertas --}}
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-graduation-cap fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Ofertas</h5>
+                    <a href="#" class="btn btn-info btn-sm mt-3">
+                        Ver ofertas
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{-- programas --}}
+
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-book fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Programas de formación</h5>
+                    <a href="#" class="btn btn-warning btn-sm mt-3">
+                        Ver programas de formación
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{-- redes --}}
+        <div class="col-md-4 mt-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-header">
+                    <i class="fas fa-network-wired fa-3x"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Redes</h5>
+                    <a href="#" class="btn btn-dark btn-sm mt-3">
+                        Ver redes
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>

@@ -66,26 +66,55 @@
 
             </div>
 
-            {{-- FOOTER --}}
-            <div class="card-footer d-flex flex-wrap gap-1">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-users"></i> Lista de Usuarios</h3>
+                </div>
 
-                @can('users.view')
-                    <div class="d-flex flex-column">
-                        <a href="{{ route('users.show', $u) }}"
-                           class="btn btn-sm btn-outline-info me-2 mb-2 ms-auto">
-                            <i class="fas fa-eye"></i>
-                            Ver
-                        </a>
-                    </div>
-                @endcan
+                <div class="card-body">
+                    @if($users->count() > 0)
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $u)
+                                <tr>
+                                    <td><span class="badge badge-info">{{ $u->id }}</span></td>
+                                    <td>{{ $u->name }}</td>
+                                    <td><a href="mailto:{{ $u->email }}">{{ $u->email }}</a></td>
 
-                @can('users.edit')
-                <div class="d-flex flex-column">
-                    <a href="{{ route('users.edit', $u) }}"
-                       class="btn btn-sm btn-outline-warning me-2 mb-2 ms-auto">
-                        <i class="fas fa-edit"></i>
-                        Editar
-                    </a>
+                                    <td>
+                                        @can('users.edit')
+                                        <a href="{{ route('users.edit', $u) }}" class="btn btn-warning ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px me-2 ms-2">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        @endcan
+                                        @can('users.delete')
+                                        <form action="{{ route('users.destroy', $u) }}" method="POST" class="d-inline" onsubmit="return confirmarEliminacion(event);">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                        @endcan
+                                        @can('users.view')
+                                        <a href="{{ route('users.show', $u) }}" class="btn btn-info ms-2 me-2 btn-sm mt-2 mb-2 min-width-100px">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 @endcan
 
@@ -112,12 +141,6 @@
 @endforeach
 </div>
 
-<div class="mt-3">
-    <small class="text-muted">
-        Total de usuarios:
-        <strong>{{ $users->count() }}</strong>
-    </small>
-</div>
-
-@endif
+@section('js')
+@parent
 @endsection
