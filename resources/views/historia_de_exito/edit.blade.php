@@ -1,102 +1,115 @@
 @extends('layouts.app')
 
-@section('title', 'Historias de éxito')
+@section('title', 'Editar Historia de éxito')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Editar Historia</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Historias de éxito</a></li>
-                <li class="breadcrumb-item active">Editar</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-edittext-primary"></i>
+        Editar Historia de Éxito
+    </h1>
+
+    <a href="{{ route('historias.index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
-@endsection
+@stop
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            
-            {{-- Tarjeta del Formulario --}}
 
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Información de la Historia</h3>
+@can('historias.edit')
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card card-outline card-primary shadow-sm">
+
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title fw-bold">
+                    Información de la historia
+                </h3>
+            </div>
+
+            <form action="{{ route('historias.update', $historia->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                {{-- BODY --}}
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="nombre">
+                            <strong>Nombre</strong>
+                        </label>
+                        <input type="text"
+                               name="nombre"
+                               id="nombre"
+                               value="{{ $historia->nombre }}"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titulo">
+                            <strong>Título</strong>
+                        </label>
+                        <input type="text"
+                               name="titulo"
+                               id="titulo"
+                               value="{{ $historia->titulo }}"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">
+                            <strong>Descripción</strong>
+                        </label>
+                        <textarea name="descripcion"
+                                  id="descripcion"
+                                  rows="4"
+                                  class="form-control"
+                                  required>{{ $historia->descripcion }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">
+                            <strong>Fecha</strong>
+                        </label>
+                        <input type="date"
+                               name="fecha"
+                               id="fecha"
+                               value="{{ $historia->fecha }}"
+                               class="form-control"
+                               required>
+                    </div>
+
                 </div>
 
-                <form action="{{-- logica de editar historias de exito --}}" method="POST" class="form-horizontal">
-                    @csrf
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('historias.index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
 
-                    <div class="card-body">
-                        {{-- Nombre de la Historia de Éxito --}}
-                        <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    value="{{-- valor mostrar nombre --}}"
-                                    name="nombre"
-                                    id="nombre"
-                                    class="form-control">
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
 
-                    {{-- titulo de la Historia de Éxito --}}
-                        <div class="form-group row">
-                            <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    value="{{-- valor mostrar titulo --}}"
-                                    name="titulo"
-                                    id="titulo"
-                                    class="form-control">
-                        </div>
-                    </div>
-
-                    {{-- Descripción de la Historia de Éxito --}}
-                    <div class="form-group row">
-                        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                        <div class="col-sm-10">
-                            <textarea value="{{-- valor mostrar descripcion --}}"
-                            name="descripcion" 
-                            id="descripcion" 
-                            class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                    {{-- fecha de la Historia de Éxito --}}
-                        <div class="form-group row">
-                            <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
-                            <div class="col-sm-10">
-                                <input type="date"
-                                    value="{{-- valor mostrar fecha --}}"
-                                    name="fecha"
-                                    id="fecha"
-                                    class="form-control">
-                        </div>
-                    </div>
-
-                    </div>
-
-                    {{-- Pie del formulario --}}
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Historia
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </div>
+
+@else
+<div class="alert alert-danger">
+    <i class="fas fa-ban"></i>
+    No estás autorizado para editar historias de éxito.
+</div>
+@endcan
+
 @endsection

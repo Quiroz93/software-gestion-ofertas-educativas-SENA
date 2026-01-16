@@ -2,53 +2,103 @@
 
 @section('title', 'Ofertas')
 
+@section('content_header')
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-graduation-cap text-primary"></i>
+        Ofertas
+    </h1>
+
+    @can('ofertas.create')
+    <a href="{{-- enlace al controller --}}" class="btn btn-success">
+        <i class="fas fa-plus-circle"></i>
+        Crear oferta
+    </a>
+    @endcan
+</div>
+@stop
+
 @section('content')
 
-<section>
-    {{-- Esta es la seccion del titulo de la vista index --}}
-    <h1 class="text-center font-weight-bold mb-3">Gestión de Ofetas</h1>
-</section>
+@if($ofertas->isEmpty())
+<div class="alert alert-info">
+    <i class="fas fa-info-circle"></i>
+    No existen ofertas registradas.
+</div>
+@endif
 
-<section>
-    <div class="container">
-        {{-- seccion de botones de accion --}}
+<div class="row">
+    @foreach($ofertas as $oferta)
+    <div class="col-md-6 col-lg-4">
+        <div class="card card-outline card-primary shadow-sm h-100">
 
-        <a href="{{-- enlace al controller --}}" class="btn btn-success">Agregar Oferta</a>
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title text-uppercase fw-bold">
+                    {{ $oferta->nombre }}
+                </h3>
+            </div>
 
-        <a href="{{-- enlace al controller --}}" class="btn btn-secondary">Volver</a>
+            {{-- BODY --}}
+            <div class="card-body">
+
+                <p class="mb-2">
+                    <strong>Año:</strong>
+                    <span class="badge badge-secondary">
+                        {{ $oferta->anio }}
+                    </span>
+                </p>
+
+                <p class="mb-2">
+                    <strong>Fecha inicio:</strong><br>
+                    {{ $oferta->fecha_inicio }}
+                </p>
+
+                <p class="mb-2">
+                    <strong>Fecha final:</strong><br>
+                    {{ $oferta->fecha_final }}
+                </p>
+
+                <p class="mb-0">
+                    <strong>Estado:</strong>
+                    <span class="badge badge-info">
+                        {{ $oferta->estado }}
+                    </span>
+                </p>
+
+            </div>
+
+            {{-- FOOTER --}}
+            <div class="card-footer d-flex justify-content-between">
+
+                @can('ofertas.edit')
+                <a href="{{-- enlace al controller editar --}}"
+                   class="btn btn-sm btn-outline-warning">
+                    <i class="fas fa-edit"></i>
+                    Editar
+                </a>
+                @endcan
+
+                @can('ofertas.delete')
+                <form action="{{-- enlace al controller eliminar --}}"
+                      method="POST"
+                      onsubmit="return confirmarEliminacion(event)">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit"
+                            class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-trash"></i>
+                        Eliminar
+                    </button>
+                </form>
+                @endcan
+
+            </div>
+
+        </div>
     </div>
-</section>
-
-<section>
-    <div class="container mt-4">
-        {{-- seccion de tabla de datos --}}
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nombre </th>
-                    <th>Año</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Final</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{-- Ejemplo de fila de datos --}}
-                <tr>
-                    <td>{{-- logica de nombre --}}</td>
-                    <td>{{-- logica de año --}}</td>
-                    <td>{{-- logica de fecha inicio --}}</td>
-                    <td>{{-- logica de fecha final --}}</td>
-                    <td>{{-- logica de estado --}}</td>
-                    <td>
-                        {{-- configurar logica de acciones --}}
-                    </td>
-                </tr>
-                {{-- Agregar mas filas segun los datos disponibles --}}
-            </tbody>
-        </table>
-    </div>
-</section>
+    @endforeach
+</div>
 
 @endsection

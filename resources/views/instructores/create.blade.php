@@ -1,111 +1,127 @@
 @extends('layouts.app')
 
-@section('title', 'instructores')
+@section('title', 'Agregar Instructor')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Agregar instructor</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Instructores</a></li>
-                <li class="breadcrumb-item active">Crear</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-plus-circle text-primary"></i>
+        Agregar Instructor
+    </h1>
+
+    <a href="{{ route('instructores.index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
-@endsection
+@stop
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
 
-            {{-- Tarjeta del Formulario --}}
+@can('instructores.create')
 
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Información del instructor</h3>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card card-outline card-primary shadow-sm">
+
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title fw-bold">
+                    Información del instructor
+                </h3>
+            </div>
+
+            <form action="" method="POST">
+                @csrf
+
+                {{-- BODY --}}
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="nombre">
+                            <strong>Nombre</strong>
+                        </label>
+                        <input type="text"
+                               name="nombre"
+                               id="nombre"
+                               class="form-control"
+                               placeholder="Ingrese el nombre del instructor"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido">
+                            <strong>Apellido</strong>
+                        </label>
+                        <input type="text"
+                               name="apellido"
+                               id="apellido"
+                               class="form-control"
+                               placeholder="Ingrese el apellido del instructor"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="perfil">
+                            <strong>Perfil</strong>
+                        </label>
+                        <textarea name="perfil"
+                                  id="perfil"
+                                  rows="3"
+                                  class="form-control"
+                                  placeholder="Perfil del instructor"
+                                  required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experiencia">
+                            <strong>Experiencia</strong>
+                        </label>
+                        <input type="text"
+                               name="experiencia"
+                               id="experiencia"
+                               class="form-control"
+                               placeholder="Ingrese la experiencia del instructor"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">
+                            <strong>Correo</strong>
+                        </label>
+                        <input type="email"
+                               name="correo"
+                               id="correo"
+                               class="form-control"
+                               placeholder="Ingrese el correo del instructor"
+                               required>
+                    </div>
+
                 </div>
 
-                <form action="{{-- logica de crear instructores --}}" method="POST" class="form-horizontal">
-                    @csrf
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('instructores.index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
 
-                    <div class="card-body">
-                        {{-- Nombre del Instructor --}}
-                        <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    placeholder="Ingrese el nombre del Instructor"
-                                    name="nombre"
-                                    id="nombre"
-                                    class="form-control">
-                            </div>
-                        </div>
-                            <div class="form-group row">
-                            <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    placeholder="Ingrese el apellido del Instructor"
-                                    name="apellido"
-                                    id="apellido"
-                                    class="form-control">
-                            </div>
-                        </div>
-                        {{-- perfil del Instructor --}}
-                        <div class="form-group row">
-                            <label for="perfil" class="col-sm-2 col-form-label">Perfil</label>
-                            <div class="col-sm-10">
-                                <textarea placeholder="Perfil del Instructor"
-                                    name="perfil"
-                                    id="perfil"
-                                    class="form-control"></textarea>
-                            </div>
-                        </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Guardar instructor
+                    </button>
+                </div>
+            </form>
 
-                        {{-- experiencia del Instructor --}}
-                        <div class="form-group row">
-                            <label for="experiencia" class="col-sm-2 col-form-label">Experiencia</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    placeholder="Ingrese la experiencia del Instructor"
-                                    name="experiencia"
-                                    id="experiencia"
-                                    class="form-control">
-                            </div>
-                        </div>
-
-                        {{-- correo del Instructor --}}
-                        <div class="form-group row">
-                            <label for="correo" class="col-sm-2 col-form-label">Correo</label>
-                            <div class="col-sm-10">
-                                <input type="email"
-                                    placeholder="Ingrese el correo del Instructor"
-                                    name="correo"
-                                    id="correo"
-                                    class="form-control">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {{-- Pie del formulario --}}
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Instructor
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </div>
+
+@else
+<div class="alert alert-danger">
+    <i class="fas fa-ban"></i>
+    No estás autorizado para crear instructores.
+</div>
+@endcan
+
 @endsection
