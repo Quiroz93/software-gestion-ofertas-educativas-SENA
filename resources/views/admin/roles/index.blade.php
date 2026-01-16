@@ -17,7 +17,12 @@
 
 @section('content')
 
-<div class="card">
+@if($roles->isEmpty())
+<div class="alert alert-info">
+    <i class="fas fa-info-circle"></i>
+    No existen roles registrados.
+</div>
+@endif
 
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>
@@ -72,6 +77,39 @@
 
     </div>
 
+            </div>
+
+            {{-- FOOTER --}}
+            <div class="card-footer d-flex justify-content-between">
+
+                @can('roles.edit')
+                <div class="d-flex flex-column">
+                    <a href="{{ route('roles.edit', $role->id) }}"
+                        class="btn btn-outline-warning btn-sm me-2 mb-2">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </a>
+                </div>
+                @endcan
+
+                @can('roles.delete')
+                <form action="{{ route('roles.destroy', $role->id) }}"
+                    method="POST"
+                    onsubmit="return confirmarEliminacion(event)">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                        Eliminar
+                    </button>
+                </form>
+                @endcan
+
+            </div>
+        </div>
+    </div>
+    @endforeach
 </div>
 
 @stop
