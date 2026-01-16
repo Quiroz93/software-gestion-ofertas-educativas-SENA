@@ -351,6 +351,42 @@ return [
             'icon' => 'fas fa-key',
             'can' => 'permissions.view',
         ],
+        [
+            'text' => 'competencias',
+            'route' => '',
+            'icon' => 'fas fa-trophy',
+        ],
+        [
+            'text' => 'Historias de éxito',
+            'route' => '',
+            'icon' => 'fas fa-book-open',
+        ],
+        [
+            'text' => 'instructores',
+            'route' => '',
+            'icon' => 'fas fa-chalkboard-teacher',
+        ],
+        [
+            'text' => 'nivel de formación',
+            'route' => '',
+            'icon' => 'fa-solid fa-ranking-star',
+        ],
+        [
+            'text' => 'Ofertas',
+            'route' => '',
+            'icon' => 'fas fa-graduation-cap',
+        ],
+        [
+            'text' => 'programas de formación',
+            'route' => '',
+            'icon' => 'fas fa-book',
+        ],
+        [
+            'text'=>'Redes',
+            'route'=>'',
+            'icon'=>'fas fa-network-wired',
+        ]
+        
     ],
 
 
