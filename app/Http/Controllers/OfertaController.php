@@ -12,7 +12,8 @@ class OfertaController extends Controller
      */
     public function index()
     {
-        //
+        $ofertas = Oferta::all();
+        return view('ofertas.index', compact('ofertas'));
     }
 
     /**

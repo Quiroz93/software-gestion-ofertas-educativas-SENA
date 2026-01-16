@@ -12,7 +12,8 @@ class RedController extends Controller
      */
     public function index()
     {
-        //
+        $redes = Red::all();
+        return view('redes.index', compact('redes'));
     }
 
     /**

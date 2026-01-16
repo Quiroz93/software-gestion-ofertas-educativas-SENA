@@ -12,7 +12,8 @@ class HistoriaExitoController extends Controller
      */
     public function index()
     {
-        //
+        $historias = HistoriaExito::all();
+        return view('historia_de_exito.index', compact('historias'));
     }
 
     /**
