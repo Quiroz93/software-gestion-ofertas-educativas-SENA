@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -32,9 +34,14 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        Gate::authorize("users.show");
+        $user->load([
+            'roles.permissions',
+            'permissions'
+        ]);
+
         return view('user.show', compact('user'));
     }
+
 
     public function edit(User $user)
     {
@@ -78,4 +85,50 @@ class UserController extends Controller
         // Lógica para restaurar el usuario
     }
 
+    // Gestión de roles y permisos por usuario
+    public function editRolesPermissions(User $user)
+    {
+        $roles = Role::all();
+        $permissions = Permission::all()
+            ->groupBy(fn($p) => explode('.', $p->name)[0]);
+
+        $user->load(['roles', 'permissions']);
+
+        return view('user.roles', compact(
+            'user',
+            'roles',
+            'permissions'
+        ));
+    }
+
+    public function updateRolesPermissions(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'roles' => ['nullable', 'array'],
+            'roles.*' => ['exists:roles,id'],
+
+            'permissions' => ['nullable', 'array'],
+            'permissions.*' => ['exists:permissions,id'],
+        ]);
+
+        // Sincronizar roles
+        if (isset($validated['roles'])) {
+            $roles = Role::whereIn('id', $validated['roles'])->get();
+            $user->syncRoles($roles);
+        } else {
+            $user->syncRoles([]); // elimina todos los roles
+        }
+
+        // Sincronizar permisos directos
+        if (isset($validated['permissions'])) {
+            $permissions = Permission::whereIn('id', $validated['permissions'])->get();
+            $user->syncPermissions($permissions);
+        } else {
+            $user->syncPermissions([]); // elimina permisos directos
+        }
+
+        return redirect()
+            ->route('users.show', $user->id)
+            ->with('success', 'Roles y permisos actualizados correctamente.');
+    }
 }
