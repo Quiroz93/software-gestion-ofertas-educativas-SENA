@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oferta_programas', function (Blueprint $table) {
+        Schema::create('historias_de_exitos', function (Blueprint $table) {
     $table->id();
-    $table->unsignedBigInteger('oferta_id');
+    $table->string('nombre');
+    $table->string('titulo');
+    $table->text('descripcion')->nullable();
+    $table->year('año');
+    $table->string('correo');
     $table->unsignedBigInteger('programa_id');
     $table->timestamps();
 
-    $table->foreign('oferta_id')->references('id')->on('ofertas')->onDelete('cascade');
     $table->foreign('programa_id')->references('id')->on('programas')->onDelete('cascade');
 });
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('oferta_programas');
+        Schema::dropIfExists('historia_exitos');
     }
 };

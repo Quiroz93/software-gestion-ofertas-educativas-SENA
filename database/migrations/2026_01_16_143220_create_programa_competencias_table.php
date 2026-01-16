@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('programa_competencias', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+    $table->id();
+    $table->unsignedBigInteger('programa_id');
+    $table->unsignedBigInteger('competencia_id');
+    $table->timestamps();
+
+    $table->foreign('programa_id')->references('id')->on('programas')->onDelete('cascade');
+    $table->foreign('competencia_id')->references('id')->on('competencias')->onDelete('cascade');
+});
+
     }
 
     /**
