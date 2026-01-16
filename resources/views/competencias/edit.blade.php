@@ -1,81 +1,91 @@
 @extends('layouts.app')
 
-@section('title', 'Competencias')
+@section('title', 'Editar Competencia')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Editar Competencia</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('centro.index') }}">Competencias</a></li>
-                <li class="breadcrumb-item active">Editar</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-edit text-primary"></i>
+        Editar Competencia
+    </h1>
+
+    <a href="{{ route('competencias.index') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
-@endsection
+@stop
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            
-            {{-- Tarjeta del Formulario --}}
-            @can('competencias.edit')
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Información de la Competencia</h3>
+
+@can('competencias.edit')
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card card-outline card-primary shadow-sm">
+
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title fw-bold">
+                    Información de la competencia
+                </h3>
+            </div>
+
+            <form action="" method="POST">
+                @csrf
+                @method('PUT')
+
+                {{-- BODY --}}
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="nombre">
+                            <strong>Nombre de la competencia</strong>
+                        </label>
+                        <input type="text"
+                               name="nombre"
+                               id="nombre"
+                               value=""
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">
+                            <strong>Descripción</strong>
+                        </label>
+                        <textarea name="descripcion"
+                                  id="descripcion"
+                                  rows="4"
+                                  class="form-control"
+                                  required></textarea>
+                    </div>
+
                 </div>
 
-                <form action="{{-- logica de editar competencias --}}" method="POST" class="form-horizontal">
-                    @csrf
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('competencias.index') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
 
-                    <div class="card-body">
-                        {{-- Nombre de la competencia --}}
-                        <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre de la competencia</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    value="{{-- valor mostrar nombre de la competencia --}}"
-                                    name="nombre"
-                                    id="nombre"
-                                    class="form-control">
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
 
-                    {{-- Descripción de la competencia --}}
-                    <div class="form-group row">
-                        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                        <div class="col-sm-10">
-                            <textarea value="{{-- valor mostrar descripcion de la competencia --}}"
-                            name="descripcion" 
-                            id="descripcion" 
-                            class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                    {{-- Pie del formulario --}}
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Competencia
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            @else
-            <div class="alert alert-danger">
-                <i class="fas fa-ban"></i> No estás autorizado para editar competencias.
-            </div>
-            @endcan
         </div>
     </div>
 </div>
+
+@else
+<div class="alert alert-danger">
+    <i class="fas fa-ban"></i>
+    No estás autorizado para editar competencias.
+</div>
+@endcan
+
 @endsection

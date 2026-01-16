@@ -17,6 +17,8 @@ class InstructorController extends Controller
         Gate::authorize('viewAny', Instructor::class);
         $instructors = Instructor::all();
         return view('instructores.index', compact('instructors'));
+        $instructores = Instructor::all();
+        return view('instructores.index', compact('instructores'));
     }
 
     /**

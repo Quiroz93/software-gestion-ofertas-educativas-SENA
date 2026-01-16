@@ -3,105 +3,106 @@
 @section('title', 'Ofertas')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Editar Oferta</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Ofertas</a></li>
-                <li class="breadcrumb-item active">Editar</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-edit text-primary"></i>
+        Editar oferta
+    </h1>
+
+    <a href="{{-- enlace al index de ofertas --}}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
-@endsection
+@stop
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            
-            {{-- Tarjeta del Formulario --}}
 
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Información de la oferta</h3>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+
+        <div class="card card-outline card-primary shadow-sm">
+
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title fw-bold">
+                    Información de la oferta
+                </h3>
+            </div>
+
+            <form action="{{-- logica de editar oferta --}}" method="POST" class="form-horizontal">
+                @csrf
+                @method('PUT')
+
+                {{-- BODY --}}
+                <div class="card-body">
+
+                    {{-- Nombre --}}
+                    <div class="form-group">
+                        <label for="nombre"><strong>Nombre</strong></label>
+                        <input type="text"
+                               name="nombre"
+                               id="nombre"
+                               value="{{-- nombre de la oferta --}}"
+                               class="form-control">
+                    </div>
+
+                    {{-- Año --}}
+                    <div class="form-group">
+                        <label for="anio"><strong>Año</strong></label>
+                        <input type="number"
+                               name="anio"
+                               id="anio"
+                               value="{{-- año de la oferta --}}"
+                               class="form-control">
+                    </div>
+
+                    {{-- Fecha inicio --}}
+                    <div class="form-group">
+                        <label for="fecha_inicio"><strong>Fecha inicio</strong></label>
+                        <input type="date"
+                               name="fecha_inicio"
+                               id="fecha_inicio"
+                               value="{{-- fecha inicio --}}"
+                               class="form-control">
+                    </div>
+
+                    {{-- Fecha final --}}
+                    <div class="form-group">
+                        <label for="fecha_final"><strong>Fecha final</strong></label>
+                        <input type="date"
+                               name="fecha_final"
+                               id="fecha_final"
+                               value="{{-- fecha final --}}"
+                               class="form-control">
+                    </div>
+
+                    {{-- Estado --}}
+                    <div class="form-group">
+                        <label for="estado"><strong>Estado</strong></label>
+                        <select name="estado" id="estado" class="form-control">
+                            {{-- lógica de estado seleccionado --}}
+                        </select>
+                    </div>
+
                 </div>
 
-                <form action="{{-- logica de editar oferta--}}" method="POST" class="form-horizontal">
-                    @csrf
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{-- enlace al index de ofertas --}}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
 
-                    <div class="card-body">
-                        {{-- Nombre de la oferta --}}
-                        <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    value=" {{-- logica para mostrar el nombre de la oferta --}} "
-                                    name="nombre"
-                                    id="nombre"
-                                    class="form-control">
-                        </div>
-                    </div>
-                    {{-- año de la Oferta --}}
-                        <div class="form-group row">
-                            <label for="fecha" class="col-sm-2 col-form-label">Año</label>
-                            <div class="col-sm-10">
-                                <input type="date"
-                                    value=" {{-- logica para mostrar el año de la oferta --}} "
-                                    name="fecha"
-                                    id="fecha"
-                                    class="form-control">
-                        </div>
-                    </div>
-                    {{-- fecha inicial de la Oferta --}}
-                        <div class="form-group row">
-                            <label for="fecha_inicio" class="col-sm-2 col-form-label">Fecha Inicio</label>
-                            <div class="col-sm-10">
-                                <input type="date"
-                                    value=" {{-- logica para mostrar la fecha de inicio de la oferta --}} "
-                                    name="fecha_inicio"
-                                    id="fecha_inicio"
-                                    class="form-control">
-                        </div>
-                    </div>
-                    {{-- fecha final de la Oferta --}}
-                        <div class="form-group row">
-                            <label for="fecha_final" class="col-sm-2 col-form-label">Fecha Final</label>
-                            <div class="col-sm-10">
-                                <input type="date"
-                                    value=" {{-- logica para mostrar la fecha final de la oferta --}} "
-                                    name="fecha_final"
-                                    id="fecha_final"
-                                    class="form-control">
-                        </div>
-                    </div>
-                    {{-- estado de la Oferta --}}
-                        <div class="form-group row">
-                            <label for="estado" class="col-sm-2 col-form-label">Estado</label>
-                            <div class="col-sm-10">
-                                <select name="estado" id="estado" class="form-control">
-                                    {{-- logica para mostrar el estado seleccionado --}}
-                                </select>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Guardar cambios
+                    </button>
+                </div>
 
-                    </div>
-
-                    {{-- Pie del formulario --}}
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Oferta
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
 @endsection
