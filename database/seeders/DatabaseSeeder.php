@@ -108,6 +108,14 @@ class DatabaseSeeder extends Seeder
             'redes_conocimiento.delete',
             'redes_conocimiento.edit',
             'redes_conocimiento.manage',
+
+            //permisos competencias
+            'competencias.view',
+            'competencias.create',
+            'competencias.update',
+            'competencias.delete',
+            'competencias.edit',
+            'competencias.manage',
         ];
 
 

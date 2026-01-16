@@ -8,6 +8,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\CompetenciaController;
+use App\Http\Controllers\HistoriaExitoController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\NivelFormacionController;
+use App\Http\Controllers\OfertaController;
+use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\RedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -185,5 +192,75 @@ Route::middleware(['auth', 'can:users.edit'])->group(function () {
         [UserController::class, 'updateRolesPermissions']
     )->name('users.roles.update');
 
+});
+
+/*
+|--------------------------------------------------------------------------
+| Competencias
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:competencias.view'])->group(function () {
+    Route::get('competencias', [CompetenciaController::class, 'index'])
+        ->name('competencias.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Historias de éxito
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:historias_exito.view'])->group(function () {
+    Route::get('historias', [HistoriaExitoController::class, 'index'])
+        ->name('historias.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Instructores
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:instructores.view'])->group(function () {
+    Route::get('instructores', [InstructorController::class, 'index'])
+        ->name('instructores.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Niveles de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:niveles_formacion.view'])->group(function () {
+    Route::get('niveles-formacion', [NivelFormacionController::class, 'index'])
+        ->name('niveles_formacion.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Ofertas educativas
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:ofertas.view'])->group(function () {
+    Route::get('ofertas', [OfertaController::class, 'index'])
+        ->name('ofertas.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Programas de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:programas.view'])->group(function () {
+    Route::get('programas', [ProgramaController::class, 'index'])
+        ->name('programas.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Redes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:redes.view'])->group(function () {
+    Route::get('redes', [RedController::class, 'index'])
+        ->name('redes.index');
 });
 
