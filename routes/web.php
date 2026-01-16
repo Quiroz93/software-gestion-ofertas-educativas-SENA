@@ -187,3 +187,73 @@ Route::middleware(['auth', 'can:users.edit'])->group(function () {
 
 });
 
+/*
+|--------------------------------------------------------------------------
+| Competencias
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:competencias.view'])->group(function () {
+    Route::get('competencias', [CompetenciaController::class, 'index'])
+        ->name('competencias.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Historias de éxito
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:historias.view'])->group(function () {
+    Route::get('historias', [HistoriaController::class, 'index'])
+        ->name('historias.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Instructores
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:instructores.view'])->group(function () {
+    Route::get('instructores', [InstructorController::class, 'index'])
+        ->name('instructores.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Niveles de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:niveles_formacion.view'])->group(function () {
+    Route::get('niveles-formacion', [NivelFormacionController::class, 'index'])
+        ->name('niveles_formacion.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Ofertas educativas
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:ofertas.view'])->group(function () {
+    Route::get('ofertas', [OfertaController::class, 'index'])
+        ->name('ofertas.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Programas de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:programas.view'])->group(function () {
+    Route::get('programas', [ProgramaController::class, 'index'])
+        ->name('programas.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Redes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:redes.view'])->group(function () {
+    Route::get('redes', [RedController::class, 'index'])
+        ->name('redes.index');
+});
+
