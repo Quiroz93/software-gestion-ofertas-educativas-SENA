@@ -202,7 +202,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Redes</h5>
-                    <a href="{{ route('redes.index') }}" class="btn btn-dark btn-sm mt-3">
+                    <a href="{{ route('redes_conocimiento.index') }}" class="btn btn-dark btn-sm mt-3">
                         Ver redes
                     </a>
                 </div>
