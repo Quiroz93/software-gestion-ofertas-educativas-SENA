@@ -8,6 +8,13 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\CompetenciaController;
+use App\Http\Controllers\HistoriaExitoController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\NivelFormacionController;
+use App\Http\Controllers\OfertaController;
+use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\RedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -203,7 +210,7 @@ Route::middleware(['auth', 'can:competencias.view'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'can:historias.view'])->group(function () {
-    Route::get('historias', [HistoriaController::class, 'index'])
+    Route::get('historias', [HistoriaExitoController::class, 'index'])
         ->name('historias.index');
 });
 
