@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class HistoriaExito extends Model
 {
     // Definir la tabla si no sigue la convención plural
-    protected $table = 'historias_de_exito';
+    protected $table = 'historias_de_exitos';
 
     // Definir los campos que se pueden asignar masivamente
     protected $fillable = [
