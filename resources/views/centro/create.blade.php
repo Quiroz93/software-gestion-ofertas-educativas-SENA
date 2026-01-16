@@ -121,7 +121,7 @@
                             <a href="{{ route('centro.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Cancelar
                             </a>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-success">
                                 <i class="fas fa-save"></i> Guardar Centro
                             </button>
                         </div>

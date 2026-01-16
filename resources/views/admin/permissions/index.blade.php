@@ -8,7 +8,7 @@
 
 @section('content')
 
-<a href="{{ route('permissions.create') }}" class="btn btn-primary mb-3">
+<a href="{{ route('permissions.create') }}" class="btn btn-success mb-3">
     Crear permiso
 </a>
 

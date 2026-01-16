@@ -22,7 +22,7 @@
     @method('PUT')
 
     <div class=" text-right mb-3">
-        <button type="submit" class="btn btn-primary ">
+        <button type="submit" class="btn btn-success ">
             <i class="fas fa-save"></i> Guardar cambios
         </button>
         <a href="{{ route('roles.index') }}" class="btn btn-secondary">
