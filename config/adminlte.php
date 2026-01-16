@@ -353,37 +353,37 @@ return [
         ],
         [
             'text' => 'competencias',
-            'route' => '',
+            'route' => 'competencias.index',
             'icon' => 'fas fa-trophy',
         ],
         [
             'text' => 'Historias de éxito',
-            'route' => '',
+            'route' => 'historia_de_exito.index',
             'icon' => 'fas fa-book-open',
         ],
         [
             'text' => 'instructores',
-            'route' => '',
+            'route' => 'instructores.index',
             'icon' => 'fas fa-chalkboard-teacher',
         ],
         [
             'text' => 'nivel de formación',
-            'route' => '',
+            'route' => 'nivel_formacion.index',
             'icon' => 'fa-solid fa-ranking-star',
         ],
         [
             'text' => 'Ofertas',
-            'route' => '',
+            'route' => 'ofertas.index',
             'icon' => 'fas fa-graduation-cap',
         ],
         [
             'text' => 'programas de formación',
-            'route' => '',
+            'route' => 'programas.index',
             'icon' => 'fas fa-book',
         ],
         [
             'text'=>'Redes',
-            'route'=>'',
+            'route'=>'redes.index',
             'icon'=>'fas fa-network-wired',
         ]
         
