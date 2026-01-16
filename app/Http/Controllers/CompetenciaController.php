@@ -13,8 +13,8 @@ class CompetenciaController extends Controller
      */
     public function index()
     {
-        $competencia = Competencia::all();
-        return view('competencias.index', compact('competencia'));
+        $competencias = Competencia::all();
+        return view('competencias.index', compact('competencias'));
     }
 
     /**

@@ -1,77 +1,81 @@
 @extends('layouts.app')
 
-@section('title', 'Nivel de formacion')
+@section('title', 'Nivel de Formación')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Agregar Nivel de Formación</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Nivel de Formación</a></li>
-                <li class="breadcrumb-item active">Crear</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-plus-circle text-primary"></i>
+        Agregar Nivel de Formación
+    </h1>
+
+    <a href="{{-- enlace al controller --}}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
-@endsection
+@stop
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
 
-            {{-- Tarjeta del Formulario --}}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
 
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Información del Nivel de formación</h3>
+        <div class="card card-outline card-primary shadow-sm">
+
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title fw-bold">
+                    Información del nivel de formación
+                </h3>
+            </div>
+
+            <form action="{{-- logica de crear niveles de formacion --}}" method="POST">
+                @csrf
+
+                {{-- BODY --}}
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="nombre">
+                            <strong>Nombre</strong>
+                        </label>
+                        <input type="text"
+                               name="nombre"
+                               id="nombre"
+                               class="form-control"
+                               placeholder="Ingrese el nombre del nivel de formación">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="perfil">
+                            <strong>Descripción</strong>
+                        </label>
+                        <textarea name="perfil"
+                                  id="perfil"
+                                  rows="3"
+                                  class="form-control"
+                                  placeholder="Descripción del nivel de formación"></textarea>
+                    </div>
+
                 </div>
 
-                <form action="{{-- logica de crear niveles de formacion --}}" method="POST" class="form-horizontal">
-                    @csrf
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{-- logica de regreso --}}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
 
-                    <div class="card-body">
-                        {{-- Nombre del Nivel de Formación --}}
-                        <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    placeholder="Ingrese el nombre del Nivel de Formación"
-                                    name="nombre"
-                                    id="nombre"
-                                    class="form-control">
-                            </div>
-                        </div>
-                        {{-- descripcion del Nivel de Formación --}}
-                        <div class="form-group row">
-                            <label for="perfil" class="col-sm-2 col-form-label">Perfil</label>
-                            <div class="col-sm-10">
-                                <textarea placeholder="descripción del Nivel de Formación"
-                                    name="perfil"
-                                    id="perfil"
-                                    class="form-control"></textarea>
-                            </div>
-                        </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i>
+                        Guardar nivel
+                    </button>
+                </div>
 
-                    </div>
-
-                    {{-- Pie del formulario --}}
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Nivel
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
 @endsection

@@ -1,101 +1,106 @@
 @extends('layouts.app')
 
-@section('title', 'programa')
+@section('title', 'Programas')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Agregar Programa</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="">Programas</a></li>
-                <li class="breadcrumb-item active">Crear</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-plus-circle text-primary"></i>
+        Agregar programa
+    </h1>
+
+    <a href="{{-- lógica de regreso --}}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
-@endsection
+@stop
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            
-            {{-- Tarjeta del Formulario --}}
 
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Información del Programa</h3>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+
+        <div class="card card-outline card-primary shadow-sm">
+
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title fw-bold text-uppercase">
+                    Información del programa
+                </h3>
+            </div>
+
+            <form action="{{-- lógica de crear programa --}}" method="POST">
+                @csrf
+
+                {{-- BODY --}}
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="nombre">
+                            <strong>Nombre</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="nombre"
+                            id="nombre"
+                            class="form-control"
+                            placeholder="Ingrese el nombre del programa"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">
+                            <strong>Descripción</strong>
+                        </label>
+                        <textarea
+                            name="descripcion"
+                            id="descripcion"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Ingrese la descripción del programa"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requisito">
+                            <strong>Requisitos</strong>
+                        </label>
+                        <textarea
+                            name="requisito"
+                            id="requisito"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Ingrese los requisitos del programa"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duracion">
+                            <strong>Duración (meses)</strong>
+                        </label>
+                        <input
+                            type="number"
+                            name="duracion"
+                            id="duracion"
+                            class="form-control"
+                            placeholder="Ingrese la duración en meses"
+                        >
+                    </div>
+
                 </div>
 
-                <form action="{{-- logica de crear historias de exito --}}" method="POST" class="form-horizontal">
-                    @csrf
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Guardar programa
+                    </button>
+                </div>
 
-                    <div class="card-body">
-                        {{-- Nombre del Programa --}}
-                        <div class="form-group row">
-                            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                            <div class="col-sm-10">
-                                <input type="text"
-                                    placeholder="Ingrese el nombre del programa"
-                                    name="nombre"
-                                    id="nombre"
-                                    class="form-control">
-                        </div>
-                    </div>
-                    {{-- Descripción del programa --}}
-                    <div class="form-group row">
-                        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
-                        <div class="col-sm-10">
-                            <textarea placeholder="Ingrese la descripción del programa"
-                            name="descripcion" 
-                            id="descripcion" 
-                            class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                    {{-- requisito del programa --}}
-                        <div class="form-group row">
-                            <label for="requisito" class="col-sm-2 col-form-label">Requisito</label>
-                            <div class="col-sm-10">
-                                <textarea placeholder="Ingrese el requisito del programa"
-                                    name="requisito"
-                                    id="requisito"
-                                    class="form-control"></textarea>
-                        </div>
-                    </div>
-
-
-                    {{-- meses de duracion del programa --}}
-                        <div class="form-group row">
-                            <label for="fecha" class="col-sm-2 col-form-label">Duración en meses</label>
-                            <div class="col-sm-10">
-                                <input type="number"
-                                    placeholder="Ingrese la duración en meses del programa"
-                                    name="fecha"
-                                    id="fecha"
-                                    class="form-control">
-                        </div>
-                    </div>
-
-                    </div>
-
-                    {{-- Pie del formulario --}}
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <a href="{{-- logica de regreso --}}" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Guardar Programa
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
 @endsection

@@ -2,67 +2,96 @@
 
 @section('title', 'Competencias')
 
+@section('content_header')
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-award text-primary"></i>
+        Gestión de Competencias
+    </h1>
+
+    <div>
+        @can('competencias.create')
+            <a href="#" class="btn btn-success">
+                <i class="fas fa-plus-circle"></i>
+                Agregar competencia
+            </a>
+        @endcan
+        <a href="{{ route('competencias.index') }}" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </a>
+    </div>
+</div>
+@stop
+
 @section('content')
 
-<section>
-    {{-- Esta es la seccion del titulo de la vista index --}}
-    <h1 class="text-center font-weight-bold mb-3">Gestión de Competencias</h1>
-</section>
-
-<section>
-    <div class="container">
-        {{-- seccion de botones de accion --}}
-        @can('competencias.create')
-            <a href="{{-- enlace al controller --}}" class="btn btn-success">Agregar Competencia</a>
-        @endcan
-        <a href="{{-- enlace al controller --}}" class="btn btn-primary">Volver</a>
+@if($competencias->isEmpty())
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i>
+        No existen competencias registradas.
     </div>
-</section>
+@endif
 
-<section>
-    <div class="container mt-4">
-        {{-- seccion de tabla de datos --}}
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nombre de la Competencia</th>
-                    <th>Descripcion</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{-- Ejemplo de fila de datos --}}
-                <tr>
-                    <td>{{-- logica de nombre --}}</td>
-                    <td>{{-- logica de descripcion --}}</td>
-                    <td>
+<div class="row">
+    @foreach($competencias as $competencia)
+        <div class="col-md-6 col-lg-4">
+            <div class="card card-outline card-primary shadow-sm h-100">
+
+                {{-- HEADER --}}
+                <div class="card-header">
+                    <h3 class="card-title fw-bold text-uppercase">
+                        {{ $competencia->nombre }}
+                    </h3>
+                </div>
+
+                {{-- BODY --}}
+                <div class="card-body">
+                    <p class="mb-0">
+                        <strong>Descripción:</strong><br>
+                        {{ $competencia->descripcion }}
+                    </p>
+                </div>
+
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-between">
+
+                    <div>
                         @can('competencias.view')
-                            <a href="{{-- enlace show --}}" class="btn btn-info btn-sm" title="Ver">
+                            <a href="{{ route('competencias.show', $competencia->id) }}"
+                               class="btn btn-sm btn-outline-info">
                                 <i class="fas fa-eye"></i>
+                                Ver
                             </a>
                         @endcan
 
                         @can('competencias.edit')
-                            <a href="{{-- enlace edit --}}" class="btn btn-primary btn-sm" title="Editar">
+                            <a href="{{ route('competencias.edit', $competencia->id) }}"
+                               class="btn btn-sm btn-outline-warning">
                                 <i class="fas fa-edit"></i>
+                                Editar
                             </a>
                         @endcan
+                    </div>
 
-                        @can('competencias.delete')
-                            <form action="{{-- enlace delete --}}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar competencia?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        @endcan
-                    </td>
-                    </tr>
-                {{-- Agregar mas filas segun los datos disponibles --}}
-            </tbody>
-        </table>
-    </div>
-</section>
+                    @can('competencias.delete')
+                        <form action="{{ route('competencias.destroy', $competencia->id) }}"
+                              method="POST"
+                              onsubmit="return confirmarEliminacion(event)">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i>
+                                Eliminar
+                            </button>
+                        </form>
+                    @endcan
+
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
 
 @endsection
