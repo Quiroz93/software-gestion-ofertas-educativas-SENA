@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('centro.index') }}">Centros</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('centros.index') }}">Centros</a></li>
                 <li class="breadcrumb-item active">Crear</li>
             </ol>
         </div>
@@ -39,12 +39,12 @@
 
             {{-- Tarjeta del Formulario --}}
             @can('centros.create')
-            <div class="card card-primary">
+            <div class="card card-outline card-primary shadow-sm">
                 <div class="card-header">
                     <h3 class="card-title">Información del Centro</h3>
                 </div>
 
-                <form action="{{ route('centro.store') }}" method="POST" class="form-horizontal">
+                <form action="{{ route('centros.store') }}" method="POST" class="form-horizontal">
                     @csrf
 
                     <div class="card-body">
@@ -118,10 +118,10 @@
                     {{-- Pie del formulario --}}
                     <div class="card-footer">
                         <div class="float-right">
-                            <a href="{{ route('centro.index') }}" class="btn btn-secondary">
+                            <a href="{{ route('centros.index') }}" class="btn btn-outline-secondary">
                                 <i class="fas fa-arrow-left"></i> Cancelar
                             </a>
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-outline-success">
                                 <i class="fas fa-save"></i> Guardar Centro
                             </button>
                         </div>

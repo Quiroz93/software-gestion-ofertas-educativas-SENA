@@ -70,7 +70,7 @@
                         Cancelar
                     </a>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-outline-success">
                         <i class="fas fa-save"></i>
                         Guardar competencia
                     </button>

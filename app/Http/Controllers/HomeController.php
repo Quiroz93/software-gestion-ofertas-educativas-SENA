@@ -17,7 +17,6 @@ class HomeController extends Controller
       */
     public function index()
     {
-        Gate::authorize('viewAny', Noticia::class);
         $noticias = Noticia::where('activa', true)
             ->latest()
             ->take(4)

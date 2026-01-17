@@ -14,7 +14,7 @@ class ProgramaController extends Controller
      */
     public function index()
     {
-        Gate::authorize('programas.index');
+        Gate::authorize('programas.view');
         $programas = Programa::all();
         return view('programas.index', compact('programas'));
     }

@@ -9,7 +9,7 @@
         Agregar Historia de Éxito
     </h1>
 
-    <a href="{{ route('historias.index') }}" class="btn btn-secondary">
+    <a href="{{ route('historias_de_exito.index') }}" class="btn btn-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -18,7 +18,7 @@
 
 @section('content')
 
-@can('historias.create')
+@can('historias_exito.create')
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -88,7 +88,7 @@
 
                 {{-- FOOTER --}}
                 <div class="card-footer d-flex justify-content-between">
-                    <a href="{{ route('historias.index') }}" class="btn btn-outline-secondary">
+                    <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>

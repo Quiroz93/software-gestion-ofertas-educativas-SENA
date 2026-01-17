@@ -4,8 +4,12 @@ namespace App\Providers;
 
 use App\Models\Centro;
 use App\Models\User;
+use App\Models\Instructor;
+use App\Models\Programa;
 use App\Policies\CentroPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\InstructoresPolicy;
+use App\Policies\ProgramaPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -19,6 +23,11 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Centro::class => CentroPolicy::class,
         User::class => UserPolicy::class,
+        Instructor::class => InstructoresPolicy::class,
+        Programa::class => ProgramaPolicy::class,
+        
+
+
     ];
 
     /**

@@ -28,7 +28,7 @@
     {{-- Botones de acción --}}
     <div class="mb-3">
         @can('centros.create')
-        <a href="{{ route('centro.create') }}" class="btn btn-success">
+        <a href="{{ route('centros.create') }}" class="btn btn-success">
             <i class="fas fa-plus"></i> Agregar Centro
         </a>
         @endcan
@@ -120,7 +120,7 @@
         <i class="fas fa-info-circle"></i>
         No hay centros registrados.
         @can('centros.create')
-        <a href="{{ route('centro.create') }}" class="alert-link">
+        <a href="{{ route('centros.create') }}" class="alert-link">
             Crear uno ahora
         </a>
         @endcan
