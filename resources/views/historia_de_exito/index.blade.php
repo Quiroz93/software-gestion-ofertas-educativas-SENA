@@ -10,14 +10,14 @@
     </h1>
 
     <div>
-        @can('historias.create')
-            <a href="{{ route('historias.create') }}" class="btn btn-success">
+        @can('historias_exito.create')
+            <a href="{{ route('historias_de_exito.create') }}" class="btn btn-success">
                 <i class="fas fa-plus-circle"></i>
                 Agregar historia
             </a>
         @endcan
 
-        <a href="{{ route('historias.index') }}" class="btn btn-secondary">
+        <a href="{{ route('historias_de_exito.index') }}" class="btn btn-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>
@@ -72,7 +72,7 @@
                 <div class="card-footer d-flex justify-content-between">
 
                     <div>
-                        @can('historias.view')
+                        @can('historias_exito.view')
                             <a href="{{ route('historias.show', $historia->id) }}"
                                class="btn btn-sm btn-outline-info">
                                 <i class="fas fa-eye"></i>
@@ -80,8 +80,8 @@
                             </a>
                         @endcan
 
-                        @can('historias.edit')
-                            <a href="{{ route('historias.edit', $historia->id) }}"
+                        @can('historias_exito.edit')
+                            <a href="{{ route('historias_de_exito.edit', $historia->id) }}"
                                class="btn btn-sm btn-outline-warning">
                                 <i class="fas fa-edit"></i>
                                 Editar
@@ -89,8 +89,8 @@
                         @endcan
                     </div>
 
-                    @can('historias.delete')
-                        <form action="{{ route('historias.destroy', $historia->id) }}"
+                    @can('historias_exito.delete')
+                        <form action="{{ route('historias_de_exito.destroy', $historia->id) }}"
                               method="POST"
                               onsubmit="return confirmarEliminacion(event)">
                             @csrf

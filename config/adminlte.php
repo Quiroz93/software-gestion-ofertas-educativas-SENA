@@ -326,7 +326,7 @@ return [
 
         [
             'text' => 'Centros',
-            'route' => 'centro.index',
+            'route' => 'centros.index',
             'icon' => 'fas fa-building',
             'can' => 'centros.view',
         ],
@@ -358,7 +358,7 @@ return [
         ],
         [
             'text' => 'Historias de éxito',
-            'route' => 'historias.index',
+            'route' => 'historias_de_exito.index',
             'icon' => 'fas fa-book-open',
         ],
         [

@@ -14,7 +14,7 @@ class RedController extends Controller
      */
     public function index()
     {
-        Gate::authorize('redes.index');
+        Gate::authorize('redes_conocimiento.view');
         $redes = Red::all();
         return view('redes.index', compact('redes'));
     }
@@ -25,7 +25,7 @@ class RedController extends Controller
      */
     public function create()
     {
-        Gate::authorize('redes.create');
+        Gate::authorize('redes_conocimiento.create');
         return view('redes.create');
     }
 
@@ -36,7 +36,7 @@ class RedController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('redes.create');
+        Gate::authorize('redes_conocimiento.create');
         Red::create($request->all());
         return redirect()->route('redes.index')->with('success', 'Red creada exitosamente');
     }
@@ -48,7 +48,7 @@ class RedController extends Controller
      */
     public function show(Red $red)
     {
-        Gate::authorize('redes.show', $red);
+        Gate::authorize('redes_conocimiento.show', $red);
         return view('redes.show', compact('red'));
     }
 
@@ -59,7 +59,7 @@ class RedController extends Controller
      */
     public function edit(Red $red)
     {
-        Gate::authorize('redes.edit', $red);
+        Gate::authorize('redes_conocimiento.edit', $red);
         return view('redes.edit', compact('red'));
     }
 
@@ -71,7 +71,7 @@ class RedController extends Controller
      */
     public function update(Request $request, Red $red)
     {
-        Gate::authorize('redes.edit', $red);
+        Gate::authorize('redes_conocimiento.edit', $red);
         $red->update($request->all());
         return redirect()->route('redes.index')->with('success', 'Red actualizada exitosamente');
     }
@@ -83,7 +83,7 @@ class RedController extends Controller
      */
     public function destroy(Red $red)
     {
-        Gate::authorize('redes.delete', $red);
+        Gate::authorize('redes_conocimiento.delete', $red);
         $red->delete();
         return redirect()->route('redes.index')->with('success', 'Red eliminada exitosamente');
     }

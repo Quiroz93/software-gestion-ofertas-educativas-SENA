@@ -11,7 +11,7 @@
 
     <div>
         @can('competencias.create')
-            <a href="#" class="btn btn-success">
+            <a href="{{ route('competencias.create') }}" class="btn btn-success">
                 <i class="fas fa-plus-circle"></i>
                 Agregar competencia
             </a>

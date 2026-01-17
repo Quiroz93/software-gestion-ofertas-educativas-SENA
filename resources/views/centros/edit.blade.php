@@ -14,7 +14,7 @@
         </div>
 
         {{-- Botón volver --}}
-        <div class="col-12 mb-3"><a href="{{ route('centro.index') }}" class="btn btn-primary">
+        <div class="col-12 mb-3"><a href="{{ route('centros.index') }}" class="btn btn-primary">
                 Volver
             </a>
         </div>

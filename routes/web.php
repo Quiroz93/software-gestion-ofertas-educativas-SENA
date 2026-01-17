@@ -37,7 +37,7 @@ require __DIR__ . '/auth.php';
 | Home & Dashboard
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified'])->group(function () {
+
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -46,7 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })
     ->middleware('can:dashboard.view')
     ->name('dashboard');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -168,7 +168,7 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('historias-exito', HistoriaExitoController::class)
+    Route::resource('historias_de_exito', HistoriaExitoController::class)
         ->middleware([
             'index'   => 'can:historias_exito.view',
             'create'  => 'can:historias_exito.create',
@@ -204,7 +204,7 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('niveles-formacion', NivelFormacionController::class)
+    Route::resource('niveles_formacion', NivelFormacionController::class)
         ->middleware([
             'index'   => 'can:niveles_formacion.view',
             'create'  => 'can:niveles_formacion.create',
@@ -258,7 +258,7 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('redes-conocimiento', RedController::class)
+    Route::resource('redes_conocimiento', RedController::class)
         ->middleware([
             'index'   => 'can:redes_conocimiento.view',
             'create'  => 'can:redes_conocimiento.create',

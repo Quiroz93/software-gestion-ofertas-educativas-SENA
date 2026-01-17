@@ -19,7 +19,7 @@ class CentroController extends Controller
     {
         Gate::authorize("viewAny", Centro::class);
         $centros = Centro::all();
-        return view('centro.index', compact('centros'));
+        return view('centros.index', compact('centros'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CentroController extends Controller
     public function create()
     {
         Gate::authorize('centros.create', Centro::class);
-            return view('centro.create');
+            return view('centros.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class CentroController extends Controller
             'correo' => 'required|email|max:255',
         ]);
         Centro::create($data);
-        return redirect()->route('centro.index')->with('success','Elemento creado con exito');
+        return redirect()->route('centros.index')->with('success','Elemento creado con exito');
     }
 
     /**
@@ -58,7 +58,7 @@ class CentroController extends Controller
     public function show(Centro $centro)
     {
         Gate::authorize('centros.view', $centro);
-        return view('centro.show', compact('centro'));
+        return view('centros.show', compact('centro'));
     }
 
     /**
@@ -70,7 +70,7 @@ class CentroController extends Controller
     {
         Gate::authorize('centros.update', $id);
         $centro = Centro::findOrFail($id);
-        return view('centro.edit', compact('centro'));
+        return view('centros.edit', compact('centro'));
     }
 
     /**
@@ -90,7 +90,7 @@ class CentroController extends Controller
             'correo' => 'required|email|max:255',
         ]);
         $centro->update($data);
-        return redirect()->route('centro.index')->with('success','Elemento actualizado con exito');
+        return redirect()->route('centros.index')->with('success','Elemento actualizado con exito');
     }
 
     /**
@@ -102,6 +102,6 @@ class CentroController extends Controller
     {
         Gate::authorize('centros.delete', $centro);
         $centro->delete();
-        return redirect()->route('centro.index')->with('success','Elemento eliminado con exito');
+        return redirect()->route('centros.index')->with('success','Elemento eliminado con exito');
     }
 }
