@@ -9,7 +9,7 @@
         Editar Instructor
     </h1>
 
-    <a href="{{ route('instructores.index') }}" class="btn btn-secondary">
+    <a href="{{ route('instructores.index') }}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -100,13 +100,13 @@
                 </div>
 
                 {{-- FOOTER --}}
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="{{ route('instructores.index') }}" class="btn btn-outline-secondary">
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="{{ route('instructores.index') }}" class="btn btn-outline-secondary me-1">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-outline-success">
                         <i class="fas fa-save"></i>
                         Guardar cambios
                     </button>

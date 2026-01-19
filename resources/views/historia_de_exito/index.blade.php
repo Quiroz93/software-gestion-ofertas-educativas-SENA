@@ -5,19 +5,19 @@
 @section('content_header')
 <div class="d-flex justify-content-between align-items-center">
     <h1 class="m-0">
-        <i class="fas fa-star text-primary"></i>
+        <i class="fas fa-book-open  text-primary"></i>
         Gestión de Historias de Éxito
     </h1>
 
     <div>
         @can('historias_exito.create')
-            <a href="{{ route('historias_de_exito.create') }}" class="btn btn-success">
+            <a href="{{ route('historias_de_exito.create') }}" class="btn btn-outline-success">
                 <i class="fas fa-plus-circle"></i>
                 Agregar historia
             </a>
         @endcan
 
-        <a href="{{ route('historias_de_exito.index') }}" class="btn btn-secondary">
+        <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>

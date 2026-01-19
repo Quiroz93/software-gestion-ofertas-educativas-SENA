@@ -9,6 +9,21 @@
         Niveles de Formación
     </h1>
 
+    <div>
+        @can('historias_exito.create')
+            <a href="{{ route('historias_de_exito.create') }}" class="btn btn-outline-success">
+                <i class="fas fa-plus-circle"></i>
+                Agregar historia
+            </a>
+        @endcan
+
+        <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </a>
+    </div>
+    
+
     @can('niveles.create')
         <a href="{{-- enlace al controller --}}" class="btn btn-success">
             <i class="fas fa-plus-circle"></i>

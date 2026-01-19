@@ -5,18 +5,18 @@
 @section('content_header')
 <div class="d-flex justify-content-between align-items-center">
     <h1 class="m-0">
-        <i class="fas fa-award text-primary"></i>
+        <i class="fas fa-trophy text-primary"></i>
         Gestión de Competencias
     </h1>
 
     <div>
         @can('competencias.create')
-            <a href="{{ route('competencias.create') }}" class="btn btn-success">
+            <a href="{{ route('competencias.create') }}" class="btn btn-outline-success">
                 <i class="fas fa-plus-circle"></i>
                 Agregar competencia
             </a>
         @endcan
-        <a href="{{ route('competencias.index') }}" class="btn btn-primary">
+        <a href="{{ route('competencias.index') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>

@@ -3,18 +3,16 @@
 @section('title', 'Agregar Centro')
 
 @section('content_header')
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Agregar Centro</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('centros.index') }}">Centros</a></li>
-                <li class="breadcrumb-item active">Crear</li>
-            </ol>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-plus-circle text-primary"></i>
+        Agregar Centro
+    </h1>
+
+    <a href="{{ route('centros.index') }}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </a>
 </div>
 @endsection
 
@@ -119,7 +117,7 @@
                     <div class="card-footer">
                         <div class="float-right">
                             <a href="{{ route('centros.index') }}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left"></i> Cancelar
+                                <i class="fas fa-times"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-outline-success">
                                 <i class="fas fa-save"></i> Guardar Centro

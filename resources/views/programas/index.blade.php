@@ -9,12 +9,18 @@
         Programas de formación
     </h1>
 
-    @can('programas.create')
-    <a href="{{-- enlace al controller --}}" class="btn btn-success">
+    <div>
+        @can('programas.create')
+    <a href="{{-- enlace al controller --}}" class="btn btn-outline-success">
         <i class="fas fa-plus-circle"></i>
         Crear programa
     </a>
     @endcan
+    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+    </a>
+    </div>
 </div>
 @stop
 
