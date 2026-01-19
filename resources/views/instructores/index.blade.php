@@ -11,13 +11,13 @@
 
     <div>
         @can('instructores.create')
-            <a href="" class="btn btn-success">
+            <a href="" class="btn btn-outline-success">
                 <i class="fas fa-plus-circle"></i>
                 Agregar instructor
             </a>
         @endcan
 
-        <a href="{{ route('instructores.index') }}" class="btn btn-secondary">
+        <a href="{{ route('instructores.index') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>

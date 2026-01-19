@@ -9,7 +9,7 @@
         Agregar Nivel de Formación
     </h1>
 
-    <a href="{{-- enlace al controller --}}" class="btn btn-secondary">
+    <a href="{{-- enlace al controller --}}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -61,13 +61,13 @@
                 </div>
 
                 {{-- FOOTER --}}
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="{{-- logica de regreso --}}" class="btn btn-outline-secondary">
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="{{-- logica de regreso --}}" class="btn btn-outline-secondary me-1">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>
 
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-outline-success">
                         <i class="fas fa-save"></i>
                         Guardar nivel
                     </button>

@@ -64,8 +64,8 @@
                 </div>
 
                 {{-- FOOTER --}}
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="{{ route('competencias.index') }}" class="btn btn-outline-secondary">
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="{{ route('competencias.index') }}" class="btn btn-outline-secondary me-1">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>

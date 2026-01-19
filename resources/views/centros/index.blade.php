@@ -4,19 +4,23 @@
 
 @section('content_header')
 
-<div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">Centros</h1>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('dashboard') }}">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Centros</li>
-            </ol>
-        </div>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="m-0">
+        <i class="fas fa-school text-primary"></i>
+        Gestión de Centros
+    </h1>
+
+    <div>
+        @can('centros.create')
+            <a href="{{ route('centros.create') }}" class="btn btn-outline-success">
+                <i class="fas fa-plus-circle"></i>
+                Agregar centro
+            </a>
+        @endcan
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </a>
     </div>
 </div>
 @endsection
@@ -24,19 +28,6 @@
 @section('content')
 
 <div class="container-fluid">
-
-    {{-- Botones de acción --}}
-    <div class="mb-3">
-        @can('centros.create')
-        <a href="{{ route('centros.create') }}" class="btn btn-success">
-            <i class="fas fa-plus"></i> Agregar Centro
-        </a>
-        @endcan
-
-        <a href="{{ route('dashboard') }}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Volver
-        </a>
-    </div>
 
     @if($centros->count() > 0)
     <div class="row">
@@ -84,7 +75,7 @@
                 <div class="card-footer d-flex flex-wrap gap-2">
                     <div class="">
                         @canany(['centros.edit','centros.update'])
-                        <a href="{{ route('centro.edit', $centro->id) }}"
+                        <a href="{{ route('centros.edit', $centro->id) }}"
                             class="btn btn-outline-warning btn-sm min-width-100px">
                             <i class="fas fa-edit"></i> Editar
                         </a>
@@ -92,7 +83,7 @@
                     @endcanany
 
                     @can('centros.delete')
-                    <form action="{{ route('centro.destroy', $centro->id) }}"
+                    <form action="{{ route('centros.destroy', $centro->id) }}"
                         method="POST"
                         onsubmit="return confirmarEliminacion(event)">
                         @csrf

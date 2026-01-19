@@ -8,13 +8,18 @@
         <i class="fas fa-network-wired text-primary"></i>
         Gestión de redes
     </h1>
-
-    @can('redes.create')
-    <a href="{{-- enlace al controller --}}" class="btn btn-success">
+<div>
+        @can('programas.create')
+    <a href="{{-- enlace al controller --}}" class="btn btn-outline-success">
         <i class="fas fa-plus-circle"></i>
-        Agregar red
+        Crear programa
     </a>
     @endcan
+    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+    </a>
+    </div>
 </div>
 @stop
 

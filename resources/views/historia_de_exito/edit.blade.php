@@ -9,7 +9,7 @@
         Editar Historia de Éxito
     </h1>
 
-    <a href="{{ route('historias_de_exito.index') }}" class="btn btn-secondary">
+    <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -31,7 +31,7 @@
                 </h3>
             </div>
 
-            <form action="{{ route('historias.update', $historia->id) }}" method="POST">
+            <form action="" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -45,7 +45,7 @@
                         <input type="text"
                                name="nombre"
                                id="nombre"
-                               value="{{ $historia->nombre }}"
+                               value=""
                                class="form-control"
                                required>
                     </div>
@@ -57,7 +57,7 @@
                         <input type="text"
                                name="titulo"
                                id="titulo"
-                               value="{{ $historia->titulo }}"
+                               value=""
                                class="form-control"
                                required>
                     </div>
@@ -70,7 +70,7 @@
                                   id="descripcion"
                                   rows="4"
                                   class="form-control"
-                                  required>{{ $historia->descripcion }}</textarea>
+                                  required></textarea>
                     </div>
 
                     <div class="form-group">
@@ -80,7 +80,7 @@
                         <input type="date"
                                name="fecha"
                                id="fecha"
-                               value="{{ $historia->fecha }}"
+                               value=""
                                class="form-control"
                                required>
                     </div>
@@ -88,13 +88,13 @@
                 </div>
 
                 {{-- FOOTER --}}
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary">
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary me-1">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-outline-success">
                         <i class="fas fa-save"></i>
                         Guardar cambios
                     </button>
