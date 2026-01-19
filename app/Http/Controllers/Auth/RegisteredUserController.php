@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
+
 
 class RegisteredUserController extends Controller
 {
@@ -39,26 +41,42 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, SystemBootstrapService $bootstrap)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        $validated = $request->validate([
+            'name'       => 'required|string|max:255',
+            'email'      => 'required|string|email|max:255|unique:users',
+            'password'   => 'required|string|confirmed|min:8',
+            'owner_key'  => 'nullable|string',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name'     => $validated['name'],
+            'email'    => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        event(new Registered($user));
+        // 1️⃣ Rol base obligatorio
+        $user->assignRole('user');
 
+        // 2️⃣ Si el sistema ya está inicializado → FIN
+        if ($bootstrap->systemIsInitialized()) {
+            event(new Registered($user));
+            Auth::login($user);
+
+            return redirect()->route('home')->with('status', 'Welcome!');
+        }
+
+        // 3️⃣ Sistema NO inicializado → validar owner
+        if ($bootstrap->isOwnerCandidate($validated)) {
+            $user->assignRole('superAdmin');
+
+            $bootstrap->markSystemAsInitialized();
+        }
+
+        event(new Registered($user));
         Auth::login($user);
 
-        $this->systemBootstrapService->initialize($user);
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('home')->with('status', 'Welcome! You are now a super admin.');
     }
 }
