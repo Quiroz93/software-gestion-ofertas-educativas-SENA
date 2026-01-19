@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\SystemBootstrapService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +15,17 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    /**
+     * The system bootstrap service instance.
+     *
+     * @var \App\Services\SystemBootstrapService
+     */
+    protected $systemBootstrapService;
+
+    public function __construct(SystemBootstrapService $systemBootstrapService)
+    {
+        $this->systemBootstrapService = $systemBootstrapService;
+    }
     /**
      * Display the registration view.
      */
@@ -44,6 +56,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $this->systemBootstrapService->initialize($user);
 
         return redirect(route('dashboard', absolute: false));
     }

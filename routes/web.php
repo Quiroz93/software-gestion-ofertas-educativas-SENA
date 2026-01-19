@@ -15,15 +15,14 @@ use App\Http\Controllers\NivelFormacionController;
 use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\RedController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
 | Ruta de bienvenida
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 /*
 |--------------------------------------------------------------------------

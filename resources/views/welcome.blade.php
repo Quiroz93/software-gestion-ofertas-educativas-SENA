@@ -119,6 +119,65 @@
                             </button>
                         </div>
 
+                        {{-- Noticias --}}
+                        <section class="py-5">
+                            <div class="container">
+                                <h2 class="text-center fw-bold mb-4">Últimas Noticias</h2>
+                                <div class="row">
+                                    @if(isset($noticias) && $noticias->count() > 0)
+                                        @foreach($noticias as $noticia)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    @if($noticia->imagen)
+                                                        <img src="{{ asset('storage/' . $noticia->imagen) }}" class="card-img-top" alt="{{ $noticia->titulo }}">
+                                                    @endif
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $noticia->titulo }}</h5>
+                                                        <p class="card-text">{{ Str::limit($noticia->contenido, 100) }}</p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <a href="#" class="btn btn-primary btn-sm">Leer más</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="col">
+                                            <p class="text-center text-muted">No hay noticias disponibles en este momento.</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </section>
+
+                        {{-- Ofertas --}}
+                        <section class="py-5 bg-light">
+                            <div class="container">
+                                <h2 class="text-center fw-bold mb-4">Ofertas Educativas Recientes</h2>
+                                <div class="row">
+                                    @if(isset($ofertas) && $ofertas->count() > 0)
+                                        @foreach($ofertas as $oferta)
+                                            <div class="col-md-3 mb-4">
+                                                <div class="card h-100">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $oferta->nombre }}</h5>
+                                                        <p class="card-text">{{ Str::limit($oferta->descripcion, 100) }}</p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <a href="#" class="btn btn-success btn-sm">Ver oferta</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="col">
+                                            <p class="text-center text-muted">No hay ofertas disponibles en este momento.</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </section>
+
                         {{-- Características --}}
                         <div class="row g-4">
 
