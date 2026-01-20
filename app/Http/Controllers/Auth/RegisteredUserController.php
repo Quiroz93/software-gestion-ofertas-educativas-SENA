@@ -69,7 +69,7 @@ class RegisteredUserController extends Controller
 
         // 3️⃣ Sistema NO inicializado → validar owner
         if ($bootstrap->isOwnerCandidate($validated)) {
-            $user->assignRole('superAdmin');
+            $user->assignRole('admin');
 
             $bootstrap->markSystemAsInitialized();
         }

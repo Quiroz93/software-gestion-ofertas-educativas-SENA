@@ -59,7 +59,7 @@
 
     <!-- Owner Key -->
     <!-- Si el sistema no está inicializado, se solicita la owner_key -->
-    @if (!config('system.initialized'))
+    @if (!config('System.initialized'))
 
     <p class="text-danger small">
         {{ __('* Bienvenido: Esta clave es necesaria para inicializar el sistema. Solo se necesitará una vez. Si no se proporciona, El sistema asignara un usuariio por defecto y seguira esperando la inicialización.') }}

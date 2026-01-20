@@ -242,7 +242,6 @@ class DatabaseSeeder extends Seeder
         // 👤 Usuario: acceso informativo
         $user->syncPermissions([
             'dashboard.view',
-
             'centros.view',
             'programas.view',
             'ofertas.view',
