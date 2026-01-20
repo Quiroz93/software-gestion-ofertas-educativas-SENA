@@ -7,9 +7,9 @@
 
 @section('content')
 
-@can('dashboard.view')
+@hasanyrole('admin | SuperAdmin')
 
-<div class="alert alert-info alert-dismissible mb-3"> 
+<div class="alert alert-info alert-dismissible mb-3">
     <strong>
         {{ __('Bienvenido, :name', ['name' => auth()->user()->name]) }}
     </strong>
@@ -17,7 +17,7 @@
         {{ __('Acceso administrativo') }}
     </div>
 </div>
-@endcan
+@endhasanyrole
 
 <div class="container-fluid">
     <div class="row">
@@ -116,7 +116,7 @@
                 <h5 class="card-title">Competencias</h5>
                 <a href="{{ route('competencias.index') }}" class="btn btn-dark btn-sm mt-3">
                     Ver competencias
-                </a>    
+                </a>
             </div>
         </div>
     </div>
