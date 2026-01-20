@@ -91,13 +91,14 @@
     </div>
     <div class="row mt-4">
         <div class="col-6">
-            <button type="submit" class="btn btn-success btn-sm">
+            <a href="" class="btn btn-outline-secondary  btn-sm">Cancelar</a>
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-outline-success float-end btn-sm">
                 {{ __('Registrarse') }}
             </button>
         </div>
-        <div class="col-6">
-            <a href="" class="btn btn-secondary float-end btn-sm">Cancelar</a>
-        </div>
+        
     </div>
 </form>
 
