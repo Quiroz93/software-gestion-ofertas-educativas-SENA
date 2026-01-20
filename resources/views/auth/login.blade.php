@@ -50,12 +50,12 @@
         </div>
         <div class="row mt-4">
             <div class="col-6">
-                <button type="submit" class="btn btn-primary btn-sm">
-                {{ __('Iniciar sesión') }}
-            </button>
+                <a href="" class="btn btn-outline-secondary btn-sm">Cancelar</a>
             </div>
             <div class="col-6">
-                <a href="" class="btn btn-secondary float-end btn-sm">Cancelar</a>
+                <button type="submit" class="btn btn-outline-success float-end btn-sm">
+                {{ __('Iniciar sesión') }}
+            </button>
             </div>
         </div>
     </form>

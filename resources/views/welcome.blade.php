@@ -62,7 +62,7 @@
                         </li>
                     </ul>
 
-                    <a href="{{ route('login') }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm">
                         <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesión
                     </a>
 

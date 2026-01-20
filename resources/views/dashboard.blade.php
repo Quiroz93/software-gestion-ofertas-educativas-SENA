@@ -31,7 +31,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Centros Educativos</h5>
-                <a href="{{ route('centros.index') }}" class="btn btn-primary btn-sm mt-3">
+                <a href="{{ route('centros.index') }}" class="btn btn-outline-primary btn-sm mt-3">
                     Ver centros educativos
                 </a>
             </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Usuarios</h5>
-                <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm mt-3">
+                <a href="{{ route('users.index') }}" class="btn btn-outline-secondary btn-sm mt-3">
                     Ver usuarios
                 </a>
             </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Roles</h5>
-                <a href="{{ route('roles.index') }}" class="btn btn-info btn-sm mt-3">
+                <a href="{{ route('roles.index') }}" class="btn btn-outline-info btn-sm mt-3">
                     Ver roles
                 </a>
             </div>
@@ -82,7 +82,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Permisos</h5>
-                <a href="{{ route('permissions.index') }}" class="btn btn-success btn-sm mt-3">
+                <a href="{{ route('permissions.index') }}" class="btn btn-outline-success btn-sm mt-3">
                     Ver permisos
                 </a>
             </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Configuración</h5>
-                <a href="#" class="btn btn-warning btn-sm mt-3">
+                <a href="#" class="btn btn-outline-warning btn-sm mt-3">
                     Ajustes
                 </a>
             </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Competencias</h5>
-                <a href="{{ route('competencias.index') }}" class="btn btn-dark btn-sm mt-3">
+                <a href="{{ route('competencias.index') }}" class="btn btn-outline-light btn-sm mt-3">
                     Ver competencias
                 </a>
             </div>
@@ -131,7 +131,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Historias de Éxito</h5>
-                <a href="{{ route('historias_de_exito.index') }}" class="btn btn-secondary btn-sm mt-3">
+                <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary btn-sm mt-3">
                     Ver historias de éxito
                 </a>
             </div>
@@ -148,7 +148,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Instructores</h5>
-                <a href="{{ route('instructores.index') }}" class="btn btn-primary btn-sm mt-3">
+                <a href="{{ route('instructores.index') }}" class="btn btn-outline-primary btn-sm mt-3">
                     Ver instructores
                 </a>
             </div>
@@ -165,7 +165,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Niveles de Formación</h5>
-                <a href="{{ route('niveles_formacion.index') }}" class="btn btn-success btn-sm mt-3">
+                <a href="{{ route('niveles_formacion.index') }}" class="btn btn-outline-success btn-sm mt-3">
                     Ver niveles de formación
                 </a>
             </div>
@@ -182,7 +182,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Ofertas</h5>
-                <a href="{{ route('ofertas.index') }}" class="btn btn-info btn-sm mt-3">
+                <a href="{{ route('ofertas.index') }}" class="btn btn-outline-info btn-sm mt-3">
                     Ver ofertas
                 </a>
             </div>
@@ -199,7 +199,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Programas de formación</h5>
-                <a href="{{ route('programas.index') }}" class="btn btn-warning btn-sm mt-3">
+                <a href="{{ route('programas.index') }}" class="btn btn-outline-warning btn-sm mt-3">
                     Ver programas de formación
                 </a>
             </div>
@@ -216,7 +216,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Redes</h5>
-                <a href="{{ route('redes_conocimiento.index') }}" class="btn btn-dark btn-sm mt-3">
+                <a href="{{ route('redes_conocimiento.index') }}" class="btn btn-outline-light btn-sm mt-3">
                     Ver redes
                 </a>
             </div>

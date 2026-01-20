@@ -11,13 +11,13 @@
 
     <div>
         @can('users.create')
-        <a href="{{ route('users.create') }}" class="btn btn-success">
+        <a href="{{ route('users.create') }}" class="btn btn-outline-success">
             <i class="fas fa-user-plus"></i>
             Crear usuario
         </a>
         @endcan
 
-        <a href="{{ route('dashboard') }}" class="btn btn-secondary">
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>

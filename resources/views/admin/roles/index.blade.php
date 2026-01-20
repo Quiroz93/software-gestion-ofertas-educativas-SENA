@@ -8,13 +8,18 @@
         <i class="fas fa-user-shield text-primary"></i>
         Roles del sistema
     </h1>
-
-    @can('roles.create')
-    <a href="{{ route('roles.create') }}" class="btn btn-success">
-        <i class="fas fa-plus-circle"></i>
-        Crear rol
-    </a>
-    @endcan
+    <div class="d-flex justify-content-end ">
+        @can('roles.create')
+        <a href="{{ route('roles.create') }}" class="btn btn-outline-success">
+            <i class="fas fa-plus-circle"></i>
+            Crear rol
+        </a>
+        @endcan
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </a>
+    </div>
 </div>
 @stop
 
