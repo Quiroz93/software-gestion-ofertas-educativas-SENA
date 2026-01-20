@@ -319,7 +319,7 @@ return [
 
         [
             'text' => 'Administración',
-            'icon' => 'fas fa-cogs',
+            'icon' => 'fa-solid fa-box-archive',
             'submenu' => [
                 [
                     'text' => 'Panel de control',
