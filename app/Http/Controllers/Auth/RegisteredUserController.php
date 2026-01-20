@@ -18,7 +18,7 @@ use Spatie\Permission\Models\Role;
 class RegisteredUserController extends Controller
 {
     /**
-     * The system bootstrap service instance.
+     * Instancia del servicio de arranque del sistema.
      *
      * @var \App\Services\SystemBootstrapService
      */
@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
         $this->systemBootstrapService = $systemBootstrapService;
     }
     /**
-     * Display the registration view.
+     * Desplegar la vista de registro de usuarios.
      */
     public function create(): View
     {
@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Handle an incoming registration request.
+     * Manejar un requisito de validación entrante para el registro de usuarios.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -56,10 +56,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        // 1️⃣ Rol base obligatorio
+        /**
+         * Rol base obligatorio para todos los usuarios
+         */
         $user->assignRole('user');
 
-        // 2️⃣ Si el sistema ya está inicializado → FIN
+        /**
+         * Si el sistema ya está inicializado → FIN
+         */
         if ($bootstrap->systemIsInitialized()) {
             event(new Registered($user));
             Auth::login($user);
@@ -67,7 +71,9 @@ class RegisteredUserController extends Controller
             return redirect()->route('home')->with('status', 'Welcome!');
         }
 
-        // 3️⃣ Sistema NO inicializado → validar owner
+        /**
+         * Sistema NO inicializado → validar owner
+         */
         if ($bootstrap->isOwnerCandidate($validated)) {
             $user->assignRole('admin');
 
