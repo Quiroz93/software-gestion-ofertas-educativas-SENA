@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modelo para almacenar configuraciones del sistema.
+ */
 class SystemSetting extends Model
 {
     protected $fillable = ['key', 'value'];
