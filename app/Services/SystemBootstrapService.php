@@ -19,7 +19,7 @@ class SystemBootstrapService
         }
 
         // Fallback defensivo (recuperación ante ataques)
-        return User::role('super_admin')->exists();
+        return User::role('admin')->exists();
     }
 
     /**
@@ -27,14 +27,22 @@ class SystemBootstrapService
      * cumple las condiciones para ser el owner real
      */
     public function isOwnerCandidate(array $data): bool
-    {
-        if ($this->systemIsInitialized()) {
-            return false;
-        }
-
-        return isset($data['owner_key'])
-            && hash_equals(config('system.owner_key'), $data['owner_key']);
+{
+    if ($this->systemIsInitialized()) {
+        return false;
     }
+
+    $systemKey = config('system.owner_key');
+
+    if (!is_string($systemKey) || $systemKey === '') {
+        return false;
+    }
+
+    return isset($data['owner_key'])
+        && is_string($data['owner_key'])
+        && hash_equals($systemKey, $data['owner_key']);
+}
+
 
     /**
      * Marca el sistema como inicializado
