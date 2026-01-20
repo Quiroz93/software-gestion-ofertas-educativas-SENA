@@ -8,6 +8,6 @@
 
 namespace App\Config;
 return [
-    'owner_email' => env('SYSTEM_OWNER_EMAIL'),
-    'initialized' => env('SYSTEM_INITIALIZED', false),
+    'system.owner_key' => env('SYSTEM_OWNER_KEY'),
+    'system.initialized' => env('SYSTEM_INITIALIZED', false),
 ];
