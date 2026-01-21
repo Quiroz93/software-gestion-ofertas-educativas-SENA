@@ -25,7 +25,18 @@ use App\Http\Controllers\Public\PublicRedController;
 use App\Http\Controllers\PublicProgramaController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Public\CustomContentController;
 
+
+
+
+/*|--------------------------------------------------------------------------
+| Rutas para gestión de contenidos personalizados (PUBLIC CONTENT)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])
+    ->post('/public-content', [CustomContentController::class, 'store'])
+    ->name('public.content.store');
 
 
 /*
