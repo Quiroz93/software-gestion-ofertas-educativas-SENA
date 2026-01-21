@@ -296,8 +296,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('ofertas/{oferta}', [OfertaController::class, 'destroy'])
         ->middleware('can:ofertas.delete')->name('ofertas.destroy');
-
-    Route::get('ofertas/publicar', [OfertaController::class, 'publicar'])->name('ofertas.publicar');
 });
 
 

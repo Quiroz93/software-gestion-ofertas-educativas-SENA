@@ -19,10 +19,6 @@ class OfertaController extends Controller
         return view('ofertas.index', compact('ofertas'));
     }
 
-    public function publicar(){
-        return view('ofertas.show');
-    }
-
     /**
      * Despliega el formulario para crear una nueva oferta
      * @return \Illuminate\Contracts\View\View
