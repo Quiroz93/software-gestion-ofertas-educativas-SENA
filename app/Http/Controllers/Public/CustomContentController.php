@@ -15,7 +15,7 @@ class CustomContentController extends Controller
     public function store(Request $request)
     {
         // 🔐 Seguridad
-        $this->authorize('edit public content');
+        $this->authorize('public_content.edit');
 
         // 🧪 Validación
         $data = $request->validate([

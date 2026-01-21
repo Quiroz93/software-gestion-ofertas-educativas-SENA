@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\centro;
+use App\Models\Centro;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $totalCentros = centro::count();
+        $totalCentros = Centro::count();
         $totalUsuarios = User::count();
 
         return redirect()->route('home', compact('totalCentros', 'totalUsuarios'));
