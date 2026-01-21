@@ -11,13 +11,13 @@
 {{-- ===================== --}}
 {{-- Banner principal --}}
 {{-- ===================== --}}
-<section class="bg-dark text-white position-relative">
+<section class="bg-ligth text-white position-relative">
 
     <img src="{{ asset('images/banners/oferta-cata.jpg') }}"
          class="w-100 position-absolute top-0 start-0 h-100 object-fit-cover opacity-50"
          alt="Oferta educativa CATA">
 
-    <div class="container position-relative py-5">
+    <div class="container position-relative py-5 text-dark">
         <div class="row">
             <div class="col-lg-8">
 

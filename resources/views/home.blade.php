@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<div class="row mb-3">
+<div class="row mb-3" style="font-family: 'worksans sans-serif';">
   <div class="d-flex align-items-center gap-2">
     <i class="fas fa-home text-primary fs-4"></i>
     <h2 class="mb-0 fw-semibold text-xl text-gray-800">
@@ -12,8 +12,8 @@
   </div>
 </div>
 <div class="row mb-2">
-  <div class="col-6">
-    <h1><Span>Bienvenido</Span>, {{ auth()->user()->name }}</h1>
+  <div class="col-6" style="font-family: 'worksans sans-serif';">
+    <h1><Span class="text-bold">Bienvenido</Span>, {{ auth()->user()->name }}</h1>
   </div>
   <div class="col-6 d-flex justify-content-end align-items-rigth">
     <a class="link-secondary mt-3" href="#" aria-label="Search">
@@ -70,10 +70,10 @@
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
     <div class="row">
       <div class="col-lg-6 px-0" >
-      <h1 class="display-4" style="color: #39A900; font-family: 'worksans', sans-serif; font-style:italic;">
+      <h1 class="display-4 text-bold" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;">
         Title of a longer featured blog post
       </h1>
-      <p class="lead my-3" style="color:white; font-family: calibri; font-style: italic;" >
+      <p class="lead my-3 text-light" style="font-family: 'worksans sans-serif';" >
         Multiple lines of text that form the lede, informing new readers
         quickly and efficiently about what’s most interesting in this post’s
         contents.
@@ -136,7 +136,7 @@
 {{-- fin carrusel de imágenes--}}
 
 {{-- Posts destacados --}}
-<div class="container">
+<div class="container" style="font-family: 'worksans sans-serif';">
   <div class="row mb-2">
     <div class="col-md-6">
       <div
@@ -151,7 +151,7 @@
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link">
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
             Continue reading
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
@@ -187,7 +187,7 @@
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link">
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
             Continue reading
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
@@ -214,7 +214,7 @@
 </div>
 {{-- fin posts destacados --}}
 
-<div class="container">
+<div class="container" style="font-family: 'worksans sans-serif';">
   <section>
     <div class="d-flex align-items-center mb-3 mt-4">
       <i class="fas fa-layer-group text-success fs-4 me-2 mt-4 mb-4"></i>
@@ -228,7 +228,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-building fs-2 text-primary mb-2"></i>
+            <a href=""><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
             <h6 class="fw-bold">Centros</h6>
             <p class="text-muted small">
               Centros de formación.
@@ -241,7 +241,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i>
+            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
             <h6 class="fw-bold">Programas</h6>
             <p class="text-muted small">
               Programas educativos.
@@ -254,8 +254,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href="{{ route('public.programas.index') }}" class="btn btn-primary btn-lg"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
-              Ver oferta educativa
+            <a href=""><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
             </a>
 
             
@@ -288,7 +287,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i>
+            <a href=""><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
             <h6 class="fw-bold">Instructores</h6>
             <p class="text-muted small">
               Perfil de nuestros instructores
@@ -301,7 +300,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="fas fa-book-open fs-2 text-warning mb-2"></i>
+            <a href=""><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
             <h6 class="fw-bold">Historias</h6>
             <p class="text-muted small">
               Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes
@@ -314,7 +313,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-award  fs-2 text-primary mb-2"></i>
+            <a href=""><i class="bi bi-award  fs-2 text-primary mb-2"></i></a>
             <h6 class="fw-bold">Reconocimientos</h6>
             <p class="text-muted small">
               Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>
@@ -326,7 +325,7 @@
   </section>
 </div>
 
-<div class="container">
+<div class="container" style="font-family: 'worksans sans-serif';">
   <main class="container py-4">
     <div class="row mb-2">
       <div class="col">
@@ -671,7 +670,7 @@
 </div>
 
 {{-- FOOTER --}}
-<footer class="bg-light py-5">
+<footer class="bg-light py-5" style="font-family: 'worksans sans-serif';">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
