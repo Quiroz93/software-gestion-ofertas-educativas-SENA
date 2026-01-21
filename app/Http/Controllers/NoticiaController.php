@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\noticia;
+use App\Models\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,12 +15,9 @@ class NoticiaController extends Controller
     public function index()
     {
         Gate::authorize('noticias.view', Noticia::class);
-        $noticias = Noticia::where('activa', true)
-            ->latest()
-            ->take(4)
-            ->get();
+        $noticias = Noticia::latest()->get();
 
-        return view('home', compact('noticias'));
+        return view('noticias.index', compact('noticias'));
     }
 
 
@@ -48,10 +45,10 @@ class NoticiaController extends Controller
 
     /**
      * Despliega los detalles de una noticia
-     * @param noticia $noticia
+     * @param Noticia $noticia
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(noticia $noticia)
+    public function show(Noticia $noticia)
     {
         Gate::authorize('noticias.view', $noticia);
         return view('noticias.show', compact('noticia'));
@@ -59,10 +56,10 @@ class NoticiaController extends Controller
 
     /**
      * Despliega el formulario para editar una noticia
-     * @param noticia $noticia
+     * @param Noticia $noticia
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(noticia $noticia)
+    public function edit(Noticia $noticia)
     {
         Gate::authorize('noticias.update', $noticia);
         return view('noticias.edit', compact('noticia'));
@@ -71,10 +68,10 @@ class NoticiaController extends Controller
     /**
      * Actualiza una noticia
      * @param Request $request
-     * @param noticia $noticia
+     * @param Noticia $noticia
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, noticia $noticia)
+    public function update(Request $request, Noticia $noticia)
     {
         Gate::authorize('noticias.update', $noticia);
         $noticia->update($request->all());
@@ -83,10 +80,10 @@ class NoticiaController extends Controller
 
     /**
      * Elimina una noticia
-     * @param noticia $noticia
+     * @param Noticia $noticia
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(noticia $noticia)
+    public function destroy(Noticia $noticia)
     {
         Gate::authorize('noticias.delete', $noticia);
         $noticia->delete();

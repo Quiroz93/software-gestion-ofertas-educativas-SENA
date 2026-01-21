@@ -62,19 +62,17 @@
 @endsection
 
 @section('styles')
-
+@can('public_content.edit')
 <style>
     .editable {
         position: relative;
     }
 
-    @can('public_content.edit') .editable:hover {
+    .editable:hover {
         outline: 2px dashed #ffc107;
         cursor: pointer;
     }
-
-    @endcan
 </style>
-
+@endcan
 
 @endsection

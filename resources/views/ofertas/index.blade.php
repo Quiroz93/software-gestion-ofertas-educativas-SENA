@@ -11,7 +11,7 @@
 
     <div>
         @can('ofertas.create')
-    <a href="{{-- enlace al controller --}}" class="btn btn-outline-success">
+    <a href="{{ route('ofertas.create') }}" class="btn btn-outline-success">
         <i class="fas fa-plus-circle"></i>
         Crear oferta
     </a>
@@ -78,7 +78,7 @@
             <div class="card-footer d-flex justify-content-between">
 
                 @can('ofertas.edit')
-                <a href="{{-- enlace al controller editar --}}"
+                <a href="{{ route('ofertas.edit', $oferta) }}"
                    class="btn btn-sm btn-outline-warning">
                     <i class="fas fa-edit"></i>
                     Editar
@@ -86,7 +86,7 @@
                 @endcan
 
                 @can('ofertas.delete')
-                <form action="{{-- enlace al controller eliminar --}}"
+                <form action="{{ route('ofertas.destroy', $oferta) }}"
                       method="POST"
                       onsubmit="return confirmarEliminacion(event)">
                     @csrf

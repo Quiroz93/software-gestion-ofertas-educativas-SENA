@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\competencia;
+use App\Models\Competencia;
 use App\Models\User;
 
 class CompetenciaPolicy
@@ -23,10 +23,10 @@ class CompetenciaPolicy
         return $user->hasRole('admin') || $user->hasRole('instructor');
     }
 
-     /**
+    /**
      * Determinar si el usuario puede ver una competencia en particular.
      */
-    public function view(User $user, competencia $competencia): bool
+    public function view(User $user, Competencia $competencia): bool
     {
         return $user->hasRole('admin') || $user->hasRole('instructor');
     }

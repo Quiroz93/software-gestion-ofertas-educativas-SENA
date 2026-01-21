@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\competencia;
+use App\Models\Competencia;
 use Illuminate\Http\Request;
-use Symfony\Contracts\Service\Attribute\Required;
 use Illuminate\Support\Facades\Gate;
 
 class CompetenciaController extends Controller
@@ -44,50 +43,47 @@ class CompetenciaController extends Controller
 
     /**
      * Despliega el recurso especificado
-     * @param competencia $competencia
+     * @param Competencia $competencia
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(competencia $competencia)
+    public function show(Competencia $competencia)
     {
         Gate::authorize('competencias.view', $competencia);
-        $competencia->find($competencia->id);
         return view('competencias.show', compact('competencia'));
     }
 
     /**
      * Despliega el formulario para editar el recurso especificado
-     * @param Required $id
+     * @param Competencia $competencia
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(Required $id)
+    public function edit(Competencia $competencia)
     {
-        Gate::authorize('competencias.update', $id);
-        $competencia = Competencia::find($id);
-        return view('competencias.edit', compact('competencia'))->with('success', 'Competencia cargada correctamente para editar');
+        Gate::authorize('competencias.update', $competencia);
+        return view('competencias.edit', compact('competencia'));
     }
 
     /**
      * Actualiza el recurso especificado en almacenamiento
      * @param Request $request
-     * @param competencia $id
+     * @param Competencia $competencia
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, competencia $id)
+    public function update(Request $request, Competencia $competencia)
     {
-        Gate::authorize('competencias.update', $id);
-        $id->update($request->all());
+        Gate::authorize('competencias.update', $competencia);
+        $competencia->update($request->all());
         return redirect()->route('competencias.index')->with('success', 'Competencia actualizada correctamente');
     }
 
     /**
      * Elimina el recurso especificado de almacenamiento
-     * @param competencia $id
+     * @param Competencia $competencia
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(competencia $id)
+    public function destroy(Competencia $competencia)
     {
-        Gate::authorize('competencias.delete', $id);
-        $competencia = Competencia::find($id);
+        Gate::authorize('competencias.delete', $competencia);
         $competencia->delete();
         return redirect()->route('competencias.index')->with('success', 'Competencia eliminada correctamente');
     }

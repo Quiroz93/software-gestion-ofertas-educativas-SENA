@@ -9,7 +9,7 @@
         Agregar oferta
     </h1>
 
-    <a href="{{-- enlace al index de ofertas --}}" class="btn btn-outline-secondary">
+    <a href="{{ route('ofertas.index') }}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -30,7 +30,7 @@
                 </h3>
             </div>
 
-            <form action="{{-- logica de crear oferta --}}" method="POST" class="form-horizontal">
+            <form action="{{ route('ofertas.store') }}" method="POST" class="form-horizontal">
                 @csrf
 
                 {{-- BODY --}}
