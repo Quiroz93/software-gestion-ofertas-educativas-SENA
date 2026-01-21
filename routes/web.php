@@ -221,16 +221,33 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('ofertas', OfertaController::class)
-        ->middleware([
-            'index'   => 'can:ofertas.view',
-            'create'  => 'can:ofertas.create',
-            'store'   => 'can:ofertas.create',
-            'edit'    => 'can:ofertas.edit',
-            'update'  => 'can:ofertas.update',
-            'destroy' => 'can:ofertas.delete',
-        ]);
+    Route::get('ofertas', [OfertaController::class, 'index'])
+        ->middleware('can:ofertas.view')->name('ofertas.index');
+
+    Route::get('ofertas/create', [OfertaController::class, 'create'])
+        ->middleware('can:ofertas.create')->name('ofertas.create');
+
+    Route::post('ofertas', [OfertaController::class, 'store'])
+        ->middleware('can:ofertas.create')->name('ofertas.store');
+
+    Route::get('ofertas/{oferta}/edit', [OfertaController::class, 'edit'])
+        ->middleware('can:ofertas.edit')->name('ofertas.edit');
+
+    Route::put('ofertas/{oferta}', [OfertaController::class, 'update'])
+        ->middleware('can:ofertas.update')->name('ofertas.update');
+
+    Route::delete('ofertas/{oferta}', [OfertaController::class, 'destroy'])
+        ->middleware('can:ofertas.delete')->name('ofertas.destroy');
+
+    Route::get('ofertas/publicar', [OfertaController::class, 'publicar'])->name('ofertas.publicar');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Ofertas educativas - vista pública
+|--------------------------------------------------------------------------
+*/
+
 
 /*
 |--------------------------------------------------------------------------

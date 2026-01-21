@@ -144,6 +144,7 @@ class DatabaseSeeder extends Seeder
             'ofertas.update',
             'ofertas.delete',
             'ofertas.manage',
+            'ofertas.show',
 
             /*
             |--------------------------------------------------------------------------
@@ -247,6 +248,7 @@ class DatabaseSeeder extends Seeder
             'ofertas.view',
             'historias_exito.view',
             'redes_conocimiento.view',
+            'ofertas.show',
         ]);
 
         // 🎓 Aprendiz: acceso público / académico

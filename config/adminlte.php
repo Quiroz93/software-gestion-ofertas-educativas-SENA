@@ -166,7 +166,7 @@ return [
     'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => true,
     'layout_fixed_footer' => true,
-    'layout_dark_mode' => true,
+    'layout_dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -200,15 +200,15 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand' => 'bg-white text-success font-weight-bold',
+    'classes_brand_text' => 'text-success font-weight-bold',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-light-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
+    'classes_topnav' => 'navbar-success navbar-expand-lg navbar-light',
+    'classes_topnav_nav' => 'navbar-expand-lg',
     'classes_topnav_container' => 'container',
 
     /*
@@ -309,87 +309,97 @@ return [
 
     'menu' => [
 
-        ['header' => 'ADMINISTRACIÓN'],
+        
 
         [
             'text' => 'Home',
             'route' => 'home',
-            'icon' => 'fas fa-home',
+            'icon' => 'fas fa-home text-warning',
         ],
+
+        ['header' => 'MENÚ'],
 
         [
             'text' => 'Administración',
             'icon' => 'fa-solid fa-box-archive',
+            'can' => 'admin.view',
             'submenu' => [
                 [
                     'text' => 'Panel de control',
                     'route' => 'dashboard',
-                    'icon' => 'fas fa-toolbox',
+                    'icon' => 'fas fa-toolbox text-success',
                     'can' => 'dashboard.view',
                 ],
 
                 [
                     'text' => 'Centros',
                     'route' => 'centros.index',
-                    'icon' => 'fas fa-building',
+                    'icon' => 'fas fa-building text-success',
                     'can' => 'centros.view',
                 ],
 
                 [
                     'text' => 'Usuarios',
                     'route' => 'users.index',
-                    'icon' => 'fas fa-users',
+                    'icon' => 'fas fa-users text-success',
                     'can' => 'users.view',
                 ],
 
                 [
                     'text' => 'Roles',
                     'route' => 'roles.index',
-                    'icon' => 'fas fa-user-tag',
+                    'icon' => 'fas fa-user-tag text-success',
                     'can' => 'roles.view',
                 ],
 
                 [
                     'text' => 'Permisos',
                     'route' => 'permissions.index',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-key text-success',
                     'can' => 'permissions.view',
                 ],
                 [
                     'text' => 'competencias',
                     'route' => 'competencias.index',
-                    'icon' => 'fas fa-trophy',
+                    'icon' => 'fas fa-trophy text-success',
+                    'can' => 'competencias.view',
                 ],
                 [
                     'text' => 'Historias de éxito',
                     'route' => 'historias_de_exito.index',
-                    'icon' => 'fas fa-book-open',
+                    'icon' => 'fas fa-book-open text-success',
+                    'can' => 'historias_de_exito.view',
                 ],
                 [
                     'text' => 'instructores',
                     'route' => 'instructores.index',
-                    'icon' => 'fas fa-chalkboard-teacher',
+                    'icon' => 'fas fa-chalkboard-teacher text-success',
+                    'can' => 'instructores.view',
                 ],
                 [
                     'text' => 'nivel de formación',
                     'route' => 'niveles_formacion.index',
-                    'icon' => 'fa-solid fa-ranking-star',
+                    'icon' => 'fa-solid fa-ranking-star text-success',
+                    'can' => 'niveles_formacion.view',
                 ],
                 [
                     'text' => 'Ofertas',
                     'route' => 'ofertas.index',
-                    'icon' => 'fas fa-graduation-cap',
+                    'icon' => 'fas fa-graduation-cap text-success',
+                    'can' => 'ofertas.view',
                 ],
                 [
                     'text' => 'programas de formación',
                     'route' => 'programas.index',
-                    'icon' => 'fas fa-book',
+                    'icon' => 'fas fa-book text-success',
+                    'can' => 'programas.view',
                 ],
                 [
                     'text' => 'Redes',
                     'route' => 'redes_conocimiento.index',
-                    'icon' => 'fas fa-network-wired',
-                ]
+                    'icon' => 'fas fa-network-wired text-success',
+                    'can' => 'redes_conocimiento.view',
+                ],
             ],
 
 
@@ -398,37 +408,44 @@ return [
         [
             'text' => 'competencias',
             'route' => '',
-            'icon' => 'fas fa-trophy',
+            'icon' => 'fas fa-trophy text-success',
+             
         ],
         [
             'text' => 'Historias de éxito',
             'route' => '',
-            'icon' => 'fas fa-book-open',
+            'icon' => 'fas fa-book-open text-success',
+            
         ],
         [
             'text' => 'instructores',
             'route' => '',
-            'icon' => 'fas fa-chalkboard-teacher',
+            'icon' => 'fas fa-chalkboard-teacher text-success',
+           
         ],
         [
             'text' => 'nivel de formación',
             'route' => '',
-            'icon' => 'fa-solid fa-ranking-star',
+            'icon' => 'fa-solid fa-ranking-star text-success',
+              
         ],
         [
             'text' => 'Ofertas',
-            'route' => '',
-            'icon' => 'fas fa-graduation-cap',
+            'route' => 'ofertas.publicar',
+            'icon' => 'fas fa-graduation-cap text-success',
+           
         ],
         [
             'text' => 'programas de formación',
             'route' => '',
-            'icon' => 'fas fa-book',
+            'icon' => 'fas fa-book text-success',
+          
         ],
         [
             'text' => 'Redes',
             'route' => '',
-            'icon' => 'fas fa-network-wired',
+            'icon' => 'fas fa-network-wired text-success',
+           
         ]
     ],
 
