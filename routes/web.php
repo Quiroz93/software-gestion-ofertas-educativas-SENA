@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Public\PublicCentroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -14,9 +15,29 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\NivelFormacionController;
 use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\Public\PublicCompetenciaController;
+use App\Http\Controllers\Public\PublicHistoriaExitoController;
+use App\Http\Controllers\Public\PublicInstructorController;
+use App\Http\Controllers\Public\PublicNivelFormacionController;
+use App\Http\Controllers\Public\PublicNoticiaController;
+use App\Http\Controllers\Public\PublicOfertaController;
+use App\Http\Controllers\Public\PublicRedController;
 use App\Http\Controllers\PublicProgramaController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\WelcomeController;
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas para usuarios invitados
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [WelcomeController::class, 'login'])->name('login');
+    Route::get('/register', [WelcomeController::class, 'register'])->name('register');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +59,11 @@ require __DIR__ . '/auth.php';
 |--------------------------------------------------------------------------
 */
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})
     ->middleware('can:dashboard.view')
     ->name('dashboard');
 
@@ -168,16 +188,25 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('historias_de_exito', HistoriaExitoController::class)
-        ->middleware([
-            'index'   => 'can:historias_exito.view',
-            'create'  => 'can:historias_exito.create',
-            'store'   => 'can:historias_exito.create',
-            'edit'    => 'can:historias_exito.edit',
-            'update'  => 'can:historias_exito.update',
-            'destroy' => 'can:historias_exito.delete',
-        ]);
+    Route::get('historias_de_exito', [HistoriaExitoController::class, 'index'])
+        ->middleware('can:historias_de_exito.view')->name('historias_de_exito.index');
+
+    Route::get('historias_de_exito/create', [HistoriaExitoController::class, 'create'])
+        ->middleware('can:historias_de_exito.create')->name('historias_de_exito.create');
+
+    Route::post('historias_de_exito', [HistoriaExitoController::class, 'store'])
+        ->middleware('can:historias_de_exito.create')->name('historias_de_exito.store');
+
+    Route::get('historias_de_exito/{historia}/edit', [HistoriaExitoController::class, 'edit'])
+        ->middleware('can:historias_de_exito.edit')->name('historias_de_exito.edit');
+
+    Route::put('historias_de_exito/{historia}', [HistoriaExitoController::class, 'update'])
+        ->middleware('can:historias_de_exito.update')->name('historias_de_exito.update');
+
+    Route::delete('historias_de_exito/{historia}', [HistoriaExitoController::class, 'destroy'])
+        ->middleware('can:historias_de_exito.delete')->name('historias_de_exito.destroy');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -186,16 +215,26 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('instructores', InstructorController::class)
-        ->middleware([
-            'index'   => 'can:instructores.view',
-            'create'  => 'can:instructores.create',
-            'store'   => 'can:instructores.create',
-            'edit'    => 'can:instructores.edit',
-            'update'  => 'can:instructores.update',
-            'destroy' => 'can:instructores.delete',
-        ]);
+    Route::get('instructores', [InstructorController::class, 'index'])
+        ->middleware('can:instructores.view')->name('instructores.index');
+
+    Route::get('instructores/create', [InstructorController::class, 'create'])
+        ->middleware('can:instructores.create')->name('instructores.create');
+
+    Route::post('instructores', [InstructorController::class, 'store'])
+        ->middleware('can:instructores.create')->name('instructores.store');
+
+    Route::get('instructores/{instructor}/edit', [InstructorController::class, 'edit'])
+        ->middleware('can:instructores.edit')->name('instructores.edit');
+
+    Route::put('instructores/{instructor}', [InstructorController::class, 'update'])
+        ->middleware('can:instructores.update')->name('instructores.update');
+
+    Route::delete('instructores/{instructor}', [InstructorController::class, 'destroy'])
+        ->middleware('can:instructores.delete')->name('instructores.destroy');
 });
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -203,16 +242,23 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
+    Route::get('niveles_formacion', [NivelFormacionController::class, 'index'])
+        ->middleware('can:niveles_formacion.view')->name('niveles_formacion.index');
 
-    Route::resource('niveles_formacion', NivelFormacionController::class)
-        ->middleware([
-            'index'   => 'can:niveles_formacion.view',
-            'create'  => 'can:niveles_formacion.create',
-            'store'   => 'can:niveles_formacion.create',
-            'edit'    => 'can:niveles_formacion.edit',
-            'update'  => 'can:niveles_formacion.update',
-            'destroy' => 'can:niveles_formacion.delete',
-        ]);
+    Route::get('niveles_formacion/create', [NivelFormacionController::class, 'create'])
+        ->middleware('can:niveles_formacion.create')->name('niveles_formacion.create');
+
+    Route::post('niveles_formacion', [NivelFormacionController::class, 'store'])
+        ->middleware('can:niveles_formacion.create')->name('niveles_formacion.store');
+
+    Route::get('niveles_formacion/{nivel}/edit', [NivelFormacionController::class, 'edit'])
+        ->middleware('can:niveles_formacion.edit')->name('niveles_formacion.edit');
+
+    Route::put('niveles_formacion/{nivel}', [NivelFormacionController::class, 'update'])
+        ->middleware('can:niveles_formacion.update')->name('niveles_formacion.update');
+
+    Route::delete('niveles_formacion/{nivel}', [NivelFormacionController::class, 'destroy'])
+        ->middleware('can:niveles_formacion.delete')->name('niveles_formacion.destroy');
 });
 
 /*
@@ -243,12 +289,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('ofertas/publicar', [OfertaController::class, 'publicar'])->name('ofertas.publicar');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Ofertas educativas - vista pública
-|--------------------------------------------------------------------------
-*/
-
 
 /*
 |--------------------------------------------------------------------------
@@ -256,16 +296,24 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
+Route::get('programas', [ProgramaController::class, 'index'])
+        ->middleware('can:programas.view')->name('programas.index');
 
-    Route::resource('programas', ProgramaController::class)
-        ->middleware([
-            'index'   => 'can:programas.view',
-            'create'  => 'can:programas.create',
-            'store'   => 'can:programas.create',
-            'edit'    => 'can:programas.edit',
-            'update'  => 'can:programas.update',
-            'destroy' => 'can:programas.delete',
-        ]);
+    Route::get('programas/create', [ProgramaController::class, 'create'])
+        ->middleware('can:programas.create')->name('programas.create');
+
+    Route::post('programas', [ProgramaController::class, 'store'])
+        ->middleware('can:programas.create')->name('programas.store');
+
+    Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit'])
+        ->middleware('can:programas.edit')->name('programas.edit');
+
+    Route::put('programas/{programa}', [ProgramaController::class, 'update'])
+        ->middleware('can:programas.update')->name('programas.update');
+
+    Route::delete('programas/{programa}', [ProgramaController::class, 'destroy'])
+        ->middleware('can:programas.delete')->name('programas.destroy');
+    
 });
 
 /*|--------------------------------------------------------------------------
@@ -286,15 +334,23 @@ Route::get('/oferta-educativa/{programa}', [PublicProgramaController::class, 'sh
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('redes_conocimiento', RedController::class)
-        ->middleware([
-            'index'   => 'can:redes_conocimiento.view',
-            'create'  => 'can:redes_conocimiento.create',
-            'store'   => 'can:redes_conocimiento.create',
-            'edit'    => 'can:redes_conocimiento.edit',
-            'update'  => 'can:redes_conocimiento.update',
-            'destroy' => 'can:redes_conocimiento.delete',
-        ]);
+    Route::get('redes', [RedController::class, 'index'])
+        ->middleware('can:redes.view')->name('redes.index');
+
+    Route::get('redes/create', [RedController::class, 'create'])
+        ->middleware('can:redes.create')->name('redes.create');
+
+    Route::post('redes', [RedController::class, 'store'])
+        ->middleware('can:redes.create')->name('redes.store');
+
+    Route::get('redes/{red}/edit', [RedController::class, 'edit'])
+        ->middleware('can:redes.edit')->name('redes.edit');
+
+    Route::put('redes/{red}', [RedController::class, 'update'])
+        ->middleware('can:redes.update')->name('redes.update');
+
+    Route::delete('redes/{red}', [RedController::class, 'destroy'])
+        ->middleware('can:redes.delete')->name('redes.destroy');
 });
 
 /*
@@ -308,3 +364,56 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Rutas públicas
+|--------------------------------------------------------------------------
+| Acceso libre – frontend institucional
+*/
+Route::prefix('/')
+    ->name('public.')
+    ->group(function () {
+
+        Route::get('/', function () {
+            return view('welcome');
+        })->name('home');
+
+        // Centros
+        Route::resource('centros', PublicCentroController::class)
+            ->only(['index', 'show']);
+
+        // Competencias
+        Route::resource('competencias', PublicCompetenciaController::class)
+            ->only(['index']);
+
+        // Niveles de formación
+        Route::resource('nivel-formaciones', PublicNivelFormacionController::class)
+            ->only(['index']);
+
+        // Noticias
+        Route::resource('noticias', PublicNoticiaController::class)
+            ->only(['index', 'show']);
+
+        // Redes
+        Route::resource('redes', PublicRedController::class)
+            ->only(['index']);
+
+        // Instructores
+        Route::resource('instructores', PublicInstructorController::class)
+            ->only(['index', 'show']);
+
+        // Programas
+        Route::resource('programas', PublicProgramaController::class)
+            ->only(['index', 'show']);
+
+        // Ofertas educativas
+        Route::resource('ofertas', PublicOfertaController::class)
+            ->only(['index', 'show']);
+
+        // Historias de éxito
+        Route::resource('historias-exito', PublicHistoriaExitoController::class)
+            ->only(['index', 'show']);
+    });
+
