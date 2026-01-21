@@ -12,7 +12,7 @@
     <div>
         @can('users.create')
         <a href="{{ route('users.create') }}" class="btn btn-outline-success">
-            <i class="fas fa-user-plus"></i>
+            <i class="fas fa-plus-circle"></i>
             Crear usuario
         </a>
         @endcan

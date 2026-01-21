@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-<div class="row">
+<div class="row mb-3">
   <div class="d-flex align-items-center gap-2">
     <i class="fas fa-home text-primary fs-4"></i>
     <h2 class="mb-0 fw-semibold text-xl text-gray-800">
@@ -11,62 +11,50 @@
     </h2>
   </div>
 </div>
-<div class="row">
-  <h1>Bienvenido, {{ auth()->user()->name }}</h1>
+<div class="row mb-2">
+  <div class="col-6">
+    <h1><Span>Bienvenido</Span>, {{ auth()->user()->name }}</h1>
+  </div>
+  <div class="col-6 d-flex justify-content-end align-items-rigth">
+    <a class="link-secondary mt-3" href="#" aria-label="Search">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="mx-3"
+        role="img"
+        viewBox="0 0 24 24">
+        <title>Search</title>
+        <circle cx="10.5" cy="10.5" r="7.5"></circle>
+        <path d="M21 21l-5.2-5.2"></path>
+      </svg>
+    </a>
+  </div>
 </div>
-
 
 <div class="container container-fluid">
   <div class="row">
-    {{-- header --}}
-    <header class="border-bottom lh-1 py-3">
-      <div class="row flex-nowrap justify-content-between align-items-center">
-        <div class="col-4 pt-1">
-          <a class="link-secondary" href="#">Subscribe</a>
-        </div>
-        <div class="col-4 text-center">
-          <a
-            class="blog-header-logo text-body-emphasis text-decoration-none"
-            href="#">Large</a>
-        </div>
-        <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="link-secondary" href="#" aria-label="Search">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="mx-3"
-              role="img"
-              viewBox="0 0 24 24">
-              <title>Search</title>
-              <circle cx="10.5" cy="10.5" r="7.5"></circle>
-              <path d="M21 21l-5.2-5.2"></path>
-            </svg>
-          </a>
-          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
-        </div>
-      </div>
-    </header>
+    <div class="col-12">
+      {{-- header --}}
+      <header class="border-bottom lh-1 py-3">
+        <div class="row flex-nowrap justify-content-end align-items-end">
+      </header>
+    </div>
     <div class="nav-scroller py-1 mb-3 border-bottom">
       <nav class="nav nav-underline justify-content-between">
-        <a class="nav-item nav-link link-body-emphasis active" href="#">World</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">U.S.</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Technology</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Design</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Culture</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Business</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Politics</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Opinion</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Science</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Health</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Style</a>
-        <a class="nav-item nav-link link-body-emphasis" href="#">Travel</a>
-      </nav>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Competencias</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">inscribires</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">historias de exito</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Instructores</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">nivel de formacion</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Ofertas</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Programas de formacion</a>
+        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Redes</a>
     </div>
     {{-- fin header --}}
   </div>
@@ -78,19 +66,19 @@
 @section('content')
 
 {{-- Encabezado principal --}}
-<div class="container">
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-    <div class="col-lg-6 px-0">
-      <h1 class="display-4 fst-italic">
+<div class="container" >
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
+    <div class="col-lg-6 px-0" >
+      <h1 class="display-4 fst-italic" style="color: #39A900;">
         Title of a longer featured blog post
       </h1>
-      <p class="lead my-3">
+      <p class="lead my-3" style="color:white" >
         Multiple lines of text that form the lede, informing new readers
         quickly and efficiently about what’s most interesting in this post’s
         contents.
       </p>
       <p class="lead mb-0">
-        <a href="#" class="text-body-emphasis fw-bold">Continue reading...</a>
+        <a href="#" class="text-body-emphasis fw-bold text-success" >Continue reading>>></a>
       </p>
     </div>
   </div>
@@ -574,7 +562,7 @@
         </div>
         <div class="col-md-4">
           <div class="position-sticky" style="top: 2rem">
-            <div class="p-4 mb-3 bg-body-tertiary rounded">
+            <div class="p-4 mb-3 bg-body-tertiary rounded text-success">
               <h4 class="fst-italic">About</h4>
               <p class="mb-0">
                 Customize this section to tell your visitors a little bit about
