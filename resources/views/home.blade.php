@@ -82,9 +82,6 @@
         <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline" style="font-family: worksans;">Continue reading>>></a>
       </p>
     </div>
-    <div class="col-lg-6 justify-content-end">
-      <img src="images/DSC0478d4.png" alt="Imagen" class="" style="height:600px; width: auto;">
-    </div>
     </div>
   </div>
 </div>

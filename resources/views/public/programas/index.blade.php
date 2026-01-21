@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- HERO -->
-<div class="container-fluid bg-primary text-white py-5 mb-5">
+<div class="container-fluid bg-primary text-white py-5 mb-5" style="font-family: 'worksans sans-serif';">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7">
@@ -21,7 +21,7 @@
 </div>
 
 <!-- BENEFICIOS -->
-<div class="container mb-5">
+<div class="container mb-5" style="font-family: 'worksans sans-serif';">
     <div class="row text-center mb-4">
         <h2 class="fw-bold">¿Por qué elegirnos?</h2>
     </div>
@@ -43,7 +43,7 @@
 </div>
 
 <!-- FILTROS -->
-<div class="container mb-4">
+<div class="container mb-4" style="font-family: 'worksans sans-serif';">
     <form method="GET" class="row g-3">
         <div class="col-md-5">
             <select name="red" class="form-select" onchange="this.form.submit()">
@@ -74,7 +74,7 @@
 </div>
 
 <!-- LISTADO DINÁMICO -->
-<div class="container mb-5" id="ofertas">
+<div class="container mb-5" id="ofertas" style="font-family: 'worksans sans-serif';">
     <div class="row g-4">
 
         @forelse ($programas as $programa)
@@ -112,7 +112,7 @@
 </div>
 
 <!-- CTA FINAL -->
-<div class="container-fluid bg-light py-5">
+<div class="container-fluid bg-light py-5" style="font-family: 'worksans sans-serif';">
     <div class="container text-center">
         <h3 class="fw-bold">¿Deseas más información?</h3>
         <a href="#" class="btn btn-primary btn-lg mt-3">Contáctanos</a>
