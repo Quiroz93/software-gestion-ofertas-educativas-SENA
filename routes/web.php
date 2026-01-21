@@ -14,6 +14,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\NivelFormacionController;
 use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\PublicProgramaController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\WelcomeController;
 
@@ -266,6 +267,17 @@ Route::middleware(['auth'])->group(function () {
             'destroy' => 'can:programas.delete',
         ]);
 });
+
+/*|--------------------------------------------------------------------------
+| Programas de formación - vista pública
+|--------------------------------------------------------------------------
+*/
+Route::get('/oferta-educativa', [PublicProgramaController::class, 'index'])
+    ->name('public.programas.index');
+
+Route::get('/oferta-educativa/{programa}', [PublicProgramaController::class, 'show'])
+    ->name('public.programas.show');
+
 
 /*
 |--------------------------------------------------------------------------

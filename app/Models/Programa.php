@@ -18,4 +18,14 @@ class Programa extends Model
         'red_id',
         'nivel_formacion_id',
     ];
+    // Definir las relaciones con otros modelos
+    public function red()
+    {
+        return $this->belongsTo(Red::class);
+    }
+
+    public function nivelFormacion()
+    {
+        return $this->belongsTo(NivelFormacion::class);
+    }
 }

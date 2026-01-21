@@ -261,7 +261,11 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
+            <a href="{{ route('public.programas.index') }}" class="btn btn-primary btn-lg"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
+              Ver oferta educativa
+            </a>
+
+            
             <h6 class="fw-bold">Ofertas</h6>
             <p class="text-muted small">
               Ofertas educativas vigentes.
