@@ -37,7 +37,7 @@
         </div>
 
         {{-- Ícono de edición --}}
-        @can('edit public content')
+        @can('public_content.edit')
         <button class="btn btn-sm btn-outline-warning ms-3 edit-trigger"
             title="Editar contenido">
             <i class="bi bi-pencil-square"></i>

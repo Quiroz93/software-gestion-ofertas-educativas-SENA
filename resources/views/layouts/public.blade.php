@@ -132,7 +132,7 @@
     @endcan
 
 
-    @can('edit public content')
+    @can('public_content.edit')
     @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', () => {
