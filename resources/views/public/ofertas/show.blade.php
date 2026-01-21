@@ -37,7 +37,7 @@
         </div>
 
         {{-- Ícono de edición --}}
-        @can('edit public content')
+        @can('public_content.edit')
         <button class="btn btn-sm btn-outline-warning ms-3 edit-trigger"
             title="Editar contenido">
             <i class="bi bi-pencil-square"></i>
@@ -62,19 +62,17 @@
 @endsection
 
 @section('styles')
-
+@can('public_content.edit')
 <style>
     .editable {
         position: relative;
     }
 
-    @can('public_content.edit') .editable:hover {
+    .editable:hover {
         outline: 2px dashed #ffc107;
         cursor: pointer;
     }
-
-    @endcan
 </style>
-
+@endcan
 
 @endsection

@@ -16,7 +16,7 @@ class PublicProgramaController extends Controller
             ->when($request->nivel, fn ($q) => $q->where('nivel_formacion_id', $request->nivel))
             ->get();
 
-        return view('programas.public.index', [
+        return view('public.programas.index', [
             'programas' => $programas,
             'redes'     => Red::all(),
             'niveles'   => NivelFormacion::all(),
@@ -25,7 +25,7 @@ class PublicProgramaController extends Controller
 
     public function show(Programa $programa)
     {
-        return view('programas.public.show', compact('programa'));
+        return view('public.programas.show', compact('programa'));
     }
 }
 

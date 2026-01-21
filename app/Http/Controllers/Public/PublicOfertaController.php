@@ -6,11 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Oferta;
 use Illuminate\Http\Request;
 
+
 class PublicOfertaController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        $ofertas= Oferta ::all();
+        $ofertas = Oferta::where('estado', 'publicada')
+            ->orderBy('fecha_inicio')
+            ->get();
+
         return view('public.ofertas.index', compact('ofertas'));
+    }
+
+    public function show(Oferta $oferta)
+    {
+        abort_unless($oferta->estado === 'publicada', 404);
+
+        return view('public.ofertas.show', compact('oferta'));
     }
 }

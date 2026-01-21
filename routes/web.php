@@ -296,8 +296,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('ofertas/{oferta}', [OfertaController::class, 'destroy'])
         ->middleware('can:ofertas.delete')->name('ofertas.destroy');
-
-    Route::get('ofertas/publicar', [OfertaController::class, 'publicar'])->name('ofertas.publicar');
 });
 
 
@@ -362,6 +360,35 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('redes_conocimiento/{red}', [RedController::class, 'destroy'])
         ->middleware('can:redes.delete')->name('redes_conocimiento.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Noticias (Administración)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('noticias/index', [App\Http\Controllers\NoticiaController::class, 'index'])
+        ->middleware('can:noticias.view')->name('noticias.index');
+
+    Route::get('noticias/create', [App\Http\Controllers\NoticiaController::class, 'create'])
+        ->middleware('can:noticias.create')->name('noticias.create');
+
+    Route::post('noticias/store', [App\Http\Controllers\NoticiaController::class, 'store'])
+        ->middleware('can:noticias.create')->name('noticias.store');
+
+    Route::get('noticias/{noticia}', [App\Http\Controllers\NoticiaController::class, 'show'])
+        ->middleware('can:noticias.view')->name('noticias.show');
+
+    Route::get('noticias/{noticia}/edit', [App\Http\Controllers\NoticiaController::class, 'edit'])
+        ->middleware('can:noticias.update')->name('noticias.edit');
+
+    Route::put('noticias/{noticia}', [App\Http\Controllers\NoticiaController::class, 'update'])
+        ->middleware('can:noticias.update')->name('noticias.update');
+
+    Route::delete('noticias/{noticia}', [App\Http\Controllers\NoticiaController::class, 'destroy'])
+        ->middleware('can:noticias.delete')->name('noticias.destroy');
 });
 
 /*

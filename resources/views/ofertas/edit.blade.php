@@ -9,7 +9,7 @@
         Editar oferta
     </h1>
 
-    <a href="{{-- enlace al index de ofertas --}}" class="btn btn-outline-secondary">
+    <a href="{{ route('ofertas.index') }}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -30,7 +30,7 @@
                 </h3>
             </div>
 
-            <form action="{{-- logica de editar oferta --}}" method="POST" class="form-horizontal">
+            <form action="{{ route('ofertas.update', $oferta) }}" method="POST" class="form-horizontal">
                 @csrf
                 @method('PUT')
 
@@ -43,7 +43,7 @@
                         <input type="text"
                                name="nombre"
                                id="nombre"
-                               value="{{-- nombre de la oferta --}}"
+                               value="{{ $oferta->nombre }}"
                                class="form-control">
                     </div>
 
@@ -53,7 +53,7 @@
                         <input type="number"
                                name="anio"
                                id="anio"
-                               value="{{-- año de la oferta --}}"
+                               value="{{ $oferta->anio }}"
                                class="form-control">
                     </div>
 
@@ -63,7 +63,7 @@
                         <input type="date"
                                name="fecha_inicio"
                                id="fecha_inicio"
-                               value="{{-- fecha inicio --}}"
+                               value="{{ $oferta->fecha_inicio }}"
                                class="form-control">
                     </div>
 
@@ -73,7 +73,7 @@
                         <input type="date"
                                name="fecha_final"
                                id="fecha_final"
-                               value="{{-- fecha final --}}"
+                               value="{{ $oferta->fecha_final }}"
                                class="form-control">
                     </div>
 
@@ -81,7 +81,8 @@
                     <div class="form-group">
                         <label for="estado"><strong>Estado</strong></label>
                         <select name="estado" id="estado" class="form-control">
-                            {{-- lógica de estado seleccionado --}}
+                            <option value="activo" {{ $oferta->estado == 'activo' ? 'selected' : '' }}>Activo</option>
+                            <option value="inactivo" {{ $oferta->estado == 'inactivo' ? 'selected' : '' }}>Inactivo</option>
                         </select>
                     </div>
 
@@ -89,7 +90,7 @@
 
                 {{-- FOOTER --}}
                 <div class="card-footer d-flex justify-content-end">
-                    <a href="{{-- enlace al index de ofertas --}}" class="btn btn-outline-secondary me-1">
+                    <a href="{{ route('ofertas.index') }}" class="btn btn-outline-secondary me-1">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>

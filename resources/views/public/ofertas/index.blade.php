@@ -26,7 +26,7 @@
                     data-model-id="0"
                     data-key="banner_title">
                     Primera Oferta Educativa
-                    Centro CENA CATA
+                    Centro SENA CATA
                 </h1>
 
                 <p class="lead mt-3 editable"
@@ -174,7 +174,37 @@
 </section>
 
 @endsection
+
 @section('scripts')
 @endsection
 
 @section('styles')
+@can('public_content.edit')
+<style>
+    .editable {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .editable:hover {
+        outline: 2px dashed #ffc107;
+        background-color: rgba(255, 193, 7, 0.1);
+        transition: all 0.2s ease;
+    }
+
+    .editable:hover::after {
+        content: '\f4cb'; /* Bootstrap Icon pencil-square */
+        font-family: 'bootstrap-icons';
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: #ffc107;
+        color: #000;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+</style>
+@endcan
+@endsection

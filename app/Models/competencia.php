@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class competencia extends Model
+class Competencia extends Model
 {
     // Definir la tabla si no sigue la convención plural
     protected $table = "competencias";
