@@ -26,7 +26,7 @@
                     data-model-id="0"
                     data-key="banner_title">
                     Primera Oferta Educativa
-                    Centro CENA CATA
+                    Centro SENA CATA
                 </h1>
 
                 <p class="lead mt-3 editable"
