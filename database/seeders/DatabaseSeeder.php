@@ -27,6 +27,12 @@ class DatabaseSeeder extends Seeder
         |--------------------------------------------------------------------------
         */
         $permissions = [
+            /*
+            |--------------------------------------------------------------------------
+            | Contenidos públicos
+            |--------------------------------------------------------------------------
+            */
+            'public_content.edit',
 
             /*
             |--------------------------------------------------------------------------
@@ -188,6 +194,13 @@ class DatabaseSeeder extends Seeder
         | Creación de roles del sistema
         |--------------------------------------------------------------------------
         */
+        $publicista = Role::firstOrCreate(
+            [
+                'name' => 'publicista',
+                'guard_name' => 'web'
+            ]
+        );
+
         $admin = Role::firstOrCreate([
             'name'       => 'admin',
             'guard_name' => 'web',
@@ -213,6 +226,10 @@ class DatabaseSeeder extends Seeder
         | Asignación de permisos a roles
         |--------------------------------------------------------------------------
         */
+        // 📢 Publicista: acceso público
+        $publicista->syncPermissions([
+            'public_content.edit',
+        ]);
 
         // 🔐 Administrador: acceso total
         $admin->syncPermissions($permissions);

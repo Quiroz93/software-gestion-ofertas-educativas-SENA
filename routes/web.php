@@ -25,7 +25,18 @@ use App\Http\Controllers\Public\PublicRedController;
 use App\Http\Controllers\PublicProgramaController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Public\CustomContentController;
 
+
+
+
+/*|--------------------------------------------------------------------------
+| Rutas para gestión de contenidos personalizados (PUBLIC CONTENT)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])
+    ->post('/public-content', [CustomContentController::class, 'store'])
+    ->name('public.content.store');
 
 
 /*
@@ -136,13 +147,13 @@ Route::middleware(['auth', 'verified', 'can:users.assign.roles'])->group(functio
 */
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('centros', [CentroController::class, 'index'])
+    Route::get('centros/index', [CentroController::class, 'index'])
         ->middleware('can:centros.view')->name('centros.index');
 
     Route::get('centros/create', [CentroController::class, 'create'])
         ->middleware('can:centros.create')->name('centros.create');
 
-    Route::post('centros', [CentroController::class, 'store'])
+    Route::post('centros/store', [CentroController::class, 'store'])
         ->middleware('can:centros.create')->name('centros.store');
 
     Route::get('centros/{centro}/edit', [CentroController::class, 'edit'])
@@ -162,13 +173,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('competencias', [CompetenciaController::class, 'index'])
+    Route::get('competencias/index', [CompetenciaController::class, 'index'])
         ->middleware('can:competencias.view')->name('competencias.index');
 
     Route::get('competencias/create', [CompetenciaController::class, 'create'])
         ->middleware('can:competencias.create')->name('competencias.create');
 
-    Route::post('competencias', [CompetenciaController::class, 'store'])
+    Route::post('competencias/store', [CompetenciaController::class, 'store'])
         ->middleware('can:competencias.create')->name('competencias.store');
 
     Route::get('competencias/{competencia}/edit', [CompetenciaController::class, 'edit'])
@@ -188,13 +199,13 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('historias_de_exito', [HistoriaExitoController::class, 'index'])
+    Route::get('historias_de_exito/index', [HistoriaExitoController::class, 'index'])
         ->middleware('can:historias_de_exito.view')->name('historias_de_exito.index');
 
     Route::get('historias_de_exito/create', [HistoriaExitoController::class, 'create'])
         ->middleware('can:historias_de_exito.create')->name('historias_de_exito.create');
 
-    Route::post('historias_de_exito', [HistoriaExitoController::class, 'store'])
+    Route::post('historias_de_exito/store', [HistoriaExitoController::class, 'store'])
         ->middleware('can:historias_de_exito.create')->name('historias_de_exito.store');
 
     Route::get('historias_de_exito/{historia}/edit', [HistoriaExitoController::class, 'edit'])
@@ -215,13 +226,13 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('instructores', [InstructorController::class, 'index'])
+    Route::get('instructores/index', [InstructorController::class, 'index'])
         ->middleware('can:instructores.view')->name('instructores.index');
 
     Route::get('instructores/create', [InstructorController::class, 'create'])
         ->middleware('can:instructores.create')->name('instructores.create');
 
-    Route::post('instructores', [InstructorController::class, 'store'])
+    Route::post('instructores/store', [InstructorController::class, 'store'])
         ->middleware('can:instructores.create')->name('instructores.store');
 
     Route::get('instructores/{instructor}/edit', [InstructorController::class, 'edit'])
@@ -242,13 +253,13 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-    Route::get('niveles_formacion', [NivelFormacionController::class, 'index'])
+    Route::get('niveles_formacion/index', [NivelFormacionController::class, 'index'])
         ->middleware('can:niveles_formacion.view')->name('niveles_formacion.index');
 
     Route::get('niveles_formacion/create', [NivelFormacionController::class, 'create'])
         ->middleware('can:niveles_formacion.create')->name('niveles_formacion.create');
 
-    Route::post('niveles_formacion', [NivelFormacionController::class, 'store'])
+    Route::post('niveles_formacion/store', [NivelFormacionController::class, 'store'])
         ->middleware('can:niveles_formacion.create')->name('niveles_formacion.store');
 
     Route::get('niveles_formacion/{nivel}/edit', [NivelFormacionController::class, 'edit'])
@@ -268,13 +279,13 @@ Route::middleware(['auth'])->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('ofertas', [OfertaController::class, 'index'])
+    Route::get('ofertas/index', [OfertaController::class, 'index'])
         ->middleware('can:ofertas.view')->name('ofertas.index');
 
     Route::get('ofertas/create', [OfertaController::class, 'create'])
         ->middleware('can:ofertas.create')->name('ofertas.create');
 
-    Route::post('ofertas', [OfertaController::class, 'store'])
+    Route::post('ofertas/store', [OfertaController::class, 'store'])
         ->middleware('can:ofertas.create')->name('ofertas.store');
 
     Route::get('ofertas/{oferta}/edit', [OfertaController::class, 'edit'])
@@ -296,13 +307,13 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-Route::get('programas', [ProgramaController::class, 'index'])
+    Route::get('programas/index', [ProgramaController::class, 'index'])
         ->middleware('can:programas.view')->name('programas.index');
 
     Route::get('programas/create', [ProgramaController::class, 'create'])
         ->middleware('can:programas.create')->name('programas.create');
 
-    Route::post('programas', [ProgramaController::class, 'store'])
+    Route::post('programas/store', [ProgramaController::class, 'store'])
         ->middleware('can:programas.create')->name('programas.store');
 
     Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit'])
@@ -334,23 +345,23 @@ Route::get('/oferta-educativa/{programa}', [PublicProgramaController::class, 'sh
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('redes', [RedController::class, 'index'])
-        ->middleware('can:redes.view')->name('redes.index');
+    Route::get('redes_conocimiento/index', [RedController::class, 'index'])
+        ->middleware('can:redes.view')->name('redes_conocimiento.index');
 
-    Route::get('redes/create', [RedController::class, 'create'])
-        ->middleware('can:redes.create')->name('redes.create');
+    Route::get('redes_conocimiento/create', [RedController::class, 'create'])
+        ->middleware('can:redes.create')->name('redes_conocimiento.create');
 
-    Route::post('redes', [RedController::class, 'store'])
-        ->middleware('can:redes.create')->name('redes.store');
+    Route::post('redes_conocimiento/store', [RedController::class, 'store'])
+        ->middleware('can:redes.create')->name('redes_conocimiento.store');
 
-    Route::get('redes/{red}/edit', [RedController::class, 'edit'])
-        ->middleware('can:redes.edit')->name('redes.edit');
+    Route::get('redes_conocimiento/{red}/edit', [RedController::class, 'edit'])
+        ->middleware('can:redes.edit')->name('redes_conocimiento.edit');
 
-    Route::put('redes/{red}', [RedController::class, 'update'])
-        ->middleware('can:redes.update')->name('redes.update');
+    Route::put('redes_conocimiento/{red}', [RedController::class, 'update'])
+        ->middleware('can:redes.update')->name('redes_conocimiento.update');
 
-    Route::delete('redes/{red}', [RedController::class, 'destroy'])
-        ->middleware('can:redes.delete')->name('redes.destroy');
+    Route::delete('redes_conocimiento/{red}', [RedController::class, 'destroy'])
+        ->middleware('can:redes.delete')->name('redes_conocimiento.destroy');
 });
 
 /*

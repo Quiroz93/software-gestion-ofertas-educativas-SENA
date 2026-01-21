@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
 
@@ -8,6 +9,8 @@
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     {{-- SEO básico --}}
     <meta name="description" content="@yield('meta_description', 'Plataforma educativa SOESoftware')">
@@ -26,6 +29,7 @@
 
     @stack('styles')
 </head>
+
 <body>
 
     {{-- Navbar pública --}}
@@ -85,5 +89,118 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     @stack('scripts')
+
+    @can('public_content.edit')
+    <div class="modal fade" id="editContentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar contenido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="editContentForm">
+                        @csrf
+
+                        <input type="hidden" id="cc-model">
+                        <input type="hidden" id="cc-model-id">
+                        <input type="hidden" id="cc-key">
+                        <input type="hidden" id="cc-type">
+
+                        <div class="mb-3">
+                            <label class="form-label">Contenido</label>
+                            <textarea class="form-control" id="cc-value" rows="4"></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="saveContentBtn">
+                        Guardar cambios
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endcan
+
+
+    @can('edit public content')
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const modalEl = document.getElementById('editContentModal');
+            const modal = new bootstrap.Modal(modalEl);
+
+            let currentEditable = null;
+
+            // 1️⃣ Click sobre elemento editable
+            document.querySelectorAll('.editable').forEach(el => {
+                el.addEventListener('click', () => {
+
+                    currentEditable = el;
+
+                    document.getElementById('cc-model').value = el.dataset.model;
+                    document.getElementById('cc-model-id').value = el.dataset.modelId;
+                    document.getElementById('cc-key').value = el.dataset.key;
+                    document.getElementById('cc-type').value = el.dataset.type;
+
+                    document.getElementById('cc-value').value =
+                        el.innerText.trim();
+
+                    modal.show();
+                });
+            });
+
+            // 2️⃣ Guardar contenido
+            document.getElementById('saveContentBtn')
+                .addEventListener('click', () => {
+
+                    const payload = {
+                        model: document.getElementById('cc-model').value,
+                        model_id: document.getElementById('cc-model-id').value,
+                        key: document.getElementById('cc-key').value,
+                        value: document.getElementById('cc-value').value,
+                        type: document.getElementById('cc-type').value,
+                    };
+
+                    fetch("{{ route('public.content.store') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": document.querySelector(
+                                    'meta[name="csrf-token"]'
+                                ).getAttribute('content')
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+
+                            // Actualiza el contenido en la vista
+                            currentEditable.innerText = payload.value;
+
+                            modal.hide();
+                        })
+                        .catch(() => {
+                            alert('Error al guardar el contenido');
+                        });
+                });
+
+        });
+    </script>
+    @endpush
+    @endcan
+
+
 </body>
+
 </html>
