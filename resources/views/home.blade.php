@@ -68,18 +68,23 @@
 {{-- Encabezado principal --}}
 <div class="container" >
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
-    <div class="col-lg-6 px-0" >
-      <h1 class="display-4 fst-italic" style="color: #39A900;">
+    <div class="row">
+      <div class="col-lg-6 px-0" >
+      <h1 class="display-4" style="color: #39A900; font-family: 'worksans', sans-serif; font-style:italic;">
         Title of a longer featured blog post
       </h1>
-      <p class="lead my-3" style="color:white" >
+      <p class="lead my-3" style="color:white; font-family: calibri; font-style: italic;" >
         Multiple lines of text that form the lede, informing new readers
         quickly and efficiently about what’s most interesting in this post’s
         contents.
       </p>
       <p class="lead mb-0">
-        <a href="#" class="text-body-emphasis fw-bold text-success" >Continue reading>>></a>
+        <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline" style="font-family: worksans;">Continue reading>>></a>
       </p>
+    </div>
+    <div class="col-lg-6 justify-content-end">
+      <img src="images/DSC0478d4.png" alt="Imagen" class="" style="height:600px; width: auto;">
+    </div>
     </div>
   </div>
 </div>
@@ -283,7 +288,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
+            <i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i>
             <h6 class="fw-bold">Instructores</h6>
             <p class="text-muted small">
               Perfil de nuestros instructores
@@ -296,7 +301,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
+            <i class="fas fa-book-open fs-2 text-warning mb-2"></i>
             <h6 class="fw-bold">Historias</h6>
             <p class="text-muted small">
               Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes
@@ -309,7 +314,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
+            <i class="bi bi-award  fs-2 text-primary mb-2"></i>
             <h6 class="fw-bold">Reconocimientos</h6>
             <p class="text-muted small">
               Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>
