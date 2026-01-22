@@ -63,26 +63,24 @@ class CentroController extends Controller
 
     /**
      * Despliega el formulario para editar el recurso especificado
-     * @param string $id
+     * @param Centro $centro
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit(string $id)
+    public function edit(Centro $centro)
     {
-        Gate::authorize('centros.update', $id);
-        $centro = Centro::findOrFail($id);
+        Gate::authorize('centros.update', $centro);
         return view('centros.edit', compact('centro'));
     }
 
     /**
      * Actualiza el recurso especificado en almacenamiento
      * @param Request $request
-     * @param string $id
+     * @param Centro $centro
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Centro $centro)
     {
-        Gate::authorize('centros.update', $id);
-        $centro = Centro::findOrFail($id);
+        Gate::authorize('centros.update', $centro);
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
             'direccion' => 'required|string|max:255',
