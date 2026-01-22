@@ -51,9 +51,11 @@
                         <label for="centro_id"><strong>Centro</strong></label>
                         <select name="centro_id" id="centro_id" class="form-control" required>
                             <option value="">Seleccione un centro</option>
-                            @foreach($centros ?? [] as $centro)
-                                <option value="{{ $centro->id }}">{{ $centro->nombre }}</option>
-                            @endforeach
+                            @if($centros)
+                                @foreach($centros as $centro)
+                                    <option value="{{ $centro->id }}">{{ $centro->nombre }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
 
