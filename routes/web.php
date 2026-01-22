@@ -55,7 +55,7 @@ Route::middleware('guest')->group(function () {
 | Ruta de bienvenida
 |--------------------------------------------------------------------------
 */
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/SOE-SENA', [WelcomeController::class, 'index'])->name('welcome');
 
 /*
 |--------------------------------------------------------------------------
@@ -120,7 +120,7 @@ Route::middleware(['auth', 'verified', 'can:permissions.manage'])
 Route::middleware(['auth', 'verified', 'can:users.assign.roles'])->group(function () {
 
     Route::get('users/{user}/roles', [UserRoleController::class, 'edit'])
-        ->name('users.roles.assign');
+        ->name('users.roles.edit');
 
     Route::put('users/{user}/roles', [UserRoleController::class, 'update'])
         ->name('users.roles.update');
@@ -350,22 +350,22 @@ Route::get('/oferta-educativa/{programa}', [PublicProgramaController::class, 'sh
 Route::middleware(['auth'])->group(function () {
 
     Route::get('redes_conocimiento/index', [RedController::class, 'index'])
-        ->middleware('can:redes.view')->name('redes_conocimiento.index');
+        ->middleware('can:redes_conocimiento.view')->name('redes_conocimiento.index');
 
     Route::get('redes_conocimiento/create', [RedController::class, 'create'])
-        ->middleware('can:redes.create')->name('redes_conocimiento.create');
+        ->middleware('can:redes_conocimiento.create')->name('redes_conocimiento.create');
 
     Route::post('redes_conocimiento/store', [RedController::class, 'store'])
-        ->middleware('can:redes.create')->name('redes_conocimiento.store');
+        ->middleware('can:redes_conocimiento.create')->name('redes_conocimiento.store');
 
     Route::get('redes_conocimiento/{red}/edit', [RedController::class, 'edit'])
-        ->middleware('can:redes.edit')->name('redes_conocimiento.edit');
+        ->middleware('can:redes_conocimiento.edit')->name('redes_conocimiento.edit');
 
     Route::put('redes_conocimiento/{red}', [RedController::class, 'update'])
-        ->middleware('can:redes.update')->name('redes_conocimiento.update');
+        ->middleware('can:redes_conocimiento.update')->name('redes_conocimiento.update');
 
     Route::delete('redes_conocimiento/{red}', [RedController::class, 'destroy'])
-        ->middleware('can:redes.delete')->name('redes_conocimiento.destroy');
+        ->middleware('can:redes_conocimiento.delete')->name('redes_conocimiento.destroy');
 });
 
 /*

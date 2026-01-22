@@ -9,7 +9,7 @@
         Agregar Nivel de Formación
     </h1>
 
-    <a href="{{ route('niveles_formacion.index') }}" class="btn btn-outline-secondary">
+    <a href="{{route('niveles_formacion.index')}}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
@@ -53,12 +53,12 @@
                         </div>
                     </div>
 
-                    {{-- FOOTER --}}
-                    <div class="card-footer d-flex justify-content-end">
-                        <a href="{{ route('niveles_formacion.index') }}" class="btn btn-outline-secondary me-1">
-                            <i class="fas fa-times"></i>
-                            Cancelar
-                        </a>
+                {{-- FOOTER --}}
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="{{route('niveles_formacion.index')}}" class="btn btn-outline-secondary me-1">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
 
                         <button type="submit" class="btn btn-outline-success">
                             <i class="fas fa-save"></i>

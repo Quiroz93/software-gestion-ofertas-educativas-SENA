@@ -4,7 +4,7 @@
 
 @section('content_header')
 <div class="row mb-3" style="font-family: 'worksans sans-serif';">
-  <div class="d-flex align-items-center gap-2">
+  <div class="d-flex align-items-center gap-2 text-warning">
     <i class="fas fa-home text-primary fs-4"></i>
     <h2 class="mb-0 fw-semibold text-xl text-gray-800">
       {{ __('Home') }}
@@ -13,7 +13,7 @@
 </div>
 <div class="row mb-2">
   <div class="col-6" style="font-family: 'worksans sans-serif';">
-    <h1><Span class="text-bold">Bienvenido</Span>, {{ auth()->user()->name }}</h1>
+    <h1 style="color:#39A900"><Span class="text-bold text-primary">Bienvenido</Span>, {{ auth()->user()->name }}</h1>
   </div>
   <div class="col-6 d-flex justify-content-end align-items-rigth">
     <a class="link-secondary mt-3" href="#" aria-label="Search">

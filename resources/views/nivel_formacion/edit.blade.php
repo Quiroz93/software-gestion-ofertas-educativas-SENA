@@ -62,7 +62,7 @@
 
                 {{-- FOOTER --}}
                 <div class="card-footer d-flex justify-content-end">
-                    <a href="{{-- logica de regreso --}}" class="btn btn-outline-secondary me-1">
+                    <a href="{{route('niveles_formacion.index')}}" class="btn btn-outline-secondary me-1">
                         <i class="fas fa-times"></i>
                         Cancelar
                     </a>
