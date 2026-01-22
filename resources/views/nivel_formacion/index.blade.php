@@ -10,89 +10,82 @@
     </h1>
 
     <div>
-        @can('historias_exito.create')
-            <a href="{{ route('historias_de_exito.create') }}" class="btn btn-outline-success">
-                <i class="fas fa-plus-circle"></i>
-                Agregar historia
-            </a>
+        @can('niveles_formacion.create')
+        <a href="{{route('niveles_formacion.create')}}" class="btn btn-outline-success">
+            <i class="fas fa-plus-circle"></i>
+            Crear nivel
+        </a>
         @endcan
 
-        <a href="{{ route('historias_de_exito.index') }}" class="btn btn-outline-secondary">
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>
     </div>
-    
 
-    @can('niveles.create')
-        <a href="{{-- enlace al controller --}}" class="btn btn-success">
-            <i class="fas fa-plus-circle"></i>
-            Crear nivel
-        </a>
-    @endcan
 </div>
 @stop
 
 @section('content')
 
 @if($niveles_formacion->isEmpty())
-    <div class="alert alert-info">
-        <i class="fas fa-info-circle"></i>
-        No existen niveles de formación registrados.
-    </div>
+<div class="alert alert-info">
+    <i class="fas fa-info-circle"></i>
+    No existen niveles de formación registrados.
+</div>
 @endif
 
 <div class="row">
     @foreach($niveles_formacion as $nivel)
-        <div class="col-md-6 col-lg-4">
-            <div class="card card-outline card-primary shadow-sm h-100">
+    <div class="col-md-6 col-lg-4">
+        <div class="card card-outline card-primary shadow-sm h-100">
 
-                {{-- HEADER --}}
-                <div class="card-header">
-                    <h3 class="card-title text-uppercase fw-bold">
-                        {{ $nivel->nombre }}
-                    </h3>
-                </div>
+            {{-- HEADER --}}
+            <div class="card-header">
+                <h3 class="card-title text-uppercase fw-bold">
+                    {{ $nivel->nombre }}
+                </h3>
+            </div>
 
-                {{-- BODY --}}
-                <div class="card-body">
-                    <p class="mb-0">
-                        <strong>Descripción:</strong><br>
-                        <span class="text-muted">
-                            {{ $nivel->descripcion }}
-                        </span>
-                    </p>
-                </div>
+            {{-- BODY --}}
+            <div class="card-body">
+                <p class="mb-0">
+                    <strong>Descripción:</strong><br>
+                    <span class="text-muted">
+                        {{ $nivel->descripcion }}
+                    </span>
+                </p>
+            </div>
 
-                {{-- FOOTER --}}
-                <div class="card-footer d-flex justify-content-between">
+            {{-- FOOTER --}}
+            <div class="card-footer d-flex justify-content-between">
 
-                    @can('niveles.edit')
-                        <a href="{{-- enlace al controller --}}"
-                           class="btn btn-sm btn-outline-warning">
-                            <i class="fas fa-edit"></i>
-                            Editar
-                        </a>
-                    @endcan
+                @can('niveles.edit')
+                <a href="{{-- enlace al controller --}}"
+                    class="btn btn-sm btn-outline-warning">
+                    <i class="fas fa-edit"></i>
+                    Editar
+                </a>
+                @endcan
 
-                    @can('niveles.delete')
-                        <form action="{{-- enlace al controller --}}"
-                              method="POST"
-                              onsubmit="return confirmarEliminacion(event)">
-                            @csrf
-                            @method('DELETE')
+                @can('niveles.delete')
+                <form action="{{-- enlace al controller --}}"
+                    method="POST"
+                    onsubmit="return confirmarEliminacion(event)">
+                    @csrf
+                    @method('DELETE')
 
-                            <button type="submit" class="btn btn-sm btn-outline-danger">
-                                <i class="fas fa-trash"></i>
-                                Eliminar
-                            </button>
-                        </form>
-                    @endcan
-
-                </div>
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-trash"></i>
+                        Eliminar
+                    </button>
+                </form>
+                @endcan
 
             </div>
+
         </div>
+    </div>
     @endforeach
 </div>
 

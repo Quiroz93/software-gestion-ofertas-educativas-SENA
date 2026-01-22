@@ -10,7 +10,7 @@
     </h1>
 <div>
         @can('programas.create')
-    <a href="{{-- enlace al controller --}}" class="btn btn-outline-success">
+    <a href="{{route('redes_conocimiento.create')}}" class="btn btn-outline-success">
         <i class="fas fa-plus-circle"></i>
         Crear programa
     </a>
