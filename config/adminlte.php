@@ -145,7 +145,7 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -309,7 +309,7 @@ return [
 
     'menu' => [
 
-        
+
 
         [
             'text' => 'Home',
@@ -409,43 +409,43 @@ return [
             'text' => 'competencias',
             'route' => '',
             'icon' => 'fas fa-trophy text-success',
-             
+
         ],
         [
             'text' => 'Historias de éxito',
             'route' => '',
             'icon' => 'fas fa-book-open text-success',
-            
+
         ],
         [
             'text' => 'instructores',
             'route' => '',
             'icon' => 'fas fa-chalkboard-teacher text-success',
-           
+
         ],
         [
             'text' => 'nivel de formación',
             'route' => '',
             'icon' => 'fa-solid fa-ranking-star text-success',
-              
+
         ],
         [
             'text' => 'Ofertas',
             'route' => 'public.ofertas.index',
             'icon' => 'fas fa-graduation-cap text-success',
-           
+
         ],
         [
             'text' => 'programas de formación',
             'route' => '',
             'icon' => 'fas fa-book text-success',
-          
+
         ],
         [
             'text' => 'Redes',
             'route' => '',
             'icon' => 'fas fa-network-wired text-success',
-           
+
         ]
     ],
 
