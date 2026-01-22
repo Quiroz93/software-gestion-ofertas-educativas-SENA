@@ -25,8 +25,6 @@
 
 @stack('styles')
 
-@endsection
-
 @section('content')
 {{-- Navbar pública --}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
@@ -197,4 +195,3 @@
 </script>
 @endpush
 @endcan
-@endsection
