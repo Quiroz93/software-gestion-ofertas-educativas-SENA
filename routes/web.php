@@ -179,6 +179,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('competencias/create', [CompetenciaController::class, 'create'])
         ->middleware('can:competencias.create')->name('competencias.create');
 
+    Route::get('competencias/show', [CompetenciaController::class, 'show'])
+        ->middleware('can:competencias.view')->name('competencias.show');
+
     Route::post('competencias/store', [CompetenciaController::class, 'store'])
         ->middleware('can:competencias.create')->name('competencias.store');
 
@@ -234,6 +237,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('instructores/store', [InstructorController::class, 'store'])
         ->middleware('can:instructores.create')->name('instructores.store');
+
+    Route::get('instructores/{instructor}/show', [InstructorController::class, 'show'])
+        ->middleware('can:instructores.view')->name('instructores.show');
 
     Route::get('instructores/{instructor}/edit', [InstructorController::class, 'edit'])
         ->middleware('can:instructores.edit')->name('instructores.edit');

@@ -31,7 +31,7 @@
                 </h3>
             </div>
 
-            <form action="" method="POST">
+            <form action="{{ route('instructores.store') }}" method="POST">
                 @csrf
 
                 {{-- BODY --}}
@@ -50,23 +50,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="apellido">
-                            <strong>Apellido</strong>
+                        <label for="apellidos">
+                            <strong>Apellidos</strong>
                         </label>
                         <input type="text"
-                               name="apellido"
-                               id="apellido"
+                               name="apellidos"
+                               id="apellidos"
                                class="form-control"
-                               placeholder="Ingrese el apellido del instructor"
+                               placeholder="Ingrese los apellidos del instructor"
                                required>
                     </div>
 
                     <div class="form-group">
-                        <label for="perfil">
+                        <label for="perfil_profesional">
                             <strong>Perfil</strong>
                         </label>
-                        <textarea name="perfil"
-                                  id="perfil"
+                        <textarea name="perfil_profesional"
+                                  id="perfil_profesional"
                                   rows="3"
                                   class="form-control"
                                   placeholder="Perfil del instructor"

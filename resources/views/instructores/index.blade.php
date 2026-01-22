@@ -11,7 +11,7 @@
 
     <div>
         @can('instructores.create')
-            <a href="" class="btn btn-outline-success">
+            <a href="{{ route('instructores.create') }}" class="btn btn-outline-success">
                 <i class="fas fa-plus-circle"></i>
                 Agregar instructor
             </a>
