@@ -32,13 +32,6 @@
             </p>
         </div>
 
-        {{-- Ícono de edición --}}
-        @can('public_content.edit')
-        <button class="btn btn-sm btn-outline-warning ms-3 edit-trigger"
-            title="Editar contenido">
-            <i class="bi bi-pencil-square"></i>
-        </button>
-        @endcan
     </div>
 </section>
 

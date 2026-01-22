@@ -220,16 +220,27 @@
                         },
                         body: JSON.stringify(payload)
                     })
-                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.json().then(err => {
+                                throw new Error(err.message || 'Error al guardar');
+                            });
+                        }
+                        return res.json();
+                    })
                     .then(data => {
 
                         // Actualiza el contenido en la vista
                         currentEditable.innerText = payload.value;
 
                         modal.hide();
+                        
+                        // Mensaje de éxito
+                        alert('Contenido actualizado correctamente');
                     })
-                    .catch(() => {
-                        alert('Error al guardar el contenido');
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Error al guardar el contenido: ' + error.message);
                     });
             });
 
