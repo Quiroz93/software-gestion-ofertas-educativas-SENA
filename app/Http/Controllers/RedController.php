@@ -38,7 +38,7 @@ class RedController extends Controller
     {
         Gate::authorize('redes_conocimiento.create');
         Red::create($request->all());
-        return redirect()->route('redes.index')->with('success', 'Red creada exitosamente');
+        return redirect()->route('redes_conocimiento.index')->with('success', 'Red creada exitosamente');
     }
 
     /**
@@ -73,7 +73,7 @@ class RedController extends Controller
     {
         Gate::authorize('redes_conocimiento.edit', $red);
         $red->update($request->all());
-        return redirect()->route('redes.index')->with('success', 'Red actualizada exitosamente');
+        return redirect()->route('redes_conocimiento.index')->with('success', 'Red actualizada exitosamente');
     }
 
     /**
@@ -85,6 +85,6 @@ class RedController extends Controller
     {
         Gate::authorize('redes_conocimiento.delete', $red);
         $red->delete();
-        return redirect()->route('redes.index')->with('success', 'Red eliminada exitosamente');
+        return redirect()->route('redes_conocimiento.index')->with('success', 'Red eliminada exitosamente');
     }
 }
