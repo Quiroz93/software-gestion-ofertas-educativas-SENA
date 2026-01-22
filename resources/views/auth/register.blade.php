@@ -91,7 +91,7 @@
     </div>
     <div class="row mt-4">
         <div class="col-6">
-            <a href="" class="btn btn-outline-secondary  btn-sm">Cancelar</a>
+            <a href="{{ route('welcome') }}" class="btn btn-outline-secondary  btn-sm">Cancelar</a>
         </div>
         <div class="col-6">
             <button type="submit" class="btn btn-outline-success float-end btn-sm">
