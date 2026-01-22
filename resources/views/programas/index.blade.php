@@ -60,7 +60,26 @@
                 <p class="mb-0">
                     <strong>Duración:</strong>
                     <span class="badge badge-info">
-                        {{ $programa->duracion }}
+                        {{ $programa->duracion_meses }}
+                    </span>
+                </p>
+                {{--  <p>
+                    <strong>Modalidad:</strong>
+                    <span class="badge badge-info">
+                        {{ $programa->modalidad }}
+                    </span>
+                </p>--}}
+
+                <p>
+                    <strong>Red de Conocimiento:</strong>
+                    <span class="badge badge-info">
+                        {{ $programa->red->nombre }}
+                    </span>
+                </p>
+                <p>
+                    <strong>Nivel de Formación:</strong>
+                    <span class="badge badge-info">
+                        {{ $programa->nivelFormacion->nombre }}
                     </span>
                 </p>
             </div>
