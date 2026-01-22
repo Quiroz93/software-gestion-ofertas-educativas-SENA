@@ -175,8 +175,15 @@
     <div class="d-flex justify-content-end gap-2">
 
         @can('users.edit')
-        <a href="{{ route('users.roles.edit', $user->id) }}"
-            class="btn btn-primary">
+        <a href="{{ route('users.roles.edit', $user) }}" class="btn btn-primary">
+            <i class="fas fa-edit mr-1"></i>
+            Editar
+        </a>
+        @endcan
+
+        @can('users.assign.roles')
+        <a href="{{ route('users.roles.edit', $user) }}" class="btn btn-primary">
+            <i class="fas fa-user-tag mr-1"></i>
             Editar roles y permisos
         </a>
 

@@ -120,7 +120,7 @@ Route::middleware(['auth', 'verified', 'can:permissions.manage'])
 Route::middleware(['auth', 'verified', 'can:users.assign.roles'])->group(function () {
 
     Route::get('users/{user}/roles', [UserRoleController::class, 'edit'])
-        ->name('users.roles.assign');
+        ->name('users.roles.edit');
 
     Route::put('users/{user}/roles', [UserRoleController::class, 'update'])
         ->name('users.roles.update');
