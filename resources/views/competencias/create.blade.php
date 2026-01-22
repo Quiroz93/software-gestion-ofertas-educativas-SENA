@@ -31,7 +31,7 @@
                 </h3>
             </div>
 
-            <form action="" method="POST">
+            <form action="{{ route('competencias.store') }}" method="POST">
                 @csrf
 
                 {{-- BODY --}}

@@ -83,14 +83,13 @@ class NivelFormacionController extends Controller
 
     /**
      * Elimina el recurso especificado de almacenamiento
-     * @param NivelFormacion $id
+     * @param NivelFormacion $nivelFormacion
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(NivelFormacion $id)
+    public function destroy(NivelFormacion $nivelFormacion)
     {
-        Gate::authorize('niveles_formacion.delete', $id);
-        $nivel_formacion = NivelFormacion::find($id);
-        $nivel_formacion->delete();
+        Gate::authorize('niveles_formacion.delete', $nivelFormacion);
+        $nivelFormacion->delete();
         return redirect()->route('niveles_formacion.index')->with('success', 'Nivel de formacion eliminado correctamente');
     }
 }
