@@ -3,7 +3,10 @@
 @section('title', 'Editar Usuario')
 
 @section('content_header')
-    <h1 class="m-0">Editar Usuario</h1>
+    <h1 class="m-0">
+        <i class="fas fa-edit text-primary"></i>
+        Editar Usuario
+    </h1>
 @endsection
 
 @section('content')
