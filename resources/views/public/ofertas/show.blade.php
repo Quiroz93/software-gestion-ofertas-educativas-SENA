@@ -1,7 +1,3 @@
-<div>
-    <!-- Be present above all else. - Naval Ravikant -->
-</div>
-
 @extends('layouts.public')
 
 @section('title', $oferta->nombre)
@@ -46,33 +42,26 @@
     </div>
 </section>
 
-{{-- CONTENIDO DE NEGOCIO (NO editable aquí) --}}
 <section class="mb-5">
-    <h3>Descripción de la oferta</h3>
-    <p>{{ $oferta->descripcion }}</p>
+    <h3 class="fw-bold editable"
+        data-model="oferta"
+        data-model-id="{{ $oferta->id }}"
+        data-key="description_title"
+        data-type="text">
+        {{ $oferta->custom('description_title', 'Descripción de la oferta') }}
+    </h3>
+    <p class="editable"
+        data-model="oferta"
+        data-model-id="{{ $oferta->id }}"
+        data-key="descripcion"
+        data-type="textarea">
+        {{ $oferta->descripcion }}
+    </p>
 
     <ul class="list-unstyled">
-        <li><strong>Fecha inicio:</strong> {{ $oferta->fecha_inicio }}</li>
-        <li><strong>Fecha fin:</strong> {{ $oferta->fecha_fin }}</li>
+        <li><strong>Fecha inicio:</strong> {{ is_string($oferta->fecha_inicio) ? \Carbon\Carbon::parse($oferta->fecha_inicio)->format('d/m/Y') : $oferta->fecha_inicio?->format('d/m/Y') }}</li>
+        <li><strong>Fecha fin:</strong> {{ is_string($oferta->fecha_fin) ? \Carbon\Carbon::parse($oferta->fecha_fin)->format('d/m/Y') : $oferta->fecha_fin?->format('d/m/Y') }}</li>
     </ul>
 </section>
-
-@endsection
-@section('scripts')
-@endsection
-
-@section('styles')
-@can('public_content.edit')
-<style>
-    .editable {
-        position: relative;
-    }
-
-    .editable:hover {
-        outline: 2px dashed #ffc107;
-        cursor: pointer;
-    }
-</style>
-@endcan
 
 @endsection

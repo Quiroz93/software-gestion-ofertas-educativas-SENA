@@ -38,6 +38,20 @@ Route::middleware(['auth'])
     ->post('/public-content', [CustomContentController::class, 'store'])
     ->name('public.content.store');
 
+// Ruta temporal de depuración
+Route::get('/debug-auth', function() {
+    return response()->json([
+        'authenticated' => auth()->check(),
+        'user' => auth()->user() ? [
+            'id' => auth()->user()->id,
+            'email' => auth()->user()->email,
+            'name' => auth()->user()->name,
+            'roles' => auth()->user()->roles->pluck('name'),
+            'can_edit_public_content' => auth()->user()->can('public_content.edit'),
+        ] : null,
+    ]);
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -415,9 +429,11 @@ Route::middleware(['auth'])->group(function () {
 | Rutas públicas
 |--------------------------------------------------------------------------
 | Acceso libre – frontend institucional
+| Middleware web mantiene sesión para usuarios autenticados opcionales
 */
 Route::prefix('/')
     ->name('public.')
+    ->middleware('web')
     ->group(function () {
 
         Route::get('/', function () {

@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\CustomContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CustomContentController extends Controller
 {
+    use AuthorizesRequests;
+    
     /**
      * Almacena o actualiza contenido personalizado
      */

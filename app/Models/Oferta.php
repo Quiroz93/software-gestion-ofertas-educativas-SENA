@@ -25,6 +25,14 @@ class Oferta extends Model
     ];
 
     /**
+     * Castear atributos a tipos específicos
+     */
+    protected $casts = [
+        'fecha_inicio' => 'datetime',
+        'fecha_fin' => 'datetime',
+    ];
+
+    /**
      * Definir las relaciones con otros modelos
      */
     public function customContents()
@@ -35,11 +43,11 @@ class Oferta extends Model
      * Obtener un contenido personalizado por clave
      */
     public function custom(string $key, $default = null)
-{
-    return $this->customContents
-        ->where('key', $key)
-        ->first()
-        ?->value ?? $default;
-}
+    {
+        // Utiliza el constructor de consultas de la relación directamente
+        // para evitar cargar toda la colección.
+        $content = $this->customContents()->where('key', $key)->first();
+        return $content?->value ?? $default;
+    }
 
 }
