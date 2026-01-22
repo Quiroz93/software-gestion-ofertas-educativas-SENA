@@ -55,7 +55,7 @@ Route::middleware('guest')->group(function () {
 | Ruta de bienvenida
 |--------------------------------------------------------------------------
 */
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/SOE-SENA', [WelcomeController::class, 'index'])->name('welcome');
 
 /*
 |--------------------------------------------------------------------------
