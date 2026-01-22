@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Oferta;
+use App\Models\Centro;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class OfertaController extends Controller
     public function create()
     {
         Gate::authorize('ofertas.create', Oferta::class);
-        return view('ofertas.create');
+        $centros = Centro::all();
+        return view('ofertas.create', compact('centros'));
     }
 
      /**
@@ -60,7 +62,8 @@ class OfertaController extends Controller
     public function edit(Oferta $oferta)
     {
         Gate::authorize('ofertas.update', $oferta);
-        return view('ofertas.edit', compact('oferta'));
+        $centros = Centro::all();
+        return view('ofertas.edit', compact('oferta', 'centros'));
     }
 
     /**

@@ -47,14 +47,27 @@
                                class="form-control">
                     </div>
 
+                    {{-- Centro --}}
+                    <div class="form-group">
+                        <label for="centro_id"><strong>Centro</strong></label>
+                        <select name="centro_id" id="centro_id" class="form-control" required>
+                            <option value="">Seleccione un centro</option>
+                            @foreach($centros ?? [] as $centro)
+                                <option value="{{ $centro->id }}" {{ $oferta->centro_id == $centro->id ? 'selected' : '' }}>{{ $centro->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     {{-- Año --}}
                     <div class="form-group">
-                        <label for="anio"><strong>Año</strong></label>
+                        <label for="año"><strong>Año</strong></label>
                         <input type="number"
-                               name="anio"
-                               id="anio"
-                               value="{{ $oferta->anio }}"
-                               class="form-control">
+                               name="año"
+                               id="año"
+                               value="{{ $oferta->año }}"
+                               class="form-control"
+                               min="2000"
+                               max="2099">
                     </div>
 
                     {{-- Fecha inicio --}}
@@ -67,13 +80,13 @@
                                class="form-control">
                     </div>
 
-                    {{-- Fecha final --}}
+                    {{-- Fecha fin --}}
                     <div class="form-group">
-                        <label for="fecha_final"><strong>Fecha final</strong></label>
+                        <label for="fecha_fin"><strong>Fecha fin</strong></label>
                         <input type="date"
-                               name="fecha_final"
-                               id="fecha_final"
-                               value="{{ $oferta->fecha_final }}"
+                               name="fecha_fin"
+                               id="fecha_fin"
+                               value="{{ $oferta->fecha_fin }}"
                                class="form-control">
                     </div>
 
