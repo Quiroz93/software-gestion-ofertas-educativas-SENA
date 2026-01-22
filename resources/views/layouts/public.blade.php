@@ -129,15 +129,8 @@
 
 @endsection
 
-    @can('public_content.edit')
+@can('public_content.edit')
     @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-@section('js')
-
-@can('edit public content')
-@push('scripts')
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

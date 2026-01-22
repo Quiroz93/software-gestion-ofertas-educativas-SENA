@@ -10,7 +10,7 @@
 
 {{-- HERO / BANNER --}}
 <section class="p-5 rounded mb-4"
-    style="background-color: {{ $oferta->custom('hero_bg_color', '#f8f9fa') }}">
+    style="background-color: {{ $oferta->custom('hero_bg_color', '#f8f9fa') }};">
 
     <div class="d-flex align-items-start justify-content-between">
 
