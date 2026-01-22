@@ -321,7 +321,7 @@ return [
 
         [
             'text' => 'Administración',
-            'icon' => 'fa-solid fa-box-archive',
+            'icon' => 'fa-solid fa-box-archive text-teal',
             'can' => 'admin.view',
             'submenu' => [
                 [
