@@ -8,8 +8,9 @@ Algoritmo de registro (actual)
    - Crea el usuario y le asigna el rol `user`.
    - Si `SystemBootstrapService::systemIsInitialized()` devuelve true → continua, registra y loguea al usuario.
    - Si NO está inicializado → llama `SystemBootstrapService::isOwnerCandidate($validated)`:
-       - `isOwnerCandidate` devuelve true solo si `system_initialized` es false, la `SYSTEM_OWNER_KEY` de config existe y `hash_equals(config_owner_key, $data['owner_key'])`.
-       - Si es owner candidate, al usuario se le asigna el rol `admin` y se llama `markSystemAsInitialized()` que guarda `system_initialized = 'true'` en la tabla `system_settings`.
+      - `isOwnerCandidate` ahora verifica en primer lugar si existe un hash almacenado en BD (`system_settings.owner_key_hash`) y utiliza `password_verify` para validar el `owner_key` suministrado.
+      - Si no existe hash en BD, se realiza una comparación con `config('System.owner_key')` (fallback a `.env`) usando `hash_equals`; si coincide, la clave se hashea con `password_hash` y se guarda en BD como `owner_key_hash` para futuras validaciones.
+      - Si es owner candidate, al usuario se le asigna el rol `admin` y se llama `markSystemAsInitialized()` que guarda `system_initialized = 'true'` en la tabla `system_settings`.
    - Registra, autentica y redirige al usuario.
 
 3) Persistencia y fuente de verdad:
