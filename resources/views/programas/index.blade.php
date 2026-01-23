@@ -45,7 +45,7 @@
                 </h3>
             </div>
 
-            {{-- BODY --}}
+                {{-- BODY --}}
             <div class="card-body">
                 <p class="mb-2">
                     <strong>Descripción:</strong><br>
@@ -59,8 +59,8 @@
 
                 <p class="mb-0">
                     <strong>Duración:</strong>
-                    <span class="badge badge-info">
-                        {{ $programa->duracion }}
+                    <span class="badge bg-info">
+                        {{ $programa->duracion_meses ? $programa->duracion_meses . ' meses' : 'N/A' }}
                     </span>
                 </p>
             </div>
@@ -68,26 +68,34 @@
             {{-- FOOTER --}}
             <div class="card-footer d-flex justify-content-between">
 
-                @can('programas.edit')
-                <a href="{{-- enlace editar --}}" class="btn btn-sm btn-outline-warning">
-                    <i class="fas fa-edit"></i>
-                    Editar
-                </a>
-                @endcan
+                <div class="d-flex gap-1">
+                    <a href="{{ route('programas.show', $programa) }}" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-eye"></i>
+                        Ver
+                    </a>
 
-                @can('programas.delete')
-                <form action="{{-- enlace eliminar --}}"
-                      method="POST"
-                      onsubmit="return confirmarEliminacion(event)">
-                    @csrf
-                    @method('DELETE')
+                    @can('programas.edit')
+                        <a href="{{ route('programas.edit', $programa) }}" class="btn btn-sm btn-outline-warning">
+                            <i class="fas fa-edit"></i>
+                            Editar
+                        </a>
+                    @endcan
 
-                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                        <i class="fas fa-trash"></i>
-                        Eliminar
-                    </button>
-                </form>
-                @endcan
+                    @can('programas.delete')
+                        <form action="{{ route('programas.destroy', $programa) }}"
+                              method="POST"
+                              onsubmit="return confirmarEliminacion(event)">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i>
+                                Eliminar
+                            </button>
+                        </form>
+                    @endcan
+                </div>
+
 
             </div>
         </div>

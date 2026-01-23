@@ -111,6 +111,15 @@
                             Información adicional
                         </h5>
                         <p class="text-muted ms-4">
+                            <strong>Modalidad:</strong> {{ $programa->modalidad ?? 'N/A' }}<br>
+                            <strong>Jornada:</strong> {{ $programa->jornada ?? 'N/A' }}<br>
+                            <strong>Título otorgado:</strong> {{ $programa->titulo_otorgado ?? 'N/A' }}<br>
+                            <strong>Código SNIES:</strong> {{ $programa->codigo_snies ?? 'N/A' }}<br>
+                            <strong>Registro de Calidad:</strong> {{ $programa->registro_calidad ?? 'N/A' }}<br>
+                            <strong>Fecha de registro:</strong> {{ $programa->fecha_registro ? $programa->fecha_registro->format('d/m/Y') : 'N/A' }}<br>
+                            <strong>Estado:</strong> {{ $programa->estado ?? 'N/A' }}<br>
+                            <strong>Cupos:</strong> {{ $programa->cupos ?? 'N/A' }}<br>
+                            <strong>Observaciones:</strong> {{ $programa->observaciones ?? 'N/A' }}<br>
                             <strong>Fecha de creación:</strong> {{ $programa->created_at->format('d/m/Y') }}<br>
                             <strong>Última actualización:</strong> {{ $programa->updated_at->format('d/m/Y') }}
                         </p>

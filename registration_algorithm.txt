@@ -1,0 +1,78 @@
+Algoritmo de registro (actual)
+
+1) Vista de registro (`resources/views/auth/register.blade.php`):
+   - Si el sistema NO está inicializado (antes: `config('System.initialized')`, ahora usa `SystemBootstrapService::systemIsInitialized()`), muestra un campo `owner_key` requerido.
+
+2) Controlador (`App\Http\Controllers\Auth\RegisteredUserController::store`):
+   - Valida los campos: `name`, `email`, `password`, `owner_key` (nullable|string).
+   - Crea el usuario y le asigna el rol `user`.
+   - Si `SystemBootstrapService::systemIsInitialized()` devuelve true → continua, registra y loguea al usuario.
+   - Si NO está inicializado → llama `SystemBootstrapService::isOwnerCandidate($validated)`:
+       - `isOwnerCandidate` devuelve true solo si `system_initialized` es false, la `SYSTEM_OWNER_KEY` de config existe y `hash_equals(config_owner_key, $data['owner_key'])`.
+       - Si es owner candidate, al usuario se le asigna el rol `admin` y se llama `markSystemAsInitialized()` que guarda `system_initialized = 'true'` en la tabla `system_settings`.
+   - Registra, autentica y redirige al usuario.
+
+3) Persistencia y fuente de verdad:
+   - `SystemSetting` usa la tabla `system_settings` (key, value) para guardar `system_initialized`.
+   - El valor de la clave de inicialización se lee desde `config('System.owner_key')` (que utiliza `env('SYSTEM_OWNER_KEY')`, por tanto la clave en texto plano viene de `.env`).
+
+Problemas e inconsistencias detectadas
+
+- Diferencia de fuentes: la UI originalmente leía `config('System.initialized')` (env) mientras la lógica de bootstrap usa la DB, causando que tras inicializar en BD la UI siguiera pidiendo la clave.
+- `SYSTEM_OWNER_KEY` está en claro en `.env`. Si es permisible que la app lea la clave desde `.env`, queda expuesta al personal con acceso al repositorio/servidor.
+- Condición de carrera: si varios usuarios intentan registrarse simultáneamente como owner, puede haber asignaciones duplicadas si no se protege la operación atómica.
+- Validación y auditoría: no hay límite de intentos, logs de intentos fallidos o bloqueo por IP.
+
+Recomendaciones de seguridad y cambios propuestos
+
+1) Fuente segura del owner_key
+   - No almacenar la clave inicial en `.env` en texto plano en producción. Alternativas:
+     - Guardar el hash (bcrypt/argon2) de `owner_key` en la BD en una tabla `system_settings` o `secrets` y validar con `password_verify`.
+     - Proveer `owner_key` solo vía proceso bootstrap seguro (artesano: `php artisan system:init --key=...`) que escriba el hash en BD.
+
+2) Atomicidad y control de condiciones de carrera
+   - Al marcar `system_initialized` y asignar rol admin, envolver en una transacción DB y usar bloqueo optimista/pessimista para evitar múltiples inicializaciones simultáneas.
+   - Verificar después del hash_equals que `system_initialized` sigue en false antes de asignar rol y marcar la inicialización.
+
+3) Minimizar exposición en vistas y validaciones
+   - Mostrar el campo `owner_key` solo si la BD indica no inicializado (ya implementado).
+   - Limitar longitud y formato de `owner_key`, tratarlo como secreto (input type password) y nunca registrar el valor completo en logs.
+
+4) Auditoría y hardening
+   - Registrar eventos: intentos de inicialización (exitosos y fallidos) con metadatos (IP, user agent, timestamp) pero sin almacenar la clave.
+   - Implementar rate limiting por IP para intentos de registro con `owner_key`.
+
+5) Rotación y revocación
+   - Proveer comando/artisan o UI de administrador para rotar la clave owner en caso de compromiso; almacenar siempre hashes.
+
+6) Pruebas automáticas
+   - Añadir tests de integración que cubran:
+     a) Primer registro con owner_key correcto → asigna `admin` y marca `system_initialized`.
+     b) Registro posterior → no solicita owner_key y asigna solo `user`.
+     c) Intento concurrente: simular dos requests iniciales y verificar que solo uno obtiene `admin`.
+     d) Intentos fallidos y bloqueo por rate-limit.
+
+Tareas prácticas sugeridas (implementación)
+
+- Reemplazar lectura de `SYSTEM_OWNER_KEY` en `config/System.php` por una estrategia que soporte hash: p.e. `system_owner_hash` en `system_settings` o migración para introducir `owner_key_hash`.
+- Añadir un Artisan command `system:init` para inicializar/rotar owner de forma fuera de la UI (opcionalmente interactivo).
+- Modificar `SystemBootstrapService::isOwnerCandidate` para comparar mediante `password_verify` contra el hash almacenado en DB y para chequear atomicidad con transacción.
+- Añadir logs y limitador en `RegisteredUserController::store` cuando se recibe `owner_key`.
+
+Comandos útiles para pruebas manuales
+
+- Limpiar vistas compiladas:
+  php artisan view:clear
+
+- Probar y marcar inicialización desde Tinker (solo para pruebas locales):
+  php artisan tinker
+  >>> App\Models\SystemSetting::set('system_initialized','true');
+
+- Ejecutar tests (si se crean):
+  ./vendor/bin/phpunit --filter RegistrationTest
+
+Si quieres, procedo a:
+- Implementar la comparación por hash y la migración para almacenar `owner_key_hash` en BD, y actualizar `SystemBootstrapService` para usar `password_verify` y transacciones.
+- O crear el `php artisan system:init` y la documentación de uso.
+
+Indícame cuál opción deseas que implemente primero.

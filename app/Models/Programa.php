@@ -17,6 +17,17 @@ class Programa extends Model
         'duracion_meses',
         'red_id',
         'nivel_formacion_id',
+        'modalidad',
+        'jornada',
+        'titulo_otorgado',
+        'codigo_snies',
+        'registro_calidad',
+        'fecha_registro',
+        'fecha_actualizacion',
+        'estado',
+        'observaciones',
+        'centro_id',
+        'cupos',
     ];
     // Definir las relaciones con otros modelos
     public function red()

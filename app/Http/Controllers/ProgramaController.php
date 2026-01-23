@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Programa;
+use App\Models\NivelFormacion;
+use App\Models\Red;
+use App\Models\Centro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,7 +29,10 @@ class ProgramaController extends Controller
     public function create()
     {
         Gate::authorize('programas.create');
-        return view('programas.create');
+        $nivel_formaciones = NivelFormacion::all();
+        $redes = Red::all();
+        $centros = Centro::all();
+        return view('programas.create', compact('nivel_formaciones', 'redes', 'centros'));
     }
 
     /**
@@ -37,7 +43,28 @@ class ProgramaController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('programas.create');
-        Programa::create($request->all());
+        $data = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'requisitos' => 'nullable|string',
+            'duracion_meses' => 'nullable|integer',
+            'red_id' => 'nullable|exists:redes,id',
+            'nivel_formacion_id' => 'nullable|exists:nivel_formaciones,id',
+            'modalidad' => 'nullable|string|max:255',
+            'jornada' => 'nullable|string|max:255',
+            'titulo_otorgado' => 'nullable|string|max:255',
+            'codigo_snies' => 'nullable|string|max:100',
+            'registro_calidad' => 'nullable|string|max:255',
+            'fecha_registro' => 'nullable|date',
+            'fecha_actualizacion' => 'nullable|date',
+            'estado' => 'nullable|string|max:100',
+            'observaciones' => 'nullable|string',
+            'centro_id' => 'nullable|exists:centros,id',
+            'cupos' => 'nullable|integer',
+        ]);
+
+        Programa::create($data);
+
         return redirect()->route('programas.index')->with('success', 'Programa creado exitosamente');
     }
 
@@ -60,7 +87,10 @@ class ProgramaController extends Controller
     public function edit(Programa $programa)
     {
         Gate::authorize('programas.edit', $programa);
-        return view('programas.edit', compact('programa'));
+        $nivel_formaciones = NivelFormacion::all();
+        $redes = Red::all();
+        $centros = Centro::all();
+        return view('programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros'));
     }
 
     /**
@@ -72,7 +102,28 @@ class ProgramaController extends Controller
     public function update(Request $request, Programa $programa)
     {
         Gate::authorize('programas.edit', $programa);
-        $programa->update($request->all());
+        $data = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'requisitos' => 'nullable|string',
+            'duracion_meses' => 'nullable|integer',
+            'red_id' => 'nullable|exists:redes,id',
+            'nivel_formacion_id' => 'nullable|exists:nivel_formaciones,id',
+            'modalidad' => 'nullable|string|max:255',
+            'jornada' => 'nullable|string|max:255',
+            'titulo_otorgado' => 'nullable|string|max:255',
+            'codigo_snies' => 'nullable|string|max:100',
+            'registro_calidad' => 'nullable|string|max:255',
+            'fecha_registro' => 'nullable|date',
+            'fecha_actualizacion' => 'nullable|date',
+            'estado' => 'nullable|string|max:100',
+            'observaciones' => 'nullable|string',
+            'centro_id' => 'nullable|exists:centros,id',
+            'cupos' => 'nullable|integer',
+        ]);
+
+        $programa->update($data);
+
         return redirect()->route('programas.index')->with('success', 'Programa actualizado exitosamente');
     }
 

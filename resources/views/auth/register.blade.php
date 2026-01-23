@@ -3,6 +3,8 @@
 @section('title', __('Registro de Usuario'))
 
 @section('content')
+@inject('bootstrap', 'App\\Services\\SystemBootstrapService')
+
 <form method="POST" action="{{ route('register') }}" class="bg-white border border-success rounded-3 p-4 shadow-sm">
     @csrf
 
@@ -58,8 +60,8 @@
     </div>
 
     <!-- Owner Key -->
-    <!-- Si el sistema no está inicializado, se solicita la owner_key -->
-    @if (!config('System.initialized'))
+    <!-- Si el sistema no está inicializado (según DB), se solicita la owner_key -->
+    @if (!$bootstrap->systemIsInitialized())
 
     <p class="text-danger small">
         {{ __('* Bienvenido: Esta clave es necesaria para inicializar el sistema. Solo se necesitará una vez. Si no se proporciona, El sistema asignara un usuariio por defecto y seguira esperando la inicialización.') }}
