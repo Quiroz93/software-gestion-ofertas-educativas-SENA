@@ -320,6 +320,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('programas/store', [ProgramaController::class, 'store'])
         ->middleware('can:programas.create')->name('programas.store');
 
+    // Mostrar detalles de un programa (administrativo)
+    Route::get('programas/{programa}', [ProgramaController::class, 'show'])
+        ->middleware('can:programas.view')->name('programas.show');
+
     Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit'])
         ->middleware('can:programas.edit')->name('programas.edit');
 
