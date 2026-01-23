@@ -39,4 +39,14 @@ class Programa extends Model
     {
         return $this->belongsTo(NivelFormacion::class);
     }
+
+    public function centro()
+    {
+        return $this->belongsTo(Centro::class);
+    }
+
+    protected $casts = [
+        'fecha_registro' => 'date',
+        'fecha_actualizacion' => 'date',
+    ];
 }
