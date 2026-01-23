@@ -238,7 +238,11 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            @can('programas.view')
+              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            @else
+              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            @endcan
             <h6 class="fw-bold">Programas</h6>
             <p class="text-muted small">
               Programas educativos.
