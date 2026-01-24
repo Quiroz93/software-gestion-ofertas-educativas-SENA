@@ -30,7 +30,7 @@
                 </h3>
             </div>
 
-            <form action="{{-- logica de crear niveles de formacion --}}" method="POST">
+            <form action="{{ route('redes_conocimiento.store') }}" method="POST">
                 @csrf
 
                 {{-- BODY --}}
@@ -51,11 +51,11 @@
 
                     {{-- Perfil / Descripción --}}
                     <div class="form-group">
-                        <label for="perfil">
+                        <label for="descripcion">
                             <strong>Descripción</strong>
                         </label>
-                        <textarea name="perfil"
-                                  id="perfil"
+                        <textarea name="descripcion"
+                                  id="descripcion"
                                   rows="4"
                                   class="form-control"
                                   placeholder="Descripción de la red"

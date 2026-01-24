@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\CustomContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CustomContentController extends Controller
 {
+    use AuthorizesRequests;
+    
     /**
      * Almacena o actualiza contenido personalizado
      */
@@ -37,12 +40,10 @@ class CustomContentController extends Controller
 
         $modelInstance = $modelClass::findOrFail($data['model_id']);
 
-        // 💾 Crear o actualizar contenido
-        $content = CustomContent::updateOrCreate(
+        // 💾 Crear o actualizar contenido usando la relación polimórfica
+        $content = $modelInstance->customContents()->updateOrCreate(
             [
-                'contentable_type' => $modelClass,
-                'contentable_id'   => $modelInstance->id,
-                'key'              => $data['key'],
+                'key' => $data['key'],
             ],
             [
                 'value' => $data['value'],

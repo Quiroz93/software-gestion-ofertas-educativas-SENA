@@ -51,7 +51,7 @@
                     <p class="mb-2">
                         <strong>Perfil:</strong>
                         <span class="badge badge-secondary">
-                            {{ $instructor->perfil }}
+                            {{ $instructor->perfil_profesional }}
                         </span>
                     </p>
 

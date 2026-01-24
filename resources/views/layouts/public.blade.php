@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
 @section('title', config('app.name', 'SENA'))
-<meta charset="UTF-8">
 
+@section('adminlte_css_pre')
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
 
 {{-- SEO básico --}}
 <meta name="description" content="@yield('meta_description', 'Plataforma educativa SOESoftware')">
@@ -18,12 +18,39 @@
 
 {{-- Bootstrap Icons --}}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+@endsection
 
+@section('css')
+@can('public_content.edit')
+<style>
+    .editable {
+        position: relative;
+        cursor: pointer;
+    }
 
-{{-- CSS público --}}
-{{-- <link href="{{ asset('css/public.css') }}" rel="stylesheet"> --}}
+    .editable:hover {
+        outline: 2px dashed #ffc107;
+        background-color: rgba(255, 193, 7, 0.1);
+        transition: all 0.2s ease;
+    }
 
+    .editable:hover::after {
+        content: '\f4cb'; /* Bootstrap Icon pencil-square */
+        font-family: 'bootstrap-icons';
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: #ffc107;
+        color: #000;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+</style>
+@endcan
 @stack('styles')
+@endsection
 
 @section('content')
 {{-- Navbar pública --}}
@@ -58,6 +85,25 @@
                     <a class="nav-link" href="{{ route('public.noticias.index') }}">Noticias</a>
                 </li>
 
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link text-muted">
+                            <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
+                        </span>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">
+                            <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+                        </a>
+                    </li>
+                @endauth
+
             </ul>
         </div>
     </div>
@@ -82,9 +128,11 @@
 {{-- Bootstrap JS --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-@stack('scripts')
+@endsection
 
+@section('js')
 @can('public_content.edit')
+<!-- Modal para editar contenido -->
 <div class="modal fade" id="editContentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -123,12 +171,6 @@
         </div>
     </div>
 </div>
-@endcan
-
-@endsection
-
-@can('public_content.edit')
-    @push('scripts')
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -178,20 +220,32 @@
                         },
                         body: JSON.stringify(payload)
                     })
-                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.ok) {
+                            return res.json().then(err => {
+                                throw new Error(err.message || 'Error al guardar');
+                            });
+                        }
+                        return res.json();
+                    })
                     .then(data => {
 
                         // Actualiza el contenido en la vista
                         currentEditable.innerText = payload.value;
 
                         modal.hide();
+                        
+                        // Mensaje de éxito
+                        alert('Contenido actualizado correctamente');
                     })
-                    .catch(() => {
-                        alert('Error al guardar el contenido');
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('Error al guardar el contenido: ' + error.message);
                     });
             });
 
     });
 </script>
-@endpush
 @endcan
+@stack('scripts')
+@endsection

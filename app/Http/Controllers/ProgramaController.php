@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NivelFormacion;
 use App\Models\Programa;
+use App\Models\Red;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,7 +28,9 @@ class ProgramaController extends Controller
     public function create()
     {
         Gate::authorize('programas.create');
-        return view('programas.create');
+        $redes = Red::all();
+        $nivelFormacion = NivelFormacion::all();
+        return view('programas.create', compact('redes', 'nivelFormacion'));
     }
 
     /**

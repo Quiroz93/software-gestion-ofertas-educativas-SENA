@@ -30,7 +30,7 @@
                 </h3>
             </div>
 
-            <form action="{{-- lógica de crear programa --}}" method="POST">
+            <form action="{{ route('programas.store') }}" method="POST">
                 @csrf
 
                 {{-- BODY --}}
@@ -63,12 +63,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="requisito">
+                        <label for="requisitos">
                             <strong>Requisitos</strong>
                         </label>
                         <textarea
-                            name="requisito"
-                            id="requisito"
+                            name="requisitos"
+                            id="requisitos"
                             class="form-control"
                             rows="3"
                             placeholder="Ingrese los requisitos del programa"
@@ -76,16 +76,45 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="duracion">
+                        <label for="duracion_meses">
                             <strong>Duración (meses)</strong>
                         </label>
                         <input
                             type="number"
-                            name="duracion"
-                            id="duracion"
+                            name="duracion_meses"
+                            id="duracion_meses"
                             class="form-control"
                             placeholder="Ingrese la duración en meses"
                         >
+                    </div>
+                    <div>
+                        <label for="red_id">
+                            <strong>Red de Conocimiento</strong>
+                        </label>
+                        <select
+                            name="red_id"
+                            id="red_id"
+                            class="form-control"
+                        >
+                            @foreach ($redes as $red)
+                                <option value="{{ $red->id }}">{{ $red->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="nivel_formacion_id">
+                            <strong>Nivel de Formación</strong>
+                        </label>
+                        <select
+                            name="nivel_formacion_id"
+                            id="nivel_formacion_id"
+                            class="form-control"
+                        >
+                            @foreach ($nivelFormacion as $nivel)
+                                <option value="{{ $nivel->id }}">{{ $nivel->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>

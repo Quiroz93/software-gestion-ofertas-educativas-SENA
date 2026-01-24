@@ -8,17 +8,17 @@
         <i class="fas fa-network-wired text-primary"></i>
         Gestión de redes
     </h1>
-<div>
+    <div>
         @can('programas.create')
-    <a href="{{route('redes_conocimiento.create')}}" class="btn btn-outline-success">
-        <i class="fas fa-plus-circle"></i>
-        Crear programa
-    </a>
-    @endcan
-    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+        <a href="{{route('redes_conocimiento.create')}}" class="btn btn-outline-success">
+            <i class="fas fa-plus-circle"></i>
+            Nueva red de conocimiento
+        </a>
+        @endcan
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
-    </a>
+        </a>
     </div>
 </div>
 @stop
@@ -57,17 +57,19 @@
             {{-- FOOTER --}}
             <div class="card-footer d-flex justify-content-between">
 
-                @can('redes.edit')
-                <a href="{{-- enlace editar --}}" class="btn btn-sm btn-outline-warning">
-                    <i class="fas fa-edit"></i>
-                    Editar
-                </a>
-                @endcan
+                <div>
+                    @can('redes_conocimiento.edit')
+                    <a href="{{-- enlace editar --}}" class="btn btn-sm btn-outline-warning">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </a>
+                    @endcan
+                </div>
 
-                @can('redes.delete')
+                @can('redes_conocimiento.delete')
                 <form action="{{-- enlace eliminar --}}"
-                      method="POST"
-                      onsubmit="return confirmarEliminacion(event)">
+                    method="POST"
+                    onsubmit="return confirmarEliminacion(event)">
                     @csrf
                     @method('DELETE')
 

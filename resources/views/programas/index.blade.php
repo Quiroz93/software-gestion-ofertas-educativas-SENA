@@ -11,15 +11,15 @@
 
     <div>
         @can('programas.create')
-    <a href="{{route('programas.create')}}" class="btn btn-outline-success">
-        <i class="fas fa-plus-circle"></i>
-        Crear programa
-    </a>
-    @endcan
-    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+        <a href="{{route('programas.create')}}" class="btn btn-outline-success">
+            <i class="fas fa-plus-circle"></i>
+            Crear programa
+        </a>
+        @endcan
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
-    </a>
+        </a>
     </div>
 </div>
 @stop
@@ -60,25 +60,45 @@
                 <p class="mb-0">
                     <strong>Duración:</strong>
                     <span class="badge badge-info">
-                        {{ $programa->duracion }}
+                        {{ $programa->duracion_meses }}
+                    </span>
+                </p>
+                {{--  <p>
+                    <strong>Modalidad:</strong>
+                    <span class="badge badge-info">
+                        {{ $programa->modalidad }}
+                    </span>
+                </p>--}}
+
+                <p>
+                    <strong>Red de Conocimiento:</strong>
+                    <span class="badge badge-info">
+                        {{ $programa->red->nombre }}
+                    </span>
+                </p>
+                <p>
+                    <strong>Nivel de Formación:</strong>
+                    <span class="badge badge-info">
+                        {{ $programa->nivelFormacion->nombre }}
                     </span>
                 </p>
             </div>
 
             {{-- FOOTER --}}
             <div class="card-footer d-flex justify-content-between">
-
-                @can('programas.edit')
-                <a href="{{-- enlace editar --}}" class="btn btn-sm btn-outline-warning">
-                    <i class="fas fa-edit"></i>
-                    Editar
-                </a>
-                @endcan
+                <div>
+                    @can('programas.edit')
+                    <a href="{{-- enlace editar --}}" class="btn btn-sm btn-outline-warning">
+                        <i class="fas fa-edit"></i>
+                        Editar
+                    </a>
+                    @endcan
+                </div>
 
                 @can('programas.delete')
                 <form action="{{-- enlace eliminar --}}"
-                      method="POST"
-                      onsubmit="return confirmarEliminacion(event)">
+                    method="POST"
+                    onsubmit="return confirmarEliminacion(event)">
                     @csrf
                     @method('DELETE')
 

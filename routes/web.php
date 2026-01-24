@@ -38,7 +38,6 @@ Route::middleware(['auth'])
     ->post('/public-content', [CustomContentController::class, 'store'])
     ->name('public.content.store');
 
-
 /*
 |--------------------------------------------------------------------------
 | Rutas para usuarios invitados
@@ -415,9 +414,11 @@ Route::middleware(['auth'])->group(function () {
 | Rutas públicas
 |--------------------------------------------------------------------------
 | Acceso libre – frontend institucional
+| Middleware web mantiene sesión para usuarios autenticados opcionales
 */
 Route::prefix('/')
     ->name('public.')
+    ->middleware('web')
     ->group(function () {
 
         Route::get('/', function () {

@@ -18,8 +18,8 @@ class NivelFormacionController extends Controller
     public function index()
     {
         Gate::authorize('niveles_formacion.view', NivelFormacion::class);
-        $niveles_formacion = NivelFormacion::all();
-        return view('nivel_formacion.index', compact('niveles_formacion'));
+        $nivel_formaciones = NivelFormacion::all();
+        return view('nivel_formacion.index', compact('nivel_formaciones'));
     }
 
     /**
