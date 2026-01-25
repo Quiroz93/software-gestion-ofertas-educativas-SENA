@@ -18,6 +18,17 @@ class Programa extends Model
         //'modalidad',
         'red_id',
         'nivel_formacion_id',
+        'modalidad',
+        'jornada',
+        'titulo_otorgado',
+        'codigo_snies',
+        'registro_calidad',
+        'fecha_registro',
+        'fecha_actualizacion',
+        'estado',
+        'observaciones',
+        'centro_id',
+        'cupos',
     ];
     // Definir las relaciones con otros modelos
     public function red()
@@ -29,4 +40,14 @@ class Programa extends Model
     {
         return $this->belongsTo(NivelFormacion::class);
     }
+
+    public function centro()
+    {
+        return $this->belongsTo(Centro::class);
+    }
+
+    protected $casts = [
+        'fecha_registro' => 'date',
+        'fecha_actualizacion' => 'date',
+    ];
 }

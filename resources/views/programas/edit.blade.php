@@ -30,9 +30,9 @@
                 </h3>
             </div>
 
-            <form action="{{-- lógica de actualizar programa --}}" method="POST">
+            <form action="{{ route('programas.update', $programa) }}" method="POST">
                 @csrf
-                {{-- @method('PUT') --}}
+                @method('PUT')
 
                 {{-- BODY --}}
                 <div class="card-body">
@@ -46,7 +46,7 @@
                             name="nombre"
                             id="nombre"
                             class="form-control"
-                            value="{{-- nombre del programa --}}"
+                            value="{{ old('nombre', $programa->nombre) }}"
                         >
                     </div>
 
@@ -59,7 +59,7 @@
                             id="descripcion"
                             class="form-control"
                             rows="3"
-                        >{{-- descripción del programa --}}</textarea>
+                        >{{ old('descripcion', $programa->descripcion) }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -67,11 +67,11 @@
                             <strong>Requisitos</strong>
                         </label>
                         <textarea
-                            name="requisito"
-                            id="requisito"
+                            name="requisitos"
+                            id="requisitos"
                             class="form-control"
                             rows="3"
-                        >{{-- requisitos del programa --}}</textarea>
+                        >{{ old('requisitos', $programa->requisitos) }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -80,11 +80,110 @@
                         </label>
                         <input
                             type="number"
-                            name="duracion"
-                            id="duracion"
+                            name="duracion_meses"
+                            id="duracion_meses"
                             class="form-control"
-                            value="{{-- duración del programa --}}"
+                            value="{{ old('duracion_meses', $programa->duracion_meses) }}"
                         >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalidad">
+                            <strong>Modalidad</strong>
+                        </label>
+                        <input type="text" name="modalidad" id="modalidad" class="form-control" value="{{ old('modalidad', $programa->modalidad) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jornada">
+                            <strong>Jornada</strong>
+                        </label>
+                        <input type="text" name="jornada" id="jornada" class="form-control" value="{{ old('jornada', $programa->jornada) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="titulo_otorgado">
+                            <strong>Título Otorgado</strong>
+                        </label>
+                        <input type="text" name="titulo_otorgado" id="titulo_otorgado" class="form-control" value="{{ old('titulo_otorgado', $programa->titulo_otorgado) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo_snies">
+                            <strong>Código SNIES</strong>
+                        </label>
+                        <input type="text" name="codigo_snies" id="codigo_snies" class="form-control" value="{{ old('codigo_snies', $programa->codigo_snies) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registro_calidad">
+                            <strong>Registro de Calidad</strong>
+                        </label>
+                        <input type="text" name="registro_calidad" id="registro_calidad" class="form-control" value="{{ old('registro_calidad', $programa->registro_calidad) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_registro">
+                            <strong>Fecha de Registro</strong>
+                        </label>
+                        <input type="date" name="fecha_registro" id="fecha_registro" class="form-control" value="{{ old('fecha_registro', optional($programa->fecha_registro)->format('Y-m-d')) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha_actualizacion">
+                            <strong>Fecha de Actualización</strong>
+                        </label>
+                        <input type="date" name="fecha_actualizacion" id="fecha_actualizacion" class="form-control" value="{{ old('fecha_actualizacion', optional($programa->fecha_actualizacion)->format('Y-m-d')) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="estado">
+                            <strong>Estado</strong>
+                        </label>
+                        <input type="text" name="estado" id="estado" class="form-control" value="{{ old('estado', $programa->estado) }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observaciones">
+                            <strong>Observaciones</strong>
+                        </label>
+                        <textarea name="observaciones" id="observaciones" class="form-control" rows="3">{{ old('observaciones', $programa->observaciones) }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="centro_id"><strong>Centro</strong></label>
+                        <select name="centro_id" id="centro_id" class="form-control">
+                            <option value="" disabled>Seleccione un centro</option>
+                            @foreach($centros as $centro)
+                                <option value="{{ $centro->id }}" {{ old('centro_id', $programa->centro_id) == $centro->id ? 'selected' : '' }}>{{ $centro->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="red_id"><strong>Red de Conocimiento</strong></label>
+                        <select name="red_id" id="red_id" class="form-control">
+                            <option value="" disabled>Seleccione una red</option>
+                            @foreach($redes as $red)
+                                <option value="{{ $red->id }}" {{ old('red_id', $programa->red_id) == $red->id ? 'selected' : '' }}>{{ $red->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nivel_formacion_id"><strong>Nivel de Formación</strong></label>
+                        <select name="nivel_formacion_id" id="nivel_formacion_id" class="form-control">
+                            <option value="" disabled>Seleccione un nivel</option>
+                            @foreach($nivel_formaciones as $nivel)
+                                <option value="{{ $nivel->id }}" {{ old('nivel_formacion_id', $programa->nivel_formacion_id) == $nivel->id ? 'selected' : '' }}>{{ $nivel->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cupos"><strong>Cupos</strong></label>
+                        <input type="number" name="cupos" id="cupos" class="form-control" value="{{ old('cupos', $programa->cupos) }}">
+                    </div>
                     </div>
 
                 </div>

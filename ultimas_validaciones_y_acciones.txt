@@ -1,0 +1,64 @@
+Fecha: 2026-01-23
+
+Resumen de las últimas validaciones y acciones realizadas
+
+1) Validación y corrección del flujo de bootstrap (owner key)
+- Problema: la interfaz de registro seguía solicitando la clave propietaria (`SYSTEM_OWNER_KEY`) aun después de la inicialización.
+- Causa raíz: la vista consultaba la variable de entorno/config (`config('System.initialized')`) mientras que el sistema usaba la tabla `system_settings` como fuente de la verdad.
+- Acción tomada: la vista de registro ahora consulta `SystemBootstrapService::systemIsInitialized()` (flag en BD) antes de mostrar el campo `owner_key`.
+- Persistencia verificada: se creó la fila `system_initialized=true` en la tabla `system_settings`.
+- Actualización implementada: la validación del `owner_key` ahora utiliza hashing seguro.
+  - Si existe `owner_key_hash` en `system_settings`, se valida con `password_verify`.
+  - Si no existe `owner_key_hash`, la app hace fallback a `SYSTEM_OWNER_KEY` en `.env` usando `hash_equals`; si coincide, la clave se hashea con `password_hash` y se guarda en `system_settings` como `owner_key_hash`.
+- Archivos relevantes:
+  - config/System.php
+  - app/Services/SystemBootstrapService.php
+  - app/Models/SystemSetting.php
+  - resources/views/auth/register.blade.php
+  - registration_algorithm.txt (documentación añadida)
+
+2) Seguridad y observaciones sobre `SYSTEM_OWNER_KEY`
+- Estado actual: la clave propietaria sigue cargada desde `.env` (config('System.owner_key')).
+- Riesgos: almacenamiento en texto plano; posibilidad de condiciones de carrera si varios usuarios intentan registrarse como propietario simultáneamente.
+- Recomendaciones (pendientes de implementar):
+  - Almacenar y comparar la clave usando hash seguro (bcrypt/argon2) en la BD.
+  - Añadir un comando artisan para inicializar/rotar la clave de forma controlada.
+  - Agregar bloqueo/transaction para evitar condiciones de carrera al marcar `system_initialized`.
+  - Registrar intentos fallidos y aplicar rate-limiting/auditoría.
+
+3) Módulo `Programas` — sincronización CRUD y migraciones
+- Cambios principales:
+  - `app/Models/Programa.php`: ampliado `$fillable`; añadida relación `centro()` y casts para fechas.
+  - `app/Http/Controllers/ProgramaController.php`: validación añadida en `store` y `update`; `create`/`edit` pasan colecciones necesarias (`redes`, `nivel_formaciones`, `centros`).
+  - Vistas actualizadas: `resources/views/programas/create.blade.php`, `edit.blade.php`, `index.blade.php`, `show.blade.php` para reflejar los campos del formulario.
+  - Nueva migración: `database/migrations/2026_01_23_200000_add_fields_to_programas_table.php` — añade columnas (`modalidad`, `jornada`, `titulo_otorgado`, `codigo_snies`, `registro_calidad`, `fecha_registro`, `fecha_actualizacion`, `estado`, `observaciones`, `centro_id`, `cupos`) y FK `centro_id`.
+- Pruebas locales realizadas:
+  - Se ejecutaron migraciones (`php artisan migrate`) y se creó/verify `programas` con datos de prueba.
+  - Se crearon registros auxiliares en `redes`, `nivel_formaciones`, `centros` para cumplir FKs y poder insertar un `Programa` de prueba.
+
+4) Rutas y UI global
+- Cambios realizados:
+  - Añadida ruta administrativa `programas.show` dentro del grupo autenticado y protegido por permiso (`can:programas.view`).
+  - `resources/views/home.blade.php` (dashboard) y tarjetas relacionadas actualizadas para preferir rutas administrativas cuando el usuario tiene permiso (`@can`), con fallback a las rutas públicas.
+- Archivos clave:
+  - routes/web.php
+  - resources/views/home.blade.php
+
+5) Documentación y artefactos creados
+- `registration_algorithm.txt`: documento con el algoritmo de registro y recomendaciones.
+- `ultimas_validaciones_y_acciones.txt`: (este archivo) resumen con especificaciones y recomendaciones.
+
+6) Pendientes y recomendaciones a corto-medio plazo
+- Implementar hashing/rotación de `owner_key` y migración asociada.
+- Crear comando `artisan system:bootstrap` para control manual del bootstrap inicial.
+- Añadir tests automatizados (Feature/Integration) para:
+  - Flujo de registro y asignación del primer administrador.
+  - Prevención de condiciones de carrera en el bootstrap.
+  - CRUD de `Programas` (store/update/show/index).
+- Añadir auditoría y rate-limiting para intentos de owner-key.
+
+7) Contactos/Notas finales
+- Todas las acciones fueron realizadas localmente en la rama activa (commits recientes en español según la preferencia solicitada).
+- Si se desea, puedo proceder con cualquiera de las recomendaciones pendientes: crear tests, endurecer owner-key, añadir comando artisan, o abrir un pull request.
+
+Fin del resumen.

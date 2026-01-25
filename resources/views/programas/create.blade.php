@@ -117,6 +117,193 @@
                         </select>
                     </div>
 
+                    <div>
+                        <label for="nivel_formacion_id">
+                            <strong>Nivel de Formación</strong>
+                        </label>
+                        <select
+                            name="nivel_formacion_id"
+                            id="nivel_formacion_id"
+                            class="form-control"
+                        >
+                            <option value="" disabled selected>
+                                Seleccione un nivel de formación
+                            </option>
+                            @foreach($nivel_formaciones as $nivel)
+                                <option value="{{ $nivel->id }}">
+                                    {{ $nivel->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="modalidad">
+                            <strong>Modalidad</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="modalidad"
+                            id="modalidad"
+                            class="form-control"
+                            placeholder="Ingrese la modalidad del programa"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="jornada">
+                            <strong>Jornada</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="jornada"
+                            id="jornada"
+                            class="form-control"
+                            placeholder="Ingrese la jornada del programa"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="titulo_otorgado">
+                            <strong>Título Otorgado</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="titulo_otorgado"
+                            id="titulo_otorgado"
+                            class="form-control"
+                            placeholder="Ingrese el título otorgado por el programa"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="codigo_snies">
+                            <strong>Código SNIES</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="codigo_snies"
+                            id="codigo_snies"
+                            class="form-control"
+                            placeholder="Ingrese el código SNIES del programa"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="registro_calidad">
+                            <strong>Registro de Calidad</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="registro_calidad"
+                            id="registro_calidad"
+                            class="form-control"
+                            placeholder="Ingrese el registro de calidad del programa"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="fecha_registro">
+                            <strong>Fecha de Registro</strong>
+                        </label>
+                        <input
+                            type="date"
+                            name="fecha_registro"
+                            id="fecha_registro"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="fecha_actualizacion">
+                            <strong>Fecha de Actualización</strong>
+                        </label>
+                        <input
+                            type="date"
+                            name="fecha_actualizacion"
+                            id="fecha_actualizacion"
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="estado">
+                            <strong>Estado</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="estado"
+                            id="estado"
+                            class="form-control"
+                            placeholder="Ingrese el estado del programa"
+                        >
+                    </div>
+
+                    <div>
+                        <label for="observaciones">
+                            <strong>Observaciones</strong>
+                        </label>
+                        <textarea
+                            name="observaciones"
+                            id="observaciones"
+                            class="form-control"
+                            rows="3"
+                            placeholder="Ingrese las observaciones del programa"
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label for="centro_id">
+                            <strong>Nivel de Formación</strong>
+                        </label>
+                        <select
+                            name="centro_id"
+                            id="centro_id"
+                            class="form-control"
+                        >
+                            <option value="" disabled selected>
+                                Seleccione un centro de formación
+                            </option>
+                            @foreach($centros as $centro)
+                                <option value="{{ $centro->id }}">
+                                    {{ $centro->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="red_id">
+                            <strong>Nivel de Formación</strong>
+                        </label>
+                        <select
+                            name="red_id"
+                            id="red_id"
+                            class="form-control"
+                        >
+                            <option value="" disabled selected>
+                                Seleccione una red de conocimiento
+                            </option>
+                            @foreach($redes as $red)
+                                <option value="{{ $red->id }}">
+                                    {{ $red->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="cupos">
+                            <strong>Cupos</strong>
+                        </label>
+                        <input
+                            type="number"
+                            name="cupos"
+                            id="cupos"
+                            class="form-control"
+                            placeholder="Ingrese el número de cupos del programa"
+                        >
+                    </div>
                 </div>
 
                 {{-- FOOTER --}}

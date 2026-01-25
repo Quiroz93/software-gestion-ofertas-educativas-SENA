@@ -225,7 +225,11 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href=""><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            @can('centros.view')
+              <a href="{{ route('centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            @else
+              <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            @endcan
             <h6 class="fw-bold">Centros</h6>
             <p class="text-muted small">
               Centros de formación.
@@ -238,7 +242,11 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            @can('programas.view')
+              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            @else
+              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            @endcan
             <h6 class="fw-bold">Programas</h6>
             <p class="text-muted small">
               Programas educativos.
@@ -251,10 +259,12 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href=""><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i>
-            </a>
+            @can('ofertas.view')
+              <a href="{{ route('ofertas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            @else
+              <a href="{{ route('public.ofertas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            @endcan
 
-            
             <h6 class="fw-bold">Ofertas</h6>
             <p class="text-muted small">
               Ofertas educativas vigentes.
@@ -284,7 +294,11 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href=""><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            @can('instructores.view')
+              <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            @else
+              <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            @endcan
             <h6 class="fw-bold">Instructores</h6>
             <p class="text-muted small">
               Perfil de nuestros instructores
@@ -297,7 +311,11 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href=""><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            @can('historias_de_exito.view')
+              <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            @else
+              <a href="{{ route('public.historias-exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            @endcan
             <h6 class="fw-bold">Historias</h6>
             <p class="text-muted small">
               Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes
