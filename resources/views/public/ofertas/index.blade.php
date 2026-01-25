@@ -1,9 +1,5 @@
 @extends('layouts.public')
 
-<div>
-    <!-- No surplus words or unnecessary actions. - Marcus Aurelius -->
-</div>
-
 @section('title', 'Ofertas Educativas | Centro CATA')
 
 @section('content')
@@ -97,38 +93,38 @@
                     <div class="card h-100 shadow-sm border-0">
 
                         {{-- Imagen de la oferta --}}
-                        <img src="{{ $oferta->imagen
-                            ? asset('storage/' . $oferta->imagen)
+                        <img src="{{ $oferta->custom('imagen')
+                            ? asset('storage/' . $oferta->custom('imagen'))
                             : asset('images/ofertas/default.jpg') }}"
                              class="card-img-top"
-                             alt="{{ $oferta->titulo }}">
+                             alt="{{ $oferta->nombre }}">
 
                         <div class="card-body d-flex flex-column">
 
                             <h5 class="card-title">
-                                {{ $oferta->titulo }}
+                                {{ $oferta->custom('titulo', $oferta->nombre) }}
                             </h5>
 
                             <p class="card-text text-muted">
-                                {{ Str::limit($oferta->descripcion, 120) }}
+                                {{ Str::limit($oferta->custom('descripcion', ''), 120) }}
                             </p>
 
                             <ul class="list-unstyled small mb-3">
                                 <li>
                                     <strong>Inicio:</strong>
-                                    {{ $oferta->fecha_inicio?->format('d/m/Y') }}
+                                    {{ is_string($oferta->fecha_inicio) ? \Carbon\Carbon::parse($oferta->fecha_inicio)->format('d/m/Y') : $oferta->fecha_inicio?->format('d/m/Y') }}
                                 </li>
                                 <li>
                                     <strong>Fin:</strong>
-                                    {{ $oferta->fecha_fin?->format('d/m/Y') }}
+                                    {{ is_string($oferta->fecha_fin) ? \Carbon\Carbon::parse($oferta->fecha_fin)->format('d/m/Y') : $oferta->fecha_fin?->format('d/m/Y') }}
                                 </li>
                                 <li>
                                     <strong>Modalidad:</strong>
-                                    {{ $oferta->modalidad }}
+                                    {{ $oferta->custom('modalidad', 'N/A') }}
                                 </li>
                             </ul>
 
-                            <a href="{{ route('public.ofertas.show', $oferta) }}"
+                            <a href="{{ route('public.ofertas.show', $oferta->id) }}"
                                class="btn btn-outline-primary mt-auto">
                                 Ver detalles
                             </a>
@@ -173,38 +169,4 @@
     </div>
 </section>
 
-@endsection
-
-@section('scripts')
-@endsection
-
-@section('styles')
-@can('public_content.edit')
-<style>
-    .editable {
-        position: relative;
-        cursor: pointer;
-    }
-
-    .editable:hover {
-        outline: 2px dashed #ffc107;
-        background-color: rgba(255, 193, 7, 0.1);
-        transition: all 0.2s ease;
-    }
-
-    .editable:hover::after {
-        content: '\f4cb'; /* Bootstrap Icon pencil-square */
-        font-family: 'bootstrap-icons';
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background: #ffc107;
-        color: #000;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-</style>
-@endcan
 @endsection

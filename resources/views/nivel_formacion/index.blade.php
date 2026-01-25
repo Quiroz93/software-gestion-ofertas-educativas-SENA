@@ -21,13 +21,14 @@
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>
+
     </div>
 </div>
 @stop
 
 @section('content')
 
-@if($niveles_formacion->isEmpty())
+@if($nivel_formaciones->isEmpty())
     <div class="alert alert-info">
         <i class="fas fa-info-circle"></i>
         No existen niveles de formación registrados.

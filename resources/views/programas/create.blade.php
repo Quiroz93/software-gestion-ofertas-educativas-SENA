@@ -87,6 +87,35 @@
                             placeholder="Ingrese la duración en meses"
                         >
                     </div>
+                    <div>
+                        <label for="red_id">
+                            <strong>Red de Conocimiento</strong>
+                        </label>
+                        <select
+                            name="red_id"
+                            id="red_id"
+                            class="form-control"
+                        >
+                            @foreach ($redes as $red)
+                                <option value="{{ $red->id }}">{{ $red->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="nivel_formacion_id">
+                            <strong>Nivel de Formación</strong>
+                        </label>
+                        <select
+                            name="nivel_formacion_id"
+                            id="nivel_formacion_id"
+                            class="form-control"
+                        >
+                            @foreach ($nivelFormacion as $nivel)
+                                <option value="{{ $nivel->id }}">{{ $nivel->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div>
                         <label for="nivel_formacion_id">

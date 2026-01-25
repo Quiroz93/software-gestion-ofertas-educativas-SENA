@@ -51,7 +51,7 @@
                 <p class="mb-2">
                     <strong>Año:</strong>
                     <span class="badge badge-secondary">
-                        {{ $oferta->anio }}
+                        {{ $oferta->año }}
                     </span>
                 </p>
 

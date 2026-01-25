@@ -15,6 +15,7 @@ class Programa extends Model
         'descripcion',
         'requisitos',
         'duracion_meses',
+        //'modalidad',
         'red_id',
         'nivel_formacion_id',
         'modalidad',
