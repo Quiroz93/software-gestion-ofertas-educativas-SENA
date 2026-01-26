@@ -259,10 +259,10 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('ofertas.view')
-              <a href="{{ route('ofertas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            @can('ofertasEducativas.view')
+              <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.ofertas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+              <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
             @endcan
 
             <h6 class="fw-bold">Ofertas</h6>

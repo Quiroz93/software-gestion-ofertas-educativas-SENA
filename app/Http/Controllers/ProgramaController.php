@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NivelFormacion;
 use App\Models\Programa;
 use App\Models\NivelFormacion;
-use App\Models\Red;
 use App\Models\Centro;
 use App\Models\Red;
 use Illuminate\Http\Request;
