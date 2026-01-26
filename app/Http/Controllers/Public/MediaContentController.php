@@ -24,7 +24,7 @@ class MediaContentController extends Controller
     }
 
     /**
-     * Listar archivos multimedia existentes
+     * Listar archivos multimedia existentes (con paginación)
      * 
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -34,13 +34,33 @@ class MediaContentController extends Controller
         try {
             $type = $request->get('type', 'image');
             $category = $request->get('category', 'general');
+            $page = $request->get('page', 1);
+            $perPage = 12; // 12 archivos por página (grid 3x4)
 
-            $files = $this->mediaService->listFiles($type, $category);
+            // Obtener todos los archivos
+            $allFiles = $this->mediaService->listFiles($type, $category);
+
+            // Paginar manualmente (los resultados ya están ordenados)
+            $total = count($allFiles);
+            $totalPages = ceil($total / $perPage);
+            $page = max(1, min($page, $totalPages)); // Asegurar página válida
+            
+            $start = ($page - 1) * $perPage;
+            $paginatedFiles = array_slice($allFiles, $start, $perPage);
 
             return response()->json([
                 'success' => true,
-                'files' => $files,
-                'count' => count($files)
+                'files' => $paginatedFiles,
+                'pagination' => [
+                    'page' => (int)$page,
+                    'per_page' => $perPage,
+                    'total' => $total,
+                    'total_pages' => $totalPages,
+                    'has_next' => $page < $totalPages,
+                    'has_prev' => $page > 1,
+                    'next_page' => $page < $totalPages ? $page + 1 : null,
+                    'prev_page' => $page > 1 ? $page - 1 : null
+                ]
             ]);
 
         } catch (\Exception $e) {
