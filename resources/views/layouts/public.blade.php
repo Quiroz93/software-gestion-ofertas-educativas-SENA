@@ -13,10 +13,7 @@
 {{-- Favicon --}}
 <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
 
-{{-- Bootstrap 5 --}}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-{{-- Bootstrap Icons --}}
+{{-- Bootstrap Icons (AdminLTE usa Bootstrap 4) --}}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @endsection
 
@@ -60,8 +57,8 @@
             SOESoftware
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarPublic" aria-controls="navbarPublic"
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarPublic" aria-controls="navbarPublic"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -125,9 +122,6 @@
     </div>
 </footer>
 
-{{-- Bootstrap JS --}}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 @endsection
 
 @section('js')
@@ -139,7 +133,9 @@
 
             <div class="modal-header">
                 <h5 class="modal-title">Editar contenido</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <div class="modal-body">
@@ -160,7 +156,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal">
+                    data-dismiss="modal">
                     Cancelar
                 </button>
                 <button type="button" class="btn btn-primary" id="saveContentBtn">
@@ -173,89 +169,76 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const modalEl = document.getElementById('editContentModal');
-        const modal = new bootstrap.Modal(modalEl);
-
+    $(function () {
+        const $modal = $('#editContentModal');
+        const $value = $('#cc-value');
         let currentEditable = null;
 
         // 1️⃣ Click sobre elemento editable
-        document.querySelectorAll('.editable').forEach(el => {
-            el.addEventListener('click', () => {
+        $('.editable').on('click', function () {
+            currentEditable = this;
 
-                currentEditable = el;
+            $('#cc-model').val(this.dataset.model);
+            $('#cc-model-id').val(this.dataset.modelId);
+            $('#cc-key').val(this.dataset.key);
+            $('#cc-type').val(this.dataset.type);
 
-                document.getElementById('cc-model').value = el.dataset.model;
-                document.getElementById('cc-model-id').value = el.dataset.modelId;
-                document.getElementById('cc-key').value = el.dataset.key;
-                document.getElementById('cc-type').value = el.dataset.type;
+            $value.val(this.innerText.trim());
 
-                document.getElementById('cc-value').value =
-                    el.innerText.trim();
-
-                modal.show();
-            });
+            $modal.modal('show');
         });
 
         // 2️⃣ Guardar contenido
-        document.getElementById('saveContentBtn')
-            .addEventListener('click', () => {
+        $('#saveContentBtn').on('click', () => {
+            const payload = {
+                model: $('#cc-model').val(),
+                model_id: $('#cc-model-id').val(),
+                key: $('#cc-key').val(),
+                value: $value.val(),
+                type: $('#cc-type').val(),
+            };
 
-                const payload = {
-                    model: document.getElementById('cc-model').value,
-                    model_id: document.getElementById('cc-model-id').value,
-                    key: document.getElementById('cc-key').value,
-                    value: document.getElementById('cc-value').value,
-                    type: document.getElementById('cc-type').value,
-                };
+            fetch("{{ route('public.content.store') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector(
+                            'meta[name="csrf-token"]'
+                        ).getAttribute('content')
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(async res => {
+                    const contentType = res.headers.get('content-type');
+                    if (contentType && contentType.includes('text/html')) {
+                        throw new Error('Error del servidor. Por favor, verifica tus permisos o contacta al administrador.');
+                    }
 
-                fetch("{{ route('public.content.store') }}", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": document.querySelector(
-                                'meta[name="csrf-token"]'
-                            ).getAttribute('content')
-                        },
-                        body: JSON.stringify(payload)
-                    })
-                    .then(async res => {
-                        // Detectar si la respuesta es HTML (error de servidor)
-                        const contentType = res.headers.get('content-type');
-                        if (contentType && contentType.includes('text/html')) {
-                            throw new Error('Error del servidor. Por favor, verifica tus permisos o contacta al administrador.');
+                    if (!res.ok) {
+                        const err = await res.json();
+
+                        if (err.errors) {
+                            const errorMessages = Object.values(err.errors).flat().join('\n');
+                            throw new Error('Errores de validación:\n' + errorMessages);
                         }
-                        
-                        if (!res.ok) {
-                            const err = await res.json();
-                            
-                            // Si hay errores de validación específicos, mostrarlos
-                            if (err.errors) {
-                                const errorMessages = Object.values(err.errors).flat().join('\n');
-                                throw new Error('Errores de validación:\n' + errorMessages);
-                            }
-                            
-                            throw new Error(err.message || 'Error al guardar');
-                        }
-                        return res.json();
-                    })
-                    .then(data => {
 
-                        // Actualiza el contenido en la vista
+                        throw new Error(err.message || 'Error al guardar');
+                    }
+                    return res.json();
+                })
+                .then(() => {
+                    if (currentEditable) {
                         currentEditable.innerText = payload.value;
+                    }
 
-                        modal.hide();
-                        
-                        // Mensaje de éxito
-                        alert('Contenido actualizado correctamente');
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        alert('Error al guardar el contenido: ' + error.message);
-                    });
-            });
-
+                    $modal.modal('hide');
+                    alert('Contenido actualizado correctamente');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Error al guardar el contenido: ' + error.message);
+                });
+        });
     });
 </script>
 @endcan
