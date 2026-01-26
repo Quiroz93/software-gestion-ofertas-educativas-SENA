@@ -19,10 +19,22 @@ return new class extends Migration
             $table->integer('duracion_meses')->nullable();
             $table->unsignedBigInteger('red_id');
             $table->unsignedBigInteger('nivel_formacion_id');
+            $table->string('modalidad')->nullable();
+            $table->string('jornada')->nullable();
+            $table->string('titulo_otorgado')->nullable();
+            $table->string('codigo_snies')->nullable();
+            $table->string('registro_calidad')->nullable();
+            $table->date('fecha_registro')->nullable();
+            $table->date('fecha_actualizacion')->nullable();
+            $table->string('estado')->nullable();
+            $table->text('observaciones')->nullable();
+            $table->unsignedBigInteger('centro_id')->nullable();
+            $table->integer('cupos')->nullable();
             $table->timestamps();
 
             $table->foreign('red_id')->references('id')->on('redes')->onDelete('cascade');
             $table->foreign('nivel_formacion_id')->references('id')->on('nivel_formaciones')->onDelete('cascade');
+            $table->foreign('centro_id')->references('id')->on('centros')->onDelete('set null');
         });
     }
 
