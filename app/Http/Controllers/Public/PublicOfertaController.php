@@ -15,13 +15,13 @@ class PublicOfertaController extends Controller
             ->orderBy('fecha_inicio')
             ->get();
 
-        return view('public.ofertasEducativas.index', compact('ofertas'));
+        return view('public.ofertas.index', compact('ofertas'));
     }
 
     public function show(Oferta $oferta)
     {
         abort_unless($oferta->estado === 'activo', 404);
 
-        return view('public.ofertasEducativas.show', compact('oferta'));
+        return view('public.ofertas.show', compact('oferta'));
     }
 }

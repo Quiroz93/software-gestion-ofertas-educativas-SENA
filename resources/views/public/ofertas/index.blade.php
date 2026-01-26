@@ -124,7 +124,7 @@
                                 </li>
                             </ul>
 
-                            <a href="{{ route('public.ofertas.show', $oferta->id) }}"
+                            <a href="{{ route('public.ofertasEducativas.show', $oferta->id) }}"
                                class="btn btn-outline-primary mt-auto">
                                 Ver detalles
                             </a>
