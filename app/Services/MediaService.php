@@ -80,18 +80,22 @@ class MediaService
                 'url' => Storage::disk($this->disk)->url($file),
                 'name' => basename($file),
                 'size' => Storage::disk($this->disk)->size($file),
-                'modified' => Storage::disk($this->disk)->lastModified($file)
+                'modified' => Storage::disk($this->disk)->lastModified($file),
+                'is_gif' => strtolower(pathinfo($file, PATHINFO_EXTENSION)) === 'gif'
             ];
 
-            // 🖼️ Agregar URL de thumbnail si existe
-            if ($type === 'image' || $type === 'gif') {
+            // 🖼️ Agregar URL de thumbnail si existe (NO para GIFs)
+            if ($type === 'image' && !$fileData['is_gif']) {
                 $thumbPath = str_replace('media/', 'media/thumbnails/', $file);
                 if (Storage::disk($this->disk)->exists($thumbPath)) {
                     $fileData['thumbnail_url'] = Storage::disk($this->disk)->url($thumbPath);
                 } else {
-                    // Si no existe thumbnail, generar dinámicamente (fallback)
-                    $fileData['thumbnail_url'] = $fileData['url']; // Usar imagen original como fallback
+                    // Si no existe thumbnail, usar imagen original como fallback
+                    $fileData['thumbnail_url'] = $fileData['url'];
                 }
+            } elseif ($type === 'gif') {
+                // Para GIFs, siempre usar la URL original (mostrar animado)
+                $fileData['thumbnail_url'] = $fileData['url'];
             }
 
             return $fileData;
