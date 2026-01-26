@@ -220,11 +220,23 @@
                         },
                         body: JSON.stringify(payload)
                     })
-                    .then(res => {
+                    .then(async res => {
+                        // Detectar si la respuesta es HTML (error de servidor)
+                        const contentType = res.headers.get('content-type');
+                        if (contentType && contentType.includes('text/html')) {
+                            throw new Error('Error del servidor. Por favor, verifica tus permisos o contacta al administrador.');
+                        }
+                        
                         if (!res.ok) {
-                            return res.json().then(err => {
-                                throw new Error(err.message || 'Error al guardar');
-                            });
+                            const err = await res.json();
+                            
+                            // Si hay errores de validación específicos, mostrarlos
+                            if (err.errors) {
+                                const errorMessages = Object.values(err.errors).flat().join('\n');
+                                throw new Error('Errores de validación:\n' + errorMessages);
+                            }
+                            
+                            throw new Error(err.message || 'Error al guardar');
                         }
                         return res.json();
                     })

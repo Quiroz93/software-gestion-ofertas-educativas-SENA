@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class CustomContent extends Model
 {
     protected $fillable = [
+        'contentable_type',
+        'contentable_id',
         'key',
         'value',
         'type',

@@ -20,24 +20,25 @@
                 <h1 class="display-5 fw-bold editable"
                     data-model="oferta"
                     data-model-id="0"
-                    data-key="banner_title">
-                    Primera Oferta Educativa
-                    Centro SENA CATA
+                    data-key="banner_title"
+                    data-type="text">
+                    {{ getCustomContent('oferta', 'banner_title', 'Primera Oferta Educativa Centro SENA CATA') }}
                 </h1>
 
                 <p class="lead mt-3 editable"
                    data-model="oferta"
                    data-model-id="0"
-                   data-key="banner_subtitle">
-                    Centro Agro Empresarial y Turístico de los Andes
+                   data-key="banner_subtitle"
+                   data-type="text">
+                    {{ getCustomContent('oferta', 'banner_subtitle', 'Centro Agro Empresarial y Turístico de los Andes') }}
                 </p>
 
                 <p class="mt-4 editable"
                    data-model="oferta"
                    data-model-id="0"
-                   data-key="banner_slogan">
-                    Fórmate hoy para transformar tu futuro profesional
-                    con educación pertinente, gratuita y de alta calidad.
+                   data-key="banner_slogan"
+                   data-type="text">
+                    {{ getCustomContent('oferta', 'banner_slogan', 'Fórmate hoy para transformar tu futuro profesional con educación pertinente, gratuita y de alta calidad.') }}
                 </p>
 
             </div>
@@ -54,17 +55,18 @@
         <h2 class="fw-bold mb-3 editable"
             data-model="oferta"
             data-model-id="0"
-            data-key="motivational_title">
-            Educación que transforma regiones
+            data-key="motivational_title"
+            data-type="text">
+            {{ getCustomContent('oferta', 'motivational_title', 'Educación que transforma regiones') }}
         </h2>
 
         <p class="lead editable"
            data-model="oferta"
            data-model-id="0"
-           data-key="motivational_text">
-            En el Centro CATA formamos talento humano con competencias
-            reales para el sector agroempresarial y turístico,
-            contribuyendo al desarrollo sostenible de los Andes.
+           data-key="motivational_text"
+           data-type="text">
+            {{ getCustomContent('oferta', 'motivational_text', 'En el Centro CATA formamos talento humano con competencias reales para el sector agroempresarial y turístico, contribuyendo al desarrollo sostenible de los Andes.') }}
+        </p>
         </p>
 
     </div>
@@ -154,16 +156,18 @@
         <h2 class="fw-bold editable"
             data-model="oferta"
             data-model-id="0"
-            data-key="cta_title">
-            Inscripciones abiertas
+            data-key="cta_title"
+            data-type="text">
+            {{ getCustomContent('oferta', 'cta_title', 'Inscripciones abiertas') }}
         </h2>
 
         <p class="lead editable"
            data-model="oferta"
            data-model-id="0"
-           data-key="cta_text">
-            Da el primer paso hacia tu proyecto de vida.
-            La formación que necesitas está a tu alcance.
+           data-key="cta_text"
+           data-type="text">
+            {{ getCustomContent('oferta', 'cta_text', 'Da el primer paso hacia tu proyecto de vida. La formación que necesitas está a tu alcance.') }}
+        </p>
         </p>
 
     </div>
