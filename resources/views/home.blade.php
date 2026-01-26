@@ -314,7 +314,7 @@
             @can('historias_de_exito.view')
               <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.historias-exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+              <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Historias</h6>
             <p class="text-muted small">
