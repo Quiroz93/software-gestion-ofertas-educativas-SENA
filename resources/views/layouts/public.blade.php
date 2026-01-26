@@ -463,14 +463,28 @@
                 html += `
                     <div class="col-md-3 col-sm-4 col-6">
                         <div class="card file-card h-100" 
-                             style="cursor: pointer; transition: all 0.2s;"
-                             data-file='${JSON.stringify(file)}'>
+                             style="cursor: pointer; transition: all 0.2s; position: relative;"
+                             data-file='${JSON.stringify(file)}'
+                             data-file-path='${file.path}'>
                             <div class="card-body p-2">
                                 ${mediaTag}
+                                
+                                <!-- Botón eliminar flotante -->
+                                <button type="button" class="btn btn-sm btn-danger delete-file-btn" 
+                                        style="position: absolute; top: 5px; left: 5px; opacity: 0; transition: opacity 0.2s; padding: 3px 6px; font-size: 0.75rem;"
+                                        title="Eliminar archivo">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                
                                 <small class="d-block mt-2 text-truncate" title="${file.name}">
                                     ${file.name}
                                 </small>
                                 <small class="d-block text-muted">(${formatFileSize(file.size)})</small>
+                                
+                                <!-- Metadata adicional -->
+                                <small class="d-block text-muted" style="font-size: 0.7rem;">
+                                    ${new Date(file.modified * 1000).toLocaleDateString()}
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -484,8 +498,34 @@
                 initLazyLoading();
             }
 
+            // Eventos para mostrar botón eliminar al pasar mouse
+            $('.file-card').on('mouseenter', function() {
+                $(this).find('.delete-file-btn').stop().fadeIn(200);
+            }).on('mouseleave', function() {
+                $(this).find('.delete-file-btn').stop().fadeOut(200);
+            });
+
+            // Evento para eliminar archivo
+            $('.delete-file-btn').on('click', function(e) {
+                e.stopPropagation(); // Evitar que se seleccione el archivo
+                
+                const filePath = $(this).closest('.file-card').attr('data-file-path');
+                const fileName = $(this).closest('.file-card').find('small').first().text();
+                
+                if (!confirm(`¿Estás seguro de que deseas eliminar "${fileName}"?`)) {
+                    return;
+                }
+                
+                deleteFileFromServer(filePath, $(this).closest('.col-md-3, .col-sm-4, .col-6'));
+            });
+
             // Click para seleccionar archivo
-            $('.file-card').on('click', function() {
+            $('.file-card').on('click', function(e) {
+                // No seleccionar si el clic fue en el botón eliminar
+                if ($(e.target).closest('.delete-file-btn').length) {
+                    return;
+                }
+                
                 // Remover selección previa
                 $('.file-card').removeClass('border-primary').css('border-width', '1px');
                 
@@ -498,7 +538,48 @@
                 console.log('Archivo seleccionado:', selectedFile);
             });
         }
-
+        // 🗑️ Eliminar archivo del servidor
+        function deleteFileFromServer(filePath, cardElement) {
+            fetch('/public/media/delete', {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ file_path: filePath })
+            })
+            .then(res => {
+                if (!res.ok) throw new Error('Error al eliminar archivo');
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Remover tarjeta con animación
+                    cardElement.fadeOut(300, function() {
+                        $(this).remove();
+                        
+                        // Mostrar mensaje si grid está vacío
+                        if ($('#filesGrid .col-md-3, #filesGrid .col-sm-4, #filesGrid .col-6').length === 0) {
+                            $('#filesGrid').html(`
+                                <div class="col-12 text-center py-5">
+                                    <i class="bi bi-inbox" style="font-size: 3rem; color: #6c757d;"></i>
+                                    <p class="text-muted mt-3 mb-0">No hay archivos en esta categoría</p>
+                                    <small class="text-muted">Usa la pestaña "Subir nuevo" para agregar archivos</small>
+                                </div>
+                            `);
+                        }
+                    });
+                    
+                    alert('✅ Archivo eliminado correctamente');
+                } else {
+                    throw new Error(data.message || 'Error desconocido');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('❌ Error al eliminar archivo: ' + error.message);
+            });
+        }
         // � Implementar búsqueda de archivos
         $('#fileSearchInput').on('keyup', function() {
             const query = $(this).val().toLowerCase();
