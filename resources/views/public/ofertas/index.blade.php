@@ -9,8 +9,12 @@
 {{-- ===================== --}}
 <section class="bg-ligth text-white position-relative" style="font-family: 'worksans sans-serif';">
 
-    <img src="{{ asset('images/banners/oferta-cata.jpg') }}"
-         class="w-100 position-absolute top-0 start-0 h-100 object-fit-cover opacity-50"
+    <img src="{{ asset('images/oferta4.jpeg') }}"
+         class="w-100 position-absolute top-0 start-0 h-100 object-fit-cover opacity-50 editable"
+         data-model="oferta"
+         data-model-id="0"
+         data-key="banner_image"
+         data-type="image"
          alt="Oferta educativa CATA">
 
     <div class="container position-relative py-5 text-dark">
@@ -45,6 +49,12 @@
         </div>
     </div>
 </section>
+
+@can('public_content.edit')
+    <div class="alert alert-info">
+        Modo edición activado - Haz clic en cualquier elemento editable
+    </div>
+@endcan
 
 {{-- ===================== --}}
 {{-- Sección motivacional --}}
