@@ -297,7 +297,15 @@
         function showMediaEditor(type) {
             $('#textEditor').hide();
             $('#mediaEditor').show();
-            $('#editContentModalLabel').text(type === 'image' ? 'Editar imagen' : 'Editar video');
+            
+            // Determinar etiqueta según tipo
+            let title = 'Editar imagen';
+            if (type === 'video') {
+                title = 'Editar video';
+            } else if (type === 'gif') {
+                title = 'Editar GIF animado';
+            }
+            $('#editContentModalLabel').text(title);
             
             selectedFile = null; // Reset archivo seleccionado
 
@@ -313,8 +321,21 @@
                             Tu navegador no soporta el elemento video.
                         </video>
                     `);
+                } else if (type === 'gif') {
+                    // Preview para GIFs animados - mostrar etiqueta GIF
+                    $('#currentMediaPreview').html(`
+                        <div style="position: relative; display: inline-block; width: 100%;">
+                            <img src="${currentSrc}" 
+                                 alt="GIF actual"
+                                 class="img-fluid"
+                                 style="max-height: 150px; max-width: 100%;">
+                            <span style="position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.8); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">
+                                GIF ANIMADO
+                            </span>
+                        </div>
+                    `);
                 } else {
-                    // Preview para imágenes
+                    // Preview para imágenes normales
                     $('#currentMediaPreview').html(`
                         <img src="${currentSrc}" 
                              alt="Imagen actual"
@@ -389,6 +410,7 @@
 
             files.forEach(file => {
                 const isVideo = type === 'video';
+                const isGif = file.is_gif; // Detectar GIFs
                 
                 // Para videos, usar poster si está disponible
                 // Para imágenes, usar thumbnail
@@ -412,6 +434,19 @@
                                  style="width: 100%; height: 120px; object-fit: cover; background: #222;">
                             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                 <i class="bi bi-play-circle" style="font-size: 2.5rem; color: rgba(255,255,255,0.8);"></i>
+                            </div>
+                        </div>
+                    `;
+                } else if (isGif) {
+                    // GIF animado - mostrar con badge animado
+                    mediaTag = `
+                        <div style="position: relative; width: 100%; height: 120px; overflow: hidden;">
+                            <img src="${displayUrl}" alt="${file.name}" 
+                                 class="img-fluid lazy-load" 
+                                 data-src="${displayUrl}"
+                                 style="width: 100%; height: 120px; object-fit: cover; background: #f0f0f0;">
+                            <div style="position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.7rem; font-weight: bold;">
+                                GIF
                             </div>
                         </div>
                     `;

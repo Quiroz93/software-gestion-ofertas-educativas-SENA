@@ -64,8 +64,12 @@ class MediaContentController extends Controller
         try {
             $this->authorize('public_content.edit');
 
+            // Determinar límite de tamaño según tipo
+            // GIFs: 10MB, otros: 50MB
+            $maxSize = $request->type === 'gif' ? 10240 : 51200; // KB
+
             $request->validate([
-                'file' => 'required|file|mimes:jpeg,jpg,png,gif,webp,mp4,webm,ogv|max:51200', // 50MB
+                'file' => 'required|file|mimes:jpeg,jpg,png,gif,webp,mp4,webm,ogv|max:' . $maxSize,
                 'type' => 'required|in:image,video,gif',
                 'category' => 'required|string|alpha_dash|max:50'
             ]);
