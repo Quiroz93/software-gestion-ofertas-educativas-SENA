@@ -76,6 +76,22 @@ class MediaContentController extends Controller
                 $request->category
             );
 
+            // 🖼️ Generar thumbnail para imágenes
+            if ($request->type === 'image' || $request->type === 'gif') {
+                $thumbUrl = $this->mediaService->generateThumbnail($result['file_path']);
+                if ($thumbUrl) {
+                    $result['thumbnail_url'] = $thumbUrl;
+                }
+            }
+
+            // 🎬 Generar poster para videos
+            if ($request->type === 'video') {
+                $posterUrl = $this->mediaService->generateVideoPoster($result['file_path']);
+                if ($posterUrl) {
+                    $result['poster_url'] = $posterUrl;
+                }
+            }
+
             return response()->json($result);
 
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {

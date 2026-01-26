@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class MediaService
 {
@@ -73,14 +74,27 @@ class MediaService
 
         $files = Storage::disk($this->disk)->files($path);
 
-        return collect($files)->map(function ($file) {
-            return [
+        return collect($files)->map(function ($file) use ($type) {
+            $fileData = [
                 'path' => $file,
                 'url' => Storage::disk($this->disk)->url($file),
                 'name' => basename($file),
                 'size' => Storage::disk($this->disk)->size($file),
                 'modified' => Storage::disk($this->disk)->lastModified($file)
             ];
+
+            // 🖼️ Agregar URL de thumbnail si existe
+            if ($type === 'image' || $type === 'gif') {
+                $thumbPath = str_replace('media/', 'media/thumbnails/', $file);
+                if (Storage::disk($this->disk)->exists($thumbPath)) {
+                    $fileData['thumbnail_url'] = Storage::disk($this->disk)->url($thumbPath);
+                } else {
+                    // Si no existe thumbnail, generar dinámicamente (fallback)
+                    $fileData['thumbnail_url'] = $fileData['url']; // Usar imagen original como fallback
+                }
+            }
+
+            return $fileData;
         })->sortByDesc('modified')->values()->toArray();
     }
 
@@ -102,6 +116,92 @@ class MediaService
         }
 
         return $deleted;
+    }
+
+    /**
+     * Generar thumbnail para una imagen
+     * 
+     * @param string $filePath
+     * @param int $width
+     * @param int $height
+     * @return string|null (URL del thumbnail o null si error)
+     */
+    public function generateThumbnail(string $filePath, int $width = 200, int $height = 150): ?string
+    {
+        try {
+            // Verificar que el archivo existe
+            if (!Storage::disk($this->disk)->exists($filePath)) {
+                return null;
+            }
+
+            // Crear ruta de thumbnail
+            $thumbPath = str_replace('media/', 'media/thumbnails/', $filePath);
+            $thumbDir = dirname($thumbPath);
+
+            // Asegurar que el directorio de thumbnails existe
+            if (!Storage::disk($this->disk)->exists($thumbDir)) {
+                Storage::disk($this->disk)->makeDirectory($thumbDir);
+            }
+
+            // Obtener ruta completa del archivo original
+            $fullPath = Storage::disk($this->disk)->path($filePath);
+
+            // Crear y redimensionar imagen usando Intervention
+            $image = Image::read($fullPath)
+                ->cover($width, $height);
+
+            // Guardar thumbnail
+            $thumbFullPath = Storage::disk($this->disk)->path($thumbPath);
+            $image->save($thumbFullPath, quality: 85);
+
+            return Storage::disk($this->disk)->url($thumbPath);
+        } catch (\Exception $e) {
+            \Log::warning("Error generando thumbnail para {$filePath}: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Generar poster para un video
+     * 
+     * @param string $filePath
+     * @return string|null (URL del poster o null si error)
+     */
+    public function generateVideoPoster(string $filePath): ?string
+    {
+        try {
+            // Verificar que el archivo existe
+            if (!Storage::disk($this->disk)->exists($filePath)) {
+                return null;
+            }
+
+            // Crear ruta de poster
+            $posterPath = str_replace(['media/videos/', '.mp4', '.webm', '.ogv'], 
+                                     ['media/posters/', '.jpg', '.jpg', '.jpg'], $filePath);
+            $posterDir = dirname($posterPath);
+
+            // Asegurar que el directorio existe
+            if (!Storage::disk($this->disk)->exists($posterDir)) {
+                Storage::disk($this->disk)->makeDirectory($posterDir);
+            }
+
+            // Crear imagen poster genérica con ícono de video
+            $posterFullPath = Storage::disk($this->disk)->path($posterPath);
+            
+            // Crear imagen base 200x150 con fondo gris oscuro
+            $image = Image::create(200, 150, 'rgba(40, 44, 52, 1)');
+            
+            // Nota: Para agregar icono de reproducción se necesitaría una fuente TTF
+            // Por ahora usamos un poster simple que se puede mejorar
+
+            // Guardar poster
+            $image->save($posterFullPath, quality: 85);
+
+            return Storage::disk($this->disk)->url($posterPath);
+        } catch (\Exception $e) {
+            \Log::warning("Error generando poster para {$filePath}: " . $e->getMessage());
+            return null;
+        }
     }
 
     // ============ Métodos Privados ============
