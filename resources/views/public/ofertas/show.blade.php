@@ -47,7 +47,7 @@
         data-model="oferta"
         data-model-id="{{ $oferta->id }}"
         data-key="descripcion"
-        data-type="textarea">
+        data-type="text">
         {{ $oferta->descripcion }}
     </p>
 
