@@ -304,12 +304,24 @@
             // Mostrar archivo actual si existe
             const currentSrc = currentEditable.src || currentEditable.getAttribute('data-src');
             if (currentSrc) {
-                $('#currentMediaPreview').html(`
-                    <${type} src="${currentSrc}" 
-                        class="img-fluid" 
-                        style="max-height: 150px; max-width: 100%;">
-                    </${type}>
-                `);
+                if (type === 'video') {
+                    // Preview mejorado para videos
+                    $('#currentMediaPreview').html(`
+                        <video controls 
+                               style="width: 100%; max-height: 200px; background: #000;">
+                            <source src="${currentSrc}" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    `);
+                } else {
+                    // Preview para imágenes
+                    $('#currentMediaPreview').html(`
+                        <img src="${currentSrc}" 
+                             alt="Imagen actual"
+                             class="img-fluid" 
+                             style="max-height: 150px; max-width: 100%;">
+                    `);
+                }
             } else {
                 $('#currentMediaPreview').html('<p class="text-muted mb-0">No hay archivo asignado</p>');
             }
@@ -378,15 +390,40 @@
             files.forEach(file => {
                 const isVideo = type === 'video';
                 
-                // Usar thumbnail si está disponible, sino fallback a URL original
-                const displayUrl = file.thumbnail_url || file.url;
+                // Para videos, usar poster si está disponible
+                // Para imágenes, usar thumbnail
+                let displayUrl = file.url; // Fallback
                 
-                const mediaTag = isVideo 
-                    ? `<video src="${file.url}" style="width: 100%; height: 120px; object-fit: cover;" muted></video>`
-                    : `<img src="${displayUrl}" alt="${file.name}" 
-                         class="img-fluid lazy-load" 
-                         data-src="${displayUrl}"
-                         style="width: 100%; height: 120px; object-fit: cover; background: #f0f0f0;">`;
+                if (isVideo) {
+                    displayUrl = file.poster_url || file.url;
+                } else {
+                    displayUrl = file.thumbnail_url || file.url;
+                }
+                
+                // Tag multimedia
+                let mediaTag = '';
+                if (isVideo) {
+                    // Mostrar poster con ícono de play
+                    mediaTag = `
+                        <div style="position: relative; width: 100%; height: 120px; overflow: hidden;">
+                            <img src="${displayUrl}" alt="${file.name}" 
+                                 class="img-fluid lazy-load" 
+                                 data-src="${displayUrl}"
+                                 style="width: 100%; height: 120px; object-fit: cover; background: #222;">
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <i class="bi bi-play-circle" style="font-size: 2.5rem; color: rgba(255,255,255,0.8);"></i>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Imagen simple con lazy loading
+                    mediaTag = `
+                        <img src="${displayUrl}" alt="${file.name}" 
+                             class="img-fluid lazy-load" 
+                             data-src="${displayUrl}"
+                             style="width: 100%; height: 120px; object-fit: cover; background: #f0f0f0;">
+                    `;
+                }
 
                 html += `
                     <div class="col-md-3 col-sm-4 col-6">
@@ -407,7 +444,7 @@
 
             $('#filesGrid').html(html);
 
-            // Lazy loading de imágenes
+            // Lazy loading de imágenes y posters
             if ('IntersectionObserver' in window) {
                 initLazyLoading();
             }
@@ -427,7 +464,39 @@
             });
         }
 
-        // 🚀 Inicializar lazy loading con Intersection Observer
+        // � Implementar búsqueda de archivos
+        $('#fileSearchInput').on('keyup', function() {
+            const query = $(this).val().toLowerCase();
+            const cards = $('.file-card');
+
+            cards.each(function() {
+                const fileName = $(this).find('small').first().text().toLowerCase();
+                const shouldShow = fileName.includes(query);
+                
+                $(this).closest('.col-md-3, .col-sm-4, .col-6')
+                    .toggle(shouldShow);
+            });
+
+            // Mostrar mensaje si no hay resultados
+            const visibleCards = cards.filter(function() {
+                return $(this).closest('.col-md-3, .col-sm-4, .col-6').is(':visible');
+            });
+
+            if (visibleCards.length === 0) {
+                if (!$('#noResultsMessage').length) {
+                    $('#filesGrid').append(`
+                        <div class="col-12 text-center py-4" id="noResultsMessage">
+                            <i class="bi bi-search text-muted" style="font-size: 2rem;"></i>
+                            <p class="text-muted mt-2 mb-0">No se encontraron archivos</p>
+                        </div>
+                    `);
+                }
+            } else {
+                $('#noResultsMessage').remove();
+            }
+        });
+
+        // �🚀 Inicializar lazy loading con Intersection Observer
         function initLazyLoading() {
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -678,10 +747,27 @@
 
                     // Actualizar elemento en vista
                     if (currentEditable) {
-                        if (currentEditable.tagName === 'IMG') {
+                        const mediaType = $('#cc-type').val();
+                        
+                        if (mediaType === 'image' || currentEditable.tagName === 'IMG') {
+                            // Actualizar imagen
                             currentEditable.src = selectedFile.url;
-                        } else if (currentEditable.tagName === 'VIDEO') {
-                            currentEditable.src = selectedFile.url;
+                        } else if (mediaType === 'video' || currentEditable.tagName === 'VIDEO') {
+                            // Actualizar video con source element
+                            const sourceElement = currentEditable.querySelector('source');
+                            
+                            if (sourceElement) {
+                                // Si existe <source>, actualizar su src
+                                sourceElement.src = selectedFile.url;
+                            } else {
+                                // Si no existe <source>, crear uno
+                                const source = document.createElement('source');
+                                source.src = selectedFile.url;
+                                source.type = selectedFile.type || 'video/mp4';
+                                currentEditable.appendChild(source);
+                            }
+                            
+                            // Recargar el video
                             currentEditable.load();
                         }
                     }

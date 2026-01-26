@@ -161,6 +161,49 @@ class MediaService
         }
     }
 
+    /**
+     * Generar poster para un video
+     * 
+     * @param string $filePath
+     * @return string|null (URL del poster o null si error)
+     */
+    public function generateVideoPoster(string $filePath): ?string
+    {
+        try {
+            // Verificar que el archivo existe
+            if (!Storage::disk($this->disk)->exists($filePath)) {
+                return null;
+            }
+
+            // Crear ruta de poster
+            $posterPath = str_replace(['media/videos/', '.mp4', '.webm', '.ogv'], 
+                                     ['media/posters/', '.jpg', '.jpg', '.jpg'], $filePath);
+            $posterDir = dirname($posterPath);
+
+            // Asegurar que el directorio existe
+            if (!Storage::disk($this->disk)->exists($posterDir)) {
+                Storage::disk($this->disk)->makeDirectory($posterDir);
+            }
+
+            // Crear imagen poster genérica con ícono de video
+            $posterFullPath = Storage::disk($this->disk)->path($posterPath);
+            
+            // Crear imagen base 200x150 con fondo gris oscuro
+            $image = Image::create(200, 150, 'rgba(40, 44, 52, 1)');
+            
+            // Nota: Para agregar icono de reproducción se necesitaría una fuente TTF
+            // Por ahora usamos un poster simple que se puede mejorar
+
+            // Guardar poster
+            $image->save($posterFullPath, quality: 85);
+
+            return Storage::disk($this->disk)->url($posterPath);
+        } catch (\Exception $e) {
+            \Log::warning("Error generando poster para {$filePath}: " . $e->getMessage());
+            return null;
+        }
+    }
+
     // ============ Métodos Privados ============
 
     /**

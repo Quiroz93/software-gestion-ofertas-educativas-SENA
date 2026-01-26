@@ -84,6 +84,14 @@ class MediaContentController extends Controller
                 }
             }
 
+            // 🎬 Generar poster para videos
+            if ($request->type === 'video') {
+                $posterUrl = $this->mediaService->generateVideoPoster($result['file_path']);
+                if ($posterUrl) {
+                    $result['poster_url'] = $posterUrl;
+                }
+            }
+
             return response()->json($result);
 
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
