@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h1 class="m-0">
-        <i class="fas fa-school text-primary"></i>
+        <i class="bi bi-stack text-primary"></i>
         Gestión de Niveles de Formación
     </h1>
 

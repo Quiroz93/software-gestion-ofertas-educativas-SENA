@@ -5,7 +5,9 @@
 @section('content_header')
 
 <div class="d-flex justify-content-between align-items-center">
-    <h1 class="m-0">Permisos por categoría</h1>
+    <h1 class="m-0">
+        <i class="fas fa-key  text-primary"></i>        
+    Permisos por categoría</h1>
     <div class="d-flex justify-content-end align-items-center">
         <a href="{{ route('permissions.create') }}" class="btn btn-outline-success me-1">
             <i class="fas fa-plus-circle"></i>

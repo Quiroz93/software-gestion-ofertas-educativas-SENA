@@ -379,7 +379,7 @@ return [
                 [
                     'text' => 'nivel de formación',
                     'route' => 'niveles_formacion.index',
-                    'icon' => 'fa-solid fa-ranking-star text-success',
+                    'icon' => 'bi bi-stack text-success',
                     'can' => 'niveles_formacion.view',
                 ],
                 [
@@ -426,7 +426,7 @@ return [
         [
             'text' => 'nivel de formación',
             'route' => '',
-            'icon' => 'fa-solid fa-ranking-star text-success',
+            'icon' => 'bi bi-stack text-success',
 
         ],
         [
