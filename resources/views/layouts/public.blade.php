@@ -371,15 +371,22 @@
             });
         }
 
-        // 🖼️ Renderizar grid de archivos con selección
+        // 🖼️ Renderizar grid de archivos con selección y lazy loading
         function renderFilesGrid(files, type) {
             let html = '';
 
             files.forEach(file => {
                 const isVideo = type === 'video';
+                
+                // Usar thumbnail si está disponible, sino fallback a URL original
+                const displayUrl = file.thumbnail_url || file.url;
+                
                 const mediaTag = isVideo 
                     ? `<video src="${file.url}" style="width: 100%; height: 120px; object-fit: cover;" muted></video>`
-                    : `<img src="${file.url}" alt="${file.name}" class="img-fluid" style="width: 100%; height: 120px; object-fit: cover;">`;
+                    : `<img src="${displayUrl}" alt="${file.name}" 
+                         class="img-fluid lazy-load" 
+                         data-src="${displayUrl}"
+                         style="width: 100%; height: 120px; object-fit: cover; background: #f0f0f0;">`;
 
                 html += `
                     <div class="col-md-3 col-sm-4 col-6">
@@ -391,6 +398,7 @@
                                 <small class="d-block mt-2 text-truncate" title="${file.name}">
                                     ${file.name}
                                 </small>
+                                <small class="d-block text-muted">(${formatFileSize(file.size)})</small>
                             </div>
                         </div>
                     </div>
@@ -398,6 +406,11 @@
             });
 
             $('#filesGrid').html(html);
+
+            // Lazy loading de imágenes
+            if ('IntersectionObserver' in window) {
+                initLazyLoading();
+            }
 
             // Click para seleccionar archivo
             $('.file-card').on('click', function() {
@@ -412,6 +425,39 @@
                 
                 console.log('Archivo seleccionado:', selectedFile);
             });
+        }
+
+        // 🚀 Inicializar lazy loading con Intersection Observer
+        function initLazyLoading() {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.getAttribute('data-src');
+                        
+                        if (src) {
+                            img.src = src;
+                            img.removeAttribute('data-src');
+                            img.classList.remove('lazy-load');
+                            observer.unobserve(img);
+                        }
+                    }
+                });
+            });
+
+            // Observar todas las imágenes con clase lazy-load
+            document.querySelectorAll('img.lazy-load').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // 📦 Formatea tamaño de archivo a formato legible
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
         }
 
         // 📤 File input y preview de archivo nuevo

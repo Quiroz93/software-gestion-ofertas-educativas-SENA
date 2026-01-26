@@ -76,6 +76,14 @@ class MediaContentController extends Controller
                 $request->category
             );
 
+            // 🖼️ Generar thumbnail para imágenes
+            if ($request->type === 'image' || $request->type === 'gif') {
+                $thumbUrl = $this->mediaService->generateThumbnail($result['file_path']);
+                if ($thumbUrl) {
+                    $result['thumbnail_url'] = $thumbUrl;
+                }
+            }
+
             return response()->json($result);
 
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
