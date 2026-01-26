@@ -26,6 +26,7 @@ use App\Http\Controllers\PublicProgramaController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
+use App\Http\Controllers\Public\MediaContentController;
 
 
 
@@ -37,6 +38,24 @@ use App\Http\Controllers\Public\CustomContentController;
 Route::middleware(['auth'])
     ->post('/public-content', [CustomContentController::class, 'store'])
     ->name('public.content.store');
+
+/*|--------------------------------------------------------------------------
+| Rutas para gestión de archivos multimedia (MEDIA CONTENT)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'can:public_content.edit'])->group(function () {
+    Route::get('/public/media/list', [MediaContentController::class, 'list'])
+        ->name('public.media.list');
+    
+    Route::post('/public/media/upload', [MediaContentController::class, 'upload'])
+        ->name('public.media.upload');
+    
+    Route::post('/public/media/store', [MediaContentController::class, 'store'])
+        ->name('public.media.store');
+    
+    Route::delete('/public/media/delete', [MediaContentController::class, 'delete'])
+        ->name('public.media.delete');
+});
 
 /*
 |--------------------------------------------------------------------------
