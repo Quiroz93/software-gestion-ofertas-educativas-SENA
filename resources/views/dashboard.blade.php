@@ -161,7 +161,7 @@
     <div class="col-md-4 mt-4">
         <div class="card text-center shadow-sm">
             <div class="card-header">
-                <i class="fa-solid fa-ranking-star fa-3x"></i>
+                <i class="bi bi-stack fa-3x"></i>
             </div>
             <div class="card-body">
                 <h5 class="card-title">Niveles de Formación</h5>
