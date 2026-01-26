@@ -70,19 +70,19 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.programas.index') }}">Programas</a>
+                    <a class="nav-link" href="{{ route('public.programasDeFormacion.index') }}">Programas</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.ofertas.index') }}">Ofertas</a>
+                    <a class="nav-link" href="{{ route('public.ofertasEducativas.index') }}">Ofertas</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.instructores.index') }}">Instructores</a>
+                    <a class="nav-link" href="{{ route('public.instructoresDeFormacion.index') }}">Instructores</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('public.noticias.index') }}">Noticias</a>
+                    <a class="nav-link" href="{{ route('public.ultimaNoticias.index') }}">Noticias</a>
                 </li>
 
                 @auth

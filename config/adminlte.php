@@ -431,7 +431,7 @@ return [
         ],
         [
             'text' => 'Ofertas',
-            'route' => 'public.ofertas.index',
+            'route' => 'public.ofertasEducativas.index',
             'icon' => 'fas fa-graduation-cap text-success',
 
         ],

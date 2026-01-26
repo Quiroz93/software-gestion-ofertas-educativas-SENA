@@ -323,7 +323,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('programas/{programa}', [ProgramaController::class, 'show'])
         ->middleware('can:programas.view')->name('programas.show');
 
-    Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit'])
+    Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit']) 
         ->middleware('can:programas.edit')->name('programas.edit');
 
     Route::put('programas/{programa}', [ProgramaController::class, 'update'])
@@ -333,17 +333,6 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('can:programas.delete')->name('programas.destroy');
     
 });
-
-/*|--------------------------------------------------------------------------
-| Programas de formación - vista pública
-|--------------------------------------------------------------------------
-*/
-Route::get('/oferta-educativa', [PublicProgramaController::class, 'index'])
-    ->name('public.programas.index');
-
-Route::get('/oferta-educativa/{programa}', [PublicProgramaController::class, 'show'])
-    ->name('public.programas.show');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -430,39 +419,39 @@ Route::prefix('/')
         })->name('home');
 
         // Centros
-        Route::resource('centros', PublicCentroController::class)
+        Route::resource('centrosFormacion', PublicCentroController::class)
             ->only(['index', 'show']);
 
         // Competencias
-        Route::resource('competencias', PublicCompetenciaController::class)
+        Route::resource('competenciasDeFormacion', PublicCompetenciaController::class)
             ->only(['index']);
 
         // Niveles de formación
-        Route::resource('nivel-formaciones', PublicNivelFormacionController::class)
+        Route::resource('nivelFormaciones', PublicNivelFormacionController::class)
             ->only(['index']);
 
         // Noticias
-        Route::resource('noticias', PublicNoticiaController::class)
+        Route::resource('ultimaNoticias', PublicNoticiaController::class)
             ->only(['index', 'show']);
 
         // Redes
-        Route::resource('redes', PublicRedController::class)
+        Route::resource('redesDeConocimiento', PublicRedController::class)
             ->only(['index']);
 
         // Instructores
-        Route::resource('instructores', PublicInstructorController::class)
+        Route::resource('instructoresDeFormacion', PublicInstructorController::class)
             ->only(['index', 'show']);
 
         // Programas
-        Route::resource('programas', PublicProgramaController::class)
+        Route::resource('programasDeFormacion', PublicProgramaController::class)
             ->only(['index', 'show']);
 
         // Ofertas educativas
-        Route::resource('ofertas', PublicOfertaController::class)
+        Route::resource('ofertasEducativas', PublicOfertaController::class)
             ->only(['index', 'show']);
 
         // Historias de éxito
-        Route::resource('historias-exito', PublicHistoriaExitoController::class)
+        Route::resource('historiasDeExito', PublicHistoriaExitoController::class)
             ->only(['index', 'show']);
     });
 

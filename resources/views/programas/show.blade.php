@@ -104,6 +104,23 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        {{-- Centro de Formación --}}
+                        <div class="col-md-12 mb-4">
+                            <h5 class="text-primary">
+                                <i class="fas fa-building"></i>
+                                Centro de Formación
+                            </h5>
+                            <p class="text-muted ms-4">
+                                @if($programa->centro)
+                                    <span class="badge bg-primary">{{ $programa->centro->nombre }}</span>
+                                @else
+                                    No asignado
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+
                     {{-- Información adicional --}}
                     <div class="mb-4">
                         <h5 class="text-primary">
@@ -117,6 +134,7 @@
                             <strong>Código SNIES:</strong> {{ $programa->codigo_snies ?? 'N/A' }}<br>
                             <strong>Registro de Calidad:</strong> {{ $programa->registro_calidad ?? 'N/A' }}<br>
                             <strong>Fecha de registro:</strong> {{ $programa->fecha_registro ? $programa->fecha_registro->format('d/m/Y') : 'N/A' }}<br>
+                            <strong>Fecha de actualización:</strong> {{ $programa->fecha_actualizacion ? $programa->fecha_actualizacion->format('d/m/Y') : 'N/A' }}<br>
                             <strong>Estado:</strong> {{ $programa->estado ?? 'N/A' }}<br>
                             <strong>Cupos:</strong> {{ $programa->cupos ?? 'N/A' }}<br>
                             <strong>Observaciones:</strong> {{ $programa->observaciones ?? 'N/A' }}<br>

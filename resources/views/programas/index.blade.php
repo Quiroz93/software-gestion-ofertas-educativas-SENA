@@ -49,39 +49,63 @@
             <div class="card-body">
                 <p class="mb-2">
                     <strong>Descripción:</strong><br>
-                    {{ $programa->descripcion }}
+                    <small>{{ Str::limit($programa->descripcion ?? 'Sin descripción', 100) }}</small>
+                </p>
+
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <strong>Duración:</strong><br>
+                        <span class="badge bg-info">
+                            {{ $programa->duracion_meses ? $programa->duracion_meses . ' meses' : 'N/A' }}
+                        </span>
+                    </div>
+                    <div class="col-6">
+                        <strong>Cupos:</strong><br>
+                        <span class="badge bg-secondary">
+                            {{ $programa->cupos ?? 'N/A' }}
+                        </span>
+                    </div>
+                </div>
+
+                <p class="mb-2">
+                    <strong>Modalidad:</strong>
+                    <span class="badge bg-primary">
+                        {{ $programa->modalidad ?? 'N/A' }}
+                    </span>
                 </p>
 
                 <p class="mb-2">
-                    <strong>Requisitos:</strong><br>
-                    {{ $programa->requisitos }}
+                    <strong>Jornada:</strong>
+                    <span class="badge bg-primary">
+                        {{ $programa->jornada ?? 'N/A' }}
+                    </span>
+                </p>
+
+                <p class="mb-2">
+                    <strong>Estado:</strong>
+                    <span class="badge bg-success">
+                        {{ $programa->estado ?? 'N/A' }}
+                    </span>
+                </p>
+
+                <p class="mb-2">
+                    <strong>Red de Conocimiento:</strong><br>
+                    <span class="badge bg-info">
+                        {{ $programa->red->nombre ?? 'N/A' }}
+                    </span>
+                </p>
+
+                <p class="mb-2">
+                    <strong>Nivel de Formación:</strong><br>
+                    <span class="badge bg-warning">
+                        {{ $programa->nivelFormacion->nombre ?? 'N/A' }}
+                    </span>
                 </p>
 
                 <p class="mb-0">
-                    <strong>Duración:</strong>
-                    <span class="badge bg-info">
-                        {{ $programa->duracion_meses ? $programa->duracion_meses . ' meses' : 'N/A' }}
-                    <span class="badge badge-info">
-                        {{ $programa->duracion_meses }}
-                    </span>
-                </p>
-                {{--  <p>
-                    <strong>Modalidad:</strong>
-                    <span class="badge badge-info">
-                        {{ $programa->modalidad }}
-                    </span>
-                </p>--}}
-
-                <p>
-                    <strong>Red de Conocimiento:</strong>
-                    <span class="badge badge-info">
-                        {{ $programa->red->nombre }}
-                    </span>
-                </p>
-                <p>
-                    <strong>Nivel de Formación:</strong>
-                    <span class="badge badge-info">
-                        {{ $programa->nivelFormacion->nombre }}
+                    <strong>Centro:</strong><br>
+                    <span class="badge bg-dark">
+                        {{ $programa->centro->nombre ?? 'No asignado' }}
                     </span>
                 </p>
             </div>
@@ -116,30 +140,6 @@
                         </form>
                     @endcan
                 </div>
-
-                <div>
-                    @can('programas.edit')
-                    <a href="{{-- enlace editar --}}" class="btn btn-sm btn-outline-warning">
-                        <i class="fas fa-edit"></i>
-                        Editar
-                    </a>
-                    @endcan
-                </div>
-
-                @can('programas.delete')
-                <form action="{{-- enlace eliminar --}}"
-                    method="POST"
-                    onsubmit="return confirmarEliminacion(event)">
-                    @csrf
-                    @method('DELETE')
-
-                    <button type="submit" class="btn btn-sm btn-outline-danger">
-                        <i class="fas fa-trash"></i>
-                        Eliminar
-                    </button>
-                </form>
-                @endcan
-
             </div>
         </div>
     </div>
