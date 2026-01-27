@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="row mb-3" style="font-family: 'worksans sans-serif';">
   <div class="d-flex align-items-center gap-2 text-warning">
-    <i class="fas fa-home text-primary fs-4"></i>
+    <i class="fas fa-home text-primary fa-2x"></i>
     <h2 class="mb-0 fw-semibold text-xl text-gray-800">
       {{ __('Home') }}
     </h2>
@@ -244,7 +244,7 @@
 <div class="container" style="font-family: 'worksans sans-serif';">
   <section>
     <div class="d-flex align-items-center mb-3 mt-4">
-      <i class="fas fa-layer-group text-success fs-4 me-2 mt-4 mb-4"></i>
+      <i class="fas fa-layer-group text-success fa-2x me-2 mt-4 mb-4"></i>
       <h4 class="fw-bold mb-0">Información y Módulos</h4>
     </div>
     <hr>
@@ -256,9 +256,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('centros.view')
-              <a href="{{ route('centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+              <a href="{{ route('centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @else
-              <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+              <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Centros</h6>
             <p class="text-muted small">
@@ -273,9 +273,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('programas.view')
-              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Programas</h6>
             <p class="text-muted small">
@@ -290,9 +290,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('ofertasEducativas.view')
-              <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+              <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+              <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @endcan
 
             <h6 class="fw-bold">Ofertas</h6>
@@ -325,9 +325,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('instructores.view')
-              <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+              <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+              <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Instructores</h6>
             <p class="text-muted small">
@@ -342,9 +342,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('historias_de_exito.view')
-              <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+              <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+              <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Historias</h6>
             <p class="text-muted small">
@@ -358,7 +358,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href=""><i class="bi bi-award  fs-2 text-primary mb-2"></i></a>
+            <a href=""><i class="bi bi-award  fa-2x text-primary mb-2"></i></a>
             <h6 class="fw-bold">Reconocimientos</h6>
             <p class="text-muted small">
               Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>
@@ -385,7 +385,8 @@
 
       <div class="row g-5">
         <div class="col-md-8">
-          <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
+          <h3 class="pb-4 mb-4 fst-italic border-bottom editable" data-model="home" data-model-id="0" data-key="article1_subtitle" data-type="text">
+            {!! getCustomContent('home', 'article1_title', 'From the Firehose' ) !!}</h3>
           <article class="blog-post">
             <h2 class="display-5 link-body-emphasis mb-1 editable" data-model="home" data-model-id="0" data-key="article1_title" data-type="text">
               {!! getCustomContent('home', 'article1_title', 'Sample blog post') !!}
@@ -393,10 +394,10 @@
             <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article1_meta" data-type="text">
               {!! getCustomContent('home', 'article1_meta', 'January 1, 2021 by <a href="#">Mark</a>') !!}
             </p>
-            <p>
-              This blog post shows a few different types of content that’s
+            <p class=" editable" data-model="home" data-model-id="0" data-key="article1_parrafo1" data_type="text">
+              {{ getCustomContent('home', 'article1_parrafo1','This blog post shows a few different types of content that’s
               supported and styled with Bootstrap. Basic typography, lists,
-              tables, images, code, and more are all supported as expected.
+              tables, images, code, and more are all supported as expected.')}}
             </p>
             <hr />
             <p>
