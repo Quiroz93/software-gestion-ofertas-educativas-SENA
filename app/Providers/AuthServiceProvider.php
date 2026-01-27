@@ -36,5 +36,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
+
+        // Solo permitir que cada usuario edite o elimine su propio perfil
+        Gate::define('profile.update', function (User $user, User $target) {
+            return $user->id === $target->id;
+        });
+
+        Gate::define('profile.delete', function (User $user, User $target) {
+            return $user->id === $target->id;
+        });
     }
 }
