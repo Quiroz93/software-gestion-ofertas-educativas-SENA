@@ -2,6 +2,21 @@
 
 @section('title', config('app.name', 'SENA'))
 
+@section('content_top_nav_left')
+@auth
+<div>
+    <nav class="nav nav-underline justify-content-center">
+        <a class="nav-item nav-link link-body-emphasis tex-dark text-decoration-none" href="#">inscribirse</a>
+        <a class="nav-item nav-link link-body-emphasis tex-dark text-decoration-none" href="#">Ofertas</a>
+        <a class="nav-item nav-link link-body-emphasis tex-dark text-decoration-none" href="#">Programas de formacion</a>
+        <a class="nav-item nav-link link-body-emphasis tex-dark text-decoration-none" href="#">Redes</a>
+    </nav>
+</div>
+
+@endauth
+@parent
+@endsection
+
 @section('adminlte_css_pre')
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
