@@ -66,25 +66,25 @@
 @section('content')
 
 {{-- Encabezado principal --}}
-<div class="container" >
+<div class="container">
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
     <div class="row">
-      <div class="col-lg-6 px-0" >
-      <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
+      <div class="col-lg-6 px-0">
+        <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
           data-model="home" data-model-id="0" data-key="hero_title" data-type="text">
-        {!! getCustomContent('home', 'hero_title', 'Title of a longer featured blog post') !!}
-      </h1>
-      <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
-         data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
-        {!! getCustomContent('home', 'hero_description', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') !!}
-      </p>
-      <p class="lead mb-0">
-        <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
-           data-model="home" data-model-id="0" data-key="hero_link_text" data-type="text">
-          {!! getCustomContent('home', 'hero_link_text', 'Continue reading>>>') !!}
-        </a>
-      </p>
-    </div>
+          {!! getCustomContent('home', 'hero_title', 'Title of a longer featured blog post') !!}
+        </h1>
+        <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
+          data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
+          {!! getCustomContent('home', 'hero_description', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') !!}
+        </p>
+        <p class="lead mb-0">
+          <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
+            data-model="home" data-model-id="0" data-key="hero_link_text" data-type="text">
+            {!! getCustomContent('home', 'hero_link_text', 'Continue reading>>>') !!}
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
@@ -103,7 +103,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="{!! getCustomContent('home', 'carousel_slide1_image', '...') !!}" class="d-block w-100 editable" alt="Slide 1"
-             data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
+          data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide1_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide1_title', 'First slide label') !!}
@@ -115,7 +115,7 @@
       </div>
       <div class="carousel-item">
         <img src="{!! getCustomContent('home', 'carousel_slide2_image', '...') !!}" class="d-block w-100 editable" alt="Slide 2"
-             data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
+          data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide2_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide2_title', 'Second slide label') !!}
@@ -127,7 +127,7 @@
       </div>
       <div class="carousel-item">
         <img src="{!! getCustomContent('home', 'carousel_slide3_image', '...') !!}" class="d-block w-100 editable" alt="Slide 3"
-             data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
+          data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide3_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide3_title', 'Third slide label') !!}
@@ -158,7 +158,7 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-primary-emphasis editable"
-                  data-model="home" data-model-id="0" data-key="post1_category" data-type="text">
+            data-model="home" data-model-id="0" data-key="post1_category" data-type="text">
             {!! getCustomContent('home', 'post1_category', 'World') !!}
           </strong>
           <h3 class="mb-0 editable" data-model="home" data-model-id="0" data-key="post1_title" data-type="text">
@@ -200,7 +200,7 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success-emphasis editable"
-                  data-model="home" data-model-id="0" data-key="post2_category" data-type="text">
+            data-model="home" data-model-id="0" data-key="post2_category" data-type="text">
             {!! getCustomContent('home', 'post2_category', 'Design') !!}
           </strong>
           <h3 class="mb-0 editable" data-model="home" data-model-id="0" data-key="post2_title" data-type="text">
@@ -256,9 +256,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('centros.view')
-              <a href="{{ route('centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
+            <a href="{{ route('centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @else
-              <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
+            <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Centros</h6>
             <p class="text-muted small">
@@ -273,9 +273,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('programas.view')
-              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
+            <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
+            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Programas</h6>
             <p class="text-muted small">
@@ -290,9 +290,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('ofertasEducativas.view')
-              <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
+            <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
+            <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @endcan
 
             <h6 class="fw-bold">Ofertas</h6>
@@ -325,9 +325,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('instructores.view')
-              <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
+            <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
+            <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Instructores</h6>
             <p class="text-muted small">
@@ -342,9 +342,9 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('historias_de_exito.view')
-              <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
+            <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
+            <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @endcan
             <h6 class="fw-bold">Historias</h6>
             <p class="text-muted small">
@@ -400,40 +400,101 @@
               tables, images, code, and more are all supported as expected.')}}
             </p>
             <hr />
-            <p>
-              This is some additional paragraph placeholder content. It has been
+            <p class="editable" data-model="home" data-model-id="0" data-key="article1_parrafo2" data_type="text">
+              {{ getCustomContent('home', 'article1_parrafo2', 'This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We'll repeat it often to
+              of text affects the surrounding content. We´ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.
+              exact same string of text.') }}
             </p>
-            <h2>Blockquotes</h2>
-            <p>This is an example blockquote in action:</p>
+            <h2 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_blockquotes"
+              data-type="text">{{ getCustomContent('home', 'article1_blockquotes', 'Blockquotes') }}</h2>
+            <p class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_blockquotes_p"
+              data-type="text">
+              {{ getCustomContent('home', 'article1_blockquotes_p', 'This is an example blockquote in action:') }}
+            </p>
             <blockquote class="blockquote">
-              <p>Quoted text goes here.</p>
+              <p class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_blockquotes_p1"
+                data-type="text">{{getCustomContent('home', 'article1_blockquotes_p1', 'Quoted text goes here.')}}</p>
             </blockquote>
-            <p>
-              This is some additional paragraph placeholder content. It has been
+            <p class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_blockquotes_p2"
+              data-type="text">
+              {{ getCustomContent('home', 'article1_blockquotes_p2', 'This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We'll repeat it often to
+              of text affects the surrounding content. We´ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.
+              exact same string of text.') }}
             </p>
-            <h3>Example lists</h3>
-            <p>
-              This is some additional paragraph placeholder content. It's a
-              slightly shorter version of the other highly repetitive body text
-              used throughout. This is an example unordered list:
+            <h3 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_subtitle2"
+              data-type="text">
+              {{getCustomContent('home', 'article1_subtitle2', 'Example lists')}}
+            </h3>
+            <p
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_parrafo3"
+              data-type="text">
+              {{ getCustomContent('home', 'article1_parrafo3', 'This is some additional paragraph placeholder content. It´s a
+            slightly shorter version of the other highly repetitive body text
+            used throughout. This is an example unordered list:') }}
             </p>
             <ul>
-              <li>First list item</li>
-              <li>Second list item with a longer description</li>
-              <li>Third list item to close it out</li>
+              <li
+                class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_item1"
+                data-type="text">
+                {{ getCustomContent('home', 'article1_item1', 'First list item') }}
+              </li>
+              <li class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_item2"
+                data-type="text">
+                {{ getCustomContent('home', 'article1_item2', 'Second list item with a longer description') }}
+              </li>
+              <li class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_item3"
+                data-type="text">{{ getCustomContent('home', 'article1_item3', 'Third list item to close it out') }}</li>
             </ul>
-            <p>And this is an ordered list:</p>
+            <p
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_listP"
+              data-type="text">{{ getCustomContent('home', 'article1_listp', 'And this is an ordered list:') }}</p>
             <ol>
-              <li>First list item</li>
-              <li>Second list item with a longer description</li>
+              <li
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_oitem1"
+              data-type="text">{{ getCustomContent('home', 'article1_oitem1', 'First list item') }}</li>
+              <li
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_oitem2"
+              data-type="text">{{ getCustomContent('home', 'article1_oitem2', 'Second list item with a longer description') }}</li>
               <li>Third list item to close it out</li>
             </ol>
             <p>And this is a definition list:</p>
