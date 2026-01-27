@@ -14,8 +14,15 @@
     @endcan
 
     <div class="container position-relative py-5 text-dark">
+        {{-- Banner background image --}}
+        @php
+            $bannerImagePath = getCustomContent('oferta', 'banner_image', null);
+            $bannerImageUrl = $bannerImagePath 
+                ? asset('storage/' . $bannerImagePath)
+                : asset('images/oferta4.jpeg');
+        @endphp
         <div>
-            <img src="{{ getCustomContent('oferta', 'banner_image', asset('images/oferta4.jpeg')) }}"
+            <img src="{{ $bannerImageUrl }}"
                 class="w-100 position-absolute top-0 start-0 h-100 object-fit-cover opacity-50 editable"
                 data-model="oferta"
                 data-model-id="0"

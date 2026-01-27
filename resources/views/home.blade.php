@@ -64,12 +64,16 @@
 
 {{-- Encabezado principal --}}
 <div class="container" >
+  @php
+    $heroBgPath = getCustomContent('home', 'hero_background', null);
+    $heroBgUrl = $heroBgPath ? asset('storage/' . $heroBgPath) : asset('images/background_1.png');
+  @endphp
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis editable" 
        data-model="home" 
        data-model-id="0" 
        data-key="hero_background" 
        data-type="image"
-       style="background-image: url('{!! getCustomContent('home', 'hero_background', '/images/background_1.png') !!}'); background-size:cover">
+       style="background-image: url('{{ $heroBgUrl }}'); background-size:cover">
     <div class="row">
       <div class="col-lg-6 px-0" >
       <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
@@ -104,7 +108,11 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{!! getCustomContent('home', 'carousel_slide1_image', '...') !!}" class="d-block w-100 editable" alt="Slide 1"
+        @php
+          $slide1ImagePath = getCustomContent('home', 'carousel_slide1_image', null);
+          $slide1ImageUrl = $slide1ImagePath ? asset('storage/' . $slide1ImagePath) : asset('images/carousel-placeholder.jpg');
+        @endphp
+        <img src="{{ $slide1ImageUrl }}" class="d-block w-100 editable" alt="Slide 1"
              data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide1_title" data-type="text">
@@ -116,7 +124,11 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{!! getCustomContent('home', 'carousel_slide2_image', '...') !!}" class="d-block w-100 editable" alt="Slide 2"
+        @php
+          $slide2ImagePath = getCustomContent('home', 'carousel_slide2_image', null);
+          $slide2ImageUrl = $slide2ImagePath ? asset('storage/' . $slide2ImagePath) : asset('images/carousel-placeholder.jpg');
+        @endphp
+        <img src="{{ $slide2ImageUrl }}" class="d-block w-100 editable" alt="Slide 2"
              data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide2_title" data-type="text">
@@ -128,7 +140,11 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{!! getCustomContent('home', 'carousel_slide3_image', '...') !!}" class="d-block w-100 editable" alt="Slide 3"
+        @php
+          $slide3ImagePath = getCustomContent('home', 'carousel_slide3_image', null);
+          $slide3ImageUrl = $slide3ImagePath ? asset('storage/' . $slide3ImagePath) : asset('images/carousel-placeholder.jpg');
+        @endphp
+        <img src="{{ $slide3ImageUrl }}" class="d-block w-100 editable" alt="Slide 3"
              data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide3_title" data-type="text">
