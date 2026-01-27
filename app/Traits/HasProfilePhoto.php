@@ -87,4 +87,12 @@ trait HasProfilePhoto
     {
         return $this->email ?? '';
     }
+
+    /**
+     * Compatibilidad con AdminLTE para URL del perfil
+     */
+    public function adminlte_profile_url(): string
+    {
+        return route('profile.edit');
+    }
 }
