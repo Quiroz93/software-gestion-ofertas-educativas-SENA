@@ -5,15 +5,27 @@
 @section('content_header')
 <div class="row mb-3" style="font-family: 'worksans sans-serif';">
   <div class="d-flex align-items-center gap-2 text-warning">
-    <i class="fas fa-home text-primary fa-2x"></i>
-    <h2 class="mb-0 fw-semibold text-xl text-gray-800">
-      {{ __('Home') }}
+    <i class="fas fa-home text-primary fs-4"></i>
+    <h2 class="mb-0 fw-semibold text-xl text-gray-800 editable"
+    data-model="home"
+        data-model-id="1"
+        data-key="home_title"
+        data-type="text">
+        {{ getCustomContent('home', 'home_title', 'Home') }}
     </h2>
   </div>
 </div>
 <div class="row mb-2">
   <div class="col-6" style="font-family: 'worksans sans-serif';">
-    <h1 style="color:#39A900"><Span class="text-bold text-primary">Bienvenido</Span>, {{ auth()->user()->name }}</h1>
+    <h1 style="color:#39A900">
+      <Span class="text-bold text-primary editable"
+        data-model="bienvenidos"
+        data-model-id="1"
+        data-key="bienvenidos_title"
+        data-type="text">
+        {{ getCustomContent('bienvenidos', 'bienvenidos_title', 'Welcome') }}
+      </Span>, {{ auth()->user()->name }}
+    </h1>
   </div>
   <div class="col-6 d-flex justify-content-end align-items-rigth">
     <a class="link-secondary mt-3" href="#" aria-label="Search">
@@ -172,8 +184,12 @@
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
-            Continue reading
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
+            data-model="home"
+            data-model-id="0"
+            data-key="featured_post1_link"
+            data-type="text">
+            {{ getCustomContent('home', 'featured_post1_link', 'Continue reading') }}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -214,8 +230,36 @@
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
-            Continue reading
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
+            data-model="home"
+            data-model-id="0"
+            data-key="featured_post2_link"
+            data-type="text">
+            {{ getCustomContent('home', 'featured_post2_link', 'Continue reading') }}
+            <svg class="bi" aria-hidden="true">
+              <use xlink:href="#chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            aria-label="Placeholder: Thumbnail"
+            class="bd-placeholder-img"
+            height="250"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
+            width="200"
+            xmlns="http://www.w3.org/2000/svg">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- fin posts destacados --}}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -245,7 +289,13 @@
   <section>
     <div class="d-flex align-items-center mb-3 mt-4">
       <i class="fas fa-layer-group text-success fa-2x me-2 mt-4 mb-4"></i>
-      <h4 class="fw-bold mb-0">Información y Módulos</h4>
+      <h4 class="fw-bold mb-0 editable"
+          data-model="home"
+          data-model-id="0"
+          data-key="modules_section_title"
+          data-type="text">
+        {{ getCustomContent('home', 'modules_section_title', 'Información y Módulos') }}
+      </h4>
     </div>
     <hr>
 
@@ -260,9 +310,19 @@
             @else
             <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Centros</h6>
-            <p class="text-muted small">
-              Centros de formación.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="centros_title"
+                data-type="text">
+              {{ getCustomContent('home', 'centros_title', 'Centros') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="centros_description"
+               data-type="text">
+              {{ getCustomContent('home', 'centros_description', 'Centros de formación.') }}
             </p>
           </div>
         </div>
@@ -277,9 +337,19 @@
             @else
             <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Programas</h6>
-            <p class="text-muted small">
-              Programas educativos.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="programas_title"
+                data-type="text">
+              {{ getCustomContent('home', 'programas_title', 'Programas') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="programas_description"
+               data-type="text">
+              {{ getCustomContent('home', 'programas_description', 'Programas educativos.') }}
             </p>
           </div>
         </div>
@@ -295,9 +365,19 @@
             <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @endcan
 
-            <h6 class="fw-bold">Ofertas</h6>
-            <p class="text-muted small">
-              Ofertas educativas vigentes.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="ofertas_title"
+                data-type="text">
+              {{ getCustomContent('home', 'ofertas_title', 'Ofertas') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="ofertas_description"
+               data-type="text">
+              {{ getCustomContent('home', 'ofertas_description', 'Ofertas educativas vigentes.') }}
             </p>
           </div>
         </div>
@@ -329,9 +409,19 @@
             @else
             <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Instructores</h6>
-            <p class="text-muted small">
-              Perfil de nuestros instructores
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="instructores_title"
+                data-type="text">
+              {{ getCustomContent('home', 'instructores_title', 'Instructores') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="instructores_description"
+               data-type="text">
+              {{ getCustomContent('home', 'instructores_description', 'Perfil de nuestros instructores') }}
             </p>
           </div>
         </div>
@@ -346,9 +436,19 @@
             @else
             <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Historias</h6>
-            <p class="text-muted small">
-              Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="historias_title"
+                data-type="text">
+              {{ getCustomContent('home', 'historias_title', 'Historias') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="historias_description"
+               data-type="text">
+              {{ getCustomContent('home', 'historias_description', 'Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes') }}
             </p>
           </div>
         </div>
@@ -359,9 +459,19 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             <a href=""><i class="bi bi-award  fa-2x text-primary mb-2"></i></a>
-            <h6 class="fw-bold">Reconocimientos</h6>
-            <p class="text-muted small">
-              Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="reconocimientos_title"
+                data-type="text">
+              {{ getCustomContent('home', 'reconocimientos_title', 'Reconocimientos') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="reconocimientos_description"
+               data-type="text">
+              {{ getCustomContent('home', 'reconocimientos_description', 'Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>') }}
             </p>
           </div>
         </div>
