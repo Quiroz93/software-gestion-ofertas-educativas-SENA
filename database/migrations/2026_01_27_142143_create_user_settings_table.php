@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('setting_key', 100);
+            $table->text('setting_value')->nullable();
+            $table->enum('setting_type', ['string', 'json', 'boolean', 'integer'])->default('string');
             $table->timestamps();
+
+            $table->unique(['user_id', 'setting_key']);
+            $table->index(['user_id', 'setting_key']);
         });
     }
 

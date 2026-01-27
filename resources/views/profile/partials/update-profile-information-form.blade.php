@@ -49,6 +49,62 @@
             @endif
         </div>
 
+        <!-- Bio -->
+        <div class="mb-3">
+            <label for="bio" class="form-label">{{ __('Biografía') }}</label>
+            <textarea 
+                class="form-control @error('bio') is-invalid @enderror" 
+                id="bio" 
+                name="bio" 
+                rows="3"
+                placeholder="Cuéntanos sobre ti">{{ old('bio', $user->bio) }}</textarea>
+            @error('bio')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Teléfono -->
+        <div class="mb-3">
+            <label for="phone" class="form-label">{{ __('Teléfono') }}</label>
+            <input type="text" 
+                   class="form-control @error('phone') is-invalid @enderror" 
+                   id="phone" 
+                   name="phone" 
+                   value="{{ old('phone', $user->phone) }}"
+                   placeholder="+57 300 123 4567">
+            @error('phone')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Ubicación -->
+        <div class="mb-3">
+            <label for="location" class="form-label">{{ __('Ubicación') }}</label>
+            <input type="text" 
+                   class="form-control @error('location') is-invalid @enderror" 
+                   id="location" 
+                   name="location" 
+                   value="{{ old('location', $user->location) }}"
+                   placeholder="Ciudad, País">
+            @error('location')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Sitio Web -->
+        <div class="mb-3">
+            <label for="website" class="form-label">{{ __('Sitio Web') }}</label>
+            <input type="url" 
+                   class="form-control @error('website') is-invalid @enderror" 
+                   id="website" 
+                   name="website" 
+                   value="{{ old('website', $user->website) }}"
+                   placeholder="https://ejemplo.com">
+            @error('website')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
         <div class="d-flex align-items-center gap-2">
             <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
 
