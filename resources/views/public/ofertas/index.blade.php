@@ -4,20 +4,25 @@
 
 @section('content')
 
-{{-- ===================== --}}
-{{-- Banner principal --}}
-{{-- ===================== --}}
-<section class="bg-ligth text-white position-relative" style="font-family: 'worksans sans-serif';">
 
-    <img src="{{ asset('images/oferta4.jpeg') }}"
-         class="w-100 position-absolute top-0 start-0 h-100 object-fit-cover opacity-50 editable"
-         data-model="oferta"
-         data-model-id="0"
-         data-key="banner_image"
-         data-type="image"
-         alt="Oferta educativa CATA">
+{{-- Banner principal --}}
+<section class="bg-ligth text-white position-relative" style="font-family: 'worksans sans-serif';">
+    @can('public_content.edit')
+    <div class="alert alert-info">
+        Modo edición activado - Haz clic en cualquier elemento editable
+    </div>
+    @endcan
 
     <div class="container position-relative py-5 text-dark">
+        <div>
+            <img src="{{ getCustomContent('oferta', 'banner_image', asset('images/oferta4.jpeg')) }}"
+                class="w-100 position-absolute top-0 start-0 h-100 object-fit-cover opacity-50 editable"
+                data-model="oferta"
+                data-model-id="0"
+                data-key="banner_image"
+                data-type="image"
+                alt="Oferta educativa CATA">
+        </div>
         <div class="row">
             <div class="col-lg-8">
 
@@ -50,15 +55,9 @@
     </div>
 </section>
 
-@can('public_content.edit')
-    <div class="alert alert-info">
-        Modo edición activado - Haz clic en cualquier elemento editable
-    </div>
-@endcan
 
-{{-- ===================== --}}
+
 {{-- Sección motivacional --}}
-{{-- ===================== --}}
 <section class="py-5 bg-light" style="font-family: 'worksans sans-serif';">
     <div class="container text-center">
 
@@ -82,9 +81,7 @@
     </div>
 </section>
 
-{{-- ===================== --}}
-{{-- Listado de ofertas --}}
-{{-- ===================== --}}
+{{-- listado de ofertas --}}
 <section class="py-5" style="font-family: 'worksans sans-serif';">
     <div class="container">
 
@@ -98,10 +95,10 @@
                     {{ getCustomContent('oferta', 'oferta_title', 'Ofertas Educativas Disponibles') }}
                 </h2>
                 <p class="text-muted editable"
-                data-model="oferta"
-                data-model-id="0"
-                data-key="oferta_text"
-                data-type="text">
+                    data-model="oferta"
+                    data-model-id="0"
+                    data-key="oferta_text"
+                    data-type="text">
                     {{ getCustomContent('oferta', 'oferta_text', 'Conoce nuestras oportunidades de formación vigentes') }}
                 </p>
             </div>
@@ -115,11 +112,20 @@
                 <div class="card h-100 shadow-sm border-0">
 
                     {{-- Imagen de la oferta --}}
-                    <img src="{{ $oferta->custom('imagen')
-                            ? asset('storage/' . $oferta->custom('imagen'))
-                            : asset('images/ofertas/default.jpg') }}"
-                        class="card-img-top"
-                        alt="{{ $oferta->nombre }}">
+                    @php
+                        $imagenPath = $oferta->custom('imagen');
+                        $imagenUrl = $imagenPath 
+                            ? asset('storage/' . $imagenPath)
+                            : asset('images/ofertas/default.jpg');
+                    @endphp
+                    <img src="{{ $imagenUrl }}"
+                        class="card-img-top editable"
+                        data-model="oferta"
+                        data-model-id="{{ $oferta->id }}"
+                        data-key="imagen"
+                        data-type="image"
+                        alt="{{ $oferta->nombre }}"
+                        style="height: 250px; object-fit: cover;">
 
                     <div class="card-body d-flex flex-column">
 
@@ -167,9 +173,8 @@
     </div>
 </section>
 
-{{-- ===================== --}}
+
 {{-- Banner inferior --}}
-{{-- ===================== --}}
 <section class="py-5 bg-primary text-white" style="font-family: 'worksans sans-serif';">
     <div class="container text-center">
 
