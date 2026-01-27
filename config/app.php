@@ -123,4 +123,15 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Profile Photo Disk
+    |--------------------------------------------------------------------------
+    |
+    | Disco de almacenamiento para las fotos de perfil de los usuarios
+    |
+    */
+
+    'profile_photo_disk' => env('PROFILE_PHOTO_DISK', 'public'),
+
 ];

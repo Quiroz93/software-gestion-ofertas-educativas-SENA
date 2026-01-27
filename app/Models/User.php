@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Traits\HasProfilePhoto;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-    use HasRoles;
+    use HasRoles, HasProfilePhoto;
 
     /**
      * Los atributos que se pueden asignar masivamente.
@@ -25,6 +26,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'profile_photo_path',
+        'bio',
+        'phone',
+        'location',
+        'website',
     ];
 
     /**
@@ -35,6 +41,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    /**
+     * Los atributos que se agregan a las respuestas del modelo.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'profile_photo_url',
     ];
 
     /**
@@ -51,12 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Obtener la imagen de perfil del usuario para AdminLTE.
-     *
-     * @return string
+     * Relación con configuraciones de usuario
      */
-    public function adminlte_image()
+    public function settings()
     {
-        return 'https://i.pravatar.cc/300?u=' . urlencode($this->email);
+        return $this->hasMany(UserSetting::class);
     }
 }
