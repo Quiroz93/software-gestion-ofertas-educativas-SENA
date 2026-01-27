@@ -6,13 +6,28 @@
 <div class="row mb-3" style="font-family: 'worksans sans-serif';">
   <div class="d-flex align-items-center gap-2 text-warning">
     <i class="fas fa-home text-primary fs-4"></i>
-    <h2 class="mb-0 fw-semibold text-xl text-gray-800">
-      {{ __('Home') }}
+    <h2 class="mb-0 fw-semibold text-xl text-gray-800 editable"
+    data-model="home"
+        data-model-id="1"
+        data-key="home_title"
+        data-type="text">
+        {{ getCustomContent('home', 'home_title', 'Home') }}
     </h2>
   </div>
 </div>
 <div class="row mb-2">
-  <div class="col-12 d-flex justify-content-end align-items-rigth">
+  <div class="col-6" style="font-family: 'worksans sans-serif';">
+    <h1 style="color:#39A900">
+      <Span class="text-bold text-primary editable"
+        data-model="bienvenidos"
+        data-model-id="1"
+        data-key="bienvenidos_title"
+        data-type="text">
+        {{ getCustomContent('bienvenidos', 'bienvenidos_title', 'Welcome') }}
+      </Span>, {{ auth()->user()->name }}
+    </h1>
+  </div>
+  <div class="col-6 d-flex justify-content-end align-items-rigth">
     <a class="link-secondary mt-3" href="#" aria-label="Search">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -63,30 +78,25 @@
 @section('content')
 
 {{-- Encabezado principal --}}
-<div class="container" >
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis editable" 
-       data-model="home" 
-       data-model-id="0" 
-       data-key="hero_background" 
-       data-type="image"
-       style="background-image: url('{!! getCustomContent('home', 'hero_background', '/images/background_1.png') !!}'); background-size:cover">
+<div class="container">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
     <div class="row">
-      <div class="col-lg-6 px-0" >
-      <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
+      <div class="col-lg-6 px-0">
+        <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
           data-model="home" data-model-id="0" data-key="hero_title" data-type="text">
-        {!! getCustomContent('home', 'hero_title', 'Title of a longer featured blog post') !!}
-      </h1>
-      <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
-         data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
-        {!! getCustomContent('home', 'hero_description', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') !!}
-      </p>
-      <p class="lead mb-0">
-        <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
-           data-model="home" data-model-id="0" data-key="hero_link_text" data-type="text">
-          {!! getCustomContent('home', 'hero_link_text', 'Continue reading>>>') !!}
-        </a>
-      </p>
-    </div>
+          {!! getCustomContent('home', 'hero_title', 'Title of a longer featured blog post') !!}
+        </h1>
+        <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
+          data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
+          {!! getCustomContent('home', 'hero_description', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') !!}
+        </p>
+        <p class="lead mb-0">
+          <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
+            data-model="home" data-model-id="0" data-key="hero_link_text" data-type="text">
+            {!! getCustomContent('home', 'hero_link_text', 'Continue reading>>>') !!}
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
@@ -105,7 +115,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="{!! getCustomContent('home', 'carousel_slide1_image', '...') !!}" class="d-block w-100 editable" alt="Slide 1"
-             data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
+          data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide1_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide1_title', 'First slide label') !!}
@@ -117,7 +127,7 @@
       </div>
       <div class="carousel-item">
         <img src="{!! getCustomContent('home', 'carousel_slide2_image', '...') !!}" class="d-block w-100 editable" alt="Slide 2"
-             data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
+          data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide2_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide2_title', 'Second slide label') !!}
@@ -129,7 +139,7 @@
       </div>
       <div class="carousel-item">
         <img src="{!! getCustomContent('home', 'carousel_slide3_image', '...') !!}" class="d-block w-100 editable" alt="Slide 3"
-             data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
+          data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide3_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide3_title', 'Third slide label') !!}
@@ -160,7 +170,7 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-primary-emphasis editable"
-                  data-model="home" data-model-id="0" data-key="post1_category" data-type="text">
+            data-model="home" data-model-id="0" data-key="post1_category" data-type="text">
             {!! getCustomContent('home', 'post1_category', 'World') !!}
           </strong>
           <h3 class="mb-0 editable" data-model="home" data-model-id="0" data-key="post1_title" data-type="text">
@@ -175,8 +185,11 @@
           <a
             href="#"
             class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
-            data-model="home" data-model-id="0" data-key="post1_read_more" data-type="text">
-            {!! getCustomContent('home', 'post1_read_more', 'Continue reading') !!}
+            data-model="home"
+            data-model-id="0"
+            data-key="featured_post1_link"
+            data-type="text">
+            {{ getCustomContent('home', 'featured_post1_link', 'Continue reading') }}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -203,7 +216,7 @@
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success-emphasis editable"
-                  data-model="home" data-model-id="0" data-key="post2_category" data-type="text">
+            data-model="home" data-model-id="0" data-key="post2_category" data-type="text">
             {!! getCustomContent('home', 'post2_category', 'Design') !!}
           </strong>
           <h3 class="mb-0 editable" data-model="home" data-model-id="0" data-key="post2_title" data-type="text">
@@ -217,8 +230,36 @@
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
-            Continue reading
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
+            data-model="home"
+            data-model-id="0"
+            data-key="featured_post2_link"
+            data-type="text">
+            {{ getCustomContent('home', 'featured_post2_link', 'Continue reading') }}
+            <svg class="bi" aria-hidden="true">
+              <use xlink:href="#chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            aria-label="Placeholder: Thumbnail"
+            class="bd-placeholder-img"
+            height="250"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
+            width="200"
+            xmlns="http://www.w3.org/2000/svg">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- fin posts destacados --}}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -247,8 +288,14 @@
 <div class="container" style="font-family: 'worksans sans-serif';">
   <section>
     <div class="d-flex align-items-center mb-3 mt-4">
-      <i class="fas fa-layer-group text-success fs-4 me-2 mt-4 mb-4"></i>
-      <h4 class="fw-bold mb-0">Información y Módulos</h4>
+      <i class="fas fa-layer-group text-success fa-2x me-2 mt-4 mb-4"></i>
+      <h4 class="fw-bold mb-0 editable"
+          data-model="home"
+          data-model-id="0"
+          data-key="modules_section_title"
+          data-type="text">
+        {{ getCustomContent('home', 'modules_section_title', 'Información y Módulos') }}
+      </h4>
     </div>
     <hr>
 
@@ -259,13 +306,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('centros.view')
-              <a href="{{ route('centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            <a href="{{ route('centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @else
-              <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Centros</h6>
-            <p class="text-muted small">
-              Centros de formación.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="centros_title"
+                data-type="text">
+              {{ getCustomContent('home', 'centros_title', 'Centros') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="centros_description"
+               data-type="text">
+              {{ getCustomContent('home', 'centros_description', 'Centros de formación.') }}
             </p>
           </div>
         </div>
@@ -276,13 +333,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('programas.view')
-              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Programas</h6>
-            <p class="text-muted small">
-              Programas educativos.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="programas_title"
+                data-type="text">
+              {{ getCustomContent('home', 'programas_title', 'Programas') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="programas_description"
+               data-type="text">
+              {{ getCustomContent('home', 'programas_description', 'Programas educativos.') }}
             </p>
           </div>
         </div>
@@ -293,14 +360,24 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('ofertasEducativas.view')
-              <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @endcan
 
-            <h6 class="fw-bold">Ofertas</h6>
-            <p class="text-muted small">
-              Ofertas educativas vigentes.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="ofertas_title"
+                data-type="text">
+              {{ getCustomContent('home', 'ofertas_title', 'Ofertas') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="ofertas_description"
+               data-type="text">
+              {{ getCustomContent('home', 'ofertas_description', 'Ofertas educativas vigentes.') }}
             </p>
           </div>
         </div>
@@ -328,13 +405,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('instructores.view')
-              <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Instructores</h6>
-            <p class="text-muted small">
-              Perfil de nuestros instructores
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="instructores_title"
+                data-type="text">
+              {{ getCustomContent('home', 'instructores_title', 'Instructores') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="instructores_description"
+               data-type="text">
+              {{ getCustomContent('home', 'instructores_description', 'Perfil de nuestros instructores') }}
             </p>
           </div>
         </div>
@@ -345,13 +432,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('historias_de_exito.view')
-              <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Historias</h6>
-            <p class="text-muted small">
-              Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="historias_title"
+                data-type="text">
+              {{ getCustomContent('home', 'historias_title', 'Historias') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="historias_description"
+               data-type="text">
+              {{ getCustomContent('home', 'historias_description', 'Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes') }}
             </p>
           </div>
         </div>
@@ -361,10 +458,20 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            <a href=""><i class="bi bi-award  fs-2 text-primary mb-2"></i></a>
-            <h6 class="fw-bold">Reconocimientos</h6>
-            <p class="text-muted small">
-              Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>
+            <a href=""><i class="bi bi-award  fa-2x text-primary mb-2"></i></a>
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="reconocimientos_title"
+                data-type="text">
+              {{ getCustomContent('home', 'reconocimientos_title', 'Reconocimientos') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="reconocimientos_description"
+               data-type="text">
+              {{ getCustomContent('home', 'reconocimientos_description', 'Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>') }}
             </p>
           </div>
         </div>
@@ -388,7 +495,8 @@
 
       <div class="row g-5">
         <div class="col-md-8">
-          <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
+          <h3 class="pb-4 mb-4 fst-italic border-bottom editable" data-model="home" data-model-id="0" data-key="article1_subtitle" data-type="text">
+            {!! getCustomContent('home', 'article1_title', 'From the Firehose' ) !!}</h3>
           <article class="blog-post">
             <h2 class="display-5 link-body-emphasis mb-1 editable" data-model="home" data-model-id="0" data-key="article1_title" data-type="text">
               {!! getCustomContent('home', 'article1_title', 'Sample blog post') !!}
@@ -396,48 +504,107 @@
             <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article1_meta" data-type="text">
               {!! getCustomContent('home', 'article1_meta', 'January 1, 2021 by <a href="#">Mark</a>') !!}
             </p>
-            <p class="editable" data-model="home" data-model-id="0" data-key="article1_content" data-type="text">
-              {!! getCustomContent('home', 'article1_content', '
-              This blog post shows a few different types of content that’s
+            <p class=" editable" data-model="home" data-model-id="0" data-key="article1_parrafo1" data_type="text">
+              {{ getCustomContent('home', 'article1_parrafo1','This blog post shows a few different types of content that’s
               supported and styled with Bootstrap. Basic typography, lists,
-              tables, images, code, and more are all supported as expected.') !!}
+              tables, images, code, and more are all supported as expected.')}}
             </p>
             <hr />
-            <p class="editable" data-model="home" data-model-id="0" data-key="article1_additional_content" data-type="text">
-              {!! getCustomContent('home', 'article1_additional_content', '
-              This is some additional paragraph placeholder content. It has been
+            <p class="editable" data-model="home" data-model-id="0" data-key="article1_parrafo2" data_type="text">
+              {{ getCustomContent('home', 'article1_parrafo2', 'This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We\'ll repeat it often to
+              of text affects the surrounding content. We´ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.') !!}
+              exact same string of text.') }}
             </p>
-            <h2>Blockquotes</h2>
-            <p>This is an example blockquote in action:</p>
+            <h2 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_blockquotes"
+              data-type="text">{{ getCustomContent('home', 'article1_blockquotes', 'Blockquotes') }}</h2>
+            <p class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_blockquotes_p"
+              data-type="text">
+              {{ getCustomContent('home', 'article1_blockquotes_p', 'This is an example blockquote in action:') }}
+            </p>
             <blockquote class="blockquote">
-              <p>Quoted text goes here.</p>
+              <p class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_blockquotes_p1"
+                data-type="text">{{getCustomContent('home', 'article1_blockquotes_p1', 'Quoted text goes here.')}}</p>
             </blockquote>
-            <p>
-              This is some additional paragraph placeholder content. It has been
+            <p class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_blockquotes_p2"
+              data-type="text">
+              {{ getCustomContent('home', 'article1_blockquotes_p2', 'This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We\'ll repeat it often to
+              of text affects the surrounding content. We´ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.
+              exact same string of text.') }}
             </p>
-            <h3>Example lists</h3>
-            <p>
-              This is some additional paragraph placeholder content. It's a
-              slightly shorter version of the other highly repetitive body text
-              used throughout. This is an example unordered list:
+            <h3 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_subtitle2"
+              data-type="text">
+              {{getCustomContent('home', 'article1_subtitle2', 'Example lists')}}
+            </h3>
+            <p
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_parrafo3"
+              data-type="text">
+              {{ getCustomContent('home', 'article1_parrafo3', 'This is some additional paragraph placeholder content. It´s a
+            slightly shorter version of the other highly repetitive body text
+            used throughout. This is an example unordered list:') }}
             </p>
             <ul>
-              <li>First list item</li>
-              <li>Second list item with a longer description</li>
-              <li>Third list item to close it out</li>
+              <li
+                class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_item1"
+                data-type="text">
+                {{ getCustomContent('home', 'article1_item1', 'First list item') }}
+              </li>
+              <li class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_item2"
+                data-type="text">
+                {{ getCustomContent('home', 'article1_item2', 'Second list item with a longer description') }}
+              </li>
+              <li class="editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="article1_item3"
+                data-type="text">{{ getCustomContent('home', 'article1_item3', 'Third list item to close it out') }}</li>
             </ul>
-            <p>And this is an ordered list:</p>
+            <p
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_listP"
+              data-type="text">{{ getCustomContent('home', 'article1_listp', 'And this is an ordered list:') }}</p>
             <ol>
-              <li>First list item</li>
-              <li>Second list item with a longer description</li>
+              <li
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_oitem1"
+              data-type="text">{{ getCustomContent('home', 'article1_oitem1', 'First list item') }}</li>
+              <li
+              class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="article1_oitem2"
+              data-type="text">{{ getCustomContent('home', 'article1_oitem2', 'Second list item with a longer description') }}</li>
               <li>Third list item to close it out</li>
             </ol>
             <p>And this is a definition list:</p>
