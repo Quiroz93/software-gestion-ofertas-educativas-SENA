@@ -70,19 +70,16 @@
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
     <div class="row">
       <div class="col-lg-6 px-0" >
-      <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
-          data-model="home" data-model-id="0" data-key="hero_title" data-type="text">
-        {!! getCustomContent('home', 'hero_title', 'Title of a longer featured blog post') !!}
+      <h1 class="display-4 text-bold" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;">
+        Title of a longer featured blog post
       </h1>
-      <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
-         data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
-        {!! getCustomContent('home', 'hero_description', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') !!}
+      <p class="lead my-3 text-light" style="font-family: 'worksans sans-serif';" >
+        Multiple lines of text that form the lede, informing new readers
+        quickly and efficiently about what’s most interesting in this post’s
+        contents.
       </p>
       <p class="lead mb-0">
-        <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
-           data-model="home" data-model-id="0" data-key="hero_link_text" data-type="text">
-          {!! getCustomContent('home', 'hero_link_text', 'Continue reading>>>') !!}
-        </a>
+        <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline" style="font-family: worksans;">Continue reading>>></a>
       </p>
     </div>
     </div>
@@ -102,39 +99,24 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{!! getCustomContent('home', 'carousel_slide1_image', '...') !!}" class="d-block w-100 editable" alt="Slide 1"
-             data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
+        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide1_title" data-type="text">
-            {!! getCustomContent('home', 'carousel_slide1_title', 'First slide label') !!}
-          </h5>
-          <p class="editable" data-model="home" data-model-id="0" data-key="carousel_slide1_desc" data-type="text">
-            {!! getCustomContent('home', 'carousel_slide1_desc', 'Some representative placeholder content for the first slide.') !!}
-          </p>
+          <h5>First slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{!! getCustomContent('home', 'carousel_slide2_image', '...') !!}" class="d-block w-100 editable" alt="Slide 2"
-             data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
+        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide2_title" data-type="text">
-            {!! getCustomContent('home', 'carousel_slide2_title', 'Second slide label') !!}
-          </h5>
-          <p class="editable" data-model="home" data-model-id="0" data-key="carousel_slide2_desc" data-type="text">
-            {!! getCustomContent('home', 'carousel_slide2_desc', 'Some representative placeholder content for the second slide.') !!}
-          </p>
+          <h5>Second slide label</h5>
+          <p>Some representative placeholder content for the second slide.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{!! getCustomContent('home', 'carousel_slide3_image', '...') !!}" class="d-block w-100 editable" alt="Slide 3"
-             data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
+        <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide3_title" data-type="text">
-            {!! getCustomContent('home', 'carousel_slide3_title', 'Third slide label') !!}
-          </h5>
-          <p class="editable" data-model="home" data-model-id="0" data-key="carousel_slide3_desc" data-type="text">
-            {!! getCustomContent('home', 'carousel_slide3_desc', 'Some representative placeholder content for the third slide.') !!}
-          </p>
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the third slide.</p>
         </div>
       </div>
     </div>
@@ -157,18 +139,12 @@
       <div
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary-emphasis editable"
-                  data-model="home" data-model-id="0" data-key="post1_category" data-type="text">
-            {!! getCustomContent('home', 'post1_category', 'World') !!}
-          </strong>
-          <h3 class="mb-0 editable" data-model="home" data-model-id="0" data-key="post1_title" data-type="text">
-            {!! getCustomContent('home', 'post1_title', 'Featured post') !!}
-          </h3>
-          <div class="mb-1 text-body-secondary editable" data-model="home" data-model-id="0" data-key="post1_date" data-type="text">
-            {!! getCustomContent('home', 'post1_date', 'Nov 12') !!}
-          </div>
-          <p class="card-text mb-auto editable" data-model="home" data-model-id="0" data-key="post1_desc" data-type="text">
-            {!! getCustomContent('home', 'post1_desc', 'This is a wider card with supporting text below as a natural lead-in to additional content.') !!}
+          <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+          <h3 class="mb-0">Featured post</h3>
+          <div class="mb-1 text-body-secondary">Nov 12</div>
+          <p class="card-text mb-auto">
+            This is a wider card with supporting text below as a natural
+            lead-in to additional content.
           </p>
           <a
             href="#"
@@ -179,7 +155,7 @@
             </svg>
           </a>
         </div>
-        <div class="col-auto d-none d-lg-block editable" data-model="home" data-model-id="0" data-key="post1_image" data-type="image">
+        <div class="col-auto d-none d-lg-block">
           <svg
             aria-label="Placeholder: Thumbnail"
             class="bd-placeholder-img"
@@ -199,18 +175,12 @@
       <div
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success-emphasis editable"
-                  data-model="home" data-model-id="0" data-key="post2_category" data-type="text">
-            {!! getCustomContent('home', 'post2_category', 'Design') !!}
-          </strong>
-          <h3 class="mb-0 editable" data-model="home" data-model-id="0" data-key="post2_title" data-type="text">
-            {!! getCustomContent('home', 'post2_title', 'Post title') !!}
-          </h3>
-          <div class="mb-1 text-body-secondary editable" data-model="home" data-model-id="0" data-key="post2_date" data-type="text">
-            {!! getCustomContent('home', 'post2_date', 'Nov 11') !!}
-          </div>
-          <p class="mb-auto editable" data-model="home" data-model-id="0" data-key="post2_desc" data-type="text">
-            {!! getCustomContent('home', 'post2_desc', 'This is a wider card with supporting text below as a natural lead-in to additional content.') !!}
+          <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
+          <h3 class="mb-0">Post title</h3>
+          <div class="mb-1 text-body-secondary">Nov 11</div>
+          <p class="mb-auto">
+            This is a wider card with supporting text below as a natural
+            lead-in to additional content.
           </p>
           <a
             href="#"
@@ -221,7 +191,7 @@
             </svg>
           </a>
         </div>
-        <div class="col-auto d-none d-lg-block editable" data-model="home" data-model-id="0" data-key="post2_image" data-type="image">
+        <div class="col-auto d-none d-lg-block">
           <svg
             aria-label="Placeholder: Thumbnail"
             class="bd-placeholder-img"
@@ -374,11 +344,9 @@
   <main class="container py-4">
     <div class="row mb-2">
       <div class="col">
-        <h1 class="display-4 editable" data-model="home" data-model-id="0" data-key="blog_title" data-type="text">
-          {!! getCustomContent('home', 'blog_title', 'Blog Home Page') !!}
-        </h1>
-        <p class="lead text-body-secondary editable" data-model="home" data-model-id="0" data-key="blog_description" data-type="text">
-          {!! getCustomContent('home', 'blog_description', 'An example blog homepage built with Bootstrap 5') !!}
+        <h1 class="display-4">Blog Home Page</h1>
+        <p class="lead text-body-secondary">
+          An example blog homepage built with Bootstrap 5
         </p>
       </div>
 
@@ -387,11 +355,9 @@
         <div class="col-md-8">
           <h3 class="pb-4 mb-4 fst-italic border-bottom">From the Firehose</h3>
           <article class="blog-post">
-            <h2 class="display-5 link-body-emphasis mb-1 editable" data-model="home" data-model-id="0" data-key="article1_title" data-type="text">
-              {!! getCustomContent('home', 'article1_title', 'Sample blog post') !!}
-            </h2>
-            <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article1_meta" data-type="text">
-              {!! getCustomContent('home', 'article1_meta', 'January 1, 2021 by <a href="#">Mark</a>') !!}
+            <h2 class="display-5 link-body-emphasis mb-1">Sample blog post</h2>
+            <p class="blog-post-meta">
+              January 1, 2021 by <a href="#">Mark</a>
             </p>
             <p>
               This blog post shows a few different types of content that’s
@@ -518,11 +484,9 @@
             </p>
           </article>
           <article class="blog-post">
-            <h2 class="display-5 link-body-emphasis mb-1 editable" data-model="home" data-model-id="0" data-key="article2_title" data-type="text">
-              {!! getCustomContent('home', 'article2_title', 'Another blog post') !!}
-            </h2>
-            <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article2_meta" data-type="text">
-              {!! getCustomContent('home', 'article2_meta', 'December 23, 2020 by <a href="#">Jacob</a>') !!}
+            <h2 class="display-5 link-body-emphasis mb-1">Another blog post</h2>
+            <p class="blog-post-meta">
+              December 23, 2020 by <a href="#">Jacob</a>
             </p>
             <p>
               This is some additional paragraph placeholder content. It has been
@@ -586,11 +550,9 @@
             </p>
           </article>
           <article class="blog-post">
-            <h2 class="display-5 link-body-emphasis mb-1 editable" data-model="home" data-model-id="0" data-key="article3_title" data-type="text">
-              {!! getCustomContent('home', 'article3_title', 'New feature') !!}
-            </h2>
-            <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article3_meta" data-type="text">
-              {!! getCustomContent('home', 'article3_meta', 'December 14, 2020 by <a href="#">Chris</a>') !!}
+            <h2 class="display-5 link-body-emphasis mb-1">New feature</h2>
+            <p class="blog-post-meta">
+              December 14, 2020 by <a href="#">Chris</a>
             </p>
             <p>
               This is some additional paragraph placeholder content. It has been
@@ -620,17 +582,15 @@
         <div class="col-md-4">
           <div class="position-sticky" style="top: 2rem">
             <div class="p-4 mb-3 bg-body-tertiary rounded text-success">
-              <h4 class="fst-italic editable" data-model="home" data-model-id="0" data-key="sidebar_about_title" data-type="text">
-                {!! getCustomContent('home', 'sidebar_about_title', 'About') !!}
-              </h4>
-              <p class="mb-0 editable" data-model="home" data-model-id="0" data-key="sidebar_about_text" data-type="text">
-                {!! getCustomContent('home', 'sidebar_about_text', 'Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.') !!}
+              <h4 class="fst-italic">About</h4>
+              <p class="mb-0">
+                Customize this section to tell your visitors a little bit about
+                your publication, writers, content, or something else entirely.
+                Totally up to you.
               </p>
             </div>
             <div>
-              <h4 class="fst-italic editable" data-model="home" data-model-id="0" data-key="sidebar_recent_title" data-type="text">
-                {!! getCustomContent('home', 'sidebar_recent_title', 'Recent posts') !!}
-              </h4>
+              <h4 class="fst-italic">Recent posts</h4>
               <ul class="list-unstyled">
                 <li>
                   <a
@@ -694,9 +654,7 @@
               </ul>
             </div>
             <div class="p-4">
-              <h4 class="fst-italic editable" data-model="home" data-model-id="0" data-key="sidebar_archives_title" data-type="text">
-                {!! getCustomContent('home', 'sidebar_archives_title', 'Archives') !!}
-              </h4>
+              <h4 class="fst-italic">Archives</h4>
               <ol class="list-unstyled mb-0">
                 <li><a href="#">March 2021</a></li>
                 <li><a href="#">February 2021</a></li>
@@ -713,9 +671,7 @@
               </ol>
             </div>
             <div class="p-4">
-              <h4 class="fst-italic editable" data-model="home" data-model-id="0" data-key="sidebar_elsewhere_title" data-type="text">
-                {!! getCustomContent('home', 'sidebar_elsewhere_title', 'Elsewhere') !!}
-              </h4>
+              <h4 class="fst-italic">Elsewhere</h4>
               <ol class="list-unstyled">
                 <li><a href="#">GitHub</a></li>
                 <li><a href="#">Social</a></li>
@@ -733,55 +689,39 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_centro_title" data-type="text">
-          {!! getCustomContent('home', 'footer_centro_title', 'Centro') !!}
-        </h5>
+        <h5>Centro</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_centro_link1" data-type="text">{!! getCustomContent('home', 'footer_centro_link1', 'Sobre nosotros') !!}</a></li>
-          <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_centro_link2" data-type="text">{!! getCustomContent('home', 'footer_centro_link2', 'Programas') !!}</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Sobre nosotros</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Programas</a></li>
           <!-- more links -->
         </ul>
       </div>
       <div class="col-md-3">
-        <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_servicios_title" data-type="text">
-          {!! getCustomContent('home', 'footer_servicios_title', 'Servicios') !!}
-        </h5>
+        <h5>Servicios</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_servicios_link1" data-type="text">{!! getCustomContent('home', 'footer_servicios_link1', 'Características') !!}</a></li>
-          <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_servicios_link2" data-type="text">{!! getCustomContent('home', 'footer_servicios_link2', 'información') !!}</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Características</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">información</a></li>
           <!-- more links -->
         </ul>
       </div>
       <div class="col-md-3">
-        <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_recursos_title" data-type="text">
-          {!! getCustomContent('home', 'footer_recursos_title', 'Recursos') !!}
-        </h5>
+        <h5>Recursos</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_recursos_link1" data-type="text">{!! getCustomContent('home', 'footer_recursos_link1', 'Blog') !!}</a></li>
-          <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_recursos_link2" data-type="text">{!! getCustomContent('home', 'footer_recursos_link2', 'Centro de ayuda') !!}</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Blog</a></li>
+          <li><a href="#" class="text-decoration-none text-muted">Centro de ayuda</a></li>
           <!-- more links -->
         </ul>
       </div>
       <div class="col-md-3">
-        <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_contacto_title" data-type="text">
-          {!! getCustomContent('home', 'footer_contacto_title', 'Contactanos') !!}
-        </h5>
-        <p class="text-muted editable" data-model="home" data-model-id="0" data-key="footer_contacto_direccion" data-type="text">
-          {!! getCustomContent('home', 'footer_contacto_direccion', 'Cra. 11 No. 13-13') !!}
-        </p>
-        <p class="text-muted editable" data-model="home" data-model-id="0" data-key="footer_contacto_telefono" data-type="text">
-          {!! getCustomContent('home', 'footer_contacto_telefono', 'Linea de atención: 018000 910270') !!}
-        </p>
-        <p class="text-muted editable" data-model="home" data-model-id="0" data-key="footer_contacto_email" data-type="text">
-          {!! getCustomContent('home', 'footer_contacto_email', 'Email: servicioalciudadano@sena.udu.co') !!}
-        </p>
+        <h5>Contactanos</h5>
+        <p class="text-muted">Cra. 11 No. 13-13</p>
+        <p class="text-muted">Linea de atención: 018000 910270</p>
+        <p class="text-muted">Email: servicioalciudadano@sena.udu.co</p>
       </div>
     </div>
     <div class="row mt-4">
       <div class="col">
-        <p class="text-center text-muted border-top pt-3 editable" data-model="home" data-model-id="0" data-key="footer_copyright" data-type="text">
-          {!! getCustomContent('home', 'footer_copyright', '&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.') !!}
-        </p>
+        <p class="text-center text-muted border-top pt-3">&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.</p>
       </div>
     </div>
   </div>
