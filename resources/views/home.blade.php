@@ -64,7 +64,12 @@
 
 {{-- Encabezado principal --}}
 <div class="container" >
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis editable" 
+       data-model="home" 
+       data-model-id="0" 
+       data-key="hero_background" 
+       data-type="image"
+       style="background-image: url('{!! getCustomContent('home', 'hero_background', '/images/background_1.png') !!}'); background-size:cover">
     <div class="row">
       <div class="col-lg-6 px-0" >
       <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"

@@ -747,6 +747,10 @@
                 return res.json();
             })
             .then(data => {
+                if (!data.success) {
+                    throw new Error(data.message || 'Error desconocido al subir archivo');
+                }
+
                 // Simular progreso completo
                 $progressBar.css('width', '100%');
 
@@ -757,7 +761,7 @@
 
                 // Guardar archivo subido como seleccionado
                 selectedFile = {
-                    path: data.path,
+                    path: data.file_path,
                     url: data.url,
                     name: file.name,
                     size: file.size,

@@ -18,8 +18,6 @@ class MediaContentController extends Controller
 
     public function __construct(MediaService $mediaService)
     {
-        $this->middleware('auth');
-        $this->middleware('can:public_content.edit');
         $this->mediaService = $mediaService;
     }
 
