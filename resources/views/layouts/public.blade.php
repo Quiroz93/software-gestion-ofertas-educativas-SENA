@@ -17,6 +17,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 @endsection
 
+@section('content_top_nav_right')
+@auth
+<li class="nav-item d-none d-sm-inline-block">
+    <span class="nav-link" style="font-family: 'worksans sans-serif';">
+        <span><strong>Bienvenido</strong></span>
+    </span>
+</li>
+@endauth
+@parent
+@endsection
+
 @section('css')
 @can('public_content.edit')
 <style>
@@ -53,9 +64,17 @@
 {{-- Navbar pública --}}
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="{{ route('public.home') }}">
-            SOESoftware
-        </a>
+        <div class="d-flex align-items-center gap-3">
+            <a class="navbar-brand fw-bold" href="{{ route('public.home') }}">
+                SOESoftware
+            </a>
+
+            @auth
+            <div style="font-family: 'worksans sans-serif';">
+                <h5 style="color:#39A900; margin: 0;"><span class="text-bold text-primary">Bienvenido</span>, {{ auth()->user()->name }}</h5>
+            </div>
+            @endauth
+        </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarPublic" aria-controls="navbarPublic"
@@ -728,6 +747,10 @@
                 return res.json();
             })
             .then(data => {
+                if (!data.success) {
+                    throw new Error(data.message || 'Error desconocido al subir archivo');
+                }
+
                 // Simular progreso completo
                 $progressBar.css('width', '100%');
 
@@ -738,7 +761,7 @@
 
                 // Guardar archivo subido como seleccionado
                 selectedFile = {
-                    path: data.path,
+                    path: data.file_path,
                     url: data.url,
                     name: file.name,
                     size: file.size,

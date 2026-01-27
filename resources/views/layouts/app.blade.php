@@ -1,6 +1,18 @@
 @extends('adminlte::page')
 
 @section('title', config('app.name', 'SENA'))
+
+@section('content_top_nav_right')
+@auth
+<li class="nav-item d-none d-sm-inline-block">
+    <span class="nav-link" style="font-family: 'worksans sans-serif';">
+        <span><strong>Bienvenido</strong></span>
+    </span>
+</li>
+@endauth
+@parent
+@endsection
+
 {{-- Favicon --}}
 <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
 
