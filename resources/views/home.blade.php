@@ -12,10 +12,7 @@
   </div>
 </div>
 <div class="row mb-2">
-  <div class="col-6" style="font-family: 'worksans sans-serif';">
-    <h1 style="color:#39A900"><Span class="text-bold text-primary">Bienvenido</Span>, {{ auth()->user()->name }}</h1>
-  </div>
-  <div class="col-6 d-flex justify-content-end align-items-rigth">
+  <div class="col-12 d-flex justify-content-end align-items-rigth">
     <a class="link-secondary mt-3" href="#" aria-label="Search">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -47,14 +44,14 @@
     </div>
     <div class="nav-scroller py-1 mb-3 border-bottom">
       <nav class="nav nav-underline justify-content-between">
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Competencias</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">inscribires</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">historias de exito</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Instructores</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">nivel de formacion</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Ofertas</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Programas de formacion</a>
-        <a class="nav-item nav-link link-body-emphasis text-light" href="#">Redes</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Competencias</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">inscribires</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">historias de exito</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Instructores</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">nivel de formacion</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Ofertas</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Programas de formacion</a>
+        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Redes</a>
     </div>
     {{-- fin header --}}
   </div>
@@ -172,8 +169,9 @@
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
-            Continue reading
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
+            data-model="home" data-model-id="0" data-key="post1_read_more" data-type="text">
+            {!! getCustomContent('home', 'post1_read_more', 'Continue reading') !!}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -393,18 +391,20 @@
             <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article1_meta" data-type="text">
               {!! getCustomContent('home', 'article1_meta', 'January 1, 2021 by <a href="#">Mark</a>') !!}
             </p>
-            <p>
+            <p class="editable" data-model="home" data-model-id="0" data-key="article1_content" data-type="text">
+              {!! getCustomContent('home', 'article1_content', '
               This blog post shows a few different types of content that’s
               supported and styled with Bootstrap. Basic typography, lists,
-              tables, images, code, and more are all supported as expected.
+              tables, images, code, and more are all supported as expected.') !!}
             </p>
             <hr />
-            <p>
+            <p class="editable" data-model="home" data-model-id="0" data-key="article1_additional_content" data-type="text">
+              {!! getCustomContent('home', 'article1_additional_content', '
               This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We'll repeat it often to
+              of text affects the surrounding content. We\'ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.
+              exact same string of text.') !!}
             </p>
             <h2>Blockquotes</h2>
             <p>This is an example blockquote in action:</p>
@@ -414,7 +414,7 @@
             <p>
               This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We'll repeat it often to
+              of text affects the surrounding content. We\'ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
               exact same string of text.
             </p>
@@ -524,25 +524,29 @@
             <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article2_meta" data-type="text">
               {!! getCustomContent('home', 'article2_meta', 'December 23, 2020 by <a href="#">Jacob</a>') !!}
             </p>
-            <p>
-              This is some additional paragraph placeholder content. It has been
-              written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We'll repeat it often to
+            <p class="editable" data-model="home" data-model-id="0" data-key="article2_content" data-type="text">
+              {!! getCustomContent('home', 'article2_content', 'This is some additional paragraph placeholder content. It has been
+              written to fill the available space and show how a longer snippet of text affects the surrounding content. We\'ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.
+              exact same string of text.') !!}
             </p>
-            <blockquote>
+            <blockquote class="editable" data-model="home" data-model-id="0" data-key="article2_quote" data-type="text">
               <p>
                 Longer quote goes here, maybe with some
                 <strong>emphasized text</strong> in the middle of it.
               </p>
             </blockquote>
-            <p>
-              This is some additional paragraph placeholder content. It has been
-              written to fill the available space and show how a longer snippet
-              of text affects the surrounding content. We'll repeat it often to
+            <p class="editable" data-model="home" data-model-id="0" data-key="article2_additional_content" data-type="text">
+              {!! getCustomContent('home', 'article2_additional_content', 'This is some additional paragraph placeholder content. It has been
+              written to fill the available space and show how a longer snippet of text affects the surrounding content. We\'ll repeat it often to
               keep the demonstration flowing, so be on the lookout for this
-              exact same string of text.
+              exact same string of text.') !!}
+            </p>
+            <p class="editable" data-model="home" data-model-id="0" data-key="article2_additional_content2" data-type="text">
+              {!! getCustomContent('home', 'article2_additional_content2', 'This is some additional paragraph placeholder content. It has been
+              written to fill the available space and show how a longer snippet of text affects the surrounding content. We\'ll repeat it often to
+              keep the demonstration flowing, so be on the lookout for this
+              exact same string of text.') !!}
             </p>
             <h3>Example table</h3>
             <p>And don't forget about tables in these posts:</p>
