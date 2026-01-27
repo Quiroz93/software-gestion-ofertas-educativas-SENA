@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('title', 'Dashboard')
 
@@ -6,14 +6,26 @@
 <div class="row mb-3" style="font-family: 'worksans sans-serif';">
   <div class="d-flex align-items-center gap-2 text-warning">
     <i class="fas fa-home text-primary fs-4"></i>
-    <h2 class="mb-0 fw-semibold text-xl text-gray-800">
-      {{ __('Home') }}
+    <h2 class="mb-0 fw-semibold text-xl text-gray-800 editable"
+    data-model="home"
+        data-model-id="1"
+        data-key="home_title"
+        data-type="text">
+        {{ getCustomContent('home', 'home_title', 'Home') }}
     </h2>
   </div>
 </div>
 <div class="row mb-2">
   <div class="col-6" style="font-family: 'worksans sans-serif';">
-    <h1 style="color:#39A900"><Span class="text-bold text-primary">Bienvenido</Span>, {{ auth()->user()->name }}</h1>
+    <h1 style="color:#39A900">
+      <Span class="text-bold text-primary editable"
+        data-model="bienvenidos"
+        data-model-id="1"
+        data-key="bienvenidos_title"
+        data-type="text">
+        {{ getCustomContent('bienvenidos', 'bienvenidos_title', 'Welcome') }}
+      </Span>, {{ auth()->user()->name }}
+    </h1>
   </div>
   <div class="col-6 d-flex justify-content-end align-items-rigth">
     <a class="link-secondary mt-3" href="#" aria-label="Search">
@@ -66,22 +78,34 @@
 @section('content')
 
 {{-- Encabezado principal --}}
-<div class="container" >
+<div class="container">
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis " style="background-image: url('/images/background_1.png'); background-size:cover">
     <div class="row">
-      <div class="col-lg-6 px-0" >
-      <h1 class="display-4 text-bold" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;">
-        Title of a longer featured blog post
-      </h1>
-      <p class="lead my-3 text-light" style="font-family: 'worksans sans-serif';" >
-        Multiple lines of text that form the lede, informing new readers
-        quickly and efficiently about what’s most interesting in this post’s
-        contents.
-      </p>
-      <p class="lead mb-0">
-        <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline" style="font-family: worksans;">Continue reading>>></a>
-      </p>
-    </div>
+      <div class="col-lg-6 px-0">
+        <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
+            data-model="home"
+            data-model-id="0"
+            data-key="main_title"
+            data-type="text">
+          {{ getCustomContent('home', 'main_title', 'Title of a longer featured blog post') }}
+        </h1>
+        <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
+           data-model="home"
+           data-model-id="0"
+           data-key="main_subtitle"
+           data-type="text">
+          {{ getCustomContent('home', 'main_subtitle', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') }}
+        </p>
+        <p class="lead mb-0">
+          <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
+             data-model="home"
+             data-model-id="0"
+             data-key="continue_reading_link"
+             data-type="text">
+            {{ getCustomContent('home', 'continue_reading_link', 'Continue reading>>>') }}
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
@@ -101,22 +125,58 @@
       <div class="carousel-item active">
         <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+          <h5 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="carousel_slide1_title"
+              data-type="text">
+            {{ getCustomContent('home', 'carousel_slide1_title', 'First slide label') }}
+          </h5>
+          <p class="editable"
+             data-model="home"
+             data-model-id="0"
+             data-key="carousel_slide1_text"
+             data-type="text">
+            {{ getCustomContent('home', 'carousel_slide1_text', 'Some representative placeholder content for the first slide.') }}
+          </p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
+          <h5 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="carousel_slide2_title"
+              data-type="text">
+            {{ getCustomContent('home', 'carousel_slide2_title', 'Second slide label') }}
+          </h5>
+          <p class="editable"
+             data-model="home"
+             data-model-id="0"
+             data-key="carousel_slide2_text"
+             data-type="text">
+            {{ getCustomContent('home', 'carousel_slide2_text', 'Some representative placeholder content for the second slide.') }}
+          </p>
         </div>
       </div>
       <div class="carousel-item">
         <img src="..." class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
+          <h5 class="editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="carousel_slide3_title"
+              data-type="text">
+            {{ getCustomContent('home', 'carousel_slide3_title', 'Third slide label') }}
+          </h5>
+          <p class="editable"
+             data-model="home"
+             data-model-id="0"
+             data-key="carousel_slide3_text"
+             data-type="text">
+            {{ getCustomContent('home', 'carousel_slide3_text', 'Some representative placeholder content for the third slide.') }}
+          </p>
         </div>
       </div>
     </div>
@@ -139,17 +199,42 @@
       <div
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
-          <h3 class="mb-0">Featured post</h3>
-          <div class="mb-1 text-body-secondary">Nov 12</div>
-          <p class="card-text mb-auto">
-            This is a wider card with supporting text below as a natural
-            lead-in to additional content.
+          <strong class="d-inline-block mb-2 text-primary-emphasis editable"
+                 data-model="home"
+                 data-model-id="0"
+                 data-key="featured_post1_category"
+                 data-type="text">
+            {{ getCustomContent('home', 'featured_post1_category', 'World') }}
+          </strong>
+          <h3 class="mb-0 editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="featured_post1_title"
+              data-type="text">
+            {{ getCustomContent('home', 'featured_post1_title', 'Featured post') }}
+          </h3>
+          <div class="mb-1 text-body-secondary editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="featured_post1_date"
+               data-type="text">
+            {{ getCustomContent('home', 'featured_post1_date', 'Nov 12') }}
+          </div>
+          <p class="card-text mb-auto editable"
+             data-model="home"
+             data-model-id="0"
+             data-key="featured_post1_text"
+             data-type="text">
+            {{ getCustomContent('home', 'featured_post1_text', 'This is a wider card with supporting text below as a natural lead-in to additional content.') }}
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
-            Continue reading
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
+            data-model="home"
+            data-model-id="0"
+            data-key="featured_post1_link"
+            data-type="text">
+            {{ getCustomContent('home', 'featured_post1_link', 'Continue reading') }}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -175,17 +260,66 @@
       <div
         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
-          <h3 class="mb-0">Post title</h3>
-          <div class="mb-1 text-body-secondary">Nov 11</div>
-          <p class="mb-auto">
-            This is a wider card with supporting text below as a natural
-            lead-in to additional content.
+          <strong class="d-inline-block mb-2 text-success-emphasis editable"
+                 data-model="home"
+                 data-model-id="0"
+                 data-key="featured_post2_category"
+                 data-type="text">
+            {{ getCustomContent('home', 'featured_post2_category', 'Design') }}
+          </strong>
+          <h3 class="mb-0 editable"
+              data-model="home"
+              data-model-id="0"
+              data-key="featured_post2_title"
+              data-type="text">
+            {{ getCustomContent('home', 'featured_post2_title', 'Post title') }}
+          </h3>
+          <div class="mb-1 text-body-secondary editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="featured_post2_date"
+               data-type="text">
+            {{ getCustomContent('home', 'featured_post2_date', 'Nov 11') }}
+          </div>
+          <p class="mb-auto editable"
+             data-model="home"
+             data-model-id="0"
+             data-key="featured_post2_text"
+             data-type="text">
+            {{ getCustomContent('home', 'featured_post2_text', 'This is a wider card with supporting text below as a natural lead-in to additional content.') }}
           </p>
           <a
             href="#"
-            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline">
-            Continue reading
+            class="icon-link gap-1 icon-link-hover stretched-link text-success text-decoration-underline editable"
+            data-model="home"
+            data-model-id="0"
+            data-key="featured_post2_link"
+            data-type="text">
+            {{ getCustomContent('home', 'featured_post2_link', 'Continue reading') }}
+            <svg class="bi" aria-hidden="true">
+              <use xlink:href="#chevron-right"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg
+            aria-label="Placeholder: Thumbnail"
+            class="bd-placeholder-img"
+            height="250"
+            preserveAspectRatio="xMidYMid slice"
+            role="img"
+            width="200"
+            xmlns="http://www.w3.org/2000/svg">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- fin posts destacados --}}
             <svg class="bi" aria-hidden="true">
               <use xlink:href="#chevron-right"></use>
             </svg>
@@ -215,7 +349,13 @@
   <section>
     <div class="d-flex align-items-center mb-3 mt-4">
       <i class="fas fa-layer-group text-success fs-4 me-2 mt-4 mb-4"></i>
-      <h4 class="fw-bold mb-0">Información y Módulos</h4>
+      <h4 class="fw-bold mb-0 editable"
+          data-model="home"
+          data-model-id="0"
+          data-key="modules_section_title"
+          data-type="text">
+        {{ getCustomContent('home', 'modules_section_title', 'Información y Módulos') }}
+      </h4>
     </div>
     <hr>
 
@@ -226,13 +366,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('centros.view')
-              <a href="{{ route('centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            <a href="{{ route('centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
             @else
-              <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
+            <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fs-2 text-primary mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Centros</h6>
-            <p class="text-muted small">
-              Centros de formación.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="centros_title"
+                data-type="text">
+              {{ getCustomContent('home', 'centros_title', 'Centros') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="centros_description"
+               data-type="text">
+              {{ getCustomContent('home', 'centros_description', 'Centros de formación.') }}
             </p>
           </div>
         </div>
@@ -243,13 +393,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('programas.view')
-              <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fs-2 text-success mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Programas</h6>
-            <p class="text-muted small">
-              Programas educativos.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="programas_title"
+                data-type="text">
+              {{ getCustomContent('home', 'programas_title', 'Programas') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="programas_description"
+               data-type="text">
+              {{ getCustomContent('home', 'programas_description', 'Programas educativos.') }}
             </p>
           </div>
         </div>
@@ -260,14 +420,24 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('ofertasEducativas.view')
-              <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fs-2 text-warning mb-2"></i></a>
             @endcan
 
-            <h6 class="fw-bold">Ofertas</h6>
-            <p class="text-muted small">
-              Ofertas educativas vigentes.
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="ofertas_title"
+                data-type="text">
+              {{ getCustomContent('home', 'ofertas_title', 'Ofertas') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="ofertas_description"
+               data-type="text">
+              {{ getCustomContent('home', 'ofertas_description', 'Ofertas educativas vigentes.') }}
             </p>
           </div>
         </div>
@@ -295,13 +465,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('instructores.view')
-              <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
             @else
-              <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
+            <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fs-2 text-success mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Instructores</h6>
-            <p class="text-muted small">
-              Perfil de nuestros instructores
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="instructores_title"
+                data-type="text">
+              {{ getCustomContent('home', 'instructores_title', 'Instructores') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="instructores_description"
+               data-type="text">
+              {{ getCustomContent('home', 'instructores_description', 'Perfil de nuestros instructores') }}
             </p>
           </div>
         </div>
@@ -312,13 +492,23 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             @can('historias_de_exito.view')
-              <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
             @else
-              <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
+            <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fs-2 text-warning mb-2"></i></a>
             @endcan
-            <h6 class="fw-bold">Historias</h6>
-            <p class="text-muted small">
-              Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="historias_title"
+                data-type="text">
+              {{ getCustomContent('home', 'historias_title', 'Historias') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="historias_description"
+               data-type="text">
+              {{ getCustomContent('home', 'historias_description', 'Conoce las experiencias que se viven en el Centro Agroempresarial y Turístico de los Andes') }}
             </p>
           </div>
         </div>
@@ -329,9 +519,19 @@
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             <a href=""><i class="bi bi-award  fs-2 text-primary mb-2"></i></a>
-            <h6 class="fw-bold">Reconocimientos</h6>
-            <p class="text-muted small">
-              Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>
+            <h6 class="fw-bold editable"
+                data-model="home"
+                data-model-id="0"
+                data-key="reconocimientos_title"
+                data-type="text">
+              {{ getCustomContent('home', 'reconocimientos_title', 'Reconocimientos') }}
+            </h6>
+            <p class="text-muted small editable"
+               data-model="home"
+               data-model-id="0"
+               data-key="reconocimientos_description"
+               data-type="text">
+              {{ getCustomContent('home', 'reconocimientos_description', 'Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>') }}
             </p>
           </div>
         </div>
@@ -344,9 +544,19 @@
   <main class="container py-4">
     <div class="row mb-2">
       <div class="col">
-        <h1 class="display-4">Blog Home Page</h1>
-        <p class="lead text-body-secondary">
-          An example blog homepage built with Bootstrap 5
+        <h1 class="display-4 editable"
+            data-model="home"
+            data-model-id="0"
+            data-key="blog_title"
+            data-type="text">
+          {{ getCustomContent('home', 'blog_title', 'Blog Home Page') }}
+        </h1>
+        <p class="lead text-body-secondary editable"
+           data-model="home"
+           data-model-id="0"
+           data-key="blog_subtitle"
+           data-type="text">
+          {{ getCustomContent('home', 'blog_subtitle', 'An example blog homepage built with Bootstrap 5') }}
         </p>
       </div>
 
