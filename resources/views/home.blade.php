@@ -87,7 +87,11 @@
                     <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                         @if($slide['image'])
                             <img src="{{ asset('storage/' . $slide['image']) }}" 
-                                 class="d-block w-100" 
+                                 class="d-block w-100 editable" 
+                                 data-model="home" 
+                                 data-model-id="0" 
+                                 data-key="carousel_slide{{ $key + 1 }}_image" 
+                                 data-type="image"
                                  alt="Slide {{ $key + 1 }}"
                                  style="object-fit: cover; height: 500px;">
                         @else

@@ -35,7 +35,7 @@ use App\Http\Controllers\Public\MediaContentController;
 | Rutas para gestión de contenidos personalizados (PUBLIC CONTENT)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])
+Route::middleware(['auth', 'can:public_content.edit'])
     ->post('/public-content', [CustomContentController::class, 'store'])
     ->name('public.content.store');
 
