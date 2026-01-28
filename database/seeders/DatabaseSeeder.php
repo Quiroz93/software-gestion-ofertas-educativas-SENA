@@ -109,12 +109,12 @@ class DatabaseSeeder extends Seeder
             | Historias de éxito
             |--------------------------------------------------------------------------
             */
-            'historias_exito.view',
-            'historias_exito.create',
-            'historias_exito.edit',
-            'historias_exito.update',
-            'historias_exito.delete',
-            'historias_exito.manage',
+            'historias_de_exito.view',
+            'historias_de_exito.create',
+            'historias_de_exito.edit',
+            'historias_de_exito.update',
+            'historias_de_exito.delete',
+            'historias_de_exito.manage',
 
             /*
             |--------------------------------------------------------------------------
@@ -276,7 +276,7 @@ class DatabaseSeeder extends Seeder
             'centros.view',
             'programas.view',
             'ofertas.view',
-            'historias_exito.view',
+            'historias_de_exito.view',
             'redes_conocimiento.view',
             'ofertas.show',
         ]);
@@ -287,7 +287,7 @@ class DatabaseSeeder extends Seeder
 
             'programas.view',
             'ofertas.view',
-            'historias_exito.view',
+            'historias_de_exito.view',
         ]);
     }
 }

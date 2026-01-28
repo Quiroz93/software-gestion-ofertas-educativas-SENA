@@ -20,7 +20,7 @@ class Historias_de_exitoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasPermissionTo('historias_exito.view');
+        return $user->hasPermissionTo('historias_de_exito.view');
     }
 
     /**
@@ -28,7 +28,7 @@ class Historias_de_exitoPolicy
      */
     public function view(User $user, HistoriaExito $historia_exito): bool
     {
-        return $user->hasPermissionTo('historias_exito.view');
+        return $user->hasPermissionTo('historias_de_exito.view');
     }
 
     /**
@@ -36,7 +36,7 @@ class Historias_de_exitoPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('historias_exito.create');
+        return $user->hasPermissionTo('historias_de_exito.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class Historias_de_exitoPolicy
      */
     public function update(User $user, HistoriaExito $historia_exito): bool
     {
-        return $user->hasPermissionTo('historias_exito.update');
+        return $user->hasPermissionTo('historias_de_exito.update');
     }
 
     /**
@@ -52,7 +52,7 @@ class Historias_de_exitoPolicy
      */
     public function delete(User $user, HistoriaExito $historia_exito): bool
     {
-        return $user->hasPermissionTo('historias_exito.delete');
+        return $user->hasPermissionTo('historias_de_exito.delete');
     }
 
     /**
@@ -60,7 +60,7 @@ class Historias_de_exitoPolicy
      */
     public function manage(User $user): bool
     {
-        return $user->hasPermissionTo('historias_exito.manage');
+        return $user->hasPermissionTo('historias_de_exito.manage');
     }
 }
 
