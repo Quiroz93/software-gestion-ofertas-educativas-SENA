@@ -208,11 +208,7 @@
                        data-model="home" data-model-id="0" data-key="programas_description" data-type="text">
                         {{ getCustomContent('home', 'programas_description', 'Formación profesional') }}
                     </p>
-                    @can('programas.view')
-                        <a href="{{ route('programas.index') }}" class="btn btn-sm btn-success">Ver más</a>
-                    @else
-                        <a href="{{ route('public.programasDeFormacion.index') }}" class="btn btn-sm btn-success">Ver más</a>
-                    @endcan
+                    <a href="{{ route('public.programasDeFormacion.index') }}" class="btn btn-sm btn-success">Ver más</a>
                 </div>
             </div>
         </div>
@@ -230,11 +226,7 @@
                        data-model="home" data-model-id="0" data-key="ofertas_description" data-type="text">
                         {{ getCustomContent('home', 'ofertas_description', 'Oportunidades laborales') }}
                     </p>
-                    @can('ofertas.view')
-                        <a href="{{ route('ofertas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
-                    @else
-                        <a href="{{ route('public.ofertasEducativas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
-                    @endcan
+                    <a href="{{ route('public.ofertasEducativas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
                 </div>
             </div>
         </div>
@@ -252,11 +244,7 @@
                        data-model="home" data-model-id="0" data-key="noticias_description" data-type="text">
                         {{ getCustomContent('home', 'noticias_description', 'Últimas novedades') }}
                     </p>
-                    @can('noticias.view')
-                        <a href="{{ route('noticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
-                    @else
-                        <a href="{{ route('public.ultimaNoticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
-                    @endcan
+                    <a href="{{ route('public.ultimaNoticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
                 </div>
             </div>
         </div>
@@ -356,11 +344,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('programas.view')
-            <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
-            @else
             <a href="{{ route('public.programasDeFormacion.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
-            @endcan
             <h6 class="fw-bold editable"
                 data-model="home"
                 data-model-id="0"
@@ -383,11 +367,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('ofertas.view')
-            <a href="{{ route('ofertas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
-            @else
             <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
-            @endcan
 
             <h6 class="fw-bold editable"
                 data-model="home"
