@@ -320,7 +320,6 @@
         transform: scale(1.1);
     }
 </style>
-@endsection
     </div>
     <div class="carousel-inner" style="max-height: 500px; overflow: hidden;">
       <div class="carousel-item active">
