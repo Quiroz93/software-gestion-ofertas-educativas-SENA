@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Noticia;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class NoticiaController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Despliega una lista de recursos
      * @return \Illuminate\Contracts\View\View
