@@ -153,6 +153,74 @@ El sistema se implementa bajo una arquitectura cliente-servidor:
 
 ---
 
+## 🚀 Instalación y Configuración
+
+### Requisitos Previos
+- PHP >= 8.2
+- Composer
+- MySQL
+- Node.js y NPM
+
+### Pasos de Instalación
+
+1. **Clonar el repositorio:**
+```bash
+git clone <url-repositorio>
+cd SoeSoftware2
+```
+
+2. **Instalar dependencias y configurar:**
+```bash
+composer setup
+```
+
+O de manera manual:
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan storage:link
+php artisan migrate
+npm install
+npm run build
+```
+
+3. **Configurar base de datos en `.env`:**
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=soesoftware
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
+
+4. **Ejecutar migraciones y seeders:**
+```bash
+php artisan migrate:fresh --seed
+```
+
+5. **Iniciar servidor de desarrollo:**
+```bash
+php artisan serve
+```
+
+### ⚠️ Importante: Enlace Simbólico de Storage
+
+El sistema requiere un enlace simbólico entre `public/storage` y `storage/app/public` para que funcionen las subidas de archivos (fotos de perfil, imágenes, documentos).
+
+**Si las imágenes no se muestran, ejecuta:**
+```bash
+php artisan storage:link
+```
+
+Este comando ya está incluido en `composer setup`, pero puede ser necesario ejecutarlo nuevamente si:
+- Clonas el proyecto en otra máquina
+- Cambias de sistema operativo
+- El directorio `public/storage` se elimina accidentalmente
+
+---
+
 ## 🚀 Estado del Proyecto
 📌 En desarrollo – fase de implementación inicial.
 
