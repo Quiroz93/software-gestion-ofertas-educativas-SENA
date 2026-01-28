@@ -4,7 +4,6 @@ use App\Http\Controllers\Public\PublicCentroController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProfilePhotoController;
 use App\Http\Controllers\CentroController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
@@ -421,9 +420,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     // Rutas de foto de perfil
-    Route::put('/profile/photo', [ProfilePhotoController::class, 'update'])
+    Route::put('/profile/photo', [ProfileController::class, 'photoUpdate'])
         ->name('profile.photo.update');
-    Route::delete('/profile/photo', [ProfilePhotoController::class, 'destroy'])
+    Route::delete('/profile/photo', [ProfileController::class, 'photoDestroy'])
         ->name('profile.photo.destroy');
 });
 
