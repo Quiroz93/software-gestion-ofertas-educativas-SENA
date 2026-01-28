@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\HistoriaExito;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class HistoriaExitoController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', HistoriaExito::class);
         $historias = HistoriaExito::all();
         return view('historia_de_exito.index', compact('historias'));
     }
@@ -21,6 +25,7 @@ class HistoriaExitoController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', HistoriaExito::class);
         return view('historia_de_exito.create');
     }
 
@@ -29,6 +34,7 @@ class HistoriaExitoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', HistoriaExito::class);
         //
     }
 
@@ -37,6 +43,7 @@ class HistoriaExitoController extends Controller
      */
     public function show(HistoriaExito $historiaExito)
     {
+        $this->authorize('view', $historiaExito);
         //
     }
 
@@ -45,6 +52,7 @@ class HistoriaExitoController extends Controller
      */
     public function edit(HistoriaExito $historiaExito)
     {
+        $this->authorize('update', $historiaExito);
         //
     }
 
@@ -53,6 +61,7 @@ class HistoriaExitoController extends Controller
      */
     public function update(Request $request, HistoriaExito $historiaExito)
     {
+        $this->authorize('update', $historiaExito);
         //
     }
 
@@ -61,6 +70,7 @@ class HistoriaExitoController extends Controller
      */
     public function destroy(HistoriaExito $historiaExito)
     {
+        $this->authorize('delete', $historiaExito);
         //
     }
 }
