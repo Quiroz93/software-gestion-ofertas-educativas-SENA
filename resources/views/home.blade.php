@@ -173,24 +173,20 @@
             </h3>
         </div>
 
-        <!-- Centros Card -->
+        <!-- Centro Card -->
         <div class="col-md-3 mb-4">
             <div class="card h-100 shadow-sm border-0 text-center transition hover-shadow">
                 <div class="card-body py-5">
                     <i class="bi bi-building display-4 text-primary mb-3 d-block"></i>
                     <h6 class="fw-bold card-title editable"
-                        data-model="home" data-model-id="0" data-key="centros_title" data-type="text">
-                        {{ getCustomContent('home', 'centros_title', 'Centros') }}
+                        data-model="home" data-model-id="0" data-key="centro_title" data-type="text">
+                        {{ getCustomContent('home', 'centro_title', 'Centro') }}
                     </h6>
                     <p class="text-muted small card-text editable"
-                       data-model="home" data-model-id="0" data-key="centros_description" data-type="text">
-                        {{ getCustomContent('home', 'centros_description', 'Conoce nuestras sedes') }}
+                       data-model="home" data-model-id="0" data-key="centro_description" data-type="text">
+                        {{ getCustomContent('home', 'centro_description', 'Conoce nuestra sede') }}
                     </p>
-                    @can('centros.view')
-                        <a href="{{ route('centros.index') }}" class="btn btn-sm btn-primary">Ver más</a>
-                    @else
-                        <a href="{{ route('public.centrosFormacion.index') }}" class="btn btn-sm btn-primary">Ver más</a>
-                    @endcan
+                    <a href="{{ route('public.centrosFormacion.index') }}" class="btn btn-sm btn-primary">Ver más</a>
                 </div>
             </div>
         </div>
@@ -313,28 +309,24 @@
 
     <div class="row g-4">
 
-      {{-- Centros --}}
+      {{-- Centro --}}
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('centros.view')
-            <a href="{{ route('centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
-            @else
             <a href="{{ route('public.centrosFormacion.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
-            @endcan
             <h6 class="fw-bold editable"
                 data-model="home"
                 data-model-id="0"
-                data-key="centros_title"
+                data-key="centro_title"
                 data-type="text">
-              {{ getCustomContent('home', 'centros_title', 'Centros') }}
+              {{ getCustomContent('home', 'centro_title', 'Centro') }}
             </h6>
             <p class="text-muted small editable"
                data-model="home"
                data-model-id="0"
-               data-key="centros_description"
+               data-key="centro_description"
                data-type="text">
-              {{ getCustomContent('home', 'centros_description', 'Centros de formación.') }}
+              {{ getCustomContent('home', 'centro_description', 'Centro de formación.') }}
             </p>
           </div>
         </div>
@@ -408,11 +400,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('instructores.view')
-            <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
-            @else
             <a href="{{ route('public.instructoresDeFormacion.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
-            @endcan
             <h6 class="fw-bold editable"
                 data-model="home"
                 data-model-id="0"
@@ -435,11 +423,7 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('historias_de_exito.view')
-            <a href="{{ route('historias_de_exito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
-            @else
             <a href="{{ route('public.historiasDeExito.index') }}"><i class="fas fa-book-open fa-2x text-warning mb-2"></i></a>
-            @endcan
             <h6 class="fw-bold editable"
                 data-model="home"
                 data-model-id="0"
