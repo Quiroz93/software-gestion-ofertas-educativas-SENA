@@ -49,29 +49,6 @@
   </div>
 </div>
 
-<div class="container container-fluid">
-  <div class="row">
-    <div class="col-12">
-      {{-- header --}}
-      <header class="border-bottom lh-1 py-3">
-        <div class="row flex-nowrap justify-content-end align-items-end">
-      </header>
-    </div>
-    <div class="nav-scroller py-1 mb-3 border-bottom">
-      <nav class="nav nav-underline justify-content-between">
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Competencias</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">inscribires</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">historias de exito</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Instructores</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">nivel de formacion</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Ofertas</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Programas de formacion</a>
-        <a class="nav-item nav-link link-body-emphasis text-primary text-decoration-none" href="#">Redes</a>
-    </div>
-    {{-- fin header --}}
-  </div>
-</div>
-
 
 @endsection
 
