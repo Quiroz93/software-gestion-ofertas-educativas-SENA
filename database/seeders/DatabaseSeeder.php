@@ -289,5 +289,22 @@ class DatabaseSeeder extends Seeder
             'ofertas.view',
             'historias_de_exito.view',
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ejecutar seeders de datos de prueba
+        |--------------------------------------------------------------------------
+        */
+        $this->call([
+            CentroSeeder::class,
+            RedSeeder::class,
+            NivelFormacionSeeder::class,
+            CompetenciaSeeder::class,
+            ProgramaSeeder::class,
+            InstructorSeeder::class,
+            HistoriaDeExitoSeeder::class,
+            OfertaSeeder::class,
+            NoticiaSeeder::class,
+        ]);
     }
 }
