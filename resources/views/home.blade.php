@@ -202,7 +202,7 @@
                     @can('centros.view')
                         <a href="{{ route('centros.index') }}" class="btn btn-sm btn-primary">Ver más</a>
                     @else
-                        <a href="{{ route('public.centros.index') }}" class="btn btn-sm btn-primary">Ver más</a>
+                        <a href="{{ route('public.centrosFormacion.index') }}" class="btn btn-sm btn-primary">Ver más</a>
                     @endcan
                 </div>
             </div>
@@ -224,7 +224,7 @@
                     @can('programas.view')
                         <a href="{{ route('programas.index') }}" class="btn btn-sm btn-success">Ver más</a>
                     @else
-                        <a href="{{ route('public.programas.index') }}" class="btn btn-sm btn-success">Ver más</a>
+                        <a href="{{ route('public.programasDeFormacion.index') }}" class="btn btn-sm btn-success">Ver más</a>
                     @endcan
                 </div>
             </div>
@@ -246,7 +246,7 @@
                     @can('ofertas.view')
                         <a href="{{ route('ofertas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
                     @else
-                        <a href="{{ route('public.ofertas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
+                        <a href="{{ route('public.ofertasEducativas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
                     @endcan
                 </div>
             </div>
@@ -268,7 +268,7 @@
                     @can('noticias.view')
                         <a href="{{ route('noticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
                     @else
-                        <a href="{{ route('public.noticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
+                        <a href="{{ route('public.ultimaNoticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
                     @endcan
                 </div>
             </div>
@@ -507,7 +507,7 @@
             @can('centros.view')
             <a href="{{ route('centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @else
-            <a href="{{ route('public.centros.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
+            <a href="{{ route('public.centrosFormacion.index') }}"><i class="bi bi-building fa-2x text-primary mb-2"></i></a>
             @endcan
             <h6 class="fw-bold editable"
                 data-model="home"
@@ -534,7 +534,7 @@
             @can('programas.view')
             <a href="{{ route('programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @else
-            <a href="{{ route('public.programas.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
+            <a href="{{ route('public.programasDeFormacion.index') }}"><i class="bi bi-journal-bookmark fa-2x text-success mb-2"></i></a>
             @endcan
             <h6 class="fw-bold editable"
                 data-model="home"
@@ -558,8 +558,8 @@
       <div class="col-md-3">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
-            @can('ofertasEducativas.view')
-            <a href="{{ route('ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
+            @can('ofertas.view')
+            <a href="{{ route('ofertas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @else
             <a href="{{ route('public.ofertasEducativas.index') }}"><i class="bi bi-mortarboard fa-2x text-warning mb-2"></i></a>
             @endcan
@@ -606,7 +606,7 @@
             @can('instructores.view')
             <a href="{{ route('instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @else
-            <a href="{{ route('public.instructores.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
+            <a href="{{ route('public.instructoresDeFormacion.index') }}"><i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i></a>
             @endcan
             <h6 class="fw-bold editable"
                 data-model="home"

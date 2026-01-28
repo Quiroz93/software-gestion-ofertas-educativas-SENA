@@ -357,7 +357,7 @@
 
                     {{-- Centros --}}
                     <li class="sidebar-nav-item">
-                        <a href="{{ route('centros.show', 1) }}"
+                        <a href="{{ route('centros.index') }}"
                            class="sidebar-nav-link {{ request()->routeIs('centros.*') ? 'active' : '' }}">
                             <i class="bi bi-geo-alt"></i>
                             <span>Centros</span>
@@ -375,8 +375,8 @@
 
                     {{-- Niveles de Formación --}}
                     <li class="sidebar-nav-item">
-                        <a href="{{ route('nivel_formacion.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('nivel_formacion.*') ? 'active' : '' }}">
+                        <a href="{{ route('niveles_formacion.index') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('niveles_formacion.*') ? 'active' : '' }}">
                             <i class="bi bi-mortarboard"></i>
                             <span>Niveles</span>
                         </a>
@@ -384,8 +384,8 @@
 
                     {{-- Redes --}}
                     <li class="sidebar-nav-item">
-                        <a href="{{ route('redes.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('redes.*') ? 'active' : '' }}">
+                        <a href="{{ route('redes_conocimiento.index') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('redes_conocimiento.*') ? 'active' : '' }}">
                             <i class="bi bi-diagram-3"></i>
                             <span>Redes</span>
                         </a>
@@ -406,8 +406,8 @@
 
                     {{-- Usuarios --}}
                     <li class="sidebar-nav-item">
-                        <a href="{{ route('user.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
+                        <a href="{{ route('users.index') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
                             <i class="bi bi-shield-lock"></i>
                             <span>Usuarios</span>
                         </a>

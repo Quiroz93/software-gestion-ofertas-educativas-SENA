@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb" class="mb-3">
                 <ol class="breadcrumb breadcrumb-dark mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('public.noticias.index') }}" class="text-white-50">Noticias</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('public.ultimaNoticias.index') }}" class="text-white-50">Noticias</a></li>
                     <li class="breadcrumb-item active text-white">{{ Str::limit($noticia->titulo, 30) }}</li>
                 </ol>
             </nav>
@@ -88,7 +88,7 @@
                             <a href="#" class="btn btn-sm btn-outline-primary" title="Compartir en LinkedIn">
                                 <i class="bi bi-linkedin"></i>
                             </a>
-                            <a href="mailto:?subject={{ urlencode($noticia->titulo) }}&body={{ urlencode(route('public.noticias.show', $noticia)) }}"
+                            <a href="mailto:?subject={{ urlencode($noticia->titulo) }}&body={{ urlencode(route('public.ultimaNoticias.show', $noticia)) }}"
                                class="btn btn-sm btn-outline-primary" title="Enviar por correo">
                                 <i class="bi bi-envelope"></i>
                             </a>
@@ -116,7 +116,7 @@
 
                         <div class="d-flex flex-column gap-3">
                             @foreach($relatedNews as $related)
-                            <a href="{{ route('public.noticias.show', $related) }}"
+                            <a href="{{ route('public.ultimaNoticias.show', $related) }}"
                                class="text-decoration-none border-bottom pb-3 transition"
                                style="color: inherit;">
                                 <h6 class="fw-bold text-primary mb-1">{{ Str::limit($related->titulo, 50) }}</h6>
@@ -178,7 +178,7 @@
 
     <!-- Back Button -->
     <div class="container mb-5">
-        <a href="{{ route('public.noticias.index') }}" class="btn btn-outline-secondary">
+        <a href="{{ route('public.ultimaNoticias.index') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left me-2"></i>Volver a Noticias
         </a>
     </div>

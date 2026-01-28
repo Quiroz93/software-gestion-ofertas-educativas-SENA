@@ -156,7 +156,7 @@
                                     </div>
 
                                     <!-- Button -->
-                                    <a href="{{ route('public.programas.show', $programa) }}"
+                                    <a href="{{ route('public.programasDeFormacion.show', $programa) }}"
                                        class="btn btn-primary btn-sm">
                                         <i class="bi bi-arrow-right me-1"></i>Ver Detalles Completos
                                     </a>

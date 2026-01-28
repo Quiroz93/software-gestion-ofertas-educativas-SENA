@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb" class="mb-3">
                 <ol class="breadcrumb breadcrumb-dark mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('public.programas.index') }}" class="text-white-50">Programas</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('public.programasDeFormacion.index') }}" class="text-white-50">Programas</a></li>
                     <li class="breadcrumb-item active text-white">{{ $programa->nombre }}</li>
                 </ol>
             </nav>
@@ -199,7 +199,7 @@
 
     <!-- Back Button -->
     <div class="container mb-5">
-        <a href="{{ route('public.programas.index') }}" class="btn btn-outline-secondary">
+        <a href="{{ route('public.programasDeFormacion.index') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left me-2"></i>Volver a Programas
         </a>
     </div>

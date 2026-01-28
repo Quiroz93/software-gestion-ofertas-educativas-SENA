@@ -33,7 +33,7 @@
                     <nav aria-label="breadcrumb" class="mt-3">
                         <ol class="breadcrumb breadcrumb-dark mb-0">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('public.ofertas.index') }}" class="text-white-50">Ofertas</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('public.ofertasEducativas.index') }}" class="text-white-50">Ofertas</a></li>
                             <li class="breadcrumb-item active text-white">{{ $oferta->nombre }}</li>
                         </ol>
                     </nav>
@@ -215,7 +215,7 @@
 
     <!-- Back Button -->
     <div class="container mb-5">
-        <a href="{{ route('public.ofertas.index') }}" class="btn btn-outline-secondary">
+        <a href="{{ route('public.ofertasEducativas.index') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left me-2"></i>Volver a Ofertas
         </a>
     </div>
