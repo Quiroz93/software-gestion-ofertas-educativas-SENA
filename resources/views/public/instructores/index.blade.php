@@ -71,14 +71,14 @@
                                 </div>
                                 <h5 class="fw-bold card-title">{{ $instructor->nombre ?? 'Instructor' }}</h5>
                                 <p class="text-muted small mb-3">{{ $instructor->especialidad ?? 'Especialidad' }}</p>
-                                @if($instructor->resena ?? null)
+                                @isset($instructor->resena)
                                     <p class="text-muted small">{{ Str::limit($instructor->resena, 100) }}</p>
-                                @endif
-                                @if($instructor->email ?? null)
+                                @endisset
+                                @isset($instructor->email)
                                     <a href="mailto:{{ $instructor->email }}" class="btn btn-sm btn-outline-success">
                                         <i class="bi bi-envelope me-1"></i>Contactar
                                     </a>
-                                @endif
+                                @endisset
                             </div>
                         </div>
                     </div>

@@ -72,17 +72,17 @@
                                 <div class="mb-3">
                                     <div class="d-flex align-items-center mb-2">
                                         <span class="badge bg-warning text-dark me-2">Egresado</span>
-                                        @if($historia->programa ?? null)
+                                        @isset($historia->programa)
                                             <span class="small text-muted">Programa: {{ $historia->programa }}</span>
-                                        @endif
+                                        @endisset
                                     </div>
                                 </div>
                                 
-                                @if($historia->descripcion ?? null)
+                                @isset($historia->descripcion)
                                     <p class="text-muted small mb-3">
                                         {{ Str::limit($historia->descripcion, 150) }}
                                     </p>
-                                @endif
+                                @endisset
                                 
                                 <a href="{{ route('public.historiasDeExito.show', $historia->id) }}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-arrow-right me-1"></i>Leer historia completa
