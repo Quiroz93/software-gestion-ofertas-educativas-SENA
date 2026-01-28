@@ -6,10 +6,14 @@ use App\Models\Centro;
 use App\Models\User;
 use App\Models\Instructor;
 use App\Models\Programa;
+use App\Models\Noticia;
+use App\Models\HistoriaExito;
 use App\Policies\CentroPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\InstructoresPolicy;
 use App\Policies\ProgramaPolicy;
+use App\Policies\NoticiasPolicy;
+use App\Policies\Historias_de_exitoPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +29,8 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Instructor::class => InstructoresPolicy::class,
         Programa::class => ProgramaPolicy::class,
+        Noticia::class => NoticiasPolicy::class,
+        HistoriaExito::class => Historias_de_exitoPolicy::class,
         
 
 

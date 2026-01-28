@@ -67,4 +67,36 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Actualiza la foto de perfil del usuario
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function photoUpdate(Request $request): RedirectResponse
+    {
+        Gate::authorize('profile.update', $request->user());
+        
+        $request->validate([
+            'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'],
+        ]);
+
+        $request->user()->updateProfilePhoto($request->file('photo'));
+
+        return Redirect::route('profile.edit')->with('status', 'photo-updated');
+    }
+
+    /**
+     * Elimina la foto de perfil del usuario
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function photoDestroy(Request $request): RedirectResponse
+    {
+        Gate::authorize('profile.update', $request->user());
+        
+        $request->user()->deleteProfilePhoto();
+
+        return Redirect::route('profile.edit')->with('status', 'photo-deleted');
+    }
 }
