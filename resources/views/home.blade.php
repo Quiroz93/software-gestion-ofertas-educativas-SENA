@@ -91,8 +91,9 @@
 
 
 {{-- Carrusel de imágenes --}}
-<div class="container my-4 container-fluid">
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="height: 400px;"> {{-- tamaño temporal. --}}
+<div class="container py-5">
+  <div style="margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 2px solid #f0f0f0;">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px;"> {{-- tamaño temporal. --}}
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -157,11 +158,12 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+  </div>
 </div>
 {{-- fin carrusel de imágenes--}}
 
 {{-- Posts destacados --}}
-<div class="container" style="font-family: 'worksans sans-serif';">
+<div class="container" style="margin-top: 4rem; padding-top: 2rem; font-family: 'worksans sans-serif';">
   <div class="row mb-2">
     <div class="col-md-6">
       <div
