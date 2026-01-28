@@ -212,25 +212,3 @@
     }
 </style>
 @endsection
-                </div>
-            </div>
-        @empty
-            <div class="col">
-                <div class="alert alert-info text-center">
-                    No hay programas disponibles.
-                </div>
-            </div>
-        @endforelse
-
-    </div>
-</div>
-
-<!-- CTA FINAL -->
-<div class="container-fluid bg-light py-5" style="font-family: 'worksans sans-serif';">
-    <div class="container text-center">
-        <h3 class="fw-bold">¿Deseas más información?</h3>
-        <a href="#" class="btn btn-primary btn-lg mt-3">Contáctanos</a>
-    </div>
-</div>
-
-@endsection
