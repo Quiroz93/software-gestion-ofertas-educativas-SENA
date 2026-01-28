@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class PublicNoticiaController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('public.noticias.index');
+    }
 }
