@@ -36,7 +36,7 @@
 @auth
 <li class="nav-item d-none d-sm-inline-block">
     <span class="nav-link" style="font-family: 'worksans sans-serif';">
-        <span><strong>Bienvenido</strong></span>
+        <span><strong>Bienvenido</strong></span>, {{ auth()->user()->name }}
     </span>
 </li>
 @endauth
@@ -70,6 +70,28 @@
         font-size: 12px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
+
+    /* Estilos para indicadores del carousel Bootstrap 5 */
+    .carousel-indicators [data-bs-target] {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 2px solid #fff;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+
+    .carousel-indicators [data-bs-target].active {
+        background-color: #fff;
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    .carousel-indicators [data-bs-target]:hover {
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
 </style>
 @endcan
 @stack('styles')
@@ -83,12 +105,6 @@
             <a class="navbar-brand fw-bold" href="{{ route('public.home') }}">
                 SOESoftware
             </a>
-
-            @auth
-            <div style="font-family: 'worksans sans-serif';">
-                <h5 style="color:#39A900; margin: 0;"><span class="text-bold text-primary">Bienvenido</span>, {{ auth()->user()->name }}</h5>
-            </div>
-            @endauth
         </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -170,8 +186,8 @@
 
             <div class="modal-header">
                 <h5 class="modal-title">Editar contenido</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn btn-sm btn-light" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
                 </button>
             </div>
 
@@ -280,7 +296,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">
+                    data-bs-dismiss="modal">
                     Cancelar
                 </button>
                 <button type="button" class="btn btn-primary" id="saveContentBtn">
