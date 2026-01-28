@@ -1,103 +1,326 @@
-@extends('layouts.public')
+@extends('layouts.bootstrap')
 
 @section('title', 'Dashboard')
 
-@section('content_header')
-<div class="row mb-3" style="font-family: 'worksans sans-serif';">
-  <div class="d-flex align-items-center gap-2 text-warning">
-    <i class="fas fa-home text-primary fs-4"></i>
-    <h2 class="mb-0 fw-semibold text-xl text-gray-800 editable"
-    data-model="home"
-        data-model-id="1"
-        data-key="home_title"
-        data-type="text">
-        {{ getCustomContent('home', 'home_title', 'Home') }}
-    </h2>
-  </div>
-</div>
-<div class="row mb-2">
-  <div class="col-6" style="font-family: 'worksans sans-serif';">
-    <h1 style="color:#39A900">
-      <span class="text-bold text-primary editable"
-        data-model="home"
-        data-model-id="0"
-        data-key="bienvenidos_title"
-        data-type="text">
-        {{ getCustomContent('bienvenidos', 'bienvenidos_title', 'Welcome') }}
-      </span>, {{ auth()->user()->name }}
-    </h1>
-  </div>
-  <div class="col-6 d-flex justify-content-end align-items-end">
-    <a class="link-secondary mt-3" href="#" aria-label="Search">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="mx-3"
-        role="img"
-        viewBox="0 0 24 24">
-        <title>Search</title>
-        <circle cx="10.5" cy="10.5" r="7.5"></circle>
-        <path d="M21 21l-5.2-5.2"></path>
-      </svg>
-    </a>
-  </div>
-</div>
-
-
-@endsection
-
 @section('content')
-
-{{-- Encabezado principal --}}
-<div class="container" >
-  @php
-    $heroBgPath = getCustomContent('home', 'hero_background', null);
-    $heroBgUrl = $heroBgPath ? asset('storage/' . $heroBgPath) : asset('images/background_1.png');
-  @endphp
-  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis editable" 
-       data-model="home" 
-       data-model-id="0" 
-       data-key="hero_background" 
-       data-type="image"
-       style="background-image: url('{{ $heroBgUrl }}'); background-size:cover">
-    <div class="row">
-      <div class="col-lg-6 px-0">
-        <h1 class="display-4 text-bold editable" style="color: #39A900; font-family: 'worksans sans-serif'; font-style:italic;"
-          data-model="home" data-model-id="0" data-key="hero_title" data-type="text">
-          {!! getCustomContent('home', 'hero_title', 'Title of a longer featured blog post') !!}
-        </h1>
-        <p class="lead my-3 text-light editable" style="font-family: 'worksans sans-serif';"
-          data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
-          {!! getCustomContent('home', 'hero_description', 'Multiple lines of text that form the lede, informing new readers quickly and efficiently about what\'s most interesting in this post\'s contents.') !!}
-        </p>
-        <p class="lead mb-0">
-          <a href="#" class="text-body-emphasis fw-bold text-success text-decoration-underline editable" style="font-family: worksans;"
-            data-model="home" data-model-id="0" data-key="hero_link_text" data-type="text">
-            {!! getCustomContent('home', 'hero_link_text', 'Continue reading>>>') !!}
-          </a>
-        </p>
-      </div>
+<div class="container-fluid">
+    <!-- Welcome Section -->
+    <div class="row mb-5 pb-4 border-bottom">
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold mb-2">
+                <i class="bi bi-hand-thumbs-up text-success me-2"></i>
+                ¡Bienvenido, {{ auth()->user()->name }}!
+            </h1>
+            <p class="lead text-muted">
+                Accede a todos nuestros programas, ofertas y recursos de formación
+            </p>
+        </div>
+        <div class="col-lg-4 d-flex align-items-end justify-content-lg-end">
+            <a href="{{ route('profile.edit') }}" class="btn btn-outline-primary">
+                <i class="bi bi-person-circle me-2"></i>Mi Perfil
+            </a>
+        </div>
     </div>
-  </div>
+
+    <!-- Hero Section -->
+    @php
+        $heroBgPath = getCustomContent('home', 'hero_background', null);
+        $heroBgUrl = $heroBgPath ? asset('storage/' . $heroBgPath) : asset('images/background_1.png');
+    @endphp
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="rounded-lg p-5 text-white position-relative overflow-hidden"
+                 style="background-image: url('{{ $heroBgUrl }}'); 
+                         background-size: cover; 
+                         background-position: center;
+                         min-height: 400px;
+                         display: flex;
+                         align-items: center;">
+                <!-- Overlay -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+                            background: rgba(0,0,0,0.4); z-index: 1;"></div>
+                
+                <!-- Content -->
+                <div class="position-relative" style="z-index: 2;">
+                    <h2 class="display-4 fw-bold mb-3 editable"
+                        data-model="home" data-model-id="0" data-key="hero_title" data-type="text">
+                        {!! getCustomContent('home', 'hero_title', 'Bienvenido a nuestra plataforma de formación') !!}
+                    </h2>
+                    <p class="lead mb-4 editable"
+                       data-model="home" data-model-id="0" data-key="hero_description" data-type="text">
+                        {!! getCustomContent('home', 'hero_description', 'Descubre nuestros programas y oportunidades de desarrollo profesional') !!}
+                    </p>
+                    <a href="#programas" class="btn btn-success btn-lg">
+                        <i class="bi bi-arrow-down me-2"></i>Explorar Programas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="h4 fw-bold mb-4">
+                <i class="bi bi-images me-2 text-primary"></i>Galería Destacada
+            </h3>
+            <div id="carouselHome" class="carousel slide shadow-lg rounded-lg overflow-hidden" 
+                 data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-indicators">
+                    @for($i = 0; $i < 3; $i++)
+                    <button type="button" data-bs-target="#carouselHome" data-bs-slide-to="{{ $i }}"
+                            class="{{ $i === 0 ? 'active' : '' }}" 
+                            aria-label="Slide {{ $i + 1 }}"></button>
+                    @endfor
+                </div>
+                
+                <div class="carousel-inner">
+                    @php
+                        $carousel = [
+                            ['image' => getCustomContent('home', 'carousel_slide1_image', null)],
+                            ['image' => getCustomContent('home', 'carousel_slide2_image', null)],
+                            ['image' => getCustomContent('home', 'carousel_slide3_image', null)],
+                        ];
+                    @endphp
+                    
+                    @foreach($carousel as $key => $slide)
+                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                        @if($slide['image'])
+                            <img src="{{ asset('storage/' . $slide['image']) }}" 
+                                 class="d-block w-100" 
+                                 alt="Slide {{ $key + 1 }}"
+                                 style="object-fit: cover; height: 500px;">
+                        @else
+                            <div style="height: 500px; background: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                                <span class="text-muted">Sin imagen</span>
+                            </div>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Posts Section -->
+    <div class="row mb-5 pb-4 border-bottom">
+        <div class="col-12">
+            <h3 class="h4 fw-bold mb-4">
+                <i class="bi bi-star me-2 text-warning"></i>Destacados
+            </h3>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 overflow-hidden transition">
+                <img src="{{ asset('storage/' . getCustomContent('home', 'post1_image', '')) }}" 
+                     alt="Post 1" 
+                     class="card-img-top" 
+                     style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <span class="badge bg-primary mb-2 editable"
+                          data-model="home" data-model-id="0" data-key="post1_category" data-type="text">
+                        {{ getCustomContent('home', 'post1_category', 'Noticia') }}
+                    </span>
+                    <h5 class="card-title fw-bold editable"
+                        data-model="home" data-model-id="0" data-key="post1_title" data-type="text">
+                        {!! getCustomContent('home', 'post1_title', 'Título del post') !!}
+                    </h5>
+                    <p class="card-text text-muted small editable"
+                       data-model="home" data-model-id="0" data-key="post1_date" data-type="text">
+                        {!! getCustomContent('home', 'post1_date', 'Enero 28, 2026') !!}
+                    </p>
+                    <p class="card-text editable"
+                       data-model="home" data-model-id="0" data-key="post1_desc" data-type="text">
+                        {!! getCustomContent('home', 'post1_desc', 'Descripción del primer post destacado...') !!}
+                    </p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">
+                        Leer más <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 overflow-hidden transition">
+                <img src="{{ asset('storage/' . getCustomContent('home', 'post2_image', '')) }}" 
+                     alt="Post 2" 
+                     class="card-img-top" 
+                     style="height: 250px; object-fit: cover;">
+                <div class="card-body">
+                    <span class="badge bg-success mb-2 editable"
+                          data-model="home" data-model-id="0" data-key="post2_category" data-type="text">
+                        {{ getCustomContent('home', 'post2_category', 'Ofertas') }}
+                    </span>
+                    <h5 class="card-title fw-bold editable"
+                        data-model="home" data-model-id="0" data-key="post2_title" data-type="text">
+                        {!! getCustomContent('home', 'post2_title', 'Título del post 2') !!}
+                    </h5>
+                    <p class="card-text text-muted small editable"
+                       data-model="home" data-model-id="0" data-key="post2_date" data-type="text">
+                        {!! getCustomContent('home', 'post2_date', 'Enero 28, 2026') !!}
+                    </p>
+                    <p class="card-text editable"
+                       data-model="home" data-model-id="0" data-key="post2_desc" data-type="text">
+                        {!! getCustomContent('home', 'post2_desc', 'Descripción del segundo post destacado...') !!}
+                    </p>
+                    <a href="#" class="btn btn-sm btn-outline-success">
+                        Leer más <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Cards Section -->
+    <div class="row mb-5" id="programas">
+        <div class="col-12">
+            <h3 class="h4 fw-bold mb-4">
+                <i class="bi bi-grid-3x3-gap me-2 text-info"></i>Acceso Rápido
+            </h3>
+        </div>
+
+        <!-- Centros Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm border-0 text-center transition hover-shadow">
+                <div class="card-body py-5">
+                    <i class="bi bi-building display-4 text-primary mb-3 d-block"></i>
+                    <h6 class="fw-bold card-title editable"
+                        data-model="home" data-model-id="0" data-key="centros_title" data-type="text">
+                        {{ getCustomContent('home', 'centros_title', 'Centros') }}
+                    </h6>
+                    <p class="text-muted small card-text editable"
+                       data-model="home" data-model-id="0" data-key="centros_description" data-type="text">
+                        {{ getCustomContent('home', 'centros_description', 'Conoce nuestras sedes') }}
+                    </p>
+                    @can('centros.view')
+                        <a href="{{ route('centros.index') }}" class="btn btn-sm btn-primary">Ver más</a>
+                    @else
+                        <a href="{{ route('public.centros.index') }}" class="btn btn-sm btn-primary">Ver más</a>
+                    @endcan
+                </div>
+            </div>
+        </div>
+
+        <!-- Programas Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm border-0 text-center transition hover-shadow">
+                <div class="card-body py-5">
+                    <i class="bi bi-journal-code display-4 text-success mb-3 d-block"></i>
+                    <h6 class="fw-bold card-title editable"
+                        data-model="home" data-model-id="0" data-key="programas_title" data-type="text">
+                        {{ getCustomContent('home', 'programas_title', 'Programas') }}
+                    </h6>
+                    <p class="text-muted small card-text editable"
+                       data-model="home" data-model-id="0" data-key="programas_description" data-type="text">
+                        {{ getCustomContent('home', 'programas_description', 'Formación profesional') }}
+                    </p>
+                    @can('programas.view')
+                        <a href="{{ route('programas.index') }}" class="btn btn-sm btn-success">Ver más</a>
+                    @else
+                        <a href="{{ route('public.programas.index') }}" class="btn btn-sm btn-success">Ver más</a>
+                    @endcan
+                </div>
+            </div>
+        </div>
+
+        <!-- Ofertas Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm border-0 text-center transition hover-shadow">
+                <div class="card-body py-5">
+                    <i class="bi bi-megaphone display-4 text-warning mb-3 d-block"></i>
+                    <h6 class="fw-bold card-title editable"
+                        data-model="home" data-model-id="0" data-key="ofertas_title" data-type="text">
+                        {{ getCustomContent('home', 'ofertas_title', 'Ofertas') }}
+                    </h6>
+                    <p class="text-muted small card-text editable"
+                       data-model="home" data-model-id="0" data-key="ofertas_description" data-type="text">
+                        {{ getCustomContent('home', 'ofertas_description', 'Oportunidades laborales') }}
+                    </p>
+                    @can('ofertas.view')
+                        <a href="{{ route('ofertas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
+                    @else
+                        <a href="{{ route('public.ofertas.index') }}" class="btn btn-sm btn-warning">Ver más</a>
+                    @endcan
+                </div>
+            </div>
+        </div>
+
+        <!-- Noticias Card -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm border-0 text-center transition hover-shadow">
+                <div class="card-body py-5">
+                    <i class="bi bi-newspaper display-4 text-danger mb-3 d-block"></i>
+                    <h6 class="fw-bold card-title editable"
+                        data-model="home" data-model-id="0" data-key="noticias_title" data-type="text">
+                        {{ getCustomContent('home', 'noticias_title', 'Noticias') }}
+                    </h6>
+                    <p class="text-muted small card-text editable"
+                       data-model="home" data-model-id="0" data-key="noticias_description" data-type="text">
+                        {{ getCustomContent('home', 'noticias_description', 'Últimas novedades') }}
+                    </p>
+                    @can('noticias.view')
+                        <a href="{{ route('noticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
+                    @else
+                        <a href="{{ route('public.noticias.index') }}" class="btn btn-sm btn-danger">Ver más</a>
+                    @endcan
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-primary text-white rounded-lg p-5 text-center">
+                <h3 class="h4 fw-bold mb-2">¿Necesitas ayuda?</h3>
+                <p class="mb-3">Nuestro equipo está listo para asistirte en tu proceso de formación</p>
+                <a href="mailto:info@example.com" class="btn btn-light">
+                    <i class="bi bi-envelope me-2"></i>Contáctanos
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-{{-- fin encabezado principal --}}
 
-
-
-{{-- Carrusel de imágenes --}}
-<div class="container py-5">
-  <div style="margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 2px solid #f0f0f0;">
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<style>
+    .transition {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
+        transform: translateY(-5px);
+    }
+    
+    .carousel-indicators [data-bs-target] {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 2px solid #fff;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+    
+    .carousel-indicators [data-bs-target].active {
+        background-color: #fff;
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    
+    .carousel-indicators [data-bs-target]:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+        transform: scale(1.1);
+    }
+</style>
+@endsection
     </div>
     <div class="carousel-inner" style="max-height: 500px; overflow: hidden;">
       <div class="carousel-item active">
