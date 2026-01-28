@@ -6,9 +6,34 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserRoleController extends Controller
 {
+    /**
+     * Agrupa los permisos por categoría
+     * @return array
+     */
+    private function getPermissionsGroupedByCategory()
+    {
+        $permissions = Permission::all();
+        $grouped = [];
+
+        foreach ($permissions as $permission) {
+            // Dividir el nombre por el primer punto (ej: "usuarios.create" -> "usuarios")
+            $parts = explode('.', $permission->name);
+            $category = $parts[0] ?? 'otros';
+            
+            if (!isset($grouped[$category])) {
+                $grouped[$category] = [];
+            }
+            
+            $grouped[$category][] = $permission;
+        }
+
+        return $grouped;
+    }
+
     /**
      * Despliega el formulario para editar los permisos de un usuario
      * @param User $user
@@ -19,8 +44,9 @@ class UserRoleController extends Controller
         Gate::authorize("users.edit");
         $roles = Role::all();
         $userRoles = $user->roles->pluck('name')->toArray();
+        $permissions = $this->getPermissionsGroupedByCategory();
 
-        return view('user.roles', compact('user', 'roles', 'userRoles'));
+        return view('user.roles', compact('user', 'roles', 'userRoles', 'permissions'));
     }
 
     /**
