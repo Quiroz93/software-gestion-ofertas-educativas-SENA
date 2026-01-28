@@ -1,24 +1,25 @@
 <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center" 
-       href="#" 
-       id="userDropdown" 
-       role="button" 
-       data-bs-toggle="dropdown" 
-       aria-expanded="false">
-        <img src="{{ Auth::user()->profile_photo_url }}" 
-             class="rounded-circle me-2" 
-             style="width: 32px; height: 32px; object-fit: cover;"
-             alt="{{ Auth::user()->name }}">
+    <a class="nav-link dropdown-toggle d-flex align-items-center"
+        href="#"
+        id="userDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <span class="bi bi-hand text-light me-2">¡Bienvenido!</span>
+        <img src="{{ Auth::user()->profile_photo_url }}"
+            class="rounded-circle me-2"
+            style="width: 32px; height: 32px; object-fit: cover;"
+            alt="{{ Auth::user()->name }}">
         <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
         <!-- User Info -->
         <li class="px-3 py-2 border-bottom">
             <div class="d-flex align-items-center">
-                <img src="{{ Auth::user()->profile_photo_url }}" 
-                     class="rounded-circle me-2" 
-                     style="width: 40px; height: 40px; object-fit: cover;"
-                     alt="{{ Auth::user()->name }}">
+                <img src="{{ Auth::user()->profile_photo_url }}"
+                    class="rounded-circle me-2"
+                    style="width: 40px; height: 40px; object-fit: cover;"
+                    alt="{{ Auth::user()->name }}">
                 <div>
                     <strong class="d-block">{{ Auth::user()->name }}</strong>
                     <small class="text-muted">{{ Auth::user()->email }}</small>
@@ -42,9 +43,11 @@
                 <i class="bi bi-gear me-2"></i>Configuración
             </a>
         </li>
-        
-        <li><hr class="dropdown-divider"></li>
-        
+
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
         <!-- Logout -->
         <li>
             <form method="POST" action="{{ route('logout') }}">
@@ -61,11 +64,11 @@
     .dropdown-item {
         transition: background-color 0.2s ease;
     }
-    
+
     .dropdown-item:hover {
         background-color: #f8f9fa;
     }
-    
+
     .dropdown-item.text-danger:hover {
         background-color: #f8d7da;
     }

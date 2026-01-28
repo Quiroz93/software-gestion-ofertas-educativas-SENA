@@ -3,19 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="container-fluid">
-    <!-- Welcome Section -->
-    <div class="row mb-5 pb-4 border-bottom">
-        <div class="col-lg-8">
-            <h1 class="display-5 fw-bold mb-2">
-                <i class="bi bi-hand-thumbs-up text-success me-2"></i>
-                ¡Bienvenido, {{ auth()->user()->name }}!
-            </h1>
-            <p class="lead text-muted">
-                Accede a todos nuestros programas, ofertas y recursos de formación
-            </p>
-        </div>
-    </div>
+<div class="container" style="font-family: 'worksans sans-serif';">
 
     <!-- Hero Section -->
     @php
