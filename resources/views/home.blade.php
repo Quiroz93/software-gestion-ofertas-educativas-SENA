@@ -18,16 +18,16 @@
 <div class="row mb-2">
   <div class="col-6" style="font-family: 'worksans sans-serif';">
     <h1 style="color:#39A900">
-      <Span class="text-bold text-primary editable"
-        data-model="bienvenidos"
-        data-model-id="1"
+      <span class="text-bold text-primary editable"
+        data-model="home"
+        data-model-id="0"
         data-key="bienvenidos_title"
         data-type="text">
         {{ getCustomContent('bienvenidos', 'bienvenidos_title', 'Welcome') }}
-      </Span>, {{ auth()->user()->name }}
+      </span>, {{ auth()->user()->name }}
     </h1>
   </div>
-  <div class="col-6 d-flex justify-content-end align-items-rigth">
+  <div class="col-6 d-flex justify-content-end align-items-end">
     <a class="link-secondary mt-3" href="#" aria-label="Search">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -100,17 +100,12 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-<<<<<<< HEAD
         @php
           $slide1ImagePath = getCustomContent('home', 'carousel_slide1_image', null);
           $slide1ImageUrl = $slide1ImagePath ? asset('storage/' . $slide1ImagePath) : asset('images/carousel-placeholder.jpg');
         @endphp
         <img src="{{ $slide1ImageUrl }}" class="d-block w-100 editable" alt="Slide 1"
              data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
-=======
-        <img src="{!! getCustomContent('home', 'carousel_slide1_image', '...') !!}" class="d-block w-100 editable" alt="Slide 1"
-          data-model="home" data-model-id="0" data-key="carousel_slide1_image" data-type="image">
->>>>>>> e9efef37c340ddbb6eaf5f62b95d757a00c06b9a
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide1_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide1_title', 'First slide label') !!}
@@ -121,17 +116,12 @@
         </div>
       </div>
       <div class="carousel-item">
-<<<<<<< HEAD
         @php
           $slide2ImagePath = getCustomContent('home', 'carousel_slide2_image', null);
           $slide2ImageUrl = $slide2ImagePath ? asset('storage/' . $slide2ImagePath) : asset('images/carousel-placeholder.jpg');
         @endphp
         <img src="{{ $slide2ImageUrl }}" class="d-block w-100 editable" alt="Slide 2"
              data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
-=======
-        <img src="{!! getCustomContent('home', 'carousel_slide2_image', '...') !!}" class="d-block w-100 editable" alt="Slide 2"
-          data-model="home" data-model-id="0" data-key="carousel_slide2_image" data-type="image">
->>>>>>> e9efef37c340ddbb6eaf5f62b95d757a00c06b9a
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide2_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide2_title', 'Second slide label') !!}
@@ -142,17 +132,12 @@
         </div>
       </div>
       <div class="carousel-item">
-<<<<<<< HEAD
         @php
           $slide3ImagePath = getCustomContent('home', 'carousel_slide3_image', null);
           $slide3ImageUrl = $slide3ImagePath ? asset('storage/' . $slide3ImagePath) : asset('images/carousel-placeholder.jpg');
         @endphp
         <img src="{{ $slide3ImageUrl }}" class="d-block w-100 editable" alt="Slide 3"
              data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
-=======
-        <img src="{!! getCustomContent('home', 'carousel_slide3_image', '...') !!}" class="d-block w-100 editable" alt="Slide 3"
-          data-model="home" data-model-id="0" data-key="carousel_slide3_image" data-type="image">
->>>>>>> e9efef37c340ddbb6eaf5f62b95d757a00c06b9a
         <div class="carousel-caption d-none d-md-block">
           <h5 class="editable" data-model="home" data-model-id="0" data-key="carousel_slide3_title" data-type="text">
             {!! getCustomContent('home', 'carousel_slide3_title', 'Third slide label') !!}
@@ -255,30 +240,6 @@
           </a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg
-            aria-label="Placeholder: Thumbnail"
-            class="bd-placeholder-img"
-            height="250"
-            preserveAspectRatio="xMidYMid slice"
-            role="img"
-            width="200"
-            xmlns="http://www.w3.org/2000/svg">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#55595c"></rect>
-            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{{-- fin posts destacados --}}
-            <svg class="bi" aria-hidden="true">
-              <use xlink:href="#chevron-right"></use>
-            </svg>
-          </a>
-        </div>
-        <div class="col-auto d-none d-lg-block editable" data-model="home" data-model-id="0" data-key="post2_image" data-type="image">
           <svg
             aria-label="Placeholder: Thumbnail"
             class="bd-placeholder-img"
@@ -484,7 +445,7 @@
                data-model-id="0"
                data-key="reconocimientos_description"
                data-type="text">
-              {{ getCustomContent('home', 'reconocimientos_description', 'Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>') }}
+              {!! getCustomContent('home', 'reconocimientos_description', 'Conoce a nuestros aprendices mas destacados e inspirate a ser parte de nustra <span class="fw-bold mb-0">FAMILIA CATA</span>') !!}
             </p>
           </div>
         </div>
@@ -493,7 +454,7 @@
   </section>
 </div>
 
-<div class="container" style="font-family: 'worksans sans-serif';">
+<div style="font-family: 'worksans sans-serif';">
   <main class="container py-4">
     <div class="row mb-2">
       <div class="col">
@@ -504,9 +465,9 @@
           {!! getCustomContent('home', 'blog_description', 'An example blog homepage built with Bootstrap 5') !!}
         </p>
       </div>
+    </div>
 
-
-      <div class="row g-5">
+    <div class="row g-5">
         <div class="col-md-8">
           <h3 class="pb-4 mb-4 fst-italic border-bottom editable" data-model="home" data-model-id="0" data-key="article1_subtitle" data-type="text">
             {!! getCustomContent('home', 'article1_title', 'From the Firehose' ) !!}</h3>
@@ -517,13 +478,13 @@
             <p class="blog-post-meta editable" data-model="home" data-model-id="0" data-key="article1_meta" data-type="text">
               {!! getCustomContent('home', 'article1_meta', 'January 1, 2021 by <a href="#">Mark</a>') !!}
             </p>
-            <p class=" editable" data-model="home" data-model-id="0" data-key="article1_parrafo1" data_type="text">
+            <p class=" editable" data-model="home" data-model-id="0" data-key="article1_parrafo1" data-type="text">
               {{ getCustomContent('home', 'article1_parrafo1','This blog post shows a few different types of content that’s
               supported and styled with Bootstrap. Basic typography, lists,
               tables, images, code, and more are all supported as expected.')}}
             </p>
             <hr />
-            <p class="editable" data-model="home" data-model-id="0" data-key="article1_parrafo2" data_type="text">
+            <p class="editable" data-model="home" data-model-id="0" data-key="article1_parrafo2" data-type="text">
               {{ getCustomContent('home', 'article1_parrafo2', 'This is some additional paragraph placeholder content. It has been
               written to fill the available space and show how a longer snippet
               of text affects the surrounding content. We´ll repeat it often to

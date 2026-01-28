@@ -16,10 +16,9 @@
     <div class="container position-relative py-5 text-dark">
         {{-- Banner background image --}}
         @php
-            $bannerImagePath = getCustomContent('oferta', 'banner_image', null);
-            $bannerImageUrl = $bannerImagePath 
-                ? asset('storage/' . $bannerImagePath)
-                : asset('images/oferta4.jpeg');
+            // ✅ FIX: Usar helper mejorado que valida existencia
+            $bannerImageUrl = getMediaUrl('oferta', 'banner_image', asset('images/oferta4.jpeg'));
+            $bannerAlt = getMediaMetadata('oferta', 'banner_image', 'alt_text', 'Banner de ofertas educativas SENA CATA');
         @endphp
         <div>
             <img src="{{ $bannerImageUrl }}"
@@ -28,7 +27,8 @@
                 data-model-id="0"
                 data-key="banner_image"
                 data-type="image"
-                alt="Oferta educativa CATA">
+                alt="{{ $bannerAlt }}"
+                loading="lazy">
         </div>
         <div class="row">
             <div class="col-lg-8">
@@ -120,10 +120,10 @@
 
                     {{-- Imagen de la oferta --}}
                     @php
-                        $imagenPath = $oferta->custom('imagen');
-                        $imagenUrl = $imagenPath 
-                            ? asset('storage/' . $imagenPath)
-                            : asset('images/ofertas/default.jpg');
+                        // ✅ FIX: Usar relación eager loaded y helper mejorado
+                        $imagenContent = $oferta->customContents->firstWhere('key', 'imagen');
+                        $imagenUrl = $imagenContent?->getVerifiedUrl() ?? asset('images/ofertas/default.jpg');
+                        $imagenAlt = $imagenContent?->getAltText($oferta->nombre);
                     @endphp
                     <img src="{{ $imagenUrl }}"
                         class="card-img-top editable"
@@ -131,7 +131,9 @@
                         data-model-id="{{ $oferta->id }}"
                         data-key="imagen"
                         data-type="image"
-                        alt="{{ $oferta->nombre }}"
+                        alt="{{ $imagenAlt }}"
+                        title="{{ $oferta->nombre }}"
+                        loading="lazy"
                         style="height: 250px; object-fit: cover;">
 
                     <div class="card-body d-flex flex-column">
