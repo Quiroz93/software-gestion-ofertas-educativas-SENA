@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\\Models\\Noticia;
+use Illuminate\\Http\\Request;
 
 class PublicNoticiaController extends Controller
 {
     public function index()
     {
-        return view('public.noticias.index');
+        $noticias = Noticia::where('activa', true)->get();
+        return view('public.noticias.index', compact('noticias'));
     }
 }

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\\Models\\NivelFormacion;
+use Illuminate\\Http\\Request;
 
 class PublicNivelFormacionController extends Controller
 {
     public function index()
     {
-        return view('public.nivel_formaciones.index');
+        $niveles = NivelFormacion::all();
+        return view('public.nivel_formaciones.index', compact('niveles'));
     }
 }
