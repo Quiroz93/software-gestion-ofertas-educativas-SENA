@@ -5,15 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="py-5 rounded-lg mb-5 overflow-hidden text-white transition"
-         style="background: linear-gradient(135deg, {{ $oferta->custom('hero_bg_color', '#71277A') }} 0%, {{ $oferta->custom('hero_bg_color_2', '#71277A') }} 100%);
-                 min-height: 300px;
-                 display: flex;
-                 align-items: center;">
-        <div class="container">
+    <div class="hero hero-oferta hero-lg"
+         style="background: linear-gradient(135deg, {{ $oferta->custom('hero_bg_color', '#FDC300') }} 0%, {{ $oferta->custom('hero_bg_color_2', '#FDC300') }} 100%);">
+        <div class="hero-content container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-3 editable"
+                    <h1 class="hero-title editable"
                         data-model="oferta"
                         data-model-id="{{ $oferta->id }}"
                         data-key="banner_title"
@@ -21,7 +18,7 @@
                         {{ $oferta->custom('banner_title', $oferta->nombre) }}
                     </h1>
 
-                    <p class="lead editable"
+                    <p class="hero-subtitle editable"
                         data-model="oferta"
                         data-model-id="{{ $oferta->id }}"
                         data-key="slogan"
@@ -31,7 +28,7 @@
 
                     <!-- Breadcrumbs -->
                     <nav aria-label="breadcrumb" class="mt-3">
-                        <ol class="breadcrumb breadcrumb-dark mb-0">
+                        <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('public.ofertasEducativas.index') }}" class="text-white-50">Ofertas</a></li>
                             <li class="breadcrumb-item active text-white">{{ $oferta->nombre }}</li>
@@ -48,7 +45,7 @@
             <!-- Left Column -->
             <div class="col-lg-8">
                 <!-- Description Section -->
-                <div class="card shadow-sm border-0 mb-4 rounded-lg">
+                <div class="card card-oferta shadow-sm border-0 mb-4">
                     <div class="card-body">
                         <h4 class="card-title fw-bold mb-3 editable"
                             data-model="oferta"
@@ -70,7 +67,7 @@
                 </div>
 
                 <!-- Important Dates -->
-                <div class="card shadow-sm border-0 mb-4 rounded-lg">
+                <div class="card card-oferta shadow-sm border-0 mb-4">
                     <div class="card-body">
                         <h4 class="card-title fw-bold mb-3">
                             <i class="bi bi-calendar me-2 text-success"></i>Fechas Importantes
@@ -78,7 +75,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="p-3 bg-light rounded-lg mb-3">
+                                <div class="p-3 bg-light rounded mb-3">
                                     <small class="text-muted d-block mb-1">Fecha de Inicio</small>
                                     <h6 class="fw-bold mb-0">
                                         {{ is_string($oferta->fecha_inicio) ? \Carbon\Carbon::parse($oferta->fecha_inicio)->format('d/m/Y') : $oferta->fecha_inicio?->format('d/m/Y') }}
@@ -86,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="p-3 bg-light rounded-lg mb-3">
+                                <div class="p-3 bg-light rounded mb-3">
                                     <small class="text-muted d-block mb-1">Fecha de Fin</small>
                                     <h6 class="fw-bold mb-0">
                                         {{ is_string($oferta->fecha_fin) ? \Carbon\Carbon::parse($oferta->fecha_fin)->format('d/m/Y') : $oferta->fecha_fin?->format('d/m/Y') }}
@@ -99,7 +96,7 @@
 
                 <!-- Related Programs -->
                 @if($oferta->programas()->count() > 0)
-                <div class="card shadow-sm border-0 rounded-lg">
+                <div class="card card-oferta shadow-sm border-0">
                     <div class="card-body">
                         <h4 class="card-title fw-bold mb-3">
                             <i class="bi bi-link-45deg me-2 text-info"></i>Programas Asociados
@@ -109,7 +106,7 @@
                             @foreach($oferta->programas()->take(4) as $programa)
                             <div class="col-md-6">
                                 <a href="{{ route('public.programas.show', $programa) }}"
-                                   class="card border-0 shadow-sm text-decoration-none transition hover-shadow rounded-lg">
+                                   class="card card-programa border-0 shadow-sm text-decoration-none">
                                     <div class="card-body">
                                         <h6 class="card-title fw-bold text-primary mb-1">{{ $programa->nombre }}</h6>
                                         <small class="text-muted d-block">{{ $programa->duracion ?? 'Duración no especificada' }}</small>
@@ -126,7 +123,7 @@
             <!-- Right Column - Sidebar -->
             <div class="col-lg-4">
                 <!-- Offer Details Card -->
-                <div class="card shadow-sm border-0 mb-4 rounded-lg sticky-top" style="top: 20px;">
+                <div class="card card-oferta shadow-sm border-0 mb-4 sticky-top" style="top: 20px;">
                     <div class="card-body">
                         <h5 class="card-title fw-bold mb-3">
                             <i class="bi bi-info-circle me-2 text-primary"></i>Información Clave
@@ -169,7 +166,7 @@
                 </div>
 
                 <!-- Benefits Card -->
-                <div class="card shadow-sm border-0 rounded-lg">
+                <div class="card card-oferta shadow-sm border-0">
                     <div class="card-body">
                         <h5 class="card-title fw-bold mb-3">
                             <i class="bi bi-star-fill text-warning me-2"></i>Beneficios
@@ -199,7 +196,7 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="bg-light rounded-lg p-5 mb-5">
+    <div class="bg-light rounded p-5 mb-5">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <h4 class="fw-bold mb-2">¿Tienes dudas sobre esta oferta?</h4>
@@ -268,22 +265,4 @@
     </div>
 </div>
 
-<style>
-    .transition {
-        transition: all 0.3s ease;
-    }
-
-    .hover-shadow:hover {
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
-        transform: translateY(-5px);
-    }
-
-    .rounded-lg {
-        border-radius: 1rem;
-    }
-
-    .breadcrumb-dark .breadcrumb-item.active {
-        color: rgba(255, 255, 255, 0.8);
-    }
-</style>
 @endsection

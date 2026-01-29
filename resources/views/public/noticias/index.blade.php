@@ -5,15 +5,14 @@
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="bg-gradient text-white py-5 mb-5 rounded-lg overflow-hidden"
-         style="background: linear-gradient(135deg, #71277A 0%, #71277A 100%);">
-        <div class="container position-relative py-4">
+    <div class="hero hero-noticia hero-md">
+        <div class="hero-content container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-3">
+                    <h1 class="hero-title">
                         <i class="bi bi-newspaper me-3"></i>Noticias y Artículos
                     </h1>
-                    <p class="lead mb-0">Mantente informado de las últimas novedades del Centro CATA</p>
+                    <p class="hero-subtitle mb-0">Mantente informado de las últimas novedades del Centro CATA</p>
                 </div>
                 <div class="col-lg-4 text-lg-end d-none d-lg-block">
                     <i class="bi bi-newspaper text-white" style="font-size: 5rem; opacity: 0.3;"></i>
@@ -32,7 +31,7 @@
         <div class="row g-4">
             @foreach($noticias->take(1) as $noticia)
             <div class="col-12">
-                <div class="card shadow-sm border-0 overflow-hidden transition hover-shadow rounded-lg h-100">
+                <div class="card card-noticia card-lg shadow-sm border-0 overflow-hidden h-100">
                     <div class="row g-0 h-100">
                         <!-- Image -->
                         <div class="col-lg-5 bg-light d-flex align-items-center justify-content-center" style="min-height: 300px;">
@@ -83,7 +82,7 @@
         <div class="row g-4">
             @foreach($noticias->skip(1) as $noticia)
             <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 transition hover-shadow rounded-lg">
+                <div class="card card-noticia h-100 shadow-sm border-0">
                     <!-- Image -->
                     <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
                         <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
@@ -163,22 +162,4 @@
     </div>
 </div>
 
-<style>
-    .bg-gradient {
-        background: linear-gradient(135deg, #71277A 0%, #71277A 100%);
-    }
-
-    .transition {
-        transition: all 0.3s ease;
-    }
-
-    .hover-shadow:hover {
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
-        transform: translateY(-5px);
-    }
-
-    .rounded-lg {
-        border-radius: 1rem;
-    }
-</style>
 @endsection
