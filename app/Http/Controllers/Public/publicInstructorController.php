@@ -10,7 +10,7 @@ class PublicInstructorController extends Controller
 {
     public function index()
     {
-        $instructores = Instructor::all();
+        $instructores = Instructor::paginate(12);
         return view('public.instructores.index', compact('instructores'));
     }
 }

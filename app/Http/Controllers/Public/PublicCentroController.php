@@ -10,7 +10,7 @@ class PublicCentroController extends Controller
 {
     public function index()
     {
-        $centros = Centro::all();
+        $centros = Centro::paginate(10);
         return view('public.centros.index', compact('centros'));
     }
 }

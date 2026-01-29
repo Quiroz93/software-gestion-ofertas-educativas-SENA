@@ -84,6 +84,11 @@
                     </div>
                     @endforeach
                 </div>
+                
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center mt-5">
+                    {{ $instructores->links() }}
+                </div>
             @else
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
