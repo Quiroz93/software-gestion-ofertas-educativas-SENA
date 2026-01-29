@@ -1,0 +1,136 @@
+/* ============================================================================
+ * COMPONENTE HERO - SISTEMA SENA
+ * Secciones hero institucionalmente consistentes
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * HERO BASE
+ * ============================================================================
+ */
+
+.hero,
+.hero-section {
+  background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
+  color: white;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.hero-description {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-cta .btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+}
+
+.hero-cta .btn-primary {
+  background-color: white;
+  color: #39A900;
+  border-color: white;
+}
+
+.hero-cta .btn-primary:hover {
+  background-color: rgba(255,255,255,0.9);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.hero-cta .btn-outline {
+  border-color: white;
+  color: white;
+  background-color: transparent;
+}
+
+.hero-cta .btn-outline:hover {
+  background-color: rgba(255,255,255,0.1);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* ============================================================================
+ * VARIANTES DE HERO
+ * ============================================================================
+ */
+
+/* Hero Programa */
+.hero-programa {
+  background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
+}
+
+/* Hero Oferta */
+.hero-oferta {
+  background: linear-gradient(135deg, #FDC300 0%, #f5b000 100%);
+  color: #212529;
+}
+
+.hero-oferta .hero-title,
+.hero-oferta .hero-subtitle {
+  color: #212529;
+}
+
+.hero-oferta .hero-description {
+  color: rgba(33, 37, 41, 0.9);
+}
+
+/* Hero Noticia */
+.hero-noticia {
+  background: linear-gradient(135deg, #50E5F9 0%, #1db9cc 100%);
+  color: white;
+}
+
+/* Hero Admin */
+.hero-admin {
+  background: linear-gradient(135deg, #71277A 0%, #4a1850 100%);
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+/* ============================================================================
+ * HERO CON IMAGEN DE FONDO\n * ============================================================================\n */\n\n.hero-with-image {\n  background-size: cover;\n  background-position: center;\n  background-attachment: fixed;\n}\n\n.hero-with-image::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: rgba(0, 0, 0, 0.4);\n  z-index: 0;\n}\n\n/* ============================================================================\n * TAMA\u00d1OS\n * ============================================================================\n */\n\n.hero-sm {\n  padding: 2rem 0;\n}\n\n.hero-sm .hero-title {\n  font-size: 1.75rem;\n}\n\n.hero-md {\n  padding: 4rem 0;\n}\n\n.hero-lg {\n  padding: 6rem 0;\n  min-height: 400px;\n  display: flex;\n  align-items: center;\n}\n\n.hero-lg .hero-title {\n  font-size: 3rem;\n}\n\n.hero-xl {\n  padding: 8rem 0;\n  min-height: 600px;\n  display: flex;\n  align-items: center;\n}\n\n.hero-xl .hero-title {\n  font-size: 3.5rem;\n}\n\n/* ============================================================================\n * ALINEACI\u00d3N\n * ============================================================================\n */\n\n.hero-left {\n  text-align: left;\n}\n\n.hero-left .hero-cta {\n  justify-content: flex-start;\n}\n\n.hero-center {\n  text-align: center;\n}\n\n.hero-center .hero-cta {\n  justify-content: center;\n}\n\n.hero-right {\n  text-align: right;\n}\n\n.hero-right .hero-cta {\n  justify-content: flex-end;\n}\n\n/* ============================================================================\n * HERO CON CONTENIDO LATERAL\n * ============================================================================\n */\n\n.hero-with-content {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 4rem;\n  align-items: center;\n}\n\n.hero-with-content .hero-content {\n  text-align: left;\n}\n\n.hero-image {\n  width: 100%;\n  height: auto;\n  border-radius: 8px;\n  box-shadow: 0 10px 40px rgba(0,0,0,0.15);\n}\n\n/* ============================================================================\n * ANIMACIONES\n * ============================================================================\n */\n\n.hero-title {\n  animation: fadeInDown 0.8s ease-out;\n}\n\n.hero-subtitle {\n  animation: fadeInUp 0.8s ease-out 0.2s backwards;\n}\n\n.hero-cta {\n  animation: fadeInUp 0.8s ease-out 0.4s backwards;\n}\n\n@keyframes fadeInDown {\n  from {\n    opacity: 0;\n    transform: translateY(-30px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(30px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n/* ============================================================================\n * RESPONSIVE\n * ============================================================================\n */\n\n@media (max-width: 768px) {\n  .hero,\n  .hero-section {\n    padding: 2rem 0;\n    margin-bottom: 2rem;\n  }\n  \n  .hero-title {\n    font-size: 2rem;\n  }\n  \n  .hero-subtitle {\n    font-size: 1.1rem;\n  }\n  \n  .hero-lg {\n    padding: 4rem 0;\n    min-height: 300px;\n  }\n  \n  .hero-lg .hero-title {\n    font-size: 2rem;\n  }\n  \n  .hero-xl {\n    padding: 4rem 0;\n    min-height: 300px;\n  }\n  \n  .hero-xl .hero-title {\n    font-size: 2rem;\n  }\n  \n  .hero-with-content {\n    grid-template-columns: 1fr;\n    gap: 2rem;\n  }\n  \n  .hero-cta {\n    flex-direction: column;\n  }\n  \n  .hero-cta .btn {\n    width: 100%;\n  }\n}\n"

@@ -19,6 +19,7 @@
 @import './components/alerts-sena.css';
 @import './components/forms-sena.css';
 @import './components/navigation-sena.css';
+@import './components/hero-sena.css';
 
 /* PASO 4: Cargar layouts específicos */
 @import './layouts/admin.css';

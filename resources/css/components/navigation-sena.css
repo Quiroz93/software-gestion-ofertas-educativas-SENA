@@ -1,21 +1,328 @@
-﻿/* Componente navegación - SENA */
-.nav {
+﻿/* ============================================================================
+ * COMPONENTE NAVEGACIÓN - SISTEMA SENA
+ * Navegación institucionalmente consistente
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * NAVEGACIÓN BASE
+ * ============================================================================
+ */
+
+.nav,
+.navbar {
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: var(--spacing-4);
+  gap: 0;
+  align-items: center;
 }
 
+/* ============================================================================
+ * ENLACE DE NAVEGACIÓN
+ * ============================================================================
+ */
+
 .nav-link {
-  color: var(--nav-text);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: #6c757d;
   text-decoration: none;
   padding: var(--spacing-2) var(--spacing-4);
   border-radius: var(--border-radius-md);
-  transition: var(--transition-smooth);
+  transition: all 0.3s ease;
+  font-weight: var(--font-weight-medium);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--sena-text-primary);
+  background-color: rgba(57, 169, 0, 0.08);
 }
 
 .nav-link.active {
-  color: var(--nav-link-active);
+  color: #39A900;
   font-weight: var(--font-weight-semibold);
+  background-color: rgba(57, 169, 0, 0.1);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #39A900;
+  border-radius: 3px 3px 0 0;
+}
+
+/* ============================================================================
+ * NAVEGACIÓN VERTICAL (SIDEBAR)
+ * ============================================================================
+ */
+
+.nav-vertical {
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.nav-vertical .nav-link {
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-left: 3px solid transparent;
+}
+
+.nav-vertical .nav-link:hover {
+  border-left-color: #39A900;
+}
+
+.nav-vertical .nav-link.active {
+  border-left-color: #39A900;
+  background-color: rgba(57, 169, 0, 0.1);
+}
+
+.nav-vertical .nav-link.active::after {
+  display: none;
+}
+
+/* ============================================================================
+ * NAVEGACIÓN HORIZONTAL (NAVBAR)
+ * ============================================================================
+ */
+
+.nav-horizontal {
+  flex-direction: row;
+  gap: 0;
+}
+
+.nav-horizontal .nav-link {
+  border-radius: 0;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-bottom: 3px solid transparent;
+}
+
+.nav-horizontal .nav-link:hover {
+  border-bottom-color: #39A900;
+  background-color: transparent;
+}
+
+.nav-horizontal .nav-link.active {
+  border-bottom-color: #39A900;
+  background-color: transparent;
+}
+
+.nav-horizontal .nav-link.active::after {
+  display: none;
+}
+
+/* ============================================================================
+ * SIDEBAR
+ * ============================================================================
+ */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(180deg, #2d8500 0%, #39A900 100%);
+  color: #ecf0f1;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  padding: var(--spacing-4) 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar-brand {
+  padding: var(--spacing-4) var(--spacing-4);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  margin-bottom: var(--spacing-4);
+}
+
+.sidebar-nav {
+  padding: 0;
+}
+
+.sidebar-nav .nav-link {
+  color: #ecf0f1;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: 0;
+  border-left: 3px solid transparent;
+  margin: 0;
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: rgba(57, 169, 0, 0.2);
+  border-left-color: white;
+  color: white;
+}
+
+.sidebar-nav .nav-link.active {
+  background-color: rgba(57, 169, 0, 0.3);
+  border-left-color: white;
+  color: white;
+  font-weight: 600;
+}
+
+/* ============================================================================
+ * NAVBAR
+ * ============================================================================
+ */
+
+.navbar-main {
+  background: white;
+  border-bottom: 1px solid #dee2e6;
+  padding: var(--spacing-3) var(--spacing-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--sena-text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu .nav-link {
+  color: var(--sena-text-primary);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: 0;
+  border-bottom: 3px solid transparent;
+}
+
+.navbar-menu .nav-link:hover {
+  color: #39A900;
+  border-bottom-color: #39A900;
+}
+
+.navbar-menu .nav-link.active {
+  color: #39A900;
+  border-bottom-color: #39A900;
+}
+
+/* ============================================================================
+ * BREADCRUMB
+ * ============================================================================
+ */
+
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  padding: var(--spacing-2) 0;
+  margin: var(--spacing-4) 0;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '/';
+  color: #6c757d;
+  margin: 0 var(--spacing-2);
+}
+
+.breadcrumb-item a {
+  color: #39A900;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.breadcrumb-item a:hover {
+  color: #2d8500;
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: var(--sena-text-primary);
+}
+
+/* ============================================================================
+ * TABS
+ * ============================================================================
+ */
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #dee2e6;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-item {
+  margin: 0;
+}
+
+.tabs-link {
+  display: block;
+  padding: var(--spacing-3) var(--spacing-4);
+  color: #6c757d;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.3s;
+}
+
+.tabs-link:hover {
+  color: var(--sena-text-primary);
+  background-color: rgba(57, 169, 0, 0.08);
+}
+
+.tabs-link.active {
+  color: #39A900;
+  border-bottom-color: #39A900;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================================================
+ * RESPONSIVIDAD
+ * ============================================================================
+ */
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px;
+    left: -250px;
+    transition: left 0.3s ease;
+  }
+  
+  .sidebar.show {
+    left: 0;
+  }
+  
+  .nav-horizontal .nav-link {
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-sm);
+  }
 }
