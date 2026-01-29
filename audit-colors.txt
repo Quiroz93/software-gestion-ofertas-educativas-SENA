@@ -1,0 +1,31 @@
+﻿AUDITORIA DE COLORES - SISTEMA ACTUAL
+======================================
+
+Buscando colores hexadecimales en resources/css/
+    background: #d4edda;
+    background: #f8d7da;
+    background: #f8f9fa;
+    background: #ffffff;
+    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
+    background: linear-gradient(135deg, #39A900, #2d8500);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(180deg, #2d8500 0%, #39A900 100%);
+    border: 2px solid #e0e0e0;
+    border: 3px solid #f3f3f3;
+    border-bottom: 1px solid #dee2e6;
+    border-color: #667eea;
+    border-left-color: #28a745;
+    border-left-color: #39A900;
+    border-left-color: #dc3545;
+    border-top: 3px solid #3498db;
+    color: #212529;
+    color: #2c3e50;
+    color: #2d8500;
+    color: #39A900 !important;
+    color: #39A900;
+    color: #495057;
+    color: #6c757d;
+    color: #ecf0f1;
