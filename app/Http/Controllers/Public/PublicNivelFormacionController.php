@@ -10,7 +10,7 @@ class PublicNivelFormacionController extends Controller
 {
     public function index()
     {
-        $niveles = NivelFormacion::all();
+        $niveles = NivelFormacion::paginate(12);
         return view('public.nivel_formaciones.index', compact('niveles'));
     }
 }
