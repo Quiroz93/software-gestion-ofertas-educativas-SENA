@@ -176,7 +176,7 @@
         <!-- Pagination -->
         @if(method_exists($programas, 'render'))
             <div class="d-flex justify-content-center mt-5">
-                {{ $programas->links() }}
+                {{ $programas->appends(request()->query())->links() }}
             </div>
         @endif
     </div>
