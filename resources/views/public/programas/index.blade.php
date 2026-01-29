@@ -5,12 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="bg-primary text-white py-5 mb-5 rounded-bottom-lg">
+    <div class="hero hero-programa hero-md">
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-3">Programas de Formación</h1>
-                    <p class="lead mb-4">
+                    <h1 class="hero-title fw-bold mb-3">Programas de Formación</h1>
+                    <p class="hero-subtitle mb-4">
                         <i class="bi bi-info-circle me-2"></i>
                         Descubre nuestra oferta educativa diseñada para fortalecer tus competencias
                         y abrir nuevas oportunidades laborales
@@ -33,7 +33,7 @@
             <div class="col-md-4">
                 <div class="text-center">
                     <div class="bg-success bg-opacity-10 rounded-circle p-4 d-inline-block mb-3">
-                        <i class="bi bi-check-circle text-success" style="font-size: 2rem;"></i>
+                        <i class="bi bi-check-circle text-success fs-2"></i>
                     </div>
                     <h5 class="fw-bold">Programas Actualizados</h5>
                     <p class="text-muted">Alineados con las tendencias del mercado laboral</p>
@@ -42,7 +42,7 @@
             <div class="col-md-4">
                 <div class="text-center">
                     <div class="bg-primary bg-opacity-10 rounded-circle p-4 d-inline-block mb-3">
-                        <i class="bi bi-person-check text-primary" style="font-size: 2rem;"></i>
+                        <i class="bi bi-person-check text-primary fs-2"></i>
                     </div>
                     <h5 class="fw-bold">Docentes Expertos</h5>
                     <p class="text-muted">Profesionales con experiencia real en la industria</p>
@@ -51,7 +51,7 @@
             <div class="col-md-4">
                 <div class="text-center">
                     <div class="bg-warning bg-opacity-10 rounded-circle p-4 d-inline-block mb-3">
-                        <i class="bi bi-award text-warning" style="font-size: 2rem;"></i>
+                        <i class="bi bi-award text-warning fs-2"></i>
                     </div>
                     <h5 class="fw-bold">Certificación</h5>
                     <p class="text-muted">Respaldo institucional y reconocimiento laboral</p>
@@ -62,7 +62,7 @@
 
     <!-- Filters Section -->
     <div class="container mb-5">
-        <div class="bg-light p-4 rounded-lg">
+        <div class="bg-light p-4 rounded">
             <h5 class="fw-bold mb-4">
                 <i class="bi bi-funnel me-2"></i>Filtrar Programas
             </h5>
@@ -110,12 +110,12 @@
         @forelse ($programas as $programa)
             <div class="row mb-4">
                 <div class="col-lg-12">
-                    <div class="card border-0 shadow-sm hover-shadow transition rounded-lg overflow-hidden">
+                    <div class="card card-programa border-0 shadow-sm overflow-hidden">
                         <div class="row g-0">
                             <!-- Image -->
-                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center" style="min-height: 250px;">
+                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center min-h-250">
                                 <div class="text-center">
-                                    <i class="bi bi-book-half text-primary" style="font-size: 3rem;"></i>
+                                    <i class="bi bi-book-half text-primary fs-1"></i>
                                 </div>
                             </div>
 
@@ -168,7 +168,7 @@
             </div>
         @empty
             <div class="alert alert-info text-center py-5">
-                <i class="bi bi-info-circle me-2" style="font-size: 2rem;"></i>
+                <i class="bi bi-info-circle me-2 fs-2"></i>
                 <p class="mb-0">No hay programas disponibles con los filtros seleccionados</p>
             </div>
         @endforelse
@@ -182,7 +182,7 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="bg-light py-5 rounded-lg mb-5">
+    <div class="bg-light py-5 rounded mb-5">
         <div class="container text-center">
             <h3 class="h4 fw-bold mb-3">¿Necesitas más información?</h3>
             <p class="text-muted mb-4">Contacta con nuestro equipo de asesoría académica</p>
@@ -192,23 +192,4 @@
         </div>
     </div>
 </div>
-
-<style>
-    .transition {
-        transition: all 0.3s ease;
-    }
-    
-    .hover-shadow:hover {
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
-        transform: translateY(-5px);
-    }
-    
-    .rounded-bottom-lg {
-        border-radius: 0 0 1rem 1rem;
-    }
-    
-    .rounded-lg {
-        border-radius: 1rem;
-    }
-</style>
 @endsection

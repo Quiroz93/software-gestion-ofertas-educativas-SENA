@@ -123,7 +123,7 @@
             <!-- Right Column - Sidebar -->
             <div class="col-lg-4">
                 <!-- Offer Details Card -->
-                <div class="card card-oferta shadow-sm border-0 mb-4 sticky-top" style="top: 20px;">
+                <div class="card card-oferta shadow-sm border-0 mb-4 sticky-top sticky-top-offset">
                     <div class="card-body">
                         <h5 class="card-title fw-bold mb-3">
                             <i class="bi bi-info-circle me-2 text-primary"></i>Información Clave
@@ -131,7 +131,7 @@
 
                         <!-- Status -->
                         <div class="d-flex mb-3 pb-3 border-bottom">
-                            <i class="bi bi-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
+                            <i class="bi bi-check-circle text-success me-3 fs-4"></i>
                             <div>
                                 <small class="text-muted d-block">Estado</small>
                                 <strong class="text-success">Oferta Activa</strong>
@@ -141,7 +141,7 @@
                         <!-- Center -->
                         @if($oferta->centro)
                         <div class="d-flex mb-3 pb-3 border-bottom">
-                            <i class="bi bi-geo-alt text-warning me-3" style="font-size: 1.5rem;"></i>
+                            <i class="bi bi-geo-alt text-warning me-3 fs-4"></i>
                             <div>
                                 <small class="text-muted d-block">Centro</small>
                                 <strong>{{ $oferta->centro->nombre }}</strong>
@@ -151,7 +151,7 @@
 
                         <!-- Programs Count -->
                         <div class="d-flex">
-                            <i class="bi bi-book me-3 text-info" style="font-size: 1.5rem;"></i>
+                            <i class="bi bi-book me-3 text-info fs-4"></i>
                             <div>
                                 <small class="text-muted d-block">Programas</small>
                                 <strong>{{ $oferta->programas()->count() }} disponibles</strong>

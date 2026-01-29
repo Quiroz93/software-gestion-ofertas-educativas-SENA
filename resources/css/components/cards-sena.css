@@ -101,6 +101,10 @@
   object-fit: cover;
 }
 
+.card-img-cover {
+  max-height: 400px;
+}
+
 .card-img-top {
   border-radius: var(--border-radius-card) var(--border-radius-card) 0 0;
 }

@@ -80,6 +80,10 @@
   padding: 0;
 }
 
+.sticky-top-offset {
+  top: 20px;
+}
+
 .public-container {
   max-width: 1200px;
   margin: 0 auto;

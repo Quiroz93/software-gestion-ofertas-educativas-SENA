@@ -10,19 +10,10 @@
         $bannerAlt = getMediaMetadata('oferta', 'banner_image', 'alt_text', 'Banner de ofertas educativas');
     @endphp
     
-    <div class="position-relative py-5 mb-5 rounded-lg overflow-hidden text-white"
-         style="background-image: url('{{ $bannerImageUrl }}'); 
-                 background-size: cover; 
-                 background-position: center;
-                 min-height: 500px;
-                 display: flex;
-                 align-items: center;">
-        <!-- Overlay -->
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-                    background: rgba(0,0,0,0.5); z-index: 1;"></div>
-        
+    <div class="hero hero-oferta hero-xl hero-with-image"
+         style="background-image: url('{{ $bannerImageUrl }}');">
         <!-- Content -->
-        <div class="container position-relative" style="z-index: 2;">
+        <div class="hero-content container">
             <div class="row">
                 <div class="col-lg-8">
                     <h1 class="display-4 fw-bold mb-3 editable"
@@ -65,21 +56,21 @@
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="text-center">
-                    <i class="bi bi-briefcase text-primary" style="font-size: 2.5rem;"></i>
+                    <i class="bi bi-briefcase text-primary fs-1"></i>
                     <h5 class="fw-bold mt-3">Experiencia Laboral</h5>
                     <p class="text-muted">Conecta con el mercado real</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="text-center">
-                    <i class="bi bi-award text-success" style="font-size: 2.5rem;"></i>
+                    <i class="bi bi-award text-success fs-1"></i>
                     <h5 class="fw-bold mt-3">Certificación Oficial</h5>
                     <p class="text-muted">Respaldo institucional garantizado</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="text-center">
-                    <i class="bi bi-person-check text-warning" style="font-size: 2.5rem;"></i>
+                    <i class="bi bi-person-check text-warning fs-1"></i>
                     <h5 class="fw-bold mt-3">Docentes Calificados</h5>
                     <p class="text-muted">Profesionales con experiencia real</p>
                 </div>
@@ -101,7 +92,7 @@
                             <!-- Image -->
                             <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
                                 <div class="text-center">
-                                    <i class="bi bi-laptop text-primary" style="font-size: 2.5rem;"></i>
+                                    <i class="bi bi-laptop text-primary fs-1"></i>
                                 </div>
                             </div>
 
@@ -149,7 +140,7 @@
             @empty
                 <div class="col-12">
                     <div class="alert alert-info text-center py-5">
-                        <i class="bi bi-info-circle me-2" style="font-size: 2rem;"></i>
+                        <i class="bi bi-info-circle me-2 fs-2"></i>
                         <p class="mb-0">No hay ofertas disponibles en este momento</p>
                     </div>
                 </div>

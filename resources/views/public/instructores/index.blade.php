@@ -5,12 +5,12 @@
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div class="bg-success text-white py-5 mb-5 rounded-bottom-lg">
+    <div class="hero hero-programa hero-md">
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-3">Nuestro Equipo de Instructores</h1>
-                    <p class="lead mb-4">
+                    <h1 class="hero-title fw-bold mb-3">Nuestro Equipo de Instructores</h1>
+                    <p class="hero-subtitle mb-4">
                         <i class="bi bi-info-circle me-2"></i>
                         Profesionales expertos comprometidos con tu formación de calidad
                     </p>
@@ -62,11 +62,11 @@
                 <div class="row g-4">
                     @foreach($instructores as $instructor)
                     <div class="col-lg-4 col-md-6">
-                        <div class="card shadow-sm border-0 text-center transition hover-shadow h-100">
+                        <div class="card card-programa shadow-sm border-0 text-center h-100">
                             <div class="card-body p-4">
                                 <div class="mb-3">
                                     <div class="bg-secondary bg-opacity-10 rounded-circle p-4 d-inline-block mb-3">
-                                        <i class="bi bi-person-circle text-secondary" style="font-size: 3rem;"></i>
+                                        <i class="bi bi-person-circle text-secondary fs-1"></i>
                                     </div>
                                 </div>
                                 <h5 class="fw-bold card-title">{{ $instructor->nombre }} {{ $instructor->apellidos ?? '' }}</h5>
@@ -104,7 +104,7 @@
 
     <!-- CTA Section -->
     <div class="container mb-5">
-        <div class="bg-success text-white rounded-lg p-5 text-center">
+        <div class="bg-success text-white rounded p-5 text-center">
             <h3 class="h4 fw-bold mb-3">¿Quieres aprender de nuestros expertos?</h3>
             <p class="mb-4">Consulta nuestros programas y elige el que mejor se ajuste a tus intereses</p>
             <a href="{{ route('public.programasDeFormacion.index') }}" class="btn btn-light btn-lg">
@@ -113,15 +113,4 @@
         </div>
     </div>
 </div>
-
-<style>
-    .transition {
-        transition: all 0.3s ease;
-    }
-    
-    .hover-shadow:hover {
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
-        transform: translateY(-5px);
-    }
-</style>
 @endsection
