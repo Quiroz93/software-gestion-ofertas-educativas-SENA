@@ -7,5 +7,10 @@ use Illuminate\Http\Request;
 
 class PublicInstructorController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('public.instructores.index', [
+            'instructores' => collect(),
+        ]);
+    }
 }

@@ -95,8 +95,30 @@
         </div>
     </footer>
 
+    <!-- Botón flotante global para ir a Home -->
+    @auth
+    <a href="{{ route('home') }}" 
+       class="btn btn-primary btn-lg shadow-lg position-fixed bottom-0 end-0 m-4 rounded-circle d-flex align-items-center justify-content-center"
+       style="width: 60px; height: 60px; z-index: 1050;"
+       title="Ir a Dashboard"
+       data-bs-toggle="tooltip"
+       data-bs-placement="left">
+        <i class="bi bi-house-fill fs-4"></i>
+    </a>
+    @endauth
+
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Inicializar tooltips -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
 
     <!-- Custom JS -->
     @vite(['resources/js/app.js'])
