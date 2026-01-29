@@ -46,14 +46,14 @@
 }
 
 .sidebar-nav-link:hover {
-    background: rgba(52, 152, 219, 0.2);
-    border-left-color: #3498db;
+    background: rgba(57, 169, 0, 0.2);
+    border-left-color: #39A900;
     color: #fff;
 }
 
 .sidebar-nav-link.active {
-    background: rgba(13, 110, 253, 0.2);
-    border-left-color: #0d6efd;
+    background: rgba(57, 169, 0, 0.2);
+    border-left-color: #39A900;
     color: #fff;
     font-weight: 600;
 }

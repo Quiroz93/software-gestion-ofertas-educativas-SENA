@@ -1,6 +1,6 @@
 /* ====== GENERAL ====== */
 body {
-    background: linear-gradient(135deg, #0d6efd, #198754);
+    background: linear-gradient(135deg, #39A900, #2d8500);
     min-height: 100vh;
     color: #fff;
 }
@@ -37,7 +37,7 @@ body {
 /* ====== FEATURES ====== */
 .feature-icon {
     font-size: 2.5rem;
-    color: #0d6efd;
+    color: #39A900;
     margin-bottom: .5rem;
 }
 

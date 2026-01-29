@@ -5,7 +5,7 @@
 
 /* Hero Sections */
 .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
     color: #fff;
     padding: 4rem 0;
     margin-bottom: 3rem;
@@ -64,7 +64,7 @@
 
 /* Badges */
 .badge-programa {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -90,12 +90,12 @@
 }
 
 .breadcrumb-item a {
-    color: #667eea;
+    color: #39A900;
     text-decoration: none;
 }
 
 .breadcrumb-item a:hover {
-    color: #764ba2;
+    color: #2d8500;
     text-decoration: underline;
 }
 
