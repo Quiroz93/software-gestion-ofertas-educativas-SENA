@@ -45,7 +45,7 @@
     <!-- Custom styles -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: #f8fafc;
             min-height: 100vh;
         }
