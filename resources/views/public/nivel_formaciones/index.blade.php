@@ -59,6 +59,13 @@
                 </div>
             </div>
         @endforelse
+
+        <!-- Pagination -->
+        @if($niveles->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $niveles->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- CTA Section -->

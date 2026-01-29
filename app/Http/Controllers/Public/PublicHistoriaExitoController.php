@@ -10,7 +10,7 @@ class PublicHistoriaExitoController extends Controller
 {
     public function index()
     {
-        $historias = HistoriaExito::all();
+        $historias = HistoriaExito::paginate(12);
         return view('public.historias_exito.index', compact('historias'));
     }
 }

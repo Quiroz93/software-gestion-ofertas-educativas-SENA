@@ -59,6 +59,13 @@
                 </div>
             </div>
         @endforelse
+
+        <!-- Pagination -->
+        @if($redes->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $redes->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- CTA Section -->

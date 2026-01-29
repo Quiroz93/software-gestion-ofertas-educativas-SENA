@@ -102,6 +102,13 @@
                     </div>
                 </div>
             @endif
+
+            <!-- Pagination -->
+            @if(isset($historias) && $historias->hasPages())
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $historias->links() }}
+                </div>
+            @endif
         </div>
     </div>
 

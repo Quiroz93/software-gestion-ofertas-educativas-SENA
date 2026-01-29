@@ -14,12 +14,12 @@ class PublicProgramaController extends Controller
     {
         $query = Programa::with(['red', 'nivelFormacion']);
         
-        // Apply filters if provided
-        if (request('red')) {
+        // Apply filters if provided with validation
+        if (request('red') && is_numeric(request('red'))) {
             $query->where('red_id', request('red'));
         }
         
-        if (request('nivel')) {
+        if (request('nivel') && is_numeric(request('nivel'))) {
             $query->where('nivel_formacion_id', request('nivel'));
         }
         
