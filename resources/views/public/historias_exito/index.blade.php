@@ -65,15 +65,15 @@
                                     </div>
                                     <div>
                                         <h5 class="fw-bold mb-0">{{ $historia->titulo ?? 'Título de historia' }}</h5>
-                                        <p class="text-muted small mb-0">{{ $historia->subtitulo ?? 'Subtítulo' }}</p>
+                                        <p class="text-muted small mb-0">{{ $historia->nombre ?? '' }}</p>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
                                     <div class="d-flex align-items-center mb-2">
                                         <span class="badge bg-warning text-dark me-2">Egresado</span>
-                                        @isset($historia->programa)
-                                            <span class="small text-muted">Programa: {{ $historia->programa }}</span>
+                                        @isset($historia->año)
+                                            <span class="small text-muted">Año: {{ $historia->año }}</span>
                                         @endisset
                                     </div>
                                 </div>
@@ -91,6 +91,11 @@
                         </div>
                     </div>
                     @endforeach
+                </div>
+                
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center mt-5">
+                    {{ $historias->links() }}
                 </div>
             @else
                 <div class="row">

@@ -69,13 +69,13 @@
                                         <i class="bi bi-person-circle text-secondary" style="font-size: 3rem;"></i>
                                     </div>
                                 </div>
-                                <h5 class="fw-bold card-title">{{ $instructor->nombre ?? 'Instructor' }}</h5>
-                                <p class="text-muted small mb-3">{{ $instructor->especialidad ?? 'Especialidad' }}</p>
-                                @isset($instructor->resena)
-                                    <p class="text-muted small">{{ Str::limit($instructor->resena, 100) }}</p>
+                                <h5 class="fw-bold card-title">{{ $instructor->nombre }} {{ $instructor->apellidos ?? '' }}</h5>
+                                <p class="text-muted small mb-3">{{ $instructor->perfil_profesional ?? 'Instructor' }}</p>
+                                @isset($instructor->experiencia)
+                                    <p class="text-muted small">{{ Str::limit($instructor->experiencia, 100) }}</p>
                                 @endisset
-                                @isset($instructor->email)
-                                    <a href="mailto:{{ $instructor->email }}" class="btn btn-sm btn-outline-success">
+                                @isset($instructor->correo)
+                                    <a href="mailto:{{ $instructor->correo }}" class="btn btn-sm btn-outline-success">
                                         <i class="bi bi-envelope me-1"></i>Contactar
                                     </a>
                                 @endisset
@@ -83,6 +83,11 @@
                         </div>
                     </div>
                     @endforeach
+                </div>
+                
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center mt-5">
+                    {{ $instructores->links() }}
                 </div>
             @else
                 <div class="row">
