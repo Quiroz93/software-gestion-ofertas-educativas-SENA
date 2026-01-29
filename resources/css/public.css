@@ -73,13 +73,13 @@
 }
 
 .badge-oferta {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #FDC300 0%, #FDC300 100%);
+    color: #212529;
 }
 
 .badge-noticia {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #50E5F9 0%, #50E5F9 100%);
+    color: #212529;
 }
 
 /* Breadcrumbs */
@@ -101,7 +101,7 @@
 
 /* Buttons */
 .btn-public-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #71277A 0%, #71277A 100%);
     border: none;
     color: #fff;
     padding: 0.75rem 2rem;
@@ -139,8 +139,8 @@ img[loading="lazy"].loaded {
 }
 
 .search-input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    border-color: #71277A;
+    box-shadow: 0 0 0 0.2rem rgba(113, 39, 122, 0.25);
 }
 
 /* Grid Layouts */

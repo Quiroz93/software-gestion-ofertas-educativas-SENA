@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <!-- Hero Section -->
     <div class="py-5 rounded-lg mb-5 overflow-hidden text-white transition"
-         style="background: linear-gradient(135deg, {{ $oferta->custom('hero_bg_color', '#667eea') }} 0%, {{ $oferta->custom('hero_bg_color_2', '#764ba2') }} 100%);
+         style="background: linear-gradient(135deg, {{ $oferta->custom('hero_bg_color', '#71277A') }} 0%, {{ $oferta->custom('hero_bg_color_2', '#71277A') }} 100%);
                  min-height: 300px;
                  display: flex;
                  align-items: center;">

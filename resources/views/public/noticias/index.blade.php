@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <!-- Hero Section -->
     <div class="bg-gradient text-white py-5 mb-5 rounded-lg overflow-hidden"
-         style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+         style="background: linear-gradient(135deg, #71277A 0%, #71277A 100%);">
         <div class="container position-relative py-4">
             <div class="row align-items-center">
                 <div class="col-lg-8">
@@ -165,7 +165,7 @@
 
 <style>
     .bg-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #71277A 0%, #71277A 100%);
     }
 
     .transition {
