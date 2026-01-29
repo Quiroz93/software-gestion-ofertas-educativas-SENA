@@ -9,6 +9,9 @@ class PublicHistoriaExitoController extends Controller
 {
     public function index()
     {
-        return view('public.historias_exito.index');
+        // Pass empty collection to handle gracefully in view
+        return view('public.historias_exito.index', [
+            'historias' => collect(),
+        ]);
     }
 }
