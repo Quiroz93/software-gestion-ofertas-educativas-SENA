@@ -11,6 +11,6 @@ class PublicRedController extends Controller
     public function index()
     {
         $redes = Red::all();
-        return view('redes.index', compact('redes'));
+        return view('public.redes.index', compact('redes'));
     }
 }
