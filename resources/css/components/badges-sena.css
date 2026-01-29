@@ -1,0 +1,12 @@
+﻿/* Componente de badges - SENA */
+.badge {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-full);
+  background-color: var(--sena-primary-main);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}

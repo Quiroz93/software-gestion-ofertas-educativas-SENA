@@ -1,0 +1,21 @@
+﻿/* Componente navegación - SENA */
+.nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: var(--spacing-4);
+}
+
+.nav-link {
+  color: var(--nav-text);
+  text-decoration: none;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--border-radius-md);
+  transition: var(--transition-smooth);
+}
+
+.nav-link.active {
+  color: var(--nav-link-active);
+  font-weight: var(--font-weight-semibold);
+}

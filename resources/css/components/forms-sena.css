@@ -1,0 +1,9 @@
+﻿/* Componente formularios - SENA */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  border: var(--border-default);
+  border-radius: var(--border-radius-md);
+}

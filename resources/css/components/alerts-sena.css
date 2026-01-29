@@ -1,0 +1,12 @@
+﻿/* Componente alertas - SENA */
+.alert {
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-4);
+}
+
+.alert-success {
+  background-color: var(--alert-success-bg);
+  border-left: 4px solid var(--alert-success-border);
+  color: var(--alert-success-text);
+}

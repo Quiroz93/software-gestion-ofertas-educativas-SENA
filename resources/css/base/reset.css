@@ -1,0 +1,326 @@
+/* ============================================================================
+ * RESET Y NORMALIZACIÓN - SISTEMA SENA
+ * Estilos base para todos los elementos HTML
+ * ============================================================================
+ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--sena-bg-default);
+  color: var(--sena-text-primary);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevenir scroll horizontal en dispositivos móviles */
+body,
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Selectores de accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--sena-primary-main);
+  outline-offset: 2px;
+}
+
+/* Selección de texto */
+::selection {
+  background-color: var(--sena-primary-main);
+  color: var(--sena-text-on-primary);
+}
+
+::-moz-selection {
+  background-color: var(--sena-primary-main);
+  color: var(--sena-text-on-primary);
+}
+
+/* Placeholder de inputs */
+::placeholder {
+  color: var(--sena-text-light);
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  color: var(--sena-text-light);
+  opacity: 1;
+}
+
+/* ============================================================================
+ * ELEMENTOS INLINE
+ * ============================================================================
+ */
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: var(--transition-link);
+}
+
+a:hover,
+a:focus {
+  color: var(--link-color-hover);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--link-color-visited);
+}
+
+strong,
+b {
+  font-weight: var(--font-weight-semibold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+/* ============================================================================
+ * LÍNEAS Y SEPARADORES
+ * ============================================================================
+ */
+
+hr {
+  margin: var(--spacing-8) 0;
+  border: none;
+  border-top: var(--border-default);
+  color: inherit;
+  overflow: visible;
+}
+
+/* ============================================================================
+ * IMÁGENES Y MEDIA
+ * ============================================================================
+ */
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+img {
+  border-style: none;
+}
+
+/* Imágenes responsivas */
+img[data-srcset],
+picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================================================
+ * TABLAS
+ * ============================================================================
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+th,
+td {
+  padding: var(--spacing-3);
+  text-align: left;
+  border-bottom: var(--border-default);
+}
+
+th {
+  background-color: var(--sena-bg-secondary);
+  color: var(--sena-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+tbody tr:hover {
+  background-color: var(--sena-bg-secondary);
+}
+
+/* ============================================================================
+ * LISTA
+ * ============================================================================
+ */
+
+ul,
+ol {
+  margin: var(--spacing-4) 0;
+  padding-left: var(--spacing-6);
+}
+
+li {
+  margin-bottom: var(--spacing-2);
+}
+
+/* Listas sin estilos */
+.list-unstyled,
+ul.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list-unstyled li {
+  margin-bottom: 0;
+}
+
+/* Listas inline */
+.list-inline {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list-inline li {
+  display: inline-block;
+  margin-right: var(--spacing-4);
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+ * CÓDIGO
+ * ============================================================================
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-family-mono);
+  font-size: 0.875em;
+  background-color: var(--sena-bg-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 0.2em 0.4em;
+}
+
+pre {
+  display: block;
+  padding: var(--spacing-4);
+  overflow: auto;
+  word-wrap: normal;
+  background-color: var(--sena-gray-800);
+  color: var(--sena-gray-100);
+  border-radius: var(--border-radius-lg);
+  margin: var(--spacing-4) 0;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 1em;
+}
+
+/* ============================================================================
+ * BLOCKQUOTE Y CITAS
+ * ============================================================================
+ */
+
+blockquote {
+  margin: var(--spacing-6) 0;
+  padding-left: var(--spacing-4);
+  border-left: 4px solid var(--sena-primary-main);
+  color: var(--sena-text-secondary);
+  font-style: italic;
+}
+
+blockquote p {
+  margin: var(--spacing-2) 0;
+}
+
+blockquote footer {
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--sena-text-light);
+}
+
+/* ============================================================================
+ * ELEMENTOS DE CONTROL
+ * ============================================================================
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================================================
+ * ACCESIBILIDAD
+ * ============================================================================
+ */
+
+/* Ocultar visualmente pero mantener en lector de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Mostrar elemento sr-only en foco */
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Prefiere reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

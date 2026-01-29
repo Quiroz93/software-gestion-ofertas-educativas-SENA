@@ -1,0 +1,92 @@
+/* ============================================================================
+ * COMPONENTE TARJETAS - SISTEMA SENA
+ * Tarjetas institucionalmente consistentes
+ * ============================================================================
+ */
+
+.card {
+  background-color: var(--card-bg);
+  border: var(--border-default);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  padding: var(--spacing-4);
+  background-color: var(--sena-bg-secondary);
+  border-bottom: var(--border-default);
+}
+
+.card-header h3,
+.card-header h4,
+.card-header h5 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.card-body {
+  padding: var(--spacing-6);
+}
+
+.card-footer {
+  padding: var(--spacing-4);
+  background-color: var(--sena-bg-secondary);
+  border-top: var(--border-default);
+}
+
+.card-title {
+  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.card-subtitle {
+  margin-bottom: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  color: var(--sena-text-secondary);
+}
+
+.card-text {
+  margin-bottom: var(--spacing-3);
+  color: var(--sena-text-primary);
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Tarjeta con imagen */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: var(--border-default);
+}
+
+/* Variantes de tarjeta */
+.card-bordered {
+  border: 2px solid var(--sena-primary-main);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: var(--spacing-4);
+  }
+  
+  .card-header,
+  .card-footer {
+    padding: var(--spacing-3);
+  }
+}
