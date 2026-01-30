@@ -6,6 +6,7 @@ use App\Models\Inscripcion;
 use App\Models\Programa;
 use App\Http\Requests\InscripcionRequest;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -15,20 +16,19 @@ class InscripcionController extends Controller
     /**
      * Mostrar formulario de inscripción a un programa
      */
-    public function create(Programa $programa): View
+    public function create(Programa $programa): View|RedirectResponse
     {
         // Verificar que el usuario esté autenticado
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             throw new AuthorizationException('Debes estar autenticado para inscribirte');
         }
 
-        // Verificar que el usuario tenga rol de aprendiz
-        if (!auth()->user()->hasRole('aprendiz')) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!$user || !$user->hasRole('aprendiz')) {
             throw new AuthorizationException('Solo los aprendices pueden inscribirse a programas');
         }
-
-        $user = auth()->user();
-
         // Verificar si ya está inscrito
         $yaInscrito = Inscripcion::where('user_id', $user->id)
             ->where('programa_id', $programa->id)
@@ -54,14 +54,15 @@ class InscripcionController extends Controller
     public function store(InscripcionRequest $request, Programa $programa): RedirectResponse
     {
         // Verificar que el usuario esté autenticado
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             return back()->with('error', 'Debes estar autenticado');
         }
 
-        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 
         // Verificar que el usuario tenga rol de aprendiz
-        if (!$user->hasRole('aprendiz')) {
+        if (!$user || !$user->hasRole('aprendiz')) {
             return back()->with('error', 'Solo los aprendices pueden inscribirse');
         }
 
@@ -127,8 +128,11 @@ class InscripcionController extends Controller
      */
     public function destroy(Inscripcion $inscripcion): RedirectResponse
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
         // Autorizar que sea el usuario propietario o admin
-        if (!auth()->check() || (auth()->id() !== $inscripcion->user_id && !auth()->user()->hasRole('admin'))) {
+        if (!Auth::check() || !$user || (Auth::id() !== $inscripcion->user_id && !$user->hasRole('admin'))) {
             throw new AuthorizationException('No tienes permiso para realizar esta acción');
         }
 
@@ -182,11 +186,18 @@ class InscripcionController extends Controller
      */
     public function misinscripciones()
     {
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             return back()->with('error', 'Debes estar autenticado');
         }
 
-        $inscripciones = auth()->user()
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!$user) {
+            return back()->with('error', 'Debes estar autenticado');
+        }
+
+        $inscripciones = $user
             ->inscripciones()
             ->with('programa', 'instructor')
             ->orderBy('fecha_inscripcion', 'desc')

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class InscripcionRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class InscripcionRequest extends FormRequest
     public function authorize(): bool
     {
         // Solo usuarios autenticados pueden hacer solicitud de inscripción
-        return auth()->check();
+        return Auth::check();
     }
 
     /**

@@ -115,15 +115,4 @@ class InscripcionSeeder extends Seeder
             ->where('estado', $estado)
             ->exists();
     }
-                'fecha_inscripcion' => $fechaInscripcion,
-                'fecha_retiro' => $fechaRetiro,
-                'estado' => $estado,
-                'observaciones' => $estado === 'retirado' 
-                    ? 'Retirado por motivos personales' 
-                    : ($estado === 'finalizado' ? 'Programa finalizado exitosamente' : null),
-            ]);
-        }
-
-        echo "Inscripciones de ejemplo creadas exitosamente.\n";
-    }
 }
