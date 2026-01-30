@@ -180,7 +180,7 @@
 
                         <!-- Action Buttons -->
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id="inscriptionSubmitBtn">
                                 <i class="bi bi-check-circle me-2"></i>Confirmar Inscripción
                             </button>
                             <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-secondary">
@@ -237,4 +237,71 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inscriptionForm = document.querySelector('form[method="POST"]');
+        const inscriptionSubmitBtn = document.getElementById('inscriptionSubmitBtn');
+        
+        if (inscriptionSubmitBtn && inscriptionForm) {
+            inscriptionSubmitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Verificar checkbox de términos
+                const termsCheckbox = document.getElementById('acepta_terminos');
+                if (!termsCheckbox.checked) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Términos y Condiciones',
+                        text: 'Debes aceptar los términos y condiciones para inscribirte',
+                        confirmButtonColor: '#f39c12'
+                    });
+                    return;
+                }
+                
+                // Confirmación antes de enviar
+                Swal.fire({
+                    title: '¿Confirmar Inscripción?',
+                    html: `
+                        <p class="mb-3">Estás a punto de inscribirte en:</p>
+                        <strong class="text-primary">{{ $programa->nombre }}</strong>
+                        <br><br>
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Recibirás una confirmación y podrás ver el programa en tu perfil
+                        </p>
+                    `,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#39a900',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: '<i class="bi bi-check-circle me-1"></i> Sí, inscribirme',
+                    cancelButtonText: '<i class="bi bi-x-circle me-1"></i> Cancelar',
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'btn btn-success btn-lg',
+                        cancelButton: 'btn btn-secondary btn-lg'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Procesando inscripción...',
+                            html: 'Por favor espera un momento',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        
+                        inscriptionForm.submit();
+                    }
+                });
+            });
+        }
+    });
+</script>
+@endpush
 @endsection

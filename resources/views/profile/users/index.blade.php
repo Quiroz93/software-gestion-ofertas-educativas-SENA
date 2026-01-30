@@ -27,10 +27,10 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <a href="{{ route('usuarios.edit', $user) }}" class="btn btn-sm btn-warning">Editar</a>
-                                    <form action="{{ route('usuarios.destroy', $user) }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('usuarios.destroy', $user) }}" method="POST" style="display:inline;" class="deleteUserForm">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                        <button type="button" class="btn btn-sm btn-danger deleteUserBtn" data-user="{{ $user->name }}">Eliminar</button>
                                         <a href="{{ route('usuarios.show', $user) }}" class="btn btn-sm btn-info">Ver</a>
                                         <a href="{{ route('usuarios.edit', $user) }}" class="btn btn-sm btn-warning">Editar</a>
                                     </form>
@@ -45,4 +45,49 @@
     </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteUserBtns = document.querySelectorAll('.deleteUserBtn');
+        
+        deleteUserBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const form = this.closest('form');
+                const userName = this.getAttribute('data-user');
+                
+                Swal.fire({
+                    title: '¿Eliminar usuario?',
+                    html: `
+                        <p class="mb-3">Estás a punto de eliminar:</p>
+                        <strong class="text-danger">${userName}</strong>
+                        <br><br>
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-exclamation-circle me-1"></i>
+                            Esta acción no se puede deshacer
+                        </p>
+                    `,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: '<i class="bi bi-trash me-1"></i> Sí, eliminar',
+                    cancelButtonText: '<i class="bi bi-x-circle me-1"></i> Cancelar',
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'btn btn-danger btn-sm',
+                        cancelButton: 'btn btn-secondary btn-sm'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+@endpush
 </x-app-layout>

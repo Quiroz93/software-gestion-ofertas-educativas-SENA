@@ -110,6 +110,9 @@
     <!-- Bootstrap 5 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Inicializar tooltips -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -117,6 +120,65 @@
             var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
             });
+        });
+    </script>
+
+    <!-- Manejo de mensajes flash con SweetAlert2 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mensaje de éxito
+            @if (session('success') || session('status') === 'inscripcion-exitosa' || session('status') === 'inscripcion-retirada')
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: '{{ session('message') ?? session('success') }}',
+                    confirmButtonColor: '#39a900',
+                    timer: 4000,
+                    timerProgressBar: true,
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+            @endif
+
+            // Mensaje de error
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '{{ session('error') }}',
+                    confirmButtonColor: '#d33',
+                    timer: 5000,
+                    timerProgressBar: true
+                });
+            @endif
+
+            // Mensaje de advertencia
+            @if (session('warning'))
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atención',
+                    text: '{{ session('warning') }}',
+                    confirmButtonColor: '#f39c12',
+                    timer: 4000,
+                    timerProgressBar: true
+                });
+            @endif
+
+            // Mensaje informativo
+            @if (session('info'))
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Información',
+                    text: '{{ session('info') }}',
+                    confirmButtonColor: '#3085d6',
+                    timer: 4000,
+                    timerProgressBar: true
+                });
+            @endif
         });
     </script>
 

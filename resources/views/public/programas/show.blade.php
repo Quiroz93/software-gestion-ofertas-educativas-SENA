@@ -215,7 +215,7 @@
                 <h6 class="modal-title fw-bold">Solicitud de Inscripción</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="POST" action="/programas/{{ $programa->id }}/inscribir">
+            <form method="POST" action="{{ route('inscripcion.store', $programa) }}" id="enrollForm">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="programa_id" value="{{ $programa->id }}">
@@ -260,4 +260,73 @@
         color: rgba(255, 255, 255, 0.8);
     }
 </style>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const enrollForm = document.getElementById('enrollForm');
+        
+        if (enrollForm) {
+            enrollForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Verificar checkbox de términos
+                const termsCheckbox = document.getElementById('acepta_terminos');
+                if (!termsCheckbox.checked) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Términos y Condiciones',
+                        text: 'Debes aceptar los términos y condiciones para inscribirte',
+                        confirmButtonColor: '#f39c12'
+                    });
+                    return;
+                }
+                
+                // Confirmación antes de enviar
+                Swal.fire({
+                    title: '¿Confirmar Inscripción?',
+                    html: `
+                        <p class="mb-3">Estás a punto de inscribirte en:</p>
+                        <strong class="text-primary">{{ $programa->nombre }}</strong>
+                        <br><br>
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Recibirás una confirmación y podrás ver el programa en tu perfil
+                        </p>
+                    `,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#39a900',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: '<i class="bi bi-check-circle me-1"></i> Sí, inscribirme',
+                    cancelButtonText: '<i class="bi bi-x-circle me-1"></i> Cancelar',
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'btn btn-success btn-lg',
+                        cancelButton: 'btn btn-secondary btn-lg'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mostrar loading mientras se procesa
+                        Swal.fire({
+                            title: 'Procesando inscripción...',
+                            html: 'Por favor espera un momento',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        
+                        // Enviar formulario
+                        enrollForm.submit();
+                    }
+                });
+            });
+        }
+    });
+</script>
+@endpush
+
 @endsection

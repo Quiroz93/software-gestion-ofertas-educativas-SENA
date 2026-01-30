@@ -281,6 +281,24 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                {{-- Botón de Retiro --}}
+                                @if($inscripcion->estaActiva())
+                                <div class="mt-4 pt-3 border-top">
+                                    <form method="POST" 
+                                          action="{{ route('inscripcion.destroy', $inscripcion) }}"
+                                          class="d-inline withdrawForm">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" 
+                                                class="btn btn-outline-danger btn-sm withdrawBtn"
+                                                data-programa="{{ $programa->nombre }}">
+                                            <i class="bi bi-x-circle me-1"></i>
+                                            Retirarme del Programa
+                                        </button>
+                                    </form>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -289,3 +307,57 @@
         @endif
     </div>
 </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const withdrawBtns = document.querySelectorAll('.withdrawBtn');
+        
+        withdrawBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const form = this.closest('form');
+                const programaNombre = this.getAttribute('data-programa');
+                
+                Swal.fire({
+                    title: '¿Retirarme del programa?',
+                    html: `
+                        <p class="mb-3">Estás a punto de retirarte de:</p>
+                        <strong class="text-danger">${programaNombre}</strong>
+                        <br><br>
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Podrás inscribirte nuevamente cuando lo desees
+                        </p>
+                    `,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: '<i class="bi bi-check-circle me-1"></i> Sí, retirarme',
+                    cancelButtonText: '<i class="bi bi-x-circle me-1"></i> Cancelar',
+                    reverseButtons: true,
+                    customClass: {
+                        confirmButton: 'btn btn-danger btn-sm',
+                        cancelButton: 'btn btn-secondary btn-sm'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Procesando retiro...',
+                            html: 'Por favor espera un momento',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+                        form.submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+@endpush
