@@ -117,9 +117,11 @@
         </div>
 
         <!-- Pagination -->
+        {{-- TODO: Fix pagination rendering issue
         <div class="d-flex justify-content-center mt-5">
             {!! $noticias->links() !!}
         </div>
+        --}}
         @else
         <div class="alert alert-info text-center py-5">
             <i class="bi bi-info-circle me-2" style="font-size: 2rem;"></i>
