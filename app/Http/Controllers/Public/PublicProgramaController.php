@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Public;
 
+use App\Http\Controllers\Controller;
 use App\Models\NivelFormacion;
 use App\Models\Programa;
 use App\Models\Red;

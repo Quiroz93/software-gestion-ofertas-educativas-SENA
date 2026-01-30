@@ -134,4 +134,16 @@ return [
 
     'profile_photo_disk' => env('PROFILE_PHOTO_DISK', 'public'),
 
+    'providers' => [
+    // ...
+    Illuminate\Auth\AuthServiceProvider::class,
+    // ...
+],
+
+    'aliases' => [
+    // ...
+    'Auth' => Illuminate\Support\Facades\Auth::class,
+    // ...
+],
+
 ];
