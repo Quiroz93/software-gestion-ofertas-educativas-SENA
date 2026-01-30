@@ -215,6 +215,7 @@
                 <h6 class="modal-title fw-bold">Solicitud de Inscripción</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+            @if(isset($programa) && $programa->id)
             <form method="POST" action="{{ url('programas/' . $programa->id . '/inscribir') }}">
                 @csrf
                 <div class="modal-body">
@@ -238,6 +239,16 @@
                     <button type="submit" class="btn btn-primary">Enviar Inscripción</button>
                 </div>
             </form>
+            @else
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    Error: No se pudo cargar la información del programa.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            @endif
         </div>
     </div>
 </div>
