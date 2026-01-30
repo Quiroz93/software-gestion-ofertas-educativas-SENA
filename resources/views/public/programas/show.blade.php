@@ -215,7 +215,7 @@
                 <h6 class="modal-title fw-bold">Solicitud de Inscripción</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="POST" action="{{ route('inscripcion.store', $programa) }}">
+            <form method="POST" action="{{ route('inscripcion.store', ['programa' => $programa->id]) }}">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="programa_id" value="{{ $programa->id }}">
