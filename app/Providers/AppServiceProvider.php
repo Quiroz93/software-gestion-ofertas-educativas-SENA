@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Configure pagination to use Bootstrap 5
+        \Illuminate\Pagination\Paginator::useBootstrapFive();
+        
         // Load custom helpers
         if (file_exists(app_path('Helpers/helpers.php'))) {
             require_once app_path('Helpers/helpers.php');

@@ -118,7 +118,7 @@
 
         <!-- Pagination -->
         <div class="d-flex justify-content-center mt-5">
-            {{ $noticias->links('pagination::bootstrap-5') }}
+            {{ $noticias->links() }}
         </div>
         @else
         <div class="alert alert-info text-center py-5">
