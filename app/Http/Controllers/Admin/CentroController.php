@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\Centro;
 use Illuminate\Support\Facades\Gate;
 
-class CentroController extends Controller
+class CentroController extends \App\Http\Controllers\Controller
 {
     use AuthorizesRequests;
 
@@ -19,7 +19,7 @@ class CentroController extends Controller
     {
         Gate::authorize("viewAny", Centro::class);
         $centros = Centro::all();
-        return view('centros.index', compact('centros'));
+        return view('admin.centros.index', compact('centros'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CentroController extends Controller
     public function create()
     {
         Gate::authorize('centros.create', Centro::class);
-            return view('centros.create');
+            return view('admin.centros.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class CentroController extends Controller
     public function show(Centro $centro)
     {
         Gate::authorize('centros.view', $centro);
-        return view('centros.show', compact('centro'));
+        return view('admin.centros.show', compact('centro'));
     }
 
     /**
@@ -69,7 +69,7 @@ class CentroController extends Controller
     public function edit(Centro $centro)
     {
         Gate::authorize('centros.update', $centro);
-        return view('centros.edit', compact('centro'));
+        return view('admin.centros.edit', compact('centro'));
     }
 
     /**

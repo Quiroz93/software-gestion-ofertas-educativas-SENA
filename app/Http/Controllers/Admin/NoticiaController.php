@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Noticia;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
-class NoticiaController extends Controller
+class NoticiaController extends \App\Http\Controllers\Controller
 {
     use AuthorizesRequests;
     /**
@@ -18,7 +18,7 @@ class NoticiaController extends Controller
         $this->authorize('viewAny', Noticia::class);
         $noticias = Noticia::latest()->get();
 
-        return view('noticias.index', compact('noticias'));
+        return view('admin.noticias.index', compact('noticias'));
     }
 
 
@@ -29,7 +29,7 @@ class NoticiaController extends Controller
     public function create()
     {
         $this->authorize('create', Noticia::class);
-        return view('noticias.create');
+        return view('admin.noticias.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class NoticiaController extends Controller
     public function show(Noticia $noticia)
     {
         $this->authorize('view', $noticia);
-        return view('noticias.show', compact('noticia'));
+        return view('admin.noticias.show', compact('noticia'));
     }
 
     /**
@@ -63,7 +63,7 @@ class NoticiaController extends Controller
     public function edit(Noticia $noticia)
     {
         $this->authorize('update', $noticia);
-        return view('noticias.edit', compact('noticia'));
+        return view('admin.noticias.edit', compact('noticia'));
     }
 
     /**

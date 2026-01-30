@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Competencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class CompetenciaController extends Controller
+class CompetenciaController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega una lista de recursos
@@ -16,7 +16,7 @@ class CompetenciaController extends Controller
     {
         Gate::authorize("viewAny", Competencia::class);
         $competencias = Competencia::all();
-        return view('competencias.index', compact('competencias'));
+        return view('admin.competencias.index', compact('competencias'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CompetenciaController extends Controller
     public function create()
     {
         Gate::authorize('competencias.create', Competencia::class);
-        return view('competencias.create');
+        return view('admin.competencias.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class CompetenciaController extends Controller
     public function show(Competencia $competencia)
     {
         Gate::authorize('competencias.view', $competencia);
-        return view('competencias.show', compact('competencia'));
+        return view('admin.competencias.show', compact('competencia'));
     }
 
     /**
@@ -60,7 +60,7 @@ class CompetenciaController extends Controller
     public function edit(Competencia $competencia)
     {
         Gate::authorize('competencias.update', $competencia);
-        return view('competencias.edit', compact('competencia'));
+        return view('admin.competencias.edit', compact('competencia'));
     }
 
     /**

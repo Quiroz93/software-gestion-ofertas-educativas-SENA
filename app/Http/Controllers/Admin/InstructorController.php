@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class InstructorController extends Controller
+class InstructorController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega una lista de recursos
@@ -16,7 +16,7 @@ class InstructorController extends Controller
     {
         Gate::authorize('instructores.view', Instructor::class);
         $instructores = Instructor::all();
-        return view('instructores.index', compact('instructores'));
+        return view('admin.instructores.index', compact('instructores'));
     }
 
     /**
@@ -26,7 +26,7 @@ class InstructorController extends Controller
     public function create()
     {
         Gate::authorize('instructores.create', Instructor::class);
-        return view('instructores.create');
+        return view('admin.instructores.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class InstructorController extends Controller
     public function show(Instructor $instructor)
     {
         Gate::authorize('view', $instructor);
-        return view('instructores.show', compact('instructor'));
+        return view('admin.instructores.show', compact('instructor'));
     }
 
     /**
@@ -60,7 +60,7 @@ class InstructorController extends Controller
     public function edit(Instructor $instructor)
     {
         Gate::authorize('instructores.update', $instructor);
-        return view('instructores.edit', compact('instructor'));
+        return view('admin.instructores.edit', compact('instructor'));
     }
 
     /**

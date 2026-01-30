@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\OfertaPrograma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class OfertaProgramaController extends Controller
+class OfertaProgramaController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega la lista de ofertas de programa
@@ -16,7 +16,7 @@ class OfertaProgramaController extends Controller
     {
         Gate::authorize('ofertasProgramas.view', OfertaPrograma::class);
         $ofertasProgramas = OfertaPrograma::all();
-        return view('ofertasProgramas.index', compact('ofertasProgramas'));
+        return view('admin.ofertasProgramas.index', compact('ofertasProgramas'));
     }
 
     /**
@@ -26,7 +26,7 @@ class OfertaProgramaController extends Controller
     public function create()
     {
         Gate::authorize('ofertasProgramas.create', OfertaPrograma::class);
-        return view('ofertasProgramas.create');
+        return view('admin.ofertasProgramas.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class OfertaProgramaController extends Controller
     public function show(OfertaPrograma $ofertaPrograma)
     {
         Gate::authorize('ofertasProgramas.view', $ofertaPrograma);
-        return view('ofertasProgramas.show', compact('ofertaPrograma'));
+        return view('admin.ofertasProgramas.show', compact('ofertaPrograma'));
     }
 
     /**
@@ -60,7 +60,7 @@ class OfertaProgramaController extends Controller
     public function edit(OfertaPrograma $ofertaPrograma)
     {
         Gate::authorize('ofertasProgramas.update', $ofertaPrograma);
-        return view('ofertasProgramas.edit', compact('ofertaPrograma'));
+        return view('admin.ofertasProgramas.edit', compact('ofertaPrograma'));
     }
 
     /**

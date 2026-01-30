@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
 use App\Models\Noticia;
 use App\Models\Oferta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class WelcomeController extends Controller
+class WelcomeController extends \App\Http\Controllers\Controller
 {
     /**
      * Muestra la página de bienvenida pública.
@@ -26,6 +26,6 @@ class WelcomeController extends Controller
         // Asegúrate de que el modelo Oferta exista y tenga datos.
         $ofertas = Oferta::latest()->take(4)->get();
 
-        return view('welcome', compact('noticias', 'ofertas'));
+        return view('public.welcome', compact('noticias', 'ofertas'));
     }
 }

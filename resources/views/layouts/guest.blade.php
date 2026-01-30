@@ -23,7 +23,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/common/app.css', 'resources/js/common/app.js'])
 </head>
 
 <body class="font-sans antialiased text-gray-900">

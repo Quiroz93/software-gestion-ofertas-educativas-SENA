@@ -1,3 +1,5 @@
+@import './home.css';
+
 /**
  * Public Area Styles
  * Estilos para vistas públicas (programas, ofertas, noticias)
@@ -5,7 +7,7 @@
 
 /* Hero Sections */
 .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
     color: #fff;
     padding: 4rem 0;
     margin-bottom: 3rem;
@@ -64,7 +66,7 @@
 
 /* Badges */
 .badge-programa {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -73,13 +75,13 @@
 }
 
 .badge-oferta {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #FDC300 0%, #FDC300 100%);
+    color: #212529;
 }
 
 .badge-noticia {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #50E5F9 0%, #50E5F9 100%);
+    color: #212529;
 }
 
 /* Breadcrumbs */
@@ -90,18 +92,18 @@
 }
 
 .breadcrumb-item a {
-    color: #667eea;
+    color: #39A900;
     text-decoration: none;
 }
 
 .breadcrumb-item a:hover {
-    color: #764ba2;
+    color: #2d8500;
     text-decoration: underline;
 }
 
 /* Buttons */
 .btn-public-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #71277A 0%, #71277A 100%);
     border: none;
     color: #fff;
     padding: 0.75rem 2rem;
@@ -139,8 +141,8 @@ img[loading="lazy"].loaded {
 }
 
 .search-input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    border-color: #71277A;
+    box-shadow: 0 0 0 0.2rem rgba(113, 39, 122, 0.25);
 }
 
 /* Grid Layouts */

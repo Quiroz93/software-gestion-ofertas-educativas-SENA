@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class UserController extends \App\Http\Controllers\Controller
 {
     use AuthorizesRequests;
 
@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         Gate::authorize("users.view");
         $users = User::all();
-        return view('user.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -31,7 +31,7 @@ class UserController extends Controller
     public function create()
     {
         Gate::authorize("users.create");
-        return view('user.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -67,7 +67,7 @@ class UserController extends Controller
             'permissions'
         ]);
 
-        return view('user.show', compact('user'));
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -78,7 +78,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         Gate::authorize("users.edit");
-        return view('user.edit', compact('user'));
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -123,7 +123,7 @@ class UserController extends Controller
     public function editPermissions(User $user)
     {
         Gate::authorize("users.manage");
-        return view('user.permisos', compact('user'));
+        return view('admin.users.permisos', compact('user'));
     }
 
     /**
@@ -189,7 +189,7 @@ class UserController extends Controller
 
         $user->load(['roles', 'permissions']);
 
-        return view('user.roles', compact(
+        return view('admin.users.roles', compact(
             'user',
             'roles',
             'permissions'

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/public/public.css', 'resources/js/public/public.js'])
 
     @stack('styles')
 </head>
@@ -100,7 +100,7 @@
     <a href="{{ route('home') }}" 
        class="btn btn-primary btn-lg shadow-lg position-fixed bottom-0 end-0 m-4 rounded-circle d-flex align-items-center justify-content-center"
        style="width: 60px; height: 60px; z-index: 1050;"
-       title="Ir a Dashboard"
+       title="Ir a Home"
        data-bs-toggle="tooltip"
        data-bs-placement="left">
         <i class="bi bi-house-fill fs-4"></i>
@@ -119,9 +119,6 @@
             });
         });
     </script>
-
-    <!-- Custom JS -->
-    @vite(['resources/js/app.js'])
 
     @stack('scripts')
 </body>

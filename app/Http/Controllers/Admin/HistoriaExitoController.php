@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\HistoriaExito;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
-class HistoriaExitoController extends Controller
+class HistoriaExitoController extends \App\Http\Controllers\Controller
 {
     use AuthorizesRequests;
 
@@ -17,7 +17,7 @@ class HistoriaExitoController extends Controller
     {
         $this->authorize('viewAny', HistoriaExito::class);
         $historias = HistoriaExito::all();
-        return view('historia_de_exito.index', compact('historias'));
+        return view('admin.historia_de_exito.index', compact('historias'));
     }
 
     /**
@@ -26,7 +26,7 @@ class HistoriaExitoController extends Controller
     public function create()
     {
         $this->authorize('create', HistoriaExito::class);
-        return view('historia_de_exito.create');
+        return view('admin.historia_de_exito.create');
     }
 
     /**

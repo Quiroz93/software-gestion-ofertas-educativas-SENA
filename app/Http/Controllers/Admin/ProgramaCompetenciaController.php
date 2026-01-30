@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\ProgramaCompetencia;
 use Illuminate\Http\Request;
 
-class ProgramaCompetenciaController extends Controller
+class ProgramaCompetenciaController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega la lista de programas competencias
@@ -14,7 +14,7 @@ class ProgramaCompetenciaController extends Controller
     public function index()
     {
         $programasCompetencias = ProgramaCompetencia::all();
-        return view('programasCompetencias.index', compact('programasCompetencias'));
+        return view('admin.programasCompetencias.index', compact('programasCompetencias'));
     }
 
     /**
@@ -23,7 +23,7 @@ class ProgramaCompetenciaController extends Controller
      */
     public function create()
     {
-        return view('programasCompetencias.create');
+        return view('admin.programasCompetencias.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class ProgramaCompetenciaController extends Controller
      */
     public function show(ProgramaCompetencia $programaCompetencia)
     {
-        return view('programasCompetencias.show', compact('programaCompetencia'));
+        return view('admin.programasCompetencias.show', compact('programaCompetencia'));
     }
 
     /**
@@ -54,7 +54,7 @@ class ProgramaCompetenciaController extends Controller
      */
     public function edit(ProgramaCompetencia $programaCompetencia)
     {
-        return view('programasCompetencias.edit', compact('programaCompetencia'));
+        return view('admin.programasCompetencias.edit', compact('programaCompetencia'));
     }
 
     /**

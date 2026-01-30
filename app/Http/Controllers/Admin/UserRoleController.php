@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class UserRoleController extends Controller
+class UserRoleController extends \App\Http\Controllers\Controller
 {
     /**
      * Agrupa los permisos por categoría
@@ -46,7 +46,7 @@ class UserRoleController extends Controller
         $userRoles = $user->roles->pluck('name')->toArray();
         $permissions = $this->getPermissionsGroupedByCategory();
 
-        return view('user.roles', compact('user', 'roles', 'userRoles', 'permissions'));
+        return view('admin.users.roles', compact('user', 'roles', 'userRoles', 'permissions'));
     }
 
     /**

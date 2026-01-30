@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Oferta;
 use App\Models\Centro;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
-class OfertaController extends Controller
+class OfertaController extends \App\Http\Controllers\Controller
 {
      /**
      * Despliega la lista de ofertas
@@ -17,7 +17,7 @@ class OfertaController extends Controller
     {
         Gate::authorize('ofertas.view', Oferta::class);
         $ofertas = Oferta::all();
-        return view('ofertas.index', compact('ofertas'));
+        return view('admin.ofertas.index', compact('ofertas'));
     }
 
     /**
@@ -28,7 +28,7 @@ class OfertaController extends Controller
     {
         Gate::authorize('ofertas.create', Oferta::class);
         $centros = Centro::all();
-        return view('ofertas.create', compact('centros'));
+        return view('admin.ofertas.create', compact('centros'));
     }
 
      /**
@@ -51,7 +51,7 @@ class OfertaController extends Controller
     public function show(Oferta $oferta)
     {
         Gate::authorize('ofertas.view', $oferta);
-        return view('ofertas.show', compact('oferta'));
+        return view('admin.ofertas.show', compact('oferta'));
     }
 
     /**
@@ -63,7 +63,7 @@ class OfertaController extends Controller
     {
         Gate::authorize('ofertas.update', $oferta);
         $centros = Centro::all();
-        return view('ofertas.edit', compact('oferta', 'centros'));
+        return view('admin.ofertas.edit', compact('oferta', 'centros'));
     }
 
     /**

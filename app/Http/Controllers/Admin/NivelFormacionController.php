@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\nivel_formacion;
 use App\Models\NivelFormacion;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
 
 
 
-class NivelFormacionController extends Controller
+class NivelFormacionController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega una lista de recursos
@@ -19,7 +19,7 @@ class NivelFormacionController extends Controller
     {
         Gate::authorize('niveles_formacion.view', NivelFormacion::class);
         $nivel_formaciones = NivelFormacion::all();
-        return view('nivel_formacion.index', compact('nivel_formaciones'));
+        return view('admin.nivel_formacion.index', compact('nivel_formaciones'));
     }
 
     /**
@@ -29,7 +29,7 @@ class NivelFormacionController extends Controller
     public function create()
     {
         Gate::authorize('niveles_formacion.create', NivelFormacion::class);
-        return view('nivel_formacion.create');
+        return view('admin.nivel_formacion.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class NivelFormacionController extends Controller
     {
         Gate::authorize('niveles_formacion.view', $id);
         $nivel_formacion = NivelFormacion::find($id);
-        return view('nivel_formacion.show', compact('nivel_formacion'));
+        return view('admin.nivel_formacion.show', compact('nivel_formacion'));
     }
 
     /**
@@ -65,7 +65,7 @@ class NivelFormacionController extends Controller
     {
         Gate::authorize('niveles_formacion.update', $id);
         $nivel_formacion = NivelFormacion::find($id);
-        return view('nivel_formacion.edit', compact('nivel_formacion'))->with('success', 'Nivel de formacion cargado correctamente para editar');
+        return view('admin.nivel_formacion.edit', compact('nivel_formacion'))->with('success', 'Nivel de formacion cargado correctamente para editar');
     }
 
     /**

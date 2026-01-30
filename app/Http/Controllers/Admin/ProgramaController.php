@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Programa;
 use App\Models\NivelFormacion;
@@ -9,7 +9,7 @@ use App\Models\Red;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class ProgramaController extends Controller
+class ProgramaController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega la lista de programas
@@ -19,7 +19,7 @@ class ProgramaController extends Controller
     {
         Gate::authorize('programas.view');
         $programas = Programa::all();
-        return view('programas.index', compact('programas'));
+        return view('admin.programas.index', compact('programas'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ProgramaController extends Controller
         $nivel_formaciones = NivelFormacion::all();
         $redes = Red::all();
         $centros = Centro::all();
-        return view('programas.create', compact('nivel_formaciones', 'redes', 'centros'));
+        return view('admin.programas.create', compact('nivel_formaciones', 'redes', 'centros'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ProgramaController extends Controller
     public function show(Programa $programa)
     {
         Gate::authorize('programas.show', $programa);
-        return view('programas.show', compact('programa'));
+        return view('admin.programas.show', compact('programa'));
     }
 
     /**
@@ -90,7 +90,7 @@ class ProgramaController extends Controller
         $nivel_formaciones = NivelFormacion::all();
         $redes = Red::all();
         $centros = Centro::all();
-        return view('programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros'));
+        return view('admin.programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros'));
     }
 
     /**

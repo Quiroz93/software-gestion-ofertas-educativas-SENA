@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Red;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class RedController extends Controller
+class RedController extends \App\Http\Controllers\Controller
 {
     /**
      * Despliega la lista de redes
@@ -16,7 +16,7 @@ class RedController extends Controller
     {
         Gate::authorize('redes_conocimiento.view');
         $redes = Red::all();
-        return view('redes.index', compact('redes'));
+        return view('admin.redes.index', compact('redes'));
     }
 
     /**
@@ -26,7 +26,7 @@ class RedController extends Controller
     public function create()
     {
         Gate::authorize('redes_conocimiento.create');
-        return view('redes.create');
+        return view('admin.redes.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class RedController extends Controller
     public function show(Red $red)
     {
         Gate::authorize('redes_conocimiento.show', $red);
-        return view('redes.show', compact('red'));
+        return view('admin.redes.show', compact('red'));
     }
 
     /**
@@ -60,7 +60,7 @@ class RedController extends Controller
     public function edit(Red $red)
     {
         Gate::authorize('redes_conocimiento.edit', $red);
-        return view('redes.edit', compact('red'));
+        return view('admin.redes.edit', compact('red'));
     }
 
     /**

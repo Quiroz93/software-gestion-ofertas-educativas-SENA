@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
 use App\Models\Noticia;
 use Illuminate\Http\Request;
-use illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
@@ -22,6 +22,6 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        return view('home', compact('noticias'));
+        return view('public.home', compact('noticias'));
     }
 }
