@@ -7,7 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/common/app.css',
                 'resources/css/admin/admin.css',
-                'resources/css/admin/inline.css',
+                'resources/css/admin/admin-layout.css',
                 'resources/css/public/public.css',
                 'resources/js/common/app.js',
                 'resources/js/admin/admin.js',

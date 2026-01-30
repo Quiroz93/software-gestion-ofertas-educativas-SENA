@@ -1,4 +1,6 @@
-/* Admin Layout Inline Styles - Extracted from admin.blade.php */
+/* Admin Layout Styles - Structure & Layout from admin.blade.php
+   Contains layout structure, sidebar, navbar, content area, and responsive design
+   Complementary to admin.css (which contains component-specific styling) */
 
 :root {
     --sidebar-width: 280px;

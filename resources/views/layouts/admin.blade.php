@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     {{-- Admin Assets --}}
-    @vite(['resources/css/admin/admin.css', 'resources/css/admin/inline.css', 'resources/js/admin/admin.js'])
+    @vite(['resources/css/admin/admin.css', 'resources/css/admin/admin-layout.css', 'resources/js/admin/admin.js'])
 
     @yield('css')
 </head>
