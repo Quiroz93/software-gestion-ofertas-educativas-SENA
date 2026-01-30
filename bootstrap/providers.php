@@ -10,6 +10,7 @@ return [
     Illuminate\Filesystem\FilesystemServiceProvider::class,
     Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
     Illuminate\Foundation\Providers\FoundationServiceProvider::class,
+    Illuminate\Session\SessionServiceProvider::class,
     Illuminate\Translation\TranslationServiceProvider::class,
     Illuminate\View\ViewServiceProvider::class,
 ];
