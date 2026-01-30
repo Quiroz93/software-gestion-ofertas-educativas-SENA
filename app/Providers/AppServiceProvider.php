@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // TODO: Configure pagination properly for Laravel 12
-        // \Illuminate\Pagination\Paginator::useBootstrapFive();
+        // Configure pagination to use Bootstrap 5 custom view
+        \Illuminate\Pagination\Paginator::defaultView('vendor.pagination.bootstrap-5');
         
         // Load custom helpers
         if (file_exists(app_path('Helpers/helpers.php'))) {
