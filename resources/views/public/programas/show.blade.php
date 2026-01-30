@@ -79,6 +79,7 @@
                 @endif
 
                 <!-- Related Programs -->
+                {{-- TODO: Implementar relación de programas relacionados en el modelo Programa
                 @if($programa->programas()->count() > 0)
                 <div class="card shadow-sm border-0 rounded-lg">
                     <div class="card-body">
@@ -101,6 +102,7 @@
                     </div>
                 </div>
                 @endif
+                --}}
             </div>
 
             <!-- Right Column - Sidebar -->
