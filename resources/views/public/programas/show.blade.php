@@ -215,29 +215,27 @@
                 <h6 class="modal-title fw-bold">Solicitud de Inscripción</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('inscripcion.store', $programa) }}">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="programa_id" value="{{ $programa->id }}">
 
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        <label for="observaciones" class="form-label">Observaciones (Opcional)</label>
+                        <textarea class="form-control" id="observaciones" name="observaciones" rows="3" maxlength="500"></textarea>
+                        <small class="text-muted">Máximo 500 caracteres</small>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="acepta_terminos" name="acepta_terminos" value="1" required>
+                        <label class="form-check-label" for="acepta_terminos">
+                            Acepto los términos y condiciones de inscripción
+                        </label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                    <button type="submit" class="btn btn-primary">Enviar Inscripción</button>
                 </div>
             </form>
         </div>
