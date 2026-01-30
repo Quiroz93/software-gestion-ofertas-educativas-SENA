@@ -73,4 +73,38 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(UserSetting::class);
     }
+
+    /**
+     * Relación con inscripciones (programas)
+     */
+    public function inscripciones()
+    {
+        return $this->hasMany(Inscripcion::class);
+    }
+
+    /**
+     * Relación con programas a través de inscripciones
+     */
+    public function programas()
+    {
+        return $this->belongsToMany(Programa::class, 'inscripciones')
+            ->withPivot('instructor_id', 'fecha_inscripcion', 'fecha_retiro', 'estado', 'observaciones')
+            ->withTimestamps();
+    }
+
+    /**
+     * Obtener inscripciones ordenadas por fecha (más recientes primero)
+     */
+    public function inscripcionesOrdenadas()
+    {
+        return $this->inscripciones()->orderBy('fecha_inscripcion', 'desc');
+    }
+
+    /**
+     * Obtener solo inscripciones activas
+     */
+    public function inscripcionesActivas()
+    {
+        return $this->inscripciones()->activas();
+    }
 }

@@ -44,6 +44,19 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    
+                    <li class="sidebar-nav-item px-3 py-2 mt-3">
+                        <small class="text-uppercase opacity-75">Contenido publico</small>
+                    </li>
+
+                    {{-- Home --}}
+                    <li class="sidebar-nav-item">
+                        <a href="{{ route('home') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                            <i class="bi bi-house-door"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-nav-item px-3 py-2 mt-3">
                         <small class="text-uppercase opacity-75">Contenido</small>

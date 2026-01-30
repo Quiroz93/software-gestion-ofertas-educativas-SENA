@@ -50,4 +50,30 @@ class Programa extends Model
         'fecha_registro' => 'date',
         'fecha_actualizacion' => 'date',
     ];
+
+    /**
+     * Relación con competencias
+     */
+    public function competencias()
+    {
+        return $this->belongsToMany(Competencia::class, 'programa_competencias');
+    }
+
+    /**
+     * Relación con inscripciones
+     */
+    public function inscripciones()
+    {
+        return $this->hasMany(Inscripcion::class);
+    }
+
+    /**
+     * Relación con usuarios (aprendices) a través de inscripciones
+     */
+    public function aprendices()
+    {
+        return $this->belongsToMany(User::class, 'inscripciones')
+            ->withPivot('instructor_id', 'fecha_inscripcion', 'fecha_retiro', 'estado', 'observaciones')
+            ->withTimestamps();
+    }
 }
