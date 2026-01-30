@@ -55,7 +55,7 @@
                                 <h5 class="card-title fw-bold h4 mb-3">{{ $noticia->titulo }}</h5>
 
                                 <p class="card-text text-muted mb-4">
-                                    {{ Str::limit($noticia->contenido, 200) }}
+                                    {{ \Illuminate\Support\Str::limit($noticia->contenido, 200) }}
                                 </p>
 
                                 <a href="{{ route('public.ultimaNoticias.show', $noticia) }}"
@@ -100,10 +100,10 @@
                             </small>
                         </div>
 
-                        <h6 class="card-title fw-bold mb-2">{{ Str::limit($noticia->titulo, 50) }}</h6>
+                        <h6 class="card-title fw-bold mb-2">{{ \Illuminate\Support\Str::limit($noticia->titulo, 50) }}</h6>
 
                         <p class="card-text text-muted small mb-3 flex-grow-1">
-                            {{ Str::limit($noticia->contenido, 100) }}
+                            {{ \Illuminate\Support\Str::limit($noticia->contenido, 100) }}
                         </p>
 
                         <a href="{{ route('public.ultimaNoticias.show', $noticia) }}"
