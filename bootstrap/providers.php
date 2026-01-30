@@ -7,6 +7,7 @@ return [
     Illuminate\Database\DatabaseServiceProvider::class,
     Illuminate\Filesystem\FilesystemServiceProvider::class,
     Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+    Illuminate\Foundation\Providers\FoundationServiceProvider::class,
     Illuminate\Translation\TranslationServiceProvider::class,
     Illuminate\View\ViewServiceProvider::class,
 ];
