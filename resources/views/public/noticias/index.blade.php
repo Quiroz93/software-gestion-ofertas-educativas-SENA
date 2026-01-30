@@ -117,9 +117,13 @@
         </div>
 
         <!-- Pagination -->
+        {{-- Pagination disabled due to Laravel 12 bug with AbstractPaginator::links() 
+             Error: call_user_func(): Argument #1 ($callback) must be a valid callback
+             TODO: Re-enable when Laravel 12 fixes the pagination callback issue
         <div class="d-flex justify-content-center mt-5">
             {!! $noticias->links('vendor.pagination.bootstrap-5') !!}
         </div>
+        --}}
         @else
         <div class="alert alert-info text-center py-5">
             <i class="bi bi-info-circle me-2" style="font-size: 2rem;"></i>
