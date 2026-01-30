@@ -432,6 +432,30 @@ Route::middleware(['auth'])->group(function () {
         ->name('profile.photo.destroy');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Inscripciones a programas de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    
+    // Mostrar formulario de inscripción
+    Route::get('programas/{programa}/inscribirse', [App\Http\Controllers\InscripcionController::class, 'create'])
+        ->name('inscripcion.create');
+    
+    // Guardar inscripción
+    Route::post('programas/{programa}/inscribir', [App\Http\Controllers\InscripcionController::class, 'store'])
+        ->name('inscripcion.store');
+    
+    // Retirar inscripción
+    Route::delete('inscripciones/{inscripcion}', [App\Http\Controllers\InscripcionController::class, 'destroy'])
+        ->name('inscripcion.destroy');
+    
+    // Listar mis inscripciones
+    Route::get('mis-inscripciones', [App\Http\Controllers\InscripcionController::class, 'misinscripciones'])
+        ->name('inscripcion.index');
+});
+
 
 /*
 |--------------------------------------------------------------------------

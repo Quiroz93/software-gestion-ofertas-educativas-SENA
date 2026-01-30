@@ -235,6 +235,13 @@
                     </x-u-i.card>
                 </div>
             </div>
+
+            <!-- User Programs Section (Full Width) -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <x-profile.user-programs :user="$user" />
+                </div>
+            </div>
         </div>
     </div>
 </div>
