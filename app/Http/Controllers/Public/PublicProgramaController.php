@@ -24,8 +24,9 @@ class PublicProgramaController extends Controller
         ]);
     }
 
-    public function show(Programa $programa)
+    public function show(Programa $programasDeFormacion)
     {
+        $programa = $programasDeFormacion;
         return view('public.programas.show', compact('programa'));
     }
 }
