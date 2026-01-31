@@ -1,19 +1,41 @@
 /**
- * Admin Area Styles
+ * Admin Area Styles - DESIGN SYSTEM SENA
  * Estilos específicos para el área administrativa
+ * Cumple con Manual de Identidad Visual SENA 2024
  */
 
-/* Sidebar Styles */
+:root {
+    --sena-green: #39A900;
+    --sena-green-dark: #007832;
+    --sena-blue-dark: #00304D;
+    --sena-blue-light: #50E5F9;
+    --sena-yellow: #FDC300;
+    --white: #FFFFFF;
+    --neutral-bg: #F6F6F6;
+    --text-muted: #6c757d;
+}
+
+/* Tipografía */
+body, html {
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+}
+
+/* Sidebar Styles - Color sólido SENA sin gradientes */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     width: 280px;
-    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-    color: #ecf0f1;
+    background: var(--sena-blue-dark);
+    color: var(--white);
     overflow-y: auto;
-    transition: all 0.3s ease;
+    transition: all 120ms ease-in-out;
     z-index: 1000;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
 }
@@ -24,7 +46,8 @@
     font-weight: 700;
     text-align: center;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    color: #fff;
+    color: var(--white);
+    font-family: "Work Sans", sans-serif;
 }
 
 .sidebar-nav {
@@ -39,22 +62,23 @@
     display: flex;
     align-items: center;
     padding: 0.75rem 1.5rem;
-    color: #ecf0f1;
+    color: rgba(255,255,255,0.8);
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 120ms ease-in-out;
     border-left: 3px solid transparent;
+    font-family: "Work Sans", sans-serif;
 }
 
 .sidebar-nav-link:hover {
-    background: rgba(52, 152, 219, 0.2);
-    border-left-color: #3498db;
-    color: #fff;
+    background: rgba(57,169,0,0.15);
+    border-left-color: var(--sena-green);
+    color: var(--white);
 }
 
 .sidebar-nav-link.active {
-    background: rgba(13, 110, 253, 0.2);
-    border-left-color: #0d6efd;
-    color: #fff;
+    background: rgba(57,169,0,0.2);
+    border-left-color: var(--sena-green);
+    color: var(--white);
     font-weight: 600;
 }
 
@@ -70,13 +94,13 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 120ms ease-in-out;
 }
 
 /* Navbar */
 .admin-navbar {
-    background: #fff;
-    border-bottom: 1px solid #dee2e6;
+    background: var(--white);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
     padding: 1rem 1.5rem;
     position: sticky;
     top: 0;
@@ -88,15 +112,16 @@
 .content-wrapper {
     flex: 1;
     padding: 2rem;
-    background: #f8f9fa;
+    background: var(--neutral-bg);
 }
 
 /* Cards */
 .admin-card {
-    border: none;
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 120ms ease-in-out, box-shadow 120ms ease-in-out;
+    background: var(--white);
 }
 
 .admin-card:hover {
@@ -106,42 +131,58 @@
 
 /* Tables */
 .admin-table {
-    background: #fff;
+    background: var(--white);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .admin-table thead {
-    background: #f8f9fa;
+    background: var(--neutral-bg);
+    color: var(--sena-blue-dark);
+}
+
+.admin-table tbody tr:hover {
+    background: rgba(57,169,0,0.02);
 }
 
 /* Buttons */
 .btn-admin-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    color: #fff;
-    transition: transform 0.2s;
+    background: var(--sena-green);
+    border: 1px solid var(--sena-green-dark);
+    color: var(--white);
+    transition: all 120ms ease-in-out;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 600;
 }
 
 .btn-admin-primary:hover {
+    background: var(--sena-green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 8px rgba(57,169,0,0.2);
+}
+
+.btn-admin-primary:focus {
+    outline: 3px solid rgba(57,169,0,0.14);
+    outline-offset: 2px;
 }
 
 /* Alerts */
 .admin-alert {
     border-left: 4px solid;
     border-radius: 4px;
+    font-family: "Work Sans", sans-serif;
 }
 
 .admin-alert-success {
-    border-left-color: #28a745;
-    background: #d4edda;
+    border-left-color: var(--sena-green);
+    background: rgba(57,169,0,0.08);
+    color: var(--sena-blue-dark);
 }
 
 .admin-alert-error {
-    border-left-color: #dc3545;
-    background: #f8d7da;
+    border-left-color: var(--sena-yellow);
+    background: rgba(253,195,0,0.08);
+    color: var(--sena-blue-dark);
 }
 
 /* Mobile Responsive */
@@ -165,8 +206,8 @@
 
 /* Loading Spinner */
 .admin-spinner {
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #3498db;
+    border: 3px solid var(--neutral-bg);
+    border-top: 3px solid var(--sena-green);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -179,9 +220,15 @@
 }
 
 /* Form Enhancements */
+.form-control {
+    font-family: "Work Sans", sans-serif;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
 .form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    border-color: var(--sena-green);
+    box-shadow: 0 0 0 0.2rem rgba(57,169,0,0.1);
+    color: var(--sena-blue-dark);
 }
 
 /* Badge Styles */
@@ -189,4 +236,23 @@
     padding: 0.5rem 0.75rem;
     border-radius: 20px;
     font-weight: 500;
+    font-family: "Work Sans", sans-serif;
+    background: var(--sena-green);
+    color: var(--white);
+}
+
+/* Status Badges */
+.badge-active {
+    background: var(--sena-green);
+    color: var(--white);
+}
+
+.badge-inactive {
+    background: var(--neutral-bg);
+    color: var(--sena-blue-dark);
+}
+
+.badge-pending {
+    background: var(--sena-yellow);
+    color: var(--sena-blue-dark);
 }

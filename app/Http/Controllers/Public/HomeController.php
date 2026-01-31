@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Public;
 use App\Models\Noticia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Programa;
 use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
@@ -22,6 +23,11 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        return view('public.home', compact('noticias'));
+        $programas = Programa::where('estado', 'Activo')
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('public.home', compact('noticias', 'programas'));
     }
 }

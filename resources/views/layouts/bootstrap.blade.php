@@ -10,7 +10,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=work-sans:400,500,600,700&display=swap" rel="stylesheet" />
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,171 +18,155 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-    <!-- Custom CSS -->
-    @vite(['resources/css/public/public.css', 'resources/js/public/public.js'])
+    <!-- Animate.css (usado por SweetAlert) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+
+    <!-- Assets -->
+    @vite(['resources/css/sena-utilities.css', 'resources/css/public/public.css', 'resources/js/public/public.js'])
 
     @stack('styles')
 </head>
 
 <body>
-    <div id="app">
-        <!-- Navbar -->
-        @include('partials.navbar')
+<div id="app">
 
-        <!-- Main Content -->
-        <main class="py-4">
-            @yield('content')
-        </main>
+    {{-- NAVBAR --}}
+    @include('partials.navbar')
 
-    </div>
+    {{-- CONTENIDO PRINCIPAL --}}
+    <main class="py-4">
+        @yield('content')
+    </main>
 
-    {{-- FOOTER --}}
-    <footer class="bg-light py-5" style="font-family: 'worksans sans-serif';">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_centro_title" data-type="text">
-                        {!! getCustomContent('home', 'footer_centro_title', 'Centro') !!}
-                    </h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_centro_link1" data-type="text">{!! getCustomContent('home', 'footer_centro_link1', 'Sobre nosotros') !!}</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_centro_link2" data-type="text">{!! getCustomContent('home', 'footer_centro_link2', 'Programas') !!}</a></li>
-                        <!-- more links -->
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_servicios_title" data-type="text">
-                        {!! getCustomContent('home', 'footer_servicios_title', 'Servicios') !!}
-                    </h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_servicios_link1" data-type="text">{!! getCustomContent('home', 'footer_servicios_link1', 'Características') !!}</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_servicios_link2" data-type="text">{!! getCustomContent('home', 'footer_servicios_link2', 'información') !!}</a></li>
-                        <!-- more links -->
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_recursos_title" data-type="text">
-                        {!! getCustomContent('home', 'footer_recursos_title', 'Recursos') !!}
-                    </h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_recursos_link1" data-type="text">{!! getCustomContent('home', 'footer_recursos_link1', 'Blog') !!}</a></li>
-                        <li><a href="#" class="text-decoration-none text-muted editable" data-model="home" data-model-id="0" data-key="footer_recursos_link2" data-type="text">{!! getCustomContent('home', 'footer_recursos_link2', 'Centro de ayuda') !!}</a></li>
-                        <!-- more links -->
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_contacto_title" data-type="text">
-                        {!! getCustomContent('home', 'footer_contacto_title', 'Contactanos') !!}
-                    </h5>
-                    <p class="text-muted editable" data-model="home" data-model-id="0" data-key="footer_contacto_direccion" data-type="text">
-                        {!! getCustomContent('home', 'footer_contacto_direccion', 'Cra. 11 No. 13-13') !!}
-                    </p>
-                    <p class="text-muted editable" data-model="home" data-model-id="0" data-key="footer_contacto_telefono" data-type="text">
-                        {!! getCustomContent('home', 'footer_contacto_telefono', 'Linea de atención: 018000 910270') !!}
-                    </p>
-                    <p class="text-muted editable" data-model="home" data-model-id="0" data-key="footer_contacto_email" data-type="text">
-                        {!! getCustomContent('home', 'footer_contacto_email', 'Email: servicioalciudadano@sena.udu.co') !!}
-                    </p>
-                </div>
+</div>
+
+{{-- FOOTER --}}
+<footer class="bg-light py-5" style="font-family: 'Work Sans', sans-serif;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h5 class="editable" data-model="home" data-model-id="0" data-key="footer_centro_title" data-type="text">
+                    {!! getCustomContent('home', 'footer_centro_title', 'Centro') !!}
+                </h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-decoration-none text-muted editable" data-key="footer_centro_link1">{!! getCustomContent('home','footer_centro_link1','Sobre nosotros') !!}</a></li>
+                    <li><a href="#" class="text-decoration-none text-muted editable" data-key="footer_centro_link2">{!! getCustomContent('home','footer_centro_link2','Programas') !!}</a></li>
+                </ul>
             </div>
-            <div class="row mt-4">
-                <div class="col">
-                    <p class="text-center text-muted border-top pt-3 editable" data-model="home" data-model-id="0" data-key="footer_copyright" data-type="text">
-                        {!! getCustomContent('home', 'footer_copyright', '&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.') !!}
-                    </p>
-                </div>
+
+            <div class="col-md-3">
+                <h5 class="editable" data-key="footer_servicios_title">
+                    {!! getCustomContent('home','footer_servicios_title','Servicios') !!}
+                </h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-decoration-none text-muted editable">{!! getCustomContent('home','footer_servicios_link1','Características') !!}</a></li>
+                    <li><a href="#" class="text-decoration-none text-muted editable">{!! getCustomContent('home','footer_servicios_link2','Información') !!}</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <h5 class="editable">{!! getCustomContent('home','footer_recursos_title','Recursos') !!}</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-decoration-none text-muted editable">{!! getCustomContent('home','footer_recursos_link1','Blog') !!}</a></li>
+                    <li><a href="#" class="text-decoration-none text-muted editable">{!! getCustomContent('home','footer_recursos_link2','Centro de ayuda') !!}</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <h5 class="editable">{!! getCustomContent('home','footer_contacto_title','Contáctanos') !!}</h5>
+                <p class="text-muted editable">{!! getCustomContent('home','footer_contacto_direccion','Cra. 11 No. 13-13') !!}</p>
+                <p class="text-muted editable">{!! getCustomContent('home','footer_contacto_telefono','Línea de atención: 018000 910270') !!}</p>
+                <p class="text-muted editable">{!! getCustomContent('home','footer_contacto_email','Email: servicioalciudadano@sena.edu.co') !!}</p>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <p class="text-center text-muted border-top pt-3 editable">
+                    {!! getCustomContent('home','footer_copyright','&copy; 2026 SENA, Centro Agroempresarial y Turístico de los Andes.') !!}
+                </p>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Botón flotante global para ir a Home -->
-    @auth
-    <a href="{{ route('home') }}" 
-       class="btn btn-primary btn-lg shadow-lg position-fixed bottom-0 end-0 m-4 rounded-circle d-flex align-items-center justify-content-center"
-       style="width: 60px; height: 60px; z-index: 1050;"
-       title="Ir a Home"
-       data-bs-toggle="tooltip"
-       data-bs-placement="left">
-        <i class="bi bi-house-fill fs-4"></i>
-    </a>
-    @endauth
+{{-- BOTÓN FLOTANTE --}}
+@auth
+<a href="{{ route('home') }}"
+   class="btn btn-primary btn-lg shadow-lg position-fixed bottom-0 end-0 m-4 rounded-circle d-flex align-items-center justify-content-center"
+   style="width:60px;height:60px;z-index:1050"
+   data-bs-toggle="tooltip"
+   title="Ir a Home">
+    <i class="bi bi-house-fill fs-4"></i>
+</a>
+@endauth
 
-    <!-- Bootstrap 5 Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- SweetAlert2 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+});
+</script>
 
-    <!-- Inicializar tooltips -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-        });
-    </script>
+@if(session('success') || session('status') === 'inscripcion-exitosa' || session('status') === 'inscripcion-retirada')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+Swal.fire({
+    icon: 'success',
+    title: '¡Éxito!',
+    text: "{{ session('message') ?? session('success') }}",
+    confirmButtonColor: '#39A900',
+    timer: 4000,
+    timerProgressBar: true
+});
+});
+</script>
+@endif
 
-    <!-- Manejo de mensajes flash con SweetAlert2 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mensaje de éxito
-            @if (session('success') || session('status') === 'inscripcion-exitosa' || session('status') === 'inscripcion-retirada')
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Éxito!',
-                    text: '{{ session('message') ?? session('success') }}',
-                    confirmButtonColor: '#39a900',
-                    timer: 4000,
-                    timerProgressBar: true,
-                    showClass: {
-                        popup: 'animate__animated animate__fadeInDown'
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp'
-                    }
-                });
-            @endif
+@if(session('error'))
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: "{{ session('error') }}",
+    confirmButtonColor: '#FDC300'
+});
+});
+</script>
+@endif
 
-            // Mensaje de error
-            @if (session('error'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '{{ session('error') }}',
-                    confirmButtonColor: '#d33',
-                    timer: 5000,
-                    timerProgressBar: true
-                });
-            @endif
+@if(session('warning'))
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+Swal.fire({
+    icon: 'warning',
+    title: 'Atención',
+    text: "{{ session('warning') }}",
+    confirmButtonColor: '#FDC300'
+});
+});
+</script>
+@endif
 
-            // Mensaje de advertencia
-            @if (session('warning'))
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Atención',
-                    text: '{{ session('warning') }}',
-                    confirmButtonColor: '#f39c12',
-                    timer: 4000,
-                    timerProgressBar: true
-                });
-            @endif
+@if(session('info'))
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+Swal.fire({
+    icon: 'info',
+    title: 'Información',
+    text: "{{ session('info') }}",
+    confirmButtonColor: '#00304D'
+});
+});
+</script>
+@endif
 
-            // Mensaje informativo
-            @if (session('info'))
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Información',
-                    text: '{{ session('info') }}',
-                    confirmButtonColor: '#3085d6',
-                    timer: 4000,
-                    timerProgressBar: true
-                });
-            @endif
-        });
-    </script>
-
-    @stack('scripts')
+@stack('scripts')
 </body>
-
 </html>

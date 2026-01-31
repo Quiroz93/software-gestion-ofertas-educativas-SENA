@@ -13,4 +13,14 @@ class PublicNoticiaController extends Controller
         $noticias = Noticia::where('activa', true)->paginate(10);
         return view('public.noticias.index', compact('noticias'));
     }
+
+    public function show(Noticia $ultimaNoticia)
+    {
+        // Verificar que la noticia esté activa
+        if (!$ultimaNoticia->activa) {
+            abort(404);
+        }
+
+        return view('public.noticias.show', compact('ultimaNoticia'));
+    }
 }

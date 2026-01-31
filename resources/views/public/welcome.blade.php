@@ -16,6 +16,9 @@
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
+    {{-- SENA Utilities & Public Styles --}}
+    @vite(['resources/css/sena-utilities.css', 'resources/css/public/home.css'])
+
     @can('public_content.edit')
     <style>
         .editable {
@@ -24,8 +27,8 @@
         }
 
         .editable:hover {
-            outline: 2px dashed #ffc107;
-            background-color: rgba(255, 193, 7, 0.1);
+            outline: 2px dashed #FDC300;
+            background-color: rgba(253, 195, 0, 0.1);
             transition: all 0.2s ease;
         }
 
@@ -36,7 +39,7 @@
             position: absolute;
             top: 5px;
             right: 5px;
-            background: #ffc107;
+            background: #FDC300;
             color: #000;
             padding: 4px 8px;
             border-radius: 4px;
@@ -49,7 +52,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--sena-blue-dark);">
         <div class="container">
 
             <!-- Logo -->
@@ -92,11 +95,11 @@
                         </li>
                     </ul>
 
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm">
+                    <a href="{{ route('login') }}" class="btn btn-outline-sena btn-sm bg-white">
                         <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesión
                     </a>
 
-                    <a href="{{ route('register') }}" class="btn btn-outline-success btn-sm">
+                    <a href="{{ route('register') }}" class="btn btn-outline-sena btn-sm bg-white">
                         <i class="bi bi-person-plus me-1"></i> Registrarse
                     </a>
                 </div>
@@ -165,7 +168,7 @@
                                                 <p class="card-text">{{ $noticia->descripcion_media }}</p>
                                             </div>
                                             <div class="card-footer">
-                                                <a href="#" class="btn btn-primary btn-sm">Leer más</a>
+                                                <a href="#" class="btn btn-primary-sena btn-sm">Leer más</a>
                                             </div>
                                         </div>
                                     </div>
@@ -193,7 +196,7 @@
                                                 <p class="card-text">{{ $oferta->descripcion_corta }}</p>
                                             </div>
                                             <div class="card-footer">
-                                                <a href="#" class="btn btn-success btn-sm">Ver oferta</a>
+                                                <a href="#" class="btn btn-primary-sena btn-sm">Ver oferta</a>
                                             </div>
                                         </div>
                                     </div>
@@ -365,7 +368,7 @@
 
                                     <!-- Drag & Drop Zone -->
                                     <div id="dropZone" class="border border-dashed rounded p-5 text-center bg-light" style="cursor: pointer; transition: all 0.3s;">
-                                        <i class="bi bi-cloud-upload" style="font-size: 3rem; color: #6c757d;"></i>
+                                        <i class="bi bi-cloud-upload" style="font-size: 3rem; color: var(--text-muted);"></i>
                                         <p class="mt-3 mb-0 text-muted">
                                             <strong>Arrastra un archivo aquí</strong><br>
                                             o haz clic para seleccionar
@@ -479,7 +482,7 @@
                 if (data.files && data.files.length > 0) {
                     renderFilesGrid(data.files, type);
                 } else {
-                    $('#filesGrid').html(`<div class="col-12 text-center py-5"><i class="bi bi-folder2-open" style="font-size: 3rem; color: #6c757d;"></i><p class="text-muted mt-3 mb-0">No hay archivos</p></div>`);
+                    $('#filesGrid').html(`<div class="col-12 text-center py-5"><i class="bi bi-folder2-open" style="font-size: 3rem; color: var(--text-muted);"></i><p class="text-muted mt-3 mb-0">No hay archivos</p></div>`);
                 }
             })
             .catch(error => {

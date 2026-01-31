@@ -2,17 +2,36 @@
 
 :root {
     --sena-blue-dark: #00304D;
+    --sena-green: #39A900;
+    --sena-green-dark: #007832;
+    --sena-blue-light: #50E5F9;
+    --sena-violet: #71277A;
+    --sena-yellow: #FDC300;
+    --white: #FFFFFF;
+    --neutral-bg: #F6F6F6;
+    --text-muted: #6c757d;
 }
 
 /**
- * Public Area Styles
+ * Public Area Styles - DESIGN SYSTEM SENA
  * Estilos para vistas públicas (programas, ofertas, noticias)
+ * Cumple con Manual de Identidad Visual SENA 2024
  */
 
-/* Hero Sections */
+/* Tipografía */
+body, html {
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 600;
+}
+
+/* Hero Sections - Color sólido SENA, sin gradientes */
 .hero-section {
-    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
-    color: #fff;
+    background: var(--sena-green);
+    color: var(--white);
     padding: 4rem 0;
     margin-bottom: 3rem;
 }
@@ -21,6 +40,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    font-family: "Work Sans", sans-serif;
 }
 
 /* Cards */
@@ -28,9 +48,10 @@
     border: none;
     border-radius: 12px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 120ms ease-in-out;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     height: 100%;
+    background: var(--white);
 }
 
 .public-card:hover {
@@ -53,10 +74,11 @@
     font-weight: 600;
     margin-bottom: 0.75rem;
     color: var(--sena-blue-dark);
+    font-family: "Work Sans", sans-serif;
 }
 
 .public-card-text {
-    color: rgba(0, 48, 77, 0.75);
+    color: var(--text-muted);
     line-height: 1.6;
 }
 
@@ -76,7 +98,7 @@
 .public-card .text-muted,
 .detail-header .text-muted,
 .featured-item .text-muted {
-    color: rgba(0, 48, 77, 0.75) !important;
+    color: var(--text-muted) !important;
 }
 
 .bg-white .text-white,
@@ -88,32 +110,44 @@
     color: var(--sena-blue-dark) !important;
 }
 
-/* Featured Items */
+/* Featured Items - Sin gradientes */
 .featured-item {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: var(--neutral-bg);
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
+    border: 1px solid rgba(0,0,0,0.04);
 }
 
-/* Badges */
+/* Badges - Colores SENA sólidos */
 .badge-programa {
-    background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
-    color: #fff;
+    background: var(--sena-green);
+    color: var(--white);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.875rem;
     font-weight: 500;
+    font-family: "Work Sans", sans-serif;
 }
 
 .badge-oferta {
-    background: linear-gradient(135deg, #FDC300 0%, #FDC300 100%);
-    color: #212529;
+    background: var(--sena-yellow);
+    color: var(--sena-blue-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: "Work Sans", sans-serif;
 }
 
 .badge-noticia {
-    background: linear-gradient(135deg, #50E5F9 0%, #50E5F9 100%);
-    color: #212529;
+    background: var(--sena-blue-light);
+    color: var(--sena-blue-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: "Work Sans", sans-serif;
 }
 
 /* Breadcrumbs */
@@ -124,35 +158,42 @@
 }
 
 .breadcrumb-item a {
-    color: #39A900;
+    color: var(--sena-blue-dark);
     text-decoration: none;
 }
 
 .breadcrumb-item a:hover {
-    color: #2d8500;
+    color: var(--sena-green);
     text-decoration: underline;
 }
 
 /* Buttons */
 .btn-public-primary {
-    background: linear-gradient(135deg, #71277A 0%, #71277A 100%);
-    border: none;
-    color: #fff;
+    background: var(--sena-green);
+    border: 1px solid var(--sena-green-dark);
+    color: var(--white);
     padding: 0.75rem 2rem;
-    border-radius: 25px;
+    border-radius: 8px;
     font-weight: 600;
-    transition: all 0.3s;
+    font-family: "Work Sans", sans-serif;
+    transition: all 120ms ease-in-out;
 }
 
 .btn-public-primary:hover {
+    background: var(--sena-green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 16px rgba(57,169,0,0.2);
+}
+
+.btn-public-primary:focus {
+    outline: 3px solid rgba(57,169,0,0.14);
+    outline-offset: 2px;
 }
 
 /* Image Lazy Loading */
 img[loading="lazy"] {
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 120ms ease-in-out;
 }
 
 img[loading="lazy"].loaded {
@@ -166,15 +207,17 @@ img[loading="lazy"].loaded {
 }
 
 .search-input {
-    border-radius: 25px;
+    border-radius: 8px;
     padding: 0.75rem 1.5rem;
-    border: 2px solid #e0e0e0;
-    transition: border-color 0.3s;
+    border: 1px solid rgba(0,0,0,0.08);
+    font-family: "Work Sans", sans-serif;
+    transition: border-color 120ms ease-in-out;
 }
 
 .search-input:focus {
-    border-color: #71277A;
-    box-shadow: 0 0 0 0.2rem rgba(113, 39, 122, 0.25);
+    border-color: var(--sena-green);
+    box-shadow: 0 0 0 0.2rem rgba(57,169,0,0.1);
+    outline: none;
 }
 
 /* Grid Layouts */
@@ -189,15 +232,22 @@ img[loading="lazy"].loaded {
 
 /* Detail Pages */
 .detail-header {
-    background: #f8f9fa;
+    background: var(--neutral-bg);
     padding: 2rem;
     border-radius: 12px;
     margin-bottom: 2rem;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.detail-header h1,
+.detail-header h2 {
+    color: var(--sena-blue-dark);
 }
 
 .detail-content {
     line-height: 1.8;
-    color: #495057;
+    color: var(--sena-blue-dark);
+    font-family: "Work Sans", sans-serif;
 }
 
 /* Responsive */
@@ -218,7 +268,7 @@ img[loading="lazy"].loaded {
     }
 }
 
-/* Animation */
+/* Animation - Minimal per SENA guidelines */
 @keyframes fadeInUp {
     from {
         opacity: 0;

@@ -8,7 +8,7 @@
         <div class="col-lg-8">
             <!-- Back Button -->
             <div class="mb-4">
-                <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-secondary btn-sm">
+                <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-sena btn-sm">
                     <i class="bi bi-arrow-left me-2"></i>Volver al programa
                 </a>
             </div>
@@ -23,7 +23,7 @@
 
             <!-- Error Messages -->
             @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-dismissible fade show" role="alert" style="background-color: rgba(253,195,0,0.12); border: 1px solid var(--sena-yellow); color: var(--sena-blue-dark);">
                     <i class="bi bi-exclamation-triangle me-2"></i>
                     <strong>Error en el formulario:</strong>
                     <ul class="mb-0 mt-2">
@@ -36,8 +36,8 @@
             @endif
 
             <!-- Program Info Card -->
-            <div class="card mb-4 border-info">
-                <div class="card-header bg-info bg-opacity-10 border-info">
+            <div class="card mb-4" style="border: 1px solid var(--sena-blue-light);">
+                <div class="card-header" style="background-color: rgba(80,229,249,0.12); border-bottom: 1px solid var(--sena-blue-light);">
                     <h5 class="mb-0">
                         <i class="bi bi-book me-2"></i>{{ $programa->nombre }}
                     </h5>
@@ -58,7 +58,7 @@
                             <p class="mb-2"><strong>Nivel:</strong></p>
                             <p class="text-muted">
                                 @if($programa->nivel)
-                                    <span class="badge bg-secondary">{{ $programa->nivel->nombre }}</span>
+                                    <span class="badge badge-noticia">{{ $programa->nivel->nombre }}</span>
                                 @else
                                     No especificado
                                 @endif
@@ -78,7 +78,7 @@
                             <p class="mb-2"><strong>Competencias:</strong></p>
                             <div class="d-flex flex-wrap gap-2">
                                 @foreach($programa->competencias as $competencia)
-                                    <span class="badge bg-light text-dark">{{ $competencia->nombre }}</span>
+                                    <span class="badge badge-noticia">{{ $competencia->nombre }}</span>
                                 @endforeach
                             </div>
                         </div>
@@ -180,10 +180,10 @@
 
                         <!-- Action Buttons -->
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary" id="inscriptionSubmitBtn">
+                            <button type="submit" class="btn btn-primary-sena" id="inscriptionSubmitBtn">
                                 <i class="bi bi-check-circle me-2"></i>Confirmar Inscripción
                             </button>
-                            <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-secondary">
+                            <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-sena">
                                 <i class="bi bi-x-circle me-2"></i>Cancelar
                             </a>
                         </div>
@@ -192,7 +192,7 @@
             </div>
 
             <!-- Info Alert -->
-            <div class="alert alert-info mt-4">
+            <div class="alert mt-4" style="background-color: var(--neutral-bg); border: 1px solid var(--sena-blue-light); color: var(--sena-blue-dark);">
                 <i class="bi bi-info-circle me-2"></i>
                 <strong>Información importante:</strong> Una vez inscrito, podrás ver todos los detalles del programa en tu perfil. 
                 Si cambias de opinión, podrás retirarte en cualquier momento desde tu sección de programas.
@@ -232,7 +232,7 @@
                 <p>Tus datos serán utilizados únicamente para fines educativos y administrativos conforme a nuestra política de privacidad.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-sena" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -255,7 +255,7 @@
                         icon: 'warning',
                         title: 'Términos y Condiciones',
                         text: 'Debes aceptar los términos y condiciones para inscribirte',
-                        confirmButtonColor: '#f39c12'
+                        confirmButtonColor: '#FDC300'
                     });
                     return;
                 }
@@ -265,7 +265,7 @@
                     title: '¿Confirmar Inscripción?',
                     html: `
                         <p class="mb-3">Estás a punto de inscribirte en:</p>
-                        <strong class="text-primary">{{ $programa->nombre }}</strong>
+                        <strong style="color: #39a900;">{{ $programa->nombre }}</strong>
                         <br><br>
                         <p class="text-muted small mb-0">
                             <i class="bi bi-info-circle me-1"></i>
@@ -275,13 +275,13 @@
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#39a900',
-                    cancelButtonColor: '#6c757d',
+                    cancelButtonColor: '#00304D',
                     confirmButtonText: '<i class="bi bi-check-circle me-1"></i> Sí, inscribirme',
                     cancelButtonText: '<i class="bi bi-x-circle me-1"></i> Cancelar',
                     reverseButtons: true,
                     customClass: {
-                        confirmButton: 'btn btn-success btn-lg',
-                        cancelButton: 'btn btn-secondary btn-lg'
+                        confirmButton: 'btn btn-primary-sena btn-lg',
+                        cancelButton: 'btn btn-outline-sena btn-lg'
                     },
                     buttonsStyling: false
                 }).then((result) => {

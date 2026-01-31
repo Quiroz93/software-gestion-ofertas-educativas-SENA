@@ -1,48 +1,444 @@
-/* ====== GENERAL ====== */
-body {
-    background: linear-gradient(135deg, #0d6efd, #198754);
-    min-height: 100vh;
-    color: #fff;
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+
+/* =========================================================
+    SENA DESIGN SYSTEM — home.css
+    Basado en: DESIGN_SYSTEM_SENA.md (Manual SENA 2024)
+    Referencias: archivo original home.css
+    ========================================================= */
+
+/* -------- VARIABLES (colores y tipografía) -------- */
+:root{
+    /* Colores obligatorios SENA */
+    --sena-green: #39A900;        /* color principal SENA */
+    --sena-green-dark: #007832;   /* secundario */
+    --sena-blue-dark: #00304D;    /* texto y acentos oscuros */
+    --sena-blue-light: #50E5F9;   /* acento claro (uso limitado) */
+    --sena-violet: #71277A;       /* uso muy limitado */
+    --sena-yellow: #FDC300;       /* alertas puntuales */
+
+    /* Neutrales */
+    --white: #FFFFFF;
+    --neutral-bg: #F6F6F6;        /* fondo predominante recomendado */
+    --muted: #6c757d;
+    --shadow: rgba(0,0,0,0.08);
+    --radius: 0.5rem;
+    --max-width: 1200px;
 }
 
-/* ====== NAVBAR ====== */
+/* -------- TIPOGRAFÍA -------- */
+/* Usar Work Sans según el manual SENA */
+
+* { box-sizing: border-box; }
+
+html, body {
+    font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--sena-blue-dark);
+    background-color: var(--neutral-bg); /* fondo claro institucional */
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    min-height:100vh;
+    margin:0;
+}
+
+/* Evitar pesos demasiado finos */
+h1,h2,h3,h4,h5,h6 { font-weight: 600; margin:0 0 .5rem 0; color:var(--sena-blue-dark); }
+
+/* -------- CONTENEDOR PRINCIPAL -------- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* -------- NAVBAR (sobrio e institucional) -------- */
+.navbar {
+    background: var(--white);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: .5rem 1rem;
+    display:flex;
+    align-items:center;
+    gap: .75rem;
+}
+
+.brand-image {
+    display:flex;
+    align-items:center;
+}
+
 .brand-image svg {
-    width: 40px;
-    height: 40px;
-    color: #39A900;
-    margin-right: 1rem;
+    width: 44px;
+    height: 44px;
+    fill: none; /* iconografía outline */
+    stroke: var(--sena-green);
+    stroke-width: 1.5;
+    margin-right: .75rem;
 }
 
-.hover-sena {
-    transition: color .3s ease;
+.navbar .brand-name {
+    font-weight: 600;
+    color: var(--sena-blue-dark);
+    font-size: 1.05rem;
 }
 
-.hover-sena:hover {
-    color: #39A900 !important;
+/* enlaces */
+a, .link {
+    color: var(--sena-blue-dark);
+    text-decoration: none;
 }
 
-/* ====== HERO ====== */
+a.hover-sena, .hover-sena {
+    transition: color .18s ease;
+}
+
+a.hover-sena:hover, .hover-sena:hover {
+    color: var(--sena-green);
+}
+
+/* -------- BOTONES (primarios SENA) -------- */
+.btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    padding: .5rem .9rem;
+    border-radius: .5rem;
+    font-weight:600;
+    cursor:pointer;
+    border: 1px solid transparent;
+    text-decoration:none;
+    line-height:1;
+}
+
+/* Botón primario institucional */
+.btn-primary-sena {
+    background: var(--sena-green);
+    color: var(--white);
+    border-color: var(--sena-green-dark);
+    box-shadow: 0 6px 18px rgba(57,169,0,0.12);
+}
+
+.btn-primary-sena:focus,
+.btn-primary-sena:active {
+    outline: 3px solid rgba(57,169,0,0.14);
+    outline-offset: 2px;
+}
+
+/* Botón outline secundario */
+.btn-outline-sena {
+    background: transparent;
+    color: var(--sena-green);
+    border: 1px solid var(--sena-green);
+}
+
+/* Small helper */
+.btn-sm { padding: .35rem .6rem; font-size: .9rem; }
+
+/* -------- HERO (limpio, sin exagerar efectos) -------- */
 .hero {
-    padding: 6rem 1rem;
+    padding: 4.5rem 1rem;
+    display:flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 
-.hero-card {
-    background: #ffffff;
-    color: #00304D;
+.hero .hero-card {
+    width:100%;
+    max-width: 980px;
+    background: var(--white);
+    color: var(--sena-blue-dark);
     border-radius: 1rem;
-    padding: 3rem;
-    box-shadow: 0 20px 40px rgba(0,0,0,.15);
+    padding: 2rem;
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
-/* ====== FEATURES ====== */
-.feature-icon {
-    font-size: 2.5rem;
-    color: #0d6efd;
+/* Hero encabezado y texto */
+.hero h1 {
+    font-size: 1.9rem;
     margin-bottom: .5rem;
 }
 
-/* ====== FOOTER ====== */
-footer {
-    font-size: .9rem;
-    opacity: .85;
+.hero p.lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
 }
+
+/* Imagen/ilustración hero (si aplica) */
+.hero-figure {
+    display:block;
+    max-width: 360px;
+    margin-left: auto;
+}
+
+/* -------- FEATURES / CARDS -------- */
+.features {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: 0 8px 20px var(--shadow);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.card .card-title {
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+/* Iconografía outline complementaria */
+.feature-icon, .icon-outline {
+    font-size: 1.9rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    border-radius:8px;
+    /* Usar outline minimalista: fondo muy suave y stroke verde */
+    background: rgba(57,169,0,0.06);
+    color: var(--sena-green);
+    margin-right: .75rem;
+}
+
+/* Si usas íconos-font, asegurar tamaño correcto */
+.feature-icon svg {
+    width:1.15em;
+    height:1.15em;
+    stroke: var(--sena-green);
+    fill: none;
+}
+
+/* -------- TIPOGRAFÍA AUX / BADGES -------- */
+.badge {
+    display:inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: .35rem;
+    font-weight:600;
+    font-size:.85rem;
+    background: rgba(57,169,0,0.12);
+    color: var(--sena-green);
+    border: 1px solid rgba(57,169,0,0.16);
+}
+
+/* Texto primario y secundario */
+.text-muted { color: var(--muted); }
+
+/* -------- FORMULARIOS (accesibles) -------- */
+input, textarea, select {
+    width:100%;
+    padding:.6rem .75rem;
+    border:1px solid rgba(0,0,0,0.08);
+    border-radius:.5rem;
+    background: var(--white);
+    color: var(--sena-blue-dark);
+    font-size: .95rem;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--sena-green);
+    box-shadow: 0 4px 12px rgba(57,169,0,0.08);
+    outline: none;
+}
+
+/* -------- TABLAS (limpias) -------- */
+.table {
+    width:100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+.table th, .table td {
+    padding: .75rem 1rem;
+    border-bottom:1px solid rgba(0,0,0,0.04);
+    text-align:left;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background: rgba(0,0,0,0.02);
+    font-weight:600;
+    color: var(--sena-blue-dark);
+}
+
+/* Resaltar fila hover (muy sutil) */
+.table tbody tr:hover {
+    background: rgba(0,0,0,0.02);
+}
+
+/* -------- FOOTER (sobrio) -------- */
+footer {
+    background: transparent;
+    padding: 1.25rem;
+    font-size: .9rem;
+    color: var(--muted);
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+/* -------- UTILIDADES RESPONSIVE -------- */
+.row { display:flex; flex-wrap:wrap; gap:1rem; }
+.col { flex:1 1 0; min-width: 0; }
+
+@media (max-width: 900px) {
+    .hero { padding: 3rem 1rem; flex-direction: column; text-align:center; }
+    .hero .hero-card { padding: 1.25rem; }
+    .brand-image svg { width: 40px; height: 40px; }
+    .features { gap: .75rem; }
+}
+
+/* -------- ACCESIBILIDAD Y CONTRASTE -------- */
+/* Aumentar legibilidad en tamaños pequeños */
+/* =================================================
+   RESPONSIVE MÓVIL — DESIGN SYSTEM SENA
+   ================================================= */
+
+/* --------- BREAKPOINT PRINCIPAL --------- */
+@media (max-width: 768px) {
+
+    /* CONTENEDOR */
+    .container.home {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* -------- HERO -------- */
+    .hero {
+        padding: 2.5rem 0 2rem;
+    }
+
+    .hero-card {
+        padding: 1.5rem 1.25rem;
+        border-radius: 0.75rem;
+    }
+
+    .hero h1 {
+        font-size: 1.45rem;
+        line-height: 1.25;
+    }
+
+    .hero p.lead {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 1.25rem;
+    }
+
+    /* Botón principal bien grande para dedo */
+    .hero .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1rem;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+
+    /* -------- SECCIONES -------- */
+    section {
+        margin-top: 3rem;
+    }
+
+    section header {
+        margin-bottom: 1.25rem;
+    }
+
+    section header h2 {
+        font-size: 1.25rem;
+    }
+
+    section header p {
+        font-size: 0.9rem;
+    }
+
+    /* -------- FEATURES / CARDS -------- */
+    .features {
+        grid-template-columns: 1fr; /* una columna clara */
+        gap: 1rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .card-title {
+        font-size: 1.05rem;
+        line-height: 1.3;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        line-height: 1.45;
+    }
+
+    /* Botones dentro de cards */
+    .card .btn {
+        width: 100%;
+        margin-top: 0.75rem;
+        min-height: 44px;
+    }
+
+    /* -------- ICONOS -------- */
+    .icon-outline,
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+
+    /* -------- GALERÍA -------- */
+    figure.card img {
+        width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+    }
+
+    figcaption {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+    }
+
+    /* -------- BADGES -------- */
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.45rem;
+    }
+}
+
+/* --------- EXTRA SMALL (teléfonos pequeños) --------- */
+@media (max-width: 420px) {
+
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+
+    .hero p.lead {
+        font-size: 0.9rem;
+    }
+
+    section header h2 {
+        font-size: 1.15rem;
+    }
+}
+
+/* -------- TRANSICIONES OPTIMIZADAS -------- */
+/* Aplicar solo a elementos interactivos específicos */
+a, .btn, .card, .badge, .hover-sena, .feature-icon, .icon-outline {
+    transition: all 120ms ease-in-out;
+}
+
+/* -------- COMENTARIOS FINALES -------- */
+/* Este archivo prioriza: legibilidad, contraste, sobriedad institucional.
+   - No se usan colores fuera de la paleta SENA.
+   - No se añaden degradados llamativos ni animaciones ostentosas.
+   - Tipografía: Work Sans (pesos regulados). */

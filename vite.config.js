@@ -5,6 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/css/sena-utilities.css',
                 'resources/css/common/app.css',
                 'resources/css/admin/admin.css',
                 'resources/css/admin/admin-layout.css',
