@@ -46,8 +46,7 @@
                             name="nombre"
                             id="nombre"
                             class="form-control"
-                            value="{{ old('nombre', $programa->nombre) }}"
-                        >
+                            value="{{ old('nombre', $programa->nombre) }}">
                     </div>
 
                     <div class="form-group">
@@ -58,8 +57,7 @@
                             name="descripcion"
                             id="descripcion"
                             class="form-control"
-                            rows="3"
-                        >{{ old('descripcion', $programa->descripcion) }}</textarea>
+                            rows="3">{{ old('descripcion', $programa->descripcion) }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -70,8 +68,7 @@
                             name="requisitos"
                             id="requisitos"
                             class="form-control"
-                            rows="3"
-                        >{{ old('requisitos', $programa->requisitos) }}</textarea>
+                            rows="3">{{ old('requisitos', $programa->requisitos) }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -83,8 +80,7 @@
                             name="duracion_meses"
                             id="duracion_meses"
                             class="form-control"
-                            value="{{ old('duracion_meses', $programa->duracion_meses) }}"
-                        >
+                            value="{{ old('duracion_meses', $programa->duracion_meses) }}">
                     </div>
 
                     <div class="form-group">
@@ -155,7 +151,7 @@
                         <select name="centro_id" id="centro_id" class="form-control">
                             <option value="" disabled>Seleccione un centro</option>
                             @foreach($centros as $centro)
-                                <option value="{{ $centro->id }}" {{ old('centro_id', $programa->centro_id) == $centro->id ? 'selected' : '' }}>{{ $centro->nombre }}</option>
+                            <option value="{{ $centro->id }}" {{ old('centro_id', $programa->centro_id) == $centro->id ? 'selected' : '' }}>{{ $centro->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -165,7 +161,7 @@
                         <select name="red_id" id="red_id" class="form-control">
                             <option value="" disabled>Seleccione una red</option>
                             @foreach($redes as $red)
-                                <option value="{{ $red->id }}" {{ old('red_id', $programa->red_id) == $red->id ? 'selected' : '' }}>{{ $red->nombre }}</option>
+                            <option value="{{ $red->id }}" {{ old('red_id', $programa->red_id) == $red->id ? 'selected' : '' }}>{{ $red->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -175,7 +171,7 @@
                         <select name="nivel_formacion_id" id="nivel_formacion_id" class="form-control">
                             <option value="" disabled>Seleccione un nivel</option>
                             @foreach($nivel_formaciones as $nivel)
-                                <option value="{{ $nivel->id }}" {{ old('nivel_formacion_id', $programa->nivel_formacion_id) == $nivel->id ? 'selected' : '' }}>{{ $nivel->nombre }}</option>
+                            <option value="{{ $nivel->id }}" {{ old('nivel_formacion_id', $programa->nivel_formacion_id) == $nivel->id ? 'selected' : '' }}>{{ $nivel->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -184,24 +180,23 @@
                         <label for="cupos"><strong>Cupos</strong></label>
                         <input type="number" name="cupos" id="cupos" class="form-control" value="{{ old('cupos', $programa->cupos) }}">
                     </div>
-                    </div>
-
                 </div>
 
-                {{-- FOOTER --}}
-                <div class="card-footer d-flex justify-content-end">
-                    <a href="{{ route('programas.index') }}" class="btn btn-outline-secondary me-1">
-                        <i class="fas fa-times"></i>
-                        Cancelar
-                    </a>
-                    <button type="submit" class="btn btn-outline-success">
-                        <i class="fas fa-save"></i>
-                        Guardar cambios
-                    </button>
-                </div>
-
-            </form>
         </div>
+
+        {{-- FOOTER --}}
+        <div class="card-footer d-flex justify-content-end">
+            <a href="{{ route('programas.index') }}" class="btn btn-outline-secondary me-1">
+                <i class="fas fa-times"></i>
+                Cancelar
+            </a>
+            <button type="submit" class="btn btn-outline-success">
+                <i class="fas fa-save"></i>
+                Guardar cambios
+            </button>
+        </div>
+
+        </form>
     </div>
 </div>
 
