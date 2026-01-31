@@ -6,6 +6,7 @@ use App\Models\Programa;
 use App\Models\NivelFormacion;
 use App\Models\Centro;
 use App\Models\Red;
+use App\Models\Municipio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -32,7 +33,8 @@ class ProgramaController extends \App\Http\Controllers\Controller
         $nivel_formaciones = NivelFormacion::all();
         $redes = Red::all();
         $centros = Centro::all();
-        return view('admin.programas.create', compact('nivel_formaciones', 'redes', 'centros'));
+        $municipios = Municipio::all();
+        return view('admin.programas.create', compact('nivel_formaciones', 'redes', 'centros', 'municipios'));
     }
 
     /**
@@ -90,7 +92,8 @@ class ProgramaController extends \App\Http\Controllers\Controller
         $nivel_formaciones = NivelFormacion::all();
         $redes = Red::all();
         $centros = Centro::all();
-        return view('admin.programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros'));
+        $municipios = Municipio::all();
+        return view('admin.programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros', 'municipios'));
     }
 
     /**
@@ -120,6 +123,7 @@ class ProgramaController extends \App\Http\Controllers\Controller
             'observaciones' => 'nullable|string',
             'centro_id' => 'nullable|exists:centros,id',
             'cupos' => 'nullable|integer',
+            'municipio_id' => 'nullable|exists:municipios,id',
         ]);
 
         $programa->update($data);

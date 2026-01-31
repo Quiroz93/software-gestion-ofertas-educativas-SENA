@@ -19,7 +19,9 @@
         
         {{-- Badge de categoría --}}
         <div class="mb-3">
-            <span class="badge">{{ $ultimaNoticia->categoria ?? 'Noticia' }}</span>
+            <span class="badge bg-success text-white">
+                <i class="bi bi-newspaper me-1"></i>Noticia
+            </span>
         </div>
 
         {{-- Título --}}
@@ -39,8 +41,15 @@
                 <img 
                     src="{{ asset('storage/' . $ultimaNoticia->imagen) }}" 
                     alt="{{ $ultimaNoticia->titulo }}" 
-                    class="img-fluid rounded"
-                    style="width: 100%; max-height: 500px; object-fit: cover; border: 1px solid rgba(0,0,0,0.06);">
+                    class="img-fluid rounded news-image-clickable"
+                    id="newsImage"
+                    role="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#imageModal"
+                    style="width: 100%; height: auto; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <figcaption class="text-center text-muted small mt-2">
+                    <i class="bi bi-zoom-in me-1"></i>Haz clic en la imagen para ampliar
+                </figcaption>
             </figure>
         @endif
 
@@ -84,24 +93,40 @@
             <div class="row g-3">
                 @foreach($noticiasRelacionadas as $noticiaRelacionada)
                     <div class="col-md-4">
-                        <article class="card h-100" style="padding: 1.25rem;">
-                            <span class="badge mb-2" style="width: fit-content;">
-                                {{ $noticiaRelacionada->categoria ?? 'General' }}
-                            </span>
-                            <h3 class="h6 fw-semibold mb-2">
+                        <article class="card h-100" style="overflow: hidden;">
+                            {{-- Imagen miniatura --}}
+                            @if($noticiaRelacionada->imagen)
+                                <div style="height: 150px; overflow: hidden;">
+                                    <img src="{{ asset('storage/' . $noticiaRelacionada->imagen) }}" 
+                                         class="w-100 h-100" 
+                                         alt="{{ $noticiaRelacionada->titulo }}"
+                                         style="object-fit: cover;">
+                                </div>
+                            @else
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                                    <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                                </div>
+                            @endif
+                            
+                            <div style="padding: 1.25rem;">
+                                <span class="badge bg-success text-white mb-2" style="width: fit-content;">
+                                    <i class="bi bi-newspaper me-1"></i>Noticia
+                                </span>
+                                <h3 class="h6 fw-semibold mb-2">
+                                    <a href="{{ route('public.ultimaNoticias.show', $noticiaRelacionada) }}" 
+                                       class="hover-sena text-decoration-none" 
+                                       style="color: var(--sena-blue-dark);">
+                                        {{ Str::limit($noticiaRelacionada->titulo, 60) }}
+                                    </a>
+                                </h3>
+                                <p class="text-muted small mb-3">
+                                    {{ Str::limit($noticiaRelacionada->descripcion, 80) }}
+                                    </p>
                                 <a href="{{ route('public.ultimaNoticias.show', $noticiaRelacionada) }}" 
-                                   class="hover-sena text-decoration-none" 
-                                   style="color: var(--sena-blue-dark);">
-                                    {{ Str::limit($noticiaRelacionada->titulo, 60) }}
+                                   class="btn btn-outline-sena btn-sm mt-auto">
+                                    <i class="bi bi-arrow-right me-1"></i>Leer más
                                 </a>
-                            </h3>
-                            <p class="text-muted small mb-3">
-                                {{ Str::limit($noticiaRelacionada->descripcion, 80) }}
-                            </p>
-                            <a href="{{ route('public.ultimaNoticias.show', $noticiaRelacionada) }}" 
-                               class="btn btn-outline-sena btn-sm mt-auto">
-                                Leer más
-                            </a>
+                            </div>
                         </article>
                     </div>
                 @endforeach
@@ -110,6 +135,29 @@
     @endif
 
 </div>
+
+{{-- Modal para ver imagen completa --}}
+@if($ultimaNoticia->imagen)
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white" id="imageModalLabel">
+                    <i class="bi bi-image me-2"></i>{{ $ultimaNoticia->titulo }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-0" style="background: #000;">
+                <img 
+                    src="{{ asset('storage/' . $ultimaNoticia->imagen) }}" 
+                    alt="{{ $ultimaNoticia->titulo }}" 
+                    class="img-fluid"
+                    style="max-height: 80vh; width: auto; object-fit: contain;">
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @endsection
 
 @push('styles')
@@ -153,6 +201,42 @@
         color: var(--sena-green, #39A900);
         margin-right: 0.5rem;
         font-size: 1.1rem;
+    }
+
+    /* Imagen clickeable para modal */
+    .news-image-clickable {
+        max-height: none !important;
+    }
+
+    .news-image-clickable:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 24px rgba(57, 169, 0, 0.2) !important;
+    }
+
+    /* Modal personalizado */
+    #imageModal .modal-content {
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+    #imageModal .modal-header {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 1rem 1.5rem;
+    }
+
+    #imageModal .modal-body {
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+    }
+
+    /* Caption de imagen */
+    figure figcaption {
+        font-style: italic;
+        margin-top: 0.5rem;
+        opacity: 0.8;
     }
 </style>
 @endpush

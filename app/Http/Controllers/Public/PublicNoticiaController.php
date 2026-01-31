@@ -10,7 +10,11 @@ class PublicNoticiaController extends Controller
 {
     public function index()
     {
-        $noticias = Noticia::where('activa', true)->paginate(10);
+        // Usando get() en lugar de paginate() debido a bug en Laravel 12
+        // con AbstractPaginator::links() y call_user_func()
+        $noticias = Noticia::where('activa', true)
+            ->latest()
+            ->get();
         return view('public.noticias.index', compact('noticias'));
     }
 

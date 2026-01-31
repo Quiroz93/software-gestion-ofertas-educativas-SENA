@@ -70,13 +70,34 @@
                                name="imagen"
                                id="imagen"
                                class="form-control @error('imagen') is-invalid @enderror"
-                               accept="image/*">
+                               accept="image/*"
+                               onchange="previewImage(event)">
                         <small class="form-text text-muted">
                             Formatos permitidos: JPG, PNG, GIF. Tamaño máximo: 2MB
                         </small>
                         @error('imagen')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        
+                        {{-- Vista previa de imagen --}}
+                        <div id="imagePreview" class="mt-3" style="display: none;">
+                            <label class="d-block mb-2">
+                                <strong class="text-success">
+                                    <i class="fas fa-eye me-1"></i>Vista previa
+                                </strong>
+                            </label>
+                            <div class="border border-success rounded p-3 bg-light position-relative">
+                                <img id="previewImg" 
+                                     class="img-fluid rounded" 
+                                     style="max-width: 100%; max-height: 400px; object-fit: contain;">
+                                <button type="button" 
+                                        class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2"
+                                        onclick="removePreview()"
+                                        title="Cancelar selección">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     {{-- Estado (Activa) --}}
@@ -121,3 +142,54 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    
+    if (file) {
+        // Validar tamaño (2MB)
+        if (file.size > 2048000) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Archivo muy grande',
+                text: 'La imagen no debe superar los 2MB',
+                confirmButtonColor: '#39A900'
+            });
+            event.target.value = '';
+            return;
+        }
+        
+        // Validar tipo
+        if (!file.type.match('image.*')) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Formato inválido',
+                text: 'Solo se permiten imágenes (JPG, PNG, GIF)',
+                confirmButtonColor: '#39A900'
+            });
+            event.target.value = '';
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function removePreview() {
+    const input = document.getElementById('imagen');
+    const preview = document.getElementById('imagePreview');
+    
+    input.value = '';
+    preview.style.display = 'none';
+}
+</script>
+@endpush

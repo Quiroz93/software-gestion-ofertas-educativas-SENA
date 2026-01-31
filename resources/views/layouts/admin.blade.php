@@ -25,6 +25,9 @@
 </head>
 <body>
     <div class="app-wrapper">
+        {{-- Sidebar Overlay --}}
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
         {{-- Sidebar --}}
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -138,6 +141,15 @@
                         </a>
                     </li>
 
+                    {{-- Municipios --}}
+                    <li class="sidebar-nav-item">
+                        <a href="{{ route('municipios.index') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('municipios.*') ? 'active' : '' }}">
+                            <i class="bi bi-map"></i>
+                            <span>Municipios</span>
+                        </a>
+                    </li>
+
                     {{-- Instructores --}}
                     <li class="sidebar-nav-item">
                         <a href="{{ route('instructores.index') }}"
@@ -168,11 +180,11 @@
             {{-- Navbar --}}
             <nav class="navbar navbar-expand-lg navbar-light sticky-top">
                 <div class="container-fluid">
-                    <button class="btn btn-outline-secondary d-lg-none toggle-sidebar" id="sidebarToggle">
-                        <i class="bi bi-list"></i>
+                    <button class="btn btn-outline-success d-lg-none me-2" id="sidebarToggle" type="button">
+                        <i class="bi bi-list" style="font-size: 1.25rem;"></i>
                     </button>
 
-                    <span class="navbar-brand ms-2">@yield('title', config('app.name', 'SENA'))</span>
+                    <span class="navbar-brand mb-0 h1">@yield('title', config('app.name', 'SENA'))</span>
 
                     <div class="ms-auto d-flex align-items-center gap-3">
                         {{-- User Dropdown --}}
@@ -308,15 +320,42 @@
 
      {{-- Sidebar Toggle Mobile --}}
     <script>
-        document.getElementById('sidebarToggle')?.addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('show');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        // Toggle sidebar
+        sidebarToggle?.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+            sidebarOverlay.classList.toggle('show');
+            document.body.classList.toggle('sidebar-open');
         });
 
-        // Close sidebar when clicking on a link
+        // Close sidebar when clicking overlay
+        sidebarOverlay?.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+            document.body.classList.remove('sidebar-open');
+        });
+
+        // Close sidebar when clicking on a link (mobile only)
         document.querySelectorAll('.sidebar-nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                document.getElementById('sidebar').classList.remove('show');
+                if (window.innerWidth < 769) {
+                    sidebar.classList.remove('show');
+                    sidebarOverlay.classList.remove('show');
+                    document.body.classList.remove('sidebar-open');
+                }
             });
+        });
+
+        // Close sidebar on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+                sidebarOverlay.classList.remove('show');
+                document.body.classList.remove('sidebar-open');
+            }
         });
     </script>
 

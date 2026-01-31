@@ -21,6 +21,13 @@ class Noticia extends Model
     ];
 
     /**
+     * Los atributos que deben ser convertidos
+     */
+    protected $casts = [
+        'activa' => 'boolean',
+    ];
+
+    /**
      * Accessor: Título limitado a 30 caracteres
      */
     public function getTituloCortaAttribute()

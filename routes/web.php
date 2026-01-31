@@ -25,6 +25,7 @@ use App\Http\Controllers\Public\PublicRedController;
 use App\Http\Controllers\Public\PublicProgramaController;
 use App\Http\Controllers\Admin\RedController;
 use App\Http\Controllers\Admin\HomeCarouselController;
+use App\Http\Controllers\Admin\MunicipioController;
 use App\Http\Controllers\Public\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
@@ -388,6 +389,34 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| Municipios
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('municipios/index', [MunicipioController::class, 'index'])
+        ->middleware('can:municipios.view')->name('municipios.index');
+
+    Route::get('municipios/create', [MunicipioController::class, 'create'])
+        ->middleware('can:municipios.create')->name('municipios.create');
+
+    Route::post('municipios/store', [MunicipioController::class, 'store'])
+        ->middleware('can:municipios.create')->name('municipios.store');
+
+    Route::get('municipios/{municipio}', [MunicipioController::class, 'show'])
+        ->middleware('can:municipios.view')->name('municipios.show');
+
+    Route::get('municipios/{municipio}/edit', [MunicipioController::class, 'edit'])
+        ->middleware('can:municipios.edit')->name('municipios.edit');
+
+    Route::put('municipios/{municipio}', [MunicipioController::class, 'update'])
+        ->middleware('can:municipios.update')->name('municipios.update');
+
+    Route::delete('municipios/{municipio}', [MunicipioController::class, 'destroy'])
+        ->middleware('can:municipios.delete')->name('municipios.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Noticias (Administración)
 |--------------------------------------------------------------------------
 */
@@ -413,6 +442,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('noticias/{noticia}', [App\Http\Controllers\Admin\NoticiaController::class, 'destroy'])
         ->middleware('can:noticias.delete')->name('noticias.destroy');
+
+    Route::post('noticias/{noticia}/toggle-active', [App\Http\Controllers\Admin\NoticiaController::class, 'toggleActive'])
+        ->middleware('can:noticias.update')->name('noticias.toggle-active');
 });
 
 /*

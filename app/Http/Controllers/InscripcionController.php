@@ -26,9 +26,6 @@ class InscripcionController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        if (!$user || !$user->hasRole('aprendiz')) {
-            throw new AuthorizationException('Solo los aprendices pueden inscribirse a programas');
-        }
         // Verificar si ya está inscrito
         $yaInscrito = Inscripcion::where('user_id', $user->id)
             ->where('programa_id', $programa->id)
@@ -60,11 +57,6 @@ class InscripcionController extends Controller
 
         /** @var \App\Models\User $user */
         $user = Auth::user();
-
-        // Verificar que el usuario tenga rol de aprendiz
-        if (!$user || !$user->hasRole('aprendiz')) {
-            return back()->with('error', 'Solo los aprendices pueden inscribirse');
-        }
 
         try {
             DB::beginTransaction();

@@ -15,7 +15,6 @@ class Programa extends Model
         'descripcion',
         'requisitos',
         'duracion_meses',
-        //'modalidad',
         'red_id',
         'nivel_formacion_id',
         'modalidad',
@@ -29,6 +28,7 @@ class Programa extends Model
         'observaciones',
         'centro_id',
         'cupos',
+        'municipio_id',
     ];
     // Definir las relaciones con otros modelos
     public function red()
@@ -44,6 +44,11 @@ class Programa extends Model
     public function centro()
     {
         return $this->belongsTo(Centro::class);
+    }
+
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class);
     }
 
     protected $casts = [

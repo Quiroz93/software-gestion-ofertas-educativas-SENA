@@ -30,14 +30,6 @@
 
 <div class="container-fluid">
 
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle"></i>
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-
     @if($noticias->isEmpty())
         <div class="alert alert-info">
             <i class="fas fa-info-circle"></i>
@@ -77,15 +69,20 @@
                         </p>
 
                         <div class="mt-3">
-                            @if($noticia->activa)
-                                <span class="badge bg-success">
-                                    <i class="fas fa-check"></i> Activa
-                                </span>
-                            @else
-                                <span class="badge bg-secondary">
-                                    <i class="fas fa-times"></i> Inactiva
-                                </span>
-                            @endif
+                            <div class="form-check form-switch">
+                                <input class="form-check-input toggle-active" 
+                                       type="checkbox" 
+                                       role="switch" 
+                                       data-noticia-id="{{ $noticia->id }}"
+                                       {{ $noticia->activa ? 'checked' : '' }}
+                                       @cannot('noticias.update') disabled @endcannot>
+                                <label class="form-check-label">
+                                    <span class="badge {{ $noticia->activa ? 'bg-success' : 'bg-secondary' }}">
+                                        <i class="fas fa-{{ $noticia->activa ? 'check' : 'times' }}"></i> 
+                                        {{ $noticia->activa ? 'Activa' : 'Inactiva' }}
+                                    </span>
+                                </label>
+                            </div>
                         </div>
 
                         <div class="text-muted small mt-2">
@@ -113,15 +110,19 @@
                                 @endcan
 
                                 @can('noticias.delete')
-                                    <form action="{{ route('noticias.destroy', $noticia) }}" 
+                                    <button type="button" 
+                                            class="btn btn-sm btn-danger btn-delete-noticia"
+                                            data-noticia-id="{{ $noticia->id }}"
+                                            data-noticia-titulo="{{ $noticia->titulo }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    
+                                    <form id="delete-form-{{ $noticia->id }}" 
+                                          action="{{ route('noticias.destroy', $noticia) }}" 
                                           method="POST" 
-                                          class="d-inline"
-                                          onsubmit="return confirm('¿Está seguro de eliminar esta noticia?')">
+                                          style="display: none;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
                                     </form>
                                 @endcan
                             </div>
@@ -138,3 +139,107 @@
 </div>
 
 @endsection
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Toggle Active/Inactive
+    document.querySelectorAll('.toggle-active').forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const noticiaId = this.dataset.noticiaId;
+            const checkbox = this;
+            const badge = this.parentElement.querySelector('.badge');
+            const icon = badge.querySelector('i');
+            
+            fetch(`/noticias/${noticiaId}/toggle-active`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Actualizar UI
+                    if (data.activa) {
+                        badge.classList.remove('bg-secondary');
+                        badge.classList.add('bg-success');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-check');
+                        badge.innerHTML = '<i class="fas fa-check"></i> Activa';
+                    } else {
+                        badge.classList.remove('bg-success');
+                        badge.classList.add('bg-secondary');
+                        icon.classList.remove('fa-check');
+                        icon.classList.add('fa-times');
+                        badge.innerHTML = '<i class="fas fa-times"></i> Inactiva';
+                    }
+                    
+                    // Mostrar notificación
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Actualizado!',
+                        text: data.message,
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                checkbox.checked = !checkbox.checked;
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo actualizar el estado'
+                });
+            });
+        });
+    });
+
+    // Delete Noticia
+    document.querySelectorAll('.btn-delete-noticia').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const noticiaId = this.dataset.noticiaId;
+            const noticiaTitulo = this.dataset.noticiaTitulo;
+            
+            Swal.fire({
+                title: '¿Estás seguro?',
+                html: `¿Deseas eliminar la noticia:<br><strong>${noticiaTitulo}</strong>?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(`delete-form-${noticiaId}`).submit();
+                }
+            });
+        });
+    });
+
+    // Mensaje de éxito desde session
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: '{{ session("success") }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+    @endif
+});
+</script>
+@endpush

@@ -36,19 +36,26 @@
                     <div class="row g-0 h-100">
                         <!-- Image -->
                         <div class="col-lg-5 bg-light d-flex align-items-center justify-content-center" style="min-height: 300px;">
-                            <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i>
+                            @if($noticia->imagen)
+                                <img src="{{ asset('storage/' . $noticia->imagen) }}" 
+                                     class="w-100 h-100" 
+                                     alt="{{ $noticia->titulo }}"
+                                     style="object-fit: cover;">
+                            @else
+                                <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i>
+                            @endif
                         </div>
 
                         <!-- Content -->
                         <div class="col-lg-7 d-flex flex-column">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge badge-oferta">
+                                    <span class="badge bg-warning text-dark">
                                         <i class="bi bi-fire me-1"></i>Destacado
                                     </span>
                                     <small class="text-muted">
                                         <i class="bi bi-calendar me-1"></i>
-                                        {{ $noticia->created_at->format('d M Y') }}
+                                        {{ $noticia->created_at->format('d/m/Y') }}
                                     </small>
                                 </div>
 
@@ -76,7 +83,9 @@
     <div class="container mb-5">
         <h3 class="h3 fw-bold mb-4" style="color: var(--sena-blue-dark);">
             <i class="bi bi-list-check me-2" style="color: var(--sena-green);"></i>Todas las Noticias
-            <span class="badge badge-noticia ms-2">{{ $noticias->count() }}</span>
+            @if($noticias->count() > 1)
+                <span class="badge bg-success ms-2">{{ $noticias->count() }}</span>
+            @endif
         </h3>
 
         @if($noticias->count() > 0)
@@ -85,18 +94,26 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <!-- Image -->
-                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px; overflow: hidden;">
+                        @if($noticia->imagen)
+                            <img src="{{ asset('storage/' . $noticia->imagen) }}" 
+                                 class="w-100 h-100" 
+                                 alt="{{ $noticia->titulo }}"
+                                 style="object-fit: cover;">
+                        @else
+                            <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                        @endif
                     </div>
 
                     <!-- Content -->
                     <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-2">
-                            <span class="badge badge-noticia small">
-                                {{ $noticia->categoria ?? 'General' }}
+                            <span class="badge bg-success text-white small">
+                                <i class="bi bi-newspaper me-1"></i>Noticia
                             </span>
                             <small class="text-muted">
-                                {{ $noticia->created_at->format('d M') }}
+                                <i class="bi bi-calendar3"></i>
+                                {{ $noticia->created_at->format('d/m/Y') }}
                             </small>
                         </div>
 

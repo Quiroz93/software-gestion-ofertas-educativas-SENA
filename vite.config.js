@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/css/admin/admin.css',
                 'resources/css/admin/admin-layout.css',
                 'resources/css/public/public.css',
+                'resources/css/public/home.css',
                 'resources/js/common/app.js',
                 'resources/js/admin/admin.js',
                 'resources/js/public/public.js'

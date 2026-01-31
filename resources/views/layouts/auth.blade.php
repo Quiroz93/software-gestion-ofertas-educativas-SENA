@@ -64,10 +64,17 @@
         }
 
         /* Logo SENA */
-        .brand-image svg {
+        .brand-image {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .brand-image img {
             width: 8rem;
             height: 8rem;
-            color: #39A900;
+            display: block;
+            margin: 0 auto;
+            filter: brightness(0) saturate(100%) invert(56%) sepia(96%) saturate(445%) hue-rotate(56deg) brightness(97%) contrast(95%);
         }
 
         /* Divider */

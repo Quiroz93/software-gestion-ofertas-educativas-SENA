@@ -35,6 +35,7 @@
     </section>
 
 
+    {{-- ================= CAROUSEL ================= --}}
     @if($slides->count())
     <section class="mt-5" aria-label="Información destacada SENA">
 

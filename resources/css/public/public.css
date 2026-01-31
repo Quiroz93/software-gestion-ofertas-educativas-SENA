@@ -226,8 +226,13 @@ img[loading="lazy"].loaded {
 .grid-noticias {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    margin: -1rem -1rem 2rem -1rem;
+}
+
+.grid-programas > *,
+.grid-ofertas > *,
+.grid-noticias > * {
+    padding: 1rem;
 }
 
 /* Detail Pages */
@@ -260,7 +265,13 @@ img[loading="lazy"].loaded {
     .grid-ofertas,
     .grid-noticias {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        margin: -0.75rem -0.75rem 2rem -0.75rem;
+    }
+    
+    .grid-programas > *,
+    .grid-ofertas > *,
+    .grid-noticias > * {
+        padding: 0.75rem;
     }
     
     .featured-item {

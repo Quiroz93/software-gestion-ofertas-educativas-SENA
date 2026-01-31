@@ -244,6 +244,26 @@
                     </div>
 
                     <div>
+                        <label for="municipio_id">
+                            <strong>Municipio</strong>
+                        </label>
+                        <select
+                            name="municipio_id"
+                            id="municipio_id"
+                            class="form-control"
+                        >
+                            <option value="" disabled selected>
+                                Seleccione un municipio
+                            </option>
+                            @foreach($municipios as $municipio)
+                                <option value="{{ $municipio->id }}">
+                                    {{ $municipio->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
                         <label for="red_id">
                             <strong>Red de Conocimiento</strong>
                         </label>

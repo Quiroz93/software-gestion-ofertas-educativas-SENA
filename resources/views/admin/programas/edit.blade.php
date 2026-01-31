@@ -157,6 +157,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="municipio_id"><strong>Municipio</strong></label>
+                        <select name="municipio_id" id="municipio_id" class="form-control">
+                            <option value="" disabled selected>Seleccione un municipio</option>
+                            @foreach($municipios as $municipio)
+                            <option value="{{ $municipio->id }}" {{ old('municipio_id', $programa->municipio_id) == $municipio->id ? 'selected' : '' }}>{{ $municipio->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="red_id"><strong>Red de Conocimiento</strong></label>
                         <select name="red_id" id="red_id" class="form-control">
                             <option value="" disabled>Seleccione una red</option>
