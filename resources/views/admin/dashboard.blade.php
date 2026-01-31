@@ -224,6 +224,22 @@
     </div>
     @endcan
 
+    {{-- Carousel del Home --}}
+    <div class="col-md-4 mt-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-header">
+                <i class="bi bi-images fa-3x text-sena"></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Carousel del Home</h5>
+                <p class="text-muted small">Administra los slides del carousel institucional</p>
+                <a href="{{ route('admin.home-carousel.index') }}" class="btn btn-sena btn-sm mt-3">
+                    Gestionar carousel
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </div>

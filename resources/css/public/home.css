@@ -431,10 +431,329 @@ footer {
     }
 }
 
+/* =================================================
+   CAROUSEL INSTITUCIONAL SENA
+   ================================================= */
+
+.carousel-sena {
+    background: transparent;
+}
+
+.carousel-sena .carousel-inner {
+    border-radius: 1rem;
+}
+
+.carousel-sena .carousel-item {
+    padding: 1rem;
+}
+
+.carousel-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem 2.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.carousel-card h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--sena-blue-dark);
+}
+
+.carousel-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    line-height: 1.45;
+}
+
+/* Indicadores */
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--sena-green);
+    opacity: 0.4;
+}
+
+.carousel-indicators .active {
+    opacity: 1;
+}
+
+/* Flechas */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(32%) sepia(86%) saturate(580%) hue-rotate(71deg);
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 768px) {
+
+    .carousel-card {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .carousel-card h3 {
+        font-size: 1.15rem;
+    }
+
+    .carousel-card p {
+        font-size: 0.9rem;
+    }
+
+    .carousel-card .btn {
+        width: 100%;
+        min-height: 44px;
+    }
+}
+
+/* =================================================
+   CAROUSEL DINÁMICO SENA
+   ================================================= */
+
+.carousel-sena {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carousel-slide {
+    position: relative;
+    min-height: 320px;
+    border-radius: 1rem;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Overlay institucional */
+.carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(0, 48, 77, 0.65),
+        rgba(0, 48, 77, 0.65)
+    );
+}
+
+/* Contenido */
+.carousel-content {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    text-align: center;
+    padding: 2rem;
+    color: #ffffff;
+}
+
+.carousel-content h3 {
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.carousel-content p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.45;
+    opacity: 0.95;
+}
+
+/* Indicadores */
+.carousel-indicators button {
+    background-color: #ffffff;
+    opacity: 0.4;
+}
+
+.carousel-indicators .active {
+    opacity: 1;
+}
+
+/* -------- RESPONSIVE -------- */
+@media (max-width: 768px) {
+
+    .carousel-slide {
+        min-height: 260px;
+    }
+
+    .carousel-content {
+        padding: 1.25rem;
+    }
+
+    .carousel-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-content p {
+        font-size: 0.9rem;
+    }
+
+    .carousel-content .btn {
+        width: 100%;
+        min-height: 44px;
+    }
+}
+
+
 /* -------- TRANSICIONES OPTIMIZADAS -------- */
 /* Aplicar solo a elementos interactivos específicos */
 a, .btn, .card, .badge, .hover-sena, .feature-icon, .icon-outline {
     transition: all 120ms ease-in-out;
+}
+
+/* -------- ALIAS DE BOTONES -------- */
+/* Alias para facilitar uso en componentes */
+.btn-sena {
+    background: var(--sena-green);
+    color: var(--white);
+    border-color: var(--sena-green-dark);
+    box-shadow: 0 6px 18px rgba(57,169,0,0.12);
+}
+
+.btn-sena:hover,
+.btn-sena:focus {
+    background: var(--sena-green-dark);
+    color: var(--white);
+    border-color: var(--sena-green-dark);
+    box-shadow: 0 8px 20px rgba(57,169,0,0.18);
+}
+
+/* -------- ESTILOS PARA ADMINISTRACIÓN -------- */
+/* Colores de utilidad para el panel admin */
+.text-sena {
+    color: var(--sena-green) !important;
+}
+
+.bg-sena-light {
+    background-color: rgba(57,169,0,0.08);
+}
+
+/* Tablas admin */
+.table-responsive {
+    border-radius: .5rem;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-bottom: 2px solid var(--sena-green);
+    color: var(--sena-blue-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: none;
+    padding: 1rem 0.75rem;
+}
+
+.table tbody td {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(57,169,0,0.04);
+}
+
+/* Formularios admin */
+.form-label {
+    color: var(--sena-blue-dark);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--sena-green);
+    box-shadow: 0 0 0 0.2rem rgba(57,169,0,0.15);
+}
+
+.form-check-input:checked {
+    background-color: var(--sena-green);
+    border-color: var(--sena-green-dark);
+}
+
+.form-check-input:focus {
+    border-color: var(--sena-green);
+    box-shadow: 0 0 0 0.25rem rgba(57,169,0,0.25);
+}
+
+/* Validación de formularios */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220,53,69,0.25);
+}
+
+/* Tarjetas admin */
+.card {
+    border-color: #e9ecef;
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+/* Alertas */
+.alert {
+    border-radius: .5rem;
+    border: 0;
+}
+
+.alert-success {
+    background-color: rgba(57,169,0,0.1);
+    color: var(--sena-green-dark);
+}
+
+.alert-info {
+    background-color: rgba(80,229,249,0.1);
+    color: var(--sena-blue-dark);
+}
+
+.alert-warning {
+    background-color: rgba(253,195,0,0.1);
+    color: var(--sena-blue-dark);
+}
+
+.alert-danger {
+    background-color: rgba(220,53,69,0.1);
+    color: #721c24;
+}
+
+/* Cambios de color para variantes de botones Bootstrap */
+.btn-outline-secondary:hover {
+    background-color: var(--muted);
+    border-color: var(--muted);
+}
+
+.btn-outline-primary {
+    color: var(--sena-green);
+    border-color: var(--sena-green);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--sena-green);
+    border-color: var(--sena-green);
+    color: white;
 }
 
 /* -------- COMENTARIOS FINALES -------- */

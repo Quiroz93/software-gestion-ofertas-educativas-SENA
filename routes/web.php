@@ -24,6 +24,7 @@ use App\Http\Controllers\Public\PublicOfertaController;
 use App\Http\Controllers\Public\PublicRedController;
 use App\Http\Controllers\Public\PublicProgramaController;
 use App\Http\Controllers\Admin\RedController;
+use App\Http\Controllers\Admin\HomeCarouselController;
 use App\Http\Controllers\Public\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
@@ -412,6 +413,35 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('noticias/{noticia}', [App\Http\Controllers\Admin\NoticiaController::class, 'destroy'])
         ->middleware('can:noticias.delete')->name('noticias.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Carousel del Home (Administración)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('admin')->name('admin.home-carousel.')->group(function () {
+    
+    Route::get('carousel', [HomeCarouselController::class, 'index'])
+        ->name('index');
+    
+    Route::get('carousel/create', [HomeCarouselController::class, 'create'])
+        ->name('create');
+    
+    Route::post('carousel', [HomeCarouselController::class, 'store'])
+        ->name('store');
+    
+    Route::get('carousel/{homeCarousel}/edit', [HomeCarouselController::class, 'edit'])
+        ->name('edit');
+    
+    Route::put('carousel/{homeCarousel}', [HomeCarouselController::class, 'update'])
+        ->name('update');
+    
+    Route::delete('carousel/{homeCarousel}', [HomeCarouselController::class, 'destroy'])
+        ->name('destroy');
+    
+    Route::patch('carousel/{homeCarousel}/toggle-active', [HomeCarouselController::class, 'toggleActive'])
+        ->name('toggle-active');
 });
 
 /*

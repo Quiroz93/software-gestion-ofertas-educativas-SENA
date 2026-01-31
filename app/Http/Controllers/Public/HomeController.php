@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Models\Noticia;
+use App\Models\HomeCarousel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Programa;
@@ -28,6 +29,10 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        return view('public.home', compact('noticias', 'programas'));
+        $slides = HomeCarousel::where('is_active', true)
+            ->orderBy('position')
+            ->get();
+
+        return view('public.home', compact('noticias', 'programas', 'slides'));
     }
 }
