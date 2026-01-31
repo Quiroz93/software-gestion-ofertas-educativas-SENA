@@ -48,7 +48,7 @@
             <div class="card-body">
                 <p class="mb-0">
                     <strong>Descripción:</strong><br>
-                    <span class="badge badge-secondary">
+                    <span class="badge bg-light text-sena-dark border">
                         {{ $red->descripcion }}
                     </span>
                 </p>

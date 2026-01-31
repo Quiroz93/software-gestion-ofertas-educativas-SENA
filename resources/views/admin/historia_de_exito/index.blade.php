@@ -50,7 +50,7 @@
                 <div class="card-body">
                     <p class="mb-2">
                         <strong>Autor:</strong>
-                        <span class="badge badge-secondary">
+                        <span class="badge bg-light text-sena-dark border">
                             {{ $historia->nombre }}
                         </span>
                     </p>
@@ -62,7 +62,7 @@
 
                     <p class="mb-0">
                         <strong>Fecha:</strong>
-                        <span class="badge badge-info">
+                        <span class="badge bg-info text-dark">
                             {{ $historia->fecha }}
                         </span>
                     </p>

@@ -1,5 +1,9 @@
 @import './home.css';
 
+:root {
+    --sena-blue-dark: #00304D;
+}
+
 /**
  * Public Area Styles
  * Estilos para vistas públicas (programas, ofertas, noticias)
@@ -48,12 +52,40 @@
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    color: #2c3e50;
+    color: var(--sena-blue-dark);
 }
 
 .public-card-text {
-    color: #6c757d;
+    color: rgba(0, 48, 77, 0.75);
     line-height: 1.6;
+}
+
+/* Text contrast on light backgrounds (Design System SENA) */
+.bg-white,
+.bg-light,
+.card,
+.public-card,
+.detail-header,
+.featured-item {
+    color: var(--sena-blue-dark);
+}
+
+.bg-white .text-muted,
+.bg-light .text-muted,
+.card .text-muted,
+.public-card .text-muted,
+.detail-header .text-muted,
+.featured-item .text-muted {
+    color: rgba(0, 48, 77, 0.75) !important;
+}
+
+.bg-white .text-white,
+.bg-light .text-white,
+.card .text-white,
+.public-card .text-white,
+.detail-header .text-white,
+.featured-item .text-white {
+    color: var(--sena-blue-dark) !important;
 }
 
 /* Featured Items */

@@ -50,14 +50,14 @@
                 <div class="card-body">
                     <p class="mb-2">
                         <strong>Perfil:</strong>
-                        <span class="badge badge-secondary">
+                        <span class="badge bg-light text-sena-dark border">
                             {{ $instructor->perfil_profesional }}
                         </span>
                     </p>
 
                     <p class="mb-2">
                         <strong>Experiencia:</strong>
-                        <span class="badge badge-info">
+                        <span class="badge bg-info text-dark">
                             {{ $instructor->experiencia }}
                         </span>
                     </p>

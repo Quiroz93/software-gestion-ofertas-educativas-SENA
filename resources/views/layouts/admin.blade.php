@@ -207,6 +207,13 @@
 
             {{-- Content Area --}}
             <div class="content-area fade-in">
+                {{-- Content Header (page title and navigation) --}}
+                @hasSection('content_header')
+                <div class="content-header mb-4">
+                    @yield('content_header')
+                </div>
+                @endif
+
                 {{-- Breadcrumbs --}}
                 @hasSection('breadcrumbs')
                 <nav aria-label="breadcrumb" class="mb-4">

@@ -32,9 +32,9 @@
                     <p>
                         <strong>Estado:</strong>
                         @if ($user->email_verified_at)
-                        <span class="badge badge-success">Verificado</span>
+                        <span class="badge bg-success">Verificado</span>
                         @else
-                        <span class="badge badge-warning">No verificado</span>
+                        <span class="badge bg-warning text-dark">No verificado</span>
                         @endif
                     </p>
 
@@ -55,7 +55,7 @@
 
         <div class="card-body">
             @forelse ($user->roles as $role)
-            <span class="badge badge-primary mr-2 mb-2">
+            <span class="badge badge-sena me-2 mb-2">
                 {{ $role->name }}
             </span>
             @empty
@@ -162,7 +162,7 @@
         <div class="card-body">
             <div class="d-flex flex-wrap">
                 @foreach ($user->getAllPermissions() as $permission)
-                <span class="badge badge-secondary mr-2 mb-2">
+                <span class="badge bg-secondary me-2 mb-2">
                     {{ $permission->name }}
                 </span>
                 @endforeach

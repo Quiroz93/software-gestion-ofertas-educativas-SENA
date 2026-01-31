@@ -7,6 +7,7 @@
     --primary-color: #0d6efd;
     --sidebar-bg: #2c3e50;
     --sidebar-text: #ecf0f1;
+    --sena-blue-dark: #00304D;
 }
 
 * {
@@ -18,6 +19,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
+    color: var(--sena-blue-dark);
 }
 
 .app-wrapper {
@@ -119,6 +121,28 @@ body {
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
+    color: var(--sena-blue-dark);
+}
+
+.content-area .text-muted {
+    color: rgba(0, 48, 77, 0.75) !important;
+}
+
+.text-sena-dark {
+    color: var(--sena-blue-dark) !important;
+}
+
+.badge-sena {
+    background-color: #F6F6F6;
+    color: var(--sena-blue-dark);
+    border: 1px solid #e9ecef;
+}
+
+.content-area .bg-white .text-white,
+.content-area .bg-light .text-white,
+.content-area .card .text-white,
+.content-area .table .text-white {
+    color: var(--sena-blue-dark) !important;
 }
 
 /* Cards */
@@ -127,6 +151,7 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     margin-bottom: 1.5rem;
     transition: all 0.3s ease;
+    color: var(--sena-blue-dark);
 }
 
 .card:hover {
@@ -166,6 +191,7 @@ body {
 /* Tables */
 .table {
     background: #fff;
+    color: var(--sena-blue-dark);
 }
 
 .table thead th {
@@ -185,6 +211,7 @@ body {
 .form-select {
     border-color: #dee2e6;
     transition: all 0.3s ease;
+    color: var(--sena-blue-dark);
 }
 
 .form-control:focus,

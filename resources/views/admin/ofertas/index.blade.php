@@ -50,7 +50,7 @@
 
                 <p class="mb-2">
                     <strong>Año:</strong>
-                    <span class="badge badge-secondary">
+                    <span class="badge bg-secondary">
                         {{ $oferta->año }}
                     </span>
                 </p>
@@ -67,7 +67,7 @@
 
                 <p class="mb-0">
                     <strong>Estado:</strong>
-                    <span class="badge badge-info">
+                    <span class="badge bg-info text-dark">
                         {{ $oferta->estado }}
                     </span>
                 </p>

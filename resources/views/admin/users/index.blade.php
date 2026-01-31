@@ -52,7 +52,7 @@
 
                 <p class="mb-1">
                     <strong>ID:</strong>
-                    <span class="badge badge-info">
+                    <span class="badge bg-info text-dark">
                         {{ $u->id }}
                     </span>
                 </p>
