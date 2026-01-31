@@ -72,7 +72,7 @@
                                 <h5 class="fw-bold card-title">{{ $instructor->nombre }} {{ $instructor->apellidos ?? '' }}</h5>
                                 <p class="text-muted small mb-3">{{ $instructor->perfil_profesional ?? 'Instructor' }}</p>
                                 @isset($instructor->experiencia)
-                                    <p class="text-muted small">{{ Str::limit($instructor->experiencia, 100) }}</p>
+                                    <p class="text-muted small">{{ $instructor->experiencia_corta }}</p>
                                 @endisset
                                 @isset($instructor->correo)
                                     <a href="mailto:{{ $instructor->correo }}" class="btn btn-sm btn-outline-success">

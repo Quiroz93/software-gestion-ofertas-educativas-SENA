@@ -49,7 +49,7 @@
             <div class="card-body">
                 <p class="mb-2">
                     <strong>Descripción:</strong><br>
-                    <small>{{ Str::limit($programa->descripcion ?? 'Sin descripción', 100) }}</small>
+                    <small>{{ $programa->descripcion_corta }}</small>
                 </p>
 
                 <div class="row mb-2">

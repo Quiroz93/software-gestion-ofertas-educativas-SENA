@@ -12,7 +12,7 @@
                 <ol class="breadcrumb breadcrumb-dark mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('public.programas.index') }}" class="text-white-50">Historias de Éxito</a></li>
-                    <li class="breadcrumb-item active text-white">{{ Str::limit($historia_exito->titulo, 30) }}</li>
+                    <li class="breadcrumb-item active text-white">{{ $historia_exito->titulo_corta }}</li>
                 </ol>
             </nav>
 

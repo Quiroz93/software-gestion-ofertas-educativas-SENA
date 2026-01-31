@@ -69,7 +69,7 @@
                     @if($programa->descripcion)
                         <div class="mb-3">
                             <p class="mb-2"><strong>Descripción:</strong></p>
-                            <p class="text-muted">{{ Str::limit($programa->descripcion, 200) }}</p>
+                            <p class="text-muted">{{ $programa->descripcion_larga }}</p>
                         </div>
                     @endif
 

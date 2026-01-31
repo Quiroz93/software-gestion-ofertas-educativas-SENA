@@ -76,4 +76,21 @@ class Programa extends Model
             ->withPivot('instructor_id', 'fecha_inscripcion', 'fecha_retiro', 'estado', 'observaciones')
             ->withTimestamps();
     }
+
+    /**
+     * Accessor: Obtiene la descripción limitada a 100 caracteres
+     * Útil para vistas admin sin necesidad de usar Str::limit() en Blade
+     */
+    public function getDescripcionCortaAttribute()
+    {
+        return \Illuminate\Support\Str::limit($this->descripcion ?? 'Sin descripción', 100);
+    }
+
+    /**
+     * Accessor: Obtiene la descripción limitada a 200 caracteres
+     */
+    public function getDescripcionLargaAttribute()
+    {
+        return \Illuminate\Support\Str::limit($this->descripcion ?? 'Sin descripción', 200);
+    }
 }

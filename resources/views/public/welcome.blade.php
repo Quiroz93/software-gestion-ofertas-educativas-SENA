@@ -162,7 +162,7 @@
                                             @endif
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $noticia->titulo }}</h5>
-                                                <p class="card-text">{{ Str::limit($noticia->contenido, 100) }}</p>
+                                                <p class="card-text">{{ $noticia->descripcion_media }}</p>
                                             </div>
                                             <div class="card-footer">
                                                 <a href="#" class="btn btn-primary btn-sm">Leer más</a>
@@ -190,7 +190,7 @@
                                         <div class="card h-100">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $oferta->nombre }}</h5>
-                                                <p class="card-text">{{ Str::limit($oferta->descripcion, 100) }}</p>
+                                                <p class="card-text">{{ $oferta->descripcion_corta }}</p>
                                             </div>
                                             <div class="card-footer">
                                                 <a href="#" class="btn btn-success btn-sm">Ver oferta</a>

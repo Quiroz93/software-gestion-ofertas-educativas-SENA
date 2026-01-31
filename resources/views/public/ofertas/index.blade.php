@@ -116,7 +116,7 @@
                                     </div>
 
                                     <p class="card-text text-muted small mb-3">
-                                        {{ Str::limit($oferta->descripcion, 150) }}
+                                        {{ $oferta->descripcion_media ?? '' }}
                                     </p>
 
                                     <!-- Details -->

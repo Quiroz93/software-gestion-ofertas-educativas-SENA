@@ -165,7 +165,7 @@
                                                     </p>
                                                     @if($inscripcion->instructor->perfil_profesional)
                                                     <p class="mb-0 small">
-                                                        <strong>Perfil:</strong> {{ Str::limit($inscripcion->instructor->perfil_profesional, 150) }}
+                                                        <strong>Perfil:</strong> {{ $inscripcion->instructor->perfil_profesional_corta }}
                                                     </p>
                                                     @endif
                                                 </div>

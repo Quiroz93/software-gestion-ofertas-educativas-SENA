@@ -80,7 +80,7 @@
                                 
                                 @isset($historia->descripcion)
                                     <p class="text-muted small mb-3">
-                                        {{ Str::limit($historia->descripcion, 150) }}
+                                        {{ $historia->descripcion_corta }}
                                     </p>
                                 @endisset
                                 

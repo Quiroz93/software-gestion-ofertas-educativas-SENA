@@ -73,7 +73,7 @@
                     {{-- Body --}}
                     <div class="card-body">
                         <p class="card-text text-muted">
-                            {{ Str::limit($noticia->descripcion, 120) }}
+                            {{ $noticia->descripcion_corta }}
                         </p>
 
                         <div class="mt-3">

@@ -130,7 +130,7 @@
                                     </div>
 
                                     <p class="card-text text-muted mb-3">
-                                        {{ \Illuminate\Support\Str::limit($programa->descripcion, 200) }}
+                                        {{ $programa->descripcion_larga ?? '' }}
                                     </p>
 
                                     <!-- Details -->

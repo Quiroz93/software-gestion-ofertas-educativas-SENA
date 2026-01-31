@@ -57,7 +57,7 @@
 
                     <p class="mb-2">
                         <strong>Descripción:</strong><br>
-                        {{ Str::limit($historia->descripcion, 120) }}
+                        {{ $historia->getDescripcionLimitada(120) ?? '' }}
                     </p>
 
                     <p class="mb-0">

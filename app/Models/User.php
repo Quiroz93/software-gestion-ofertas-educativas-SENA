@@ -106,4 +106,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->inscripciones()->activas();
     }
+
+    /**
+     * Accessor: Perfil profesional limitado a 150 caracteres
+     */
+    public function getPerfilProfesionalCortaAttribute()
+    {
+        return \Illuminate\Support\Str::limit($this->perfil_profesional ?? '', 150);
+    }
 }

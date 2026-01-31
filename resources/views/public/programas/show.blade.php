@@ -69,7 +69,7 @@
                             <div class="col-md-6">
                                 <div class="p-3 bg-light rounded-lg">
                                     <h6 class="fw-bold mb-2">{{ $competencia->nombre }}</h6>
-                                    <small class="text-muted">{{ Str::limit($competencia->descripcion, 80) }}</small>
+                                    <small class="text-muted">{{ $competencia->descripcion_corta ?? '' }}</small>
                                 </div>
                             </div>
                             @endforeach

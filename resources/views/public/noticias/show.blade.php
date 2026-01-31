@@ -12,7 +12,7 @@
                 <ol class="breadcrumb breadcrumb-dark mb-0">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('public.ultimaNoticias.index') }}" class="text-white-50">Noticias</a></li>
-                    <li class="breadcrumb-item active text-white">{{ Str::limit($noticia->titulo, 30) }}</li>
+                    <li class="breadcrumb-item active text-white">{{ $noticia->titulo_corta }}</li>
                 </ol>
             </nav>
 
@@ -119,7 +119,7 @@
                             <a href="{{ route('public.ultimaNoticias.show', $related) }}"
                                class="text-decoration-none border-bottom pb-3 transition"
                                style="color: inherit;">
-                                <h6 class="fw-bold text-primary mb-1">{{ Str::limit($related->titulo, 50) }}</h6>
+                                <h6 class="fw-bold text-primary mb-1">{{ $related->titulo_medio }}</h6>
                                 <small class="text-muted">
                                     <i class="bi bi-calendar me-1"></i>
                                     {{ $related->created_at->format('d M Y') }}

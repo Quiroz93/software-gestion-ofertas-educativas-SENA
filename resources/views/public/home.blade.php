@@ -403,7 +403,7 @@
               {{ $noticia->titulo }}
             </h6>
             <p class="text-muted small">
-              {{ \Illuminate\Support\Str::limit($noticia->descripcion, 90) }}
+              {{ $noticia->descripcion_corta }}
             </p>
           </div>
         </div>
