@@ -23,7 +23,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('custom_contents', function (Blueprint $table) {
-            $table->dropColumn('metadata');
+            if (Schema::hasColumn('custom_contents', 'metadata')) {
+                $table->dropColumn('metadata');
+            }
         });
     }
 };

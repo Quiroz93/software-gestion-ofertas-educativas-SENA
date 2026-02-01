@@ -43,11 +43,21 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('custom_contents', function (Blueprint $table) {
-            // Eliminar índice
-            $table->dropIndex('idx_contentable_key');
+            // Eliminar índice si existe
+            if (Schema::hasIndex('custom_contents', 'idx_contentable_key')) {
+                $table->dropIndex('idx_contentable_key');
+            }
             
             // Eliminar columnas agregadas
-            $table->dropColumn(['metadata', 'alt_text', 'title']);
+            if (Schema::hasColumn('custom_contents', 'metadata')) {
+                $table->dropColumn('metadata');
+            }
+            if (Schema::hasColumn('custom_contents', 'alt_text')) {
+                $table->dropColumn('alt_text');
+            }
+            if (Schema::hasColumn('custom_contents', 'title')) {
+                $table->dropColumn('title');
+            }
         });
     }
 };

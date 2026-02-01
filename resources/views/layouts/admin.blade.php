@@ -18,279 +18,16 @@
     {{-- Font Awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    {{-- Custom CSS --}}
-    <style>
-        :root {
-            --sidebar-width: 280px;
-            --primary-color: #0d6efd;
-            --sidebar-bg: #2c3e50;
-            --sidebar-text: #ecf0f1;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: #f8f9fa;
-        }
-
-        .app-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        {{-- Sidebar --}}
-        .sidebar {
-            width: var(--sidebar-width);
-            background: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            padding: 0;
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar-header h5 {
-            margin: 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .sidebar-nav {
-            list-style: none;
-            padding: 1rem 0;
-        }
-
-        .sidebar-nav-item {
-            margin: 0;
-        }
-
-        .sidebar-nav-link {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            color: var(--sidebar-text);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-nav-link:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-left-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .sidebar-nav-link.active {
-            background: rgba(13, 110, 253, 0.2);
-            border-left-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .sidebar-nav-link i {
-            width: 1.5rem;
-            margin-right: 0.75rem;
-            text-align: center;
-        }
-
-        {{-- Main Content --}}
-        .main-content {
-            margin-left: var(--sidebar-width);
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        {{-- Navbar --}}
-        .navbar {
-            background: #fff;
-            border-bottom: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            padding: 1rem 2rem;
-            margin-left: -var(--sidebar-width);
-            margin-left: auto;
-            width: 100%;
-        }
-
-        .navbar-brand {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #212529;
-        }
-
-        {{-- Content Area --}}
-        .content-area {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        {{-- Cards --}}
-        .card {
-            border: none;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-
-        .card-header {
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-            font-weight: 600;
-        }
-
-        {{-- Breadcrumbs --}}
-        .breadcrumb {
-            background: transparent;
-            padding: 0;
-            margin-bottom: 1.5rem;
-        }
-
-        {{-- Buttons --}}
-        .btn {
-            border-radius: 0.375rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .btn-primary:hover {
-            background-color: #0b5ed7;
-            border-color: #0b5ed7;
-        }
-
-        {{-- Tables --}}
-        .table {
-            background: #fff;
-        }
-
-        .table thead th {
-            border-bottom: 2px solid #e9ecef;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            background: #f8f9fa;
-        }
-
-        .table tbody tr:hover {
-            background: #f8f9fa;
-        }
-
-        {{-- Forms --}}
-        .form-control,
-        .form-select {
-            border-color: #dee2e6;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-        }
-
-        {{-- Alerts --}}
-        .alert {
-            border: none;
-            border-radius: 0.375rem;
-        }
-
-        {{-- Responsive --}}
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -var(--sidebar-width);
-                transition: left 0.3s ease;
-                z-index: 1050;
-            }
-
-            .sidebar.show {
-                left: 0;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .navbar {
-                margin-left: 0;
-            }
-
-            .content-area {
-                padding: 1rem;
-            }
-
-            .toggle-sidebar {
-                display: inline-block;
-                cursor: pointer;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .toggle-sidebar {
-                display: none;
-            }
-        }
-
-        {{-- Animations --}}
-        .fade-in {
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        {{-- Loading spinner --}}
-        .spinner {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        {{-- Transitions --}}
-        .transition {
-            transition: all 0.3s ease;
-        }
-
-        .hover-shadow:hover {
-            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
-            transform: translateY(-2px);
-        }
-    </style>
+    {{-- Admin Assets --}}
+    @vite(['resources/css/sena-utilities.css', 'resources/css/admin/admin.css', 'resources/css/admin/admin-layout.css', 'resources/js/admin/admin.js'])
 
     @yield('css')
 </head>
 <body>
     <div class="app-wrapper">
+        {{-- Sidebar Overlay --}}
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
         {{-- Sidebar --}}
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -308,6 +45,19 @@
                            class="sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <i class="bi bi-house"></i>
                             <span>Dashboard</span>
+                        </a>
+                    </li>
+                    
+                    <li class="sidebar-nav-item px-3 py-2 mt-3">
+                        <small class="text-uppercase opacity-75">Contenido publico</small>
+                    </li>
+
+                    {{-- Home --}}
+                    <li class="sidebar-nav-item">
+                        <a href="{{ route('home') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
+                            <i class="bi bi-house-door"></i>
+                            <span>Home</span>
                         </a>
                     </li>
 
@@ -391,6 +141,15 @@
                         </a>
                     </li>
 
+                    {{-- Municipios --}}
+                    <li class="sidebar-nav-item">
+                        <a href="{{ route('municipios.index') }}"
+                           class="sidebar-nav-link {{ request()->routeIs('municipios.*') ? 'active' : '' }}">
+                            <i class="bi bi-map"></i>
+                            <span>Municipios</span>
+                        </a>
+                    </li>
+
                     {{-- Instructores --}}
                     <li class="sidebar-nav-item">
                         <a href="{{ route('instructores.index') }}"
@@ -421,11 +180,11 @@
             {{-- Navbar --}}
             <nav class="navbar navbar-expand-lg navbar-light sticky-top">
                 <div class="container-fluid">
-                    <button class="btn btn-outline-secondary d-lg-none toggle-sidebar" id="sidebarToggle">
-                        <i class="bi bi-list"></i>
+                    <button class="btn btn-outline-success d-lg-none me-2" id="sidebarToggle" type="button">
+                        <i class="bi bi-list" style="font-size: 1.25rem;"></i>
                     </button>
 
-                    <span class="navbar-brand ms-2">@yield('title', config('app.name', 'SENA'))</span>
+                    <span class="navbar-brand mb-0 h1">@yield('title', config('app.name', 'SENA'))</span>
 
                     <div class="ms-auto d-flex align-items-center gap-3">
                         {{-- User Dropdown --}}
@@ -460,6 +219,13 @@
 
             {{-- Content Area --}}
             <div class="content-area fade-in">
+                {{-- Content Header (page title and navigation) --}}
+                @hasSection('content_header')
+                <div class="content-header mb-4">
+                    @yield('content_header')
+                </div>
+                @endif
+
                 {{-- Breadcrumbs --}}
                 @hasSection('breadcrumbs')
                 <nav aria-label="breadcrumb" class="mb-4">
@@ -552,17 +318,44 @@
         }
     </script>
 
-    {{-- Sidebar Toggle Mobile --}}
+     {{-- Sidebar Toggle Mobile --}}
     <script>
-        document.getElementById('sidebarToggle')?.addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('show');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        // Toggle sidebar
+        sidebarToggle?.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+            sidebarOverlay.classList.toggle('show');
+            document.body.classList.toggle('sidebar-open');
         });
 
-        // Close sidebar when clicking on a link
+        // Close sidebar when clicking overlay
+        sidebarOverlay?.addEventListener('click', function() {
+            sidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+            document.body.classList.remove('sidebar-open');
+        });
+
+        // Close sidebar when clicking on a link (mobile only)
         document.querySelectorAll('.sidebar-nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                document.getElementById('sidebar').classList.remove('show');
+                if (window.innerWidth < 769) {
+                    sidebar.classList.remove('show');
+                    sidebarOverlay.classList.remove('show');
+                    document.body.classList.remove('sidebar-open');
+                }
             });
+        });
+
+        // Close sidebar on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+                sidebarOverlay.classList.remove('show');
+                document.body.classList.remove('sidebar-open');
+            }
         });
     </script>
 

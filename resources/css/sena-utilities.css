@@ -1,0 +1,191 @@
+/**
+ * SENA Utility Classes
+ * Mapeadores de colores Bootstrap a SENA para transición gradual
+ */
+
+:root {
+    --sena-green: #39A900;
+    --sena-green-dark: #007832;
+    --sena-blue-dark: #00304D;
+    --sena-blue-light: #50E5F9;
+    --sena-yellow: #FDC300;
+    --white: #FFFFFF;
+    --neutral-bg: #F6F6F6;
+    --text-muted: #6c757d;
+}
+
+/* Mapeos de utilidad - Reemplazar clases Bootstrap con SENA */
+
+/* bg-primary → SENA */
+.bg-sena-primary {
+    background-color: var(--sena-green) !important;
+}
+
+.bg-primary {
+    background-color: var(--sena-green) !important;
+}
+
+/* bg-success → SENA Green */
+.bg-success {
+    background-color: var(--sena-green) !important;
+}
+
+.bg-sena-success {
+    background-color: var(--sena-green) !important;
+}
+
+/* bg-warning → SENA Yellow */
+.bg-warning {
+    background-color: var(--sena-yellow) !important;
+}
+
+.bg-sena-warning {
+    background-color: var(--sena-yellow) !important;
+}
+
+/* bg-info → SENA Blue Light */
+.bg-info {
+    background-color: var(--sena-blue-light) !important;
+}
+
+.bg-sena-info {
+    background-color: var(--sena-blue-light) !important;
+}
+
+/* bg-secondary → Neutral Gray */
+.bg-secondary {
+    background-color: var(--neutral-bg) !important;
+}
+
+.bg-sena-secondary {
+    background-color: var(--neutral-bg) !important;
+}
+
+/* bg-danger → SENA Yellow (alertas) */
+.bg-danger {
+    background-color: var(--sena-yellow) !important;
+}
+
+/* Text colors on SENA backgrounds */
+.text-white {
+    color: var(--white) !important;
+}
+
+.text-dark {
+    color: var(--sena-blue-dark) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-primary {
+    color: var(--sena-green) !important;
+}
+
+.text-secondary {
+    color: var(--text-muted) !important;
+}
+
+.text-danger {
+    color: var(--sena-yellow) !important;
+}
+
+/* Button colors */
+.btn-primary {
+    background-color: var(--sena-green) !important;
+    border-color: var(--sena-green-dark) !important;
+    color: var(--white) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--sena-green-dark) !important;
+    border-color: var(--sena-green-dark) !important;
+}
+
+.btn-success {
+    background-color: var(--sena-green) !important;
+    border-color: var(--sena-green-dark) !important;
+    color: var(--white) !important;
+}
+
+.btn-secondary {
+    background-color: var(--neutral-bg) !important;
+    border-color: var(--sena-blue-dark) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.btn-secondary:hover {
+    background-color: var(--white) !important;
+    border-color: var(--sena-blue-dark) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+/* Badge colors */
+.badge-primary {
+    background-color: var(--sena-green) !important;
+    color: var(--white) !important;
+}
+
+.badge-success {
+    background-color: var(--sena-green) !important;
+    color: var(--white) !important;
+}
+
+.badge-warning {
+    background-color: var(--sena-yellow) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.badge-info {
+    background-color: var(--sena-blue-light) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.badge-danger {
+    background-color: var(--sena-yellow) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.badge-secondary {
+    background-color: var(--neutral-bg) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+/* Border colors */
+.border-primary {
+    border-color: var(--sena-green) !important;
+}
+
+.border-info {
+    border-color: var(--sena-blue-light) !important;
+}
+
+.border-secondary {
+    border-color: var(--neutral-bg) !important;
+}
+
+/* Alert backgrounds */
+.alert-primary {
+    background-color: rgba(57, 169, 0, 0.1) !important;
+    border-color: var(--sena-green) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.alert-success {
+    background-color: rgba(57, 169, 0, 0.1) !important;
+    border-color: var(--sena-green) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.alert-warning {
+    background-color: rgba(253, 195, 0, 0.1) !important;
+    border-color: var(--sena-yellow) !important;
+    color: var(--sena-blue-dark) !important;
+}
+
+.alert-danger {
+    background-color: rgba(253, 195, 0, 0.1) !important;
+    border-color: var(--sena-yellow) !important;
+    color: var(--sena-blue-dark) !important;
+}

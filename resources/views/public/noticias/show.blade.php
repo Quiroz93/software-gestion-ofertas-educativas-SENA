@@ -1,231 +1,242 @@
 @extends('layouts.bootstrap')
 
-@section('title', $noticia->titulo)
+@section('title', $ultimaNoticia->titulo . ' - SENA')
 
 @section('content')
-<div class="container-fluid">
-    <!-- Hero Section -->
-    <div class="bg-primary text-white py-5 mb-5 rounded-lg overflow-hidden">
-        <div class="container">
-            <!-- Breadcrumbs -->
-            <nav aria-label="breadcrumb" class="mb-3">
-                <ol class="breadcrumb breadcrumb-dark mb-0">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-white-50">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('public.ultimaNoticias.index') }}" class="text-white-50">Noticias</a></li>
-                    <li class="breadcrumb-item active text-white">{{ Str::limit($noticia->titulo, 30) }}</li>
-                </ol>
-            </nav>
+<div class="container" style="max-width: 900px; margin-top: 2rem; margin-bottom: 4rem;">
 
-            <!-- Title and Meta -->
-            <h1 class="display-4 fw-bold mb-3">{{ $noticia->titulo }}</h1>
+    {{-- Breadcrumb institucional --}}
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}" class="hover-sena">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('public.ultimaNoticias.index') }}" class="hover-sena">Noticias</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($ultimaNoticia->titulo, 50) }}</li>
+        </ol>
+    </nav>
 
-            <div class="d-flex flex-wrap gap-3">
-                <small class="text-white-50">
-                    <i class="bi bi-calendar me-1"></i>
-                    {{ $noticia->created_at->format('d \\d\\e F \\d\\e Y') }}
-                </small>
-                <small class="text-white-50">
-                    <i class="bi bi-clock me-1"></i>
-                    {{ $noticia->created_at->diffForHumans() }}
-                </small>
-                @if($noticia->categoria)
-                <span class="badge bg-light text-dark">{{ $noticia->categoria }}</span>
-                @endif
-            </div>
+    {{-- Artículo principal --}}
+    <article class="card" style="padding: 2.5rem; border: 1px solid rgba(0,0,0,0.08);">
+        
+        {{-- Badge de categoría --}}
+        <div class="mb-3">
+            <span class="badge bg-success text-white">
+                <i class="bi bi-newspaper me-1"></i>Noticia
+            </span>
         </div>
-    </div>
 
-    <!-- Main Content -->
-    <div class="container mb-5">
-        <div class="row g-4">
-            <!-- Left Column - Article Content -->
-            <div class="col-lg-8">
-                <!-- Featured Image -->
-                <div class="mb-4 rounded-lg overflow-hidden">
-                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
-                        <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i>
-                    </div>
-                </div>
+        {{-- Título --}}
+        <h1 class="h2 fw-bold mb-3" style="color: var(--sena-blue-dark); line-height: 1.3;">
+            {{ $ultimaNoticia->titulo }}
+        </h1>
 
-                <!-- Article Content -->
-                <div class="card shadow-sm border-0 mb-4 rounded-lg">
-                    <div class="card-body">
-                        <div class="fs-5 lh-lg">
-                            {!! nl2br(e($noticia->contenido)) !!}
-                        </div>
-                    </div>
-                </div>
+        {{-- Fecha de publicación --}}
+        <p class="text-muted small mb-4">
+            <i class="bi bi-calendar3"></i>
+            Publicado el {{ $ultimaNoticia->created_at->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}
+        </p>
 
-                <!-- Article Meta -->
-                <div class="card shadow-sm border-0 mb-4 rounded-lg">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <small class="text-muted d-block mb-1">Publicado por</small>
-                                <strong>Centro CATA</strong>
+        {{-- Imagen destacada (si existe) --}}
+        @if($ultimaNoticia->imagen)
+            <figure class="mb-4">
+                <img 
+                    src="{{ asset('storage/' . $ultimaNoticia->imagen) }}" 
+                    alt="{{ $ultimaNoticia->titulo }}" 
+                    class="img-fluid rounded news-image-clickable"
+                    id="newsImage"
+                    role="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#imageModal"
+                    style="width: 100%; height: auto; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <figcaption class="text-center text-muted small mt-2">
+                    <i class="bi bi-zoom-in me-1"></i>Haz clic en la imagen para ampliar
+                </figcaption>
+            </figure>
+        @endif
+
+        {{-- Contenido principal --}}
+        <div class="noticia-content" style="font-size: 1.05rem; line-height: 1.7; color: var(--sena-blue-dark);">
+            {!! nl2br(e($ultimaNoticia->descripcion)) !!}
+        </div>
+
+        {{-- Separador --}}
+        <hr class="my-4" style="border-color: rgba(0,0,0,0.08);">
+
+        {{-- Acciones --}}
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="{{ route('public.ultimaNoticias.index') }}" class="btn btn-outline-sena">
+                <i class="bi bi-arrow-left"></i>
+                Volver a noticias
+            </a>
+            <a href="{{ route('home') }}" class="btn btn-outline-sena">
+                <i class="bi bi-house-door"></i>
+                Ir al inicio
+            </a>
+        </div>
+    </article>
+
+    {{-- Sección: Más noticias recientes --}}
+    @php
+        $noticiasRelacionadas = App\Models\Noticia::where('activa', true)
+            ->where('id', '!=', $ultimaNoticia->id)
+            ->latest()
+            ->take(3)
+            ->get();
+    @endphp
+
+    @if($noticiasRelacionadas->isNotEmpty())
+        <section class="mt-5">
+            <h2 class="h4 fw-semibold mb-3" style="color: var(--sena-blue-dark);">
+                <i class="bi bi-newspaper icon-outline"></i>
+                Más noticias
+            </h2>
+
+            <div class="row g-3">
+                @foreach($noticiasRelacionadas as $noticiaRelacionada)
+                    <div class="col-md-4">
+                        <article class="card h-100" style="overflow: hidden;">
+                            {{-- Imagen miniatura --}}
+                            @if($noticiaRelacionada->imagen)
+                                <div style="height: 150px; overflow: hidden;">
+                                    <img src="{{ asset('storage/' . $noticiaRelacionada->imagen) }}" 
+                                         class="w-100 h-100" 
+                                         alt="{{ $noticiaRelacionada->titulo }}"
+                                         style="object-fit: cover;">
+                                </div>
+                            @else
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                                    <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                                </div>
+                            @endif
+                            
+                            <div style="padding: 1.25rem;">
+                                <span class="badge bg-success text-white mb-2" style="width: fit-content;">
+                                    <i class="bi bi-newspaper me-1"></i>Noticia
+                                </span>
+                                <h3 class="h6 fw-semibold mb-2">
+                                    <a href="{{ route('public.ultimaNoticias.show', $noticiaRelacionada) }}" 
+                                       class="hover-sena text-decoration-none" 
+                                       style="color: var(--sena-blue-dark);">
+                                        {{ Str::limit($noticiaRelacionada->titulo, 60) }}
+                                    </a>
+                                </h3>
+                                <p class="text-muted small mb-3">
+                                    {{ Str::limit($noticiaRelacionada->descripcion, 80) }}
+                                    </p>
+                                <a href="{{ route('public.ultimaNoticias.show', $noticiaRelacionada) }}" 
+                                   class="btn btn-outline-sena btn-sm mt-auto">
+                                    <i class="bi bi-arrow-right me-1"></i>Leer más
+                                </a>
                             </div>
-                            <div class="col-md-6">
-                                <small class="text-muted d-block mb-1">Última actualización</small>
-                                <strong>{{ $noticia->updated_at->format('d/m/Y H:i') }}</strong>
-                            </div>
-                        </div>
+                        </article>
                     </div>
-                </div>
-
-                <!-- Share Section -->
-                <div class="card shadow-sm border-0 rounded-lg">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-3">
-                            <i class="bi bi-share me-2 text-primary"></i>Compartir esta noticia
-                        </h6>
-                        <div class="d-flex gap-2">
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Compartir en Facebook">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Compartir en Twitter">
-                                <i class="bi bi-twitter"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Compartir en LinkedIn">
-                                <i class="bi bi-linkedin"></i>
-                            </a>
-                            <a href="mailto:?subject={{ urlencode($noticia->titulo) }}&body={{ urlencode(route('public.ultimaNoticias.show', $noticia)) }}"
-                               class="btn btn-sm btn-outline-primary" title="Enviar por correo">
-                                <i class="bi bi-envelope"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+        </section>
+    @endif
 
-            <!-- Right Column - Sidebar -->
-            <div class="col-lg-4">
-                <!-- Related News -->
-                @php
-                    $relatedNews = \App\Models\Noticia::where('id', '!=', $noticia->id)
-                        ->latest()
-                        ->take(3)
-                        ->get();
-                @endphp
-
-                @if($relatedNews->count() > 0)
-                <div class="card shadow-sm border-0 mb-4 rounded-lg">
-                    <div class="card-body">
-                        <h6 class="card-title fw-bold mb-3">
-                            <i class="bi bi-link-45deg me-2 text-info"></i>Noticias Relacionadas
-                        </h6>
-
-                        <div class="d-flex flex-column gap-3">
-                            @foreach($relatedNews as $related)
-                            <a href="{{ route('public.ultimaNoticias.show', $related) }}"
-                               class="text-decoration-none border-bottom pb-3 transition"
-                               style="color: inherit;">
-                                <h6 class="fw-bold text-primary mb-1">{{ Str::limit($related->titulo, 50) }}</h6>
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i>
-                                    {{ $related->created_at->format('d M Y') }}
-                                </small>
-                            </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-                <!-- Newsletter CTA -->
-                <div class="card shadow-sm border-0 mb-4 rounded-lg bg-primary text-white">
-                    <div class="card-body">
-                        <h6 class="card-title fw-bold mb-2">
-                            <i class="bi bi-bell me-2"></i>Manténete Informado
-                        </h6>
-                        <p class="small mb-3">Suscríbete a nuestro newsletter para recibir todas las noticias</p>
-                        <button class="btn btn-sm btn-light w-100" data-bs-toggle="modal" data-bs-target="#newsletterModal">
-                            <i class="bi bi-envelope me-1"></i>Suscribirse
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Categories -->
-                <div class="card shadow-sm border-0 rounded-lg">
-                    <div class="card-body">
-                        <h6 class="card-title fw-bold mb-3">
-                            <i class="bi bi-tag me-2 text-success"></i>Categorías
-                        </h6>
-                        <div class="d-flex flex-wrap gap-2">
-                            <span class="badge bg-secondary">Educación</span>
-                            <span class="badge bg-secondary">Programas</span>
-                            <span class="badge bg-secondary">Centro CATA</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CTA Section -->
-    <div class="bg-light rounded-lg p-5 mb-5">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h4 class="fw-bold mb-2">¿Te interesa formarte con nosotros?</h4>
-                <p class="text-muted mb-0">Explora nuestros programas educativos disponibles</p>
-            </div>
-            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                <a href="{{ route('public.programas.index') }}" class="btn btn-primary">
-                    <i class="bi bi-arrow-right me-2"></i>Ver Programas
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Back Button -->
-    <div class="container mb-5">
-        <a href="{{ route('public.ultimaNoticias.index') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Volver a Noticias
-        </a>
-    </div>
 </div>
 
-<!-- Newsletter Modal -->
-<div class="modal fade" id="newsletterModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title fw-bold">Suscripción a Newsletter</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+{{-- Modal para ver imagen completa --}}
+@if($ultimaNoticia->imagen)
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white" id="imageModalLabel">
+                    <i class="bi bi-image me-2"></i>{{ $ultimaNoticia->titulo }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="#">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <small class="text-muted">Nos comprometemos a no compartir tu correo con terceros.</small>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Suscribirse</button>
-                </div>
-            </form>
+            <div class="modal-body text-center p-0" style="background: #000;">
+                <img 
+                    src="{{ asset('storage/' . $ultimaNoticia->imagen) }}" 
+                    alt="{{ $ultimaNoticia->titulo }}" 
+                    class="img-fluid"
+                    style="max-height: 80vh; width: auto; object-fit: contain;">
+            </div>
         </div>
     </div>
 </div>
+@endif
+@endsection
 
+@push('styles')
 <style>
-    .transition {
-        transition: all 0.3s ease;
+    /* Estilos institucionales SENA */
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "›";
+        color: var(--sena-blue-dark);
+        opacity: 0.5;
+    }
+    
+    .breadcrumb-item a {
+        color: var(--sena-blue-dark);
+        text-decoration: none;
+    }
+    
+    .breadcrumb-item.active {
+        color: var(--text-muted);
     }
 
-    .hover-shadow:hover {
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
-        transform: translateY(-5px);
+    /* Espaciado en contenido de noticia */
+    .noticia-content p {
+        margin-bottom: 1rem;
     }
 
-    .rounded-lg {
-        border-radius: 1rem;
+    /* Iconos outline SENA */
+    .icon-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: rgba(57,169,0,0.08);
+        color: var(--sena-green, #39A900);
+        margin-right: 0.5rem;
+        font-size: 1.1rem;
     }
 
-    .breadcrumb-dark .breadcrumb-item.active {
-        color: rgba(255, 255, 255, 0.8);
+    /* Imagen clickeable para modal */
+    .news-image-clickable {
+        max-height: none !important;
+    }
+
+    .news-image-clickable:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 24px rgba(57, 169, 0, 0.2) !important;
+    }
+
+    /* Modal personalizado */
+    #imageModal .modal-content {
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+    #imageModal .modal-header {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 1rem 1.5rem;
+    }
+
+    #imageModal .modal-body {
+        padding: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 300px;
+    }
+
+    /* Caption de imagen */
+    figure figcaption {
+        font-style: italic;
+        margin-top: 0.5rem;
+        opacity: 0.8;
     }
 </style>
-@endsection
+@endpush

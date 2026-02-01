@@ -2,19 +2,19 @@
 
 use App\Http\Controllers\Public\PublicCentroController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CentroController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\Admin\CentroController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\CompetenciaController;
-use App\Http\Controllers\HistoriaExitoController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\NivelFormacionController;
-use App\Http\Controllers\OfertaController;
-use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\Admin\CompetenciaController;
+use App\Http\Controllers\Admin\HistoriaExitoController;
+use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\NivelFormacionController;
+use App\Http\Controllers\Admin\OfertaController;
+use App\Http\Controllers\Admin\ProgramaController;
 use App\Http\Controllers\Public\PublicCompetenciaController;
 use App\Http\Controllers\Public\PublicHistoriaExitoController;
 use App\Http\Controllers\Public\PublicInstructorController;
@@ -22,9 +22,11 @@ use App\Http\Controllers\Public\PublicNivelFormacionController;
 use App\Http\Controllers\Public\PublicNoticiaController;
 use App\Http\Controllers\Public\PublicOfertaController;
 use App\Http\Controllers\Public\PublicRedController;
-use App\Http\Controllers\PublicProgramaController;
-use App\Http\Controllers\RedController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Public\PublicProgramaController;
+use App\Http\Controllers\Admin\RedController;
+use App\Http\Controllers\Admin\HomeCarouselController;
+use App\Http\Controllers\Admin\MunicipioController;
+use App\Http\Controllers\Public\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
 
@@ -90,11 +92,17 @@ require __DIR__ . '/auth.php';
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+/*
+|--------------------------------------------------------------------------
+| Dashboard - ADMIN ONLY
+|--------------------------------------------------------------------------
+*/
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })
-    ->middleware('can:dashboard.view')
+    ->middleware(['auth', 'verified', 'role:admin|SuperAdmin'])
     ->name('dashboard');
+
 
 
 /*
@@ -381,31 +389,91 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| Municipios
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('municipios/index', [MunicipioController::class, 'index'])
+        ->middleware('can:municipios.view')->name('municipios.index');
+
+    Route::get('municipios/create', [MunicipioController::class, 'create'])
+        ->middleware('can:municipios.create')->name('municipios.create');
+
+    Route::post('municipios/store', [MunicipioController::class, 'store'])
+        ->middleware('can:municipios.create')->name('municipios.store');
+
+    Route::get('municipios/{municipio}', [MunicipioController::class, 'show'])
+        ->middleware('can:municipios.view')->name('municipios.show');
+
+    Route::get('municipios/{municipio}/edit', [MunicipioController::class, 'edit'])
+        ->middleware('can:municipios.edit')->name('municipios.edit');
+
+    Route::put('municipios/{municipio}', [MunicipioController::class, 'update'])
+        ->middleware('can:municipios.update')->name('municipios.update');
+
+    Route::delete('municipios/{municipio}', [MunicipioController::class, 'destroy'])
+        ->middleware('can:municipios.delete')->name('municipios.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Noticias (Administración)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('noticias/index', [App\Http\Controllers\NoticiaController::class, 'index'])
+    Route::get('noticias/index', [App\Http\Controllers\Admin\NoticiaController::class, 'index'])
         ->middleware('can:noticias.view')->name('noticias.index');
 
-    Route::get('noticias/create', [App\Http\Controllers\NoticiaController::class, 'create'])
+    Route::get('noticias/create', [App\Http\Controllers\Admin\NoticiaController::class, 'create'])
         ->middleware('can:noticias.create')->name('noticias.create');
 
-    Route::post('noticias/store', [App\Http\Controllers\NoticiaController::class, 'store'])
+    Route::post('noticias/store', [App\Http\Controllers\Admin\NoticiaController::class, 'store'])
         ->middleware('can:noticias.create')->name('noticias.store');
 
-    Route::get('noticias/{noticia}', [App\Http\Controllers\NoticiaController::class, 'show'])
+    Route::get('noticias/{noticia}', [App\Http\Controllers\Admin\NoticiaController::class, 'show'])
         ->middleware('can:noticias.view')->name('noticias.show');
 
-    Route::get('noticias/{noticia}/edit', [App\Http\Controllers\NoticiaController::class, 'edit'])
+    Route::get('noticias/{noticia}/edit', [App\Http\Controllers\Admin\NoticiaController::class, 'edit'])
         ->middleware('can:noticias.update')->name('noticias.edit');
 
-    Route::put('noticias/{noticia}', [App\Http\Controllers\NoticiaController::class, 'update'])
+    Route::put('noticias/{noticia}', [App\Http\Controllers\Admin\NoticiaController::class, 'update'])
         ->middleware('can:noticias.update')->name('noticias.update');
 
-    Route::delete('noticias/{noticia}', [App\Http\Controllers\NoticiaController::class, 'destroy'])
+    Route::delete('noticias/{noticia}', [App\Http\Controllers\Admin\NoticiaController::class, 'destroy'])
         ->middleware('can:noticias.delete')->name('noticias.destroy');
+
+    Route::post('noticias/{noticia}/toggle-active', [App\Http\Controllers\Admin\NoticiaController::class, 'toggleActive'])
+        ->middleware('can:noticias.update')->name('noticias.toggle-active');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Carousel del Home (Administración)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('admin')->name('admin.home-carousel.')->group(function () {
+    
+    Route::get('carousel', [HomeCarouselController::class, 'index'])
+        ->name('index');
+    
+    Route::get('carousel/create', [HomeCarouselController::class, 'create'])
+        ->name('create');
+    
+    Route::post('carousel', [HomeCarouselController::class, 'store'])
+        ->name('store');
+    
+    Route::get('carousel/{homeCarousel}/edit', [HomeCarouselController::class, 'edit'])
+        ->name('edit');
+    
+    Route::put('carousel/{homeCarousel}', [HomeCarouselController::class, 'update'])
+        ->name('update');
+    
+    Route::delete('carousel/{homeCarousel}', [HomeCarouselController::class, 'destroy'])
+        ->name('destroy');
+    
+    Route::patch('carousel/{homeCarousel}/toggle-active', [HomeCarouselController::class, 'toggleActive'])
+        ->name('toggle-active');
 });
 
 /*
@@ -426,6 +494,30 @@ Route::middleware(['auth'])->group(function () {
         ->name('profile.photo.destroy');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Inscripciones a programas de formación
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    
+    // Mostrar formulario de inscripción
+    Route::get('programas/{programa}/inscribirse', [App\Http\Controllers\InscripcionController::class, 'create'])
+        ->name('inscripcion.create');
+    
+    // Guardar inscripción
+    Route::post('programas/{programa}/inscribir', [App\Http\Controllers\InscripcionController::class, 'store'])
+        ->name('inscripcion.store');
+    
+    // Retirar inscripción
+    Route::delete('inscripciones/{inscripcion}', [App\Http\Controllers\InscripcionController::class, 'destroy'])
+        ->name('inscripcion.destroy');
+    
+    // Listar mis inscripciones
+    Route::get('mis-inscripciones', [App\Http\Controllers\InscripcionController::class, 'misinscripciones'])
+        ->name('inscripcion.index');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -440,7 +532,7 @@ Route::prefix('/')
     ->group(function () {
 
         Route::get('/', function () {
-            return view('welcome');
+            return view('public.welcome');
         })->name('home');
 
         // Centros

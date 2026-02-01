@@ -30,9 +30,18 @@
         <!-- Menu Items -->
         <li>
             <a class="dropdown-item" href="{{ route('home') }}">
+                <i class="bi bi-house me-2"></i>Home
+            </a>
+        </li>
+        
+        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('SuperAdmin'))
+        <li>
+            <a class="dropdown-item" href="{{ route('dashboard') }}">
                 <i class="bi bi-speedometer2 me-2"></i>Dashboard
             </a>
         </li>
+        @endif
+        
         <li>
             <a class="dropdown-item" href="{{ route('profile.edit') }}">
                 <i class="bi bi-person-circle me-2"></i>Mi Perfil
@@ -43,6 +52,19 @@
                 <i class="bi bi-gear me-2"></i>Configuración
             </a>
         </li>
+
+        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('SuperAdmin'))
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <!-- Admin Panel -->
+        <li>
+            <a class="dropdown-item" href="{{ route('dashboard') }}">
+                <i class="bi bi-shield-lock me-2"></i>Panel de Administración
+            </a>
+        </li>
+        @endif
 
         <li>
             <hr class="dropdown-divider">

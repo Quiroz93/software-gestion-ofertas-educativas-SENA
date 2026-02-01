@@ -30,11 +30,13 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->unsignedBigInteger('centro_id')->nullable();
             $table->integer('cupos')->nullable();
+            $table->unsignedBigInteger('municipio_id')->nullable();
             $table->timestamps();
 
             $table->foreign('red_id')->references('id')->on('redes')->onDelete('cascade');
             $table->foreign('nivel_formacion_id')->references('id')->on('nivel_formaciones')->onDelete('cascade');
             $table->foreign('centro_id')->references('id')->on('centros')->onDelete('set null');
+            $table->foreign('municipio_id')->references('id')->on('municipios')->onDelete('set null');
         });
     }
 
