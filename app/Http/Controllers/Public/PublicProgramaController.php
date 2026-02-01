@@ -12,7 +12,7 @@ class PublicProgramaController extends Controller
 {
     public function index(Request $request)
     {
-        $programas = Programa::with(['red', 'nivelFormacion'])
+        $programas = Programa::with(['red', 'nivelFormacion', 'centro', 'municipio'])
             ->when($request->red, fn ($q) => $q->where('red_id', $request->red))
             ->when($request->nivel, fn ($q) => $q->where('nivel_formacion_id', $request->nivel))
             ->get();

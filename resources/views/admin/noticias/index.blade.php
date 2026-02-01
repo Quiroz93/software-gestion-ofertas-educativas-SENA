@@ -142,6 +142,8 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+const sessionSuccess = "{{ session('success') ?? '' }}";
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // Toggle Active/Inactive
@@ -228,18 +230,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Mensaje de éxito desde session
-    @if(session('success'))
+    if (sessionSuccess) {
         Swal.fire({
             icon: 'success',
             title: '¡Éxito!',
-            text: '{{ session("success") }}',
+            text: sessionSuccess,
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true
         });
-    @endif
+    }
 });
 </script>
 @endpush

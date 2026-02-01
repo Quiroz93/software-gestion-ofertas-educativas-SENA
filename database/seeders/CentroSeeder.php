@@ -42,6 +42,12 @@ class CentroSeeder extends Seeder
                 'direccion' => 'Cra. 6 #4-50, Popayán, Cauca',
                 'telefono' => '(2) 8244444',
                 'correo' => 'cauca@sena.edu.co'
+            ],
+            [
+                'nombre' => 'Centro Agroempresarial y turistico de los antes',
+                'direccion' => 'Cra. 10 #12-34, Los Antes, Santander',
+                'telefono' => '(7) 6200000',
+                'correo' => 'agroempresarial@sena.edu.co'
             ]
         ];
 

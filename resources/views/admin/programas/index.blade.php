@@ -52,6 +52,13 @@
                     <small>{{ $programa->descripcion_corta }}</small>
                 </p>
 
+                <p class="mb-2">
+                    <strong>Número de ficha:</strong><br>
+                    <span class="badge bg-dark">
+                        {{ $programa->numero_ficha ?? 'N/A' }}
+                    </span>
+                </p>
+
                 <div class="row mb-2">
                     <div class="col-6">
                         <strong>Duración:</strong><br>

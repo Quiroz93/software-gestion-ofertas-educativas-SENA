@@ -58,7 +58,10 @@ class InstructorSeeder extends Seeder
         ];
 
         foreach ($instructores as $instructor) {
-            Instructor::create($instructor);
+            Instructor::updateOrCreate(
+                ['correo' => $instructor['correo']],
+                $instructor
+            );
         }
     }
 }

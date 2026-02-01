@@ -12,6 +12,7 @@ class Programa extends Model
     // Definir los campos que se pueden asignar masivamente
     protected $fillable = [
         'nombre',
+        'numero_ficha',
         'descripcion',
         'requisitos',
         'duracion_meses',

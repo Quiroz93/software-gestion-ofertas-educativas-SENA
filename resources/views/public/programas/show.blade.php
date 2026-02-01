@@ -43,7 +43,7 @@
                         <h4 class="card-title fw-bold mb-3" style="color: var(--sena-green);">
                             <i class="bi bi-file-text me-2"></i>Descripción
                         </h4>
-                        <p class="text-muted mb-0">{{ $programa->descripcion }}</p>
+                        <p class="text-muted mb-0">{{ $programa->descripcion ?? 'No disponible' }}</p>
                     </div>
                 </div>
 
@@ -56,6 +56,17 @@
                         <p class="text-muted">{{ $programa->requisitos ?? 'No especificados' }}</p>
                     </div>
                 </div>
+
+                @if($programa->observaciones)
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold mb-3" style="color: var(--sena-green);">
+                            <i class="bi bi-info-circle me-2"></i>Observaciones
+                        </h4>
+                        <p class="text-muted mb-0">{{ $programa->observaciones }}</p>
+                    </div>
+                </div>
+                @endif
 
                 <!-- Competencies Section -->
                 @if($programa->competencias->count() > 0)
@@ -89,36 +100,154 @@
                         </h5>
 
                         <!-- Duration -->
-                        @if($programa->duracion)
-                        <div class="d-flex mb-3 pb-3 border-bottom">
-                            <i class="bi bi-hourglass-split" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
-                            <div>
-                                <small class="text-muted d-block">Duración</small>
-                                <strong style="color: var(--sena-blue-dark);">{{ $programa->duracion }}</strong>
+                        @if($programa->duracion_meses)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-hourglass-split" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Duración</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->duracion_meses }} {{ $programa->duracion_meses == 1 ? 'mes' : 'meses' }}</strong>
+                                </div>
                             </div>
-                        </div>
                         @endif
 
-                        <!-- Level -->
-                        @if($programa->nivel)
-                        <div class="d-flex mb-3 pb-3 border-bottom">
-                            <i class="bi bi-mortarboard" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
-                            <div>
-                                <small class="text-muted d-block">Nivel</small>
-                                <strong style="color: var(--sena-blue-dark);">{{ $programa->nivel->nombre ?? 'N/A' }}</strong>
+                        @if($programa->nivelFormacion)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-mortarboard" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Nivel</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->nivelFormacion->nombre }}</strong>
+                                </div>
                             </div>
-                        </div>
                         @endif
 
-                        <!-- Center -->
+                        @if($programa->red)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-diagram-3" style="font-size: 1.5rem; color: var(--sena-yellow); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Red</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->red->nombre }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->numero_ficha)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-hash" style="font-size: 1.5rem; color: var(--sena-blue-dark); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Número de ficha</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->numero_ficha }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->modalidad)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-laptop" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Modalidad</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->modalidad }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->jornada)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-clock" style="font-size: 1.5rem; color: var(--sena-yellow); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Jornada</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->jornada }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if(!is_null($programa->cupos))
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-people" style="font-size: 1.5rem; color: var(--sena-green-dark); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Cupos</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->cupos }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
                         @if($programa->centro)
-                        <div class="d-flex mb-3">
-                            <i class="bi bi-geo-alt" style="font-size: 1.5rem; color: var(--sena-yellow); margin-right: 1rem;"></i>
-                            <div>
-                                <small class="text-muted d-block">Centro</small>
-                                <strong style="color: var(--sena-blue-dark);">{{ $programa->centro->nombre }}</strong>
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-geo-alt" style="font-size: 1.5rem; color: var(--sena-blue-light); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Centro</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->centro->nombre }}</strong>
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
+                        @if($programa->municipio)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-pin-map" style="font-size: 1.5rem; color: var(--sena-blue-dark); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Municipio</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->municipio->nombre }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->titulo_otorgado)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-award" style="font-size: 1.5rem; color: var(--sena-yellow); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Título otorgado</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->titulo_otorgado }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->codigo_snies)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-upc-scan" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Código SNIES</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->codigo_snies }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->registro_calidad)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-shield-check" style="font-size: 1.5rem; color: var(--sena-green-dark); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Registro de calidad</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->registro_calidad }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->fecha_registro)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-calendar-check" style="font-size: 1.5rem; color: var(--sena-blue-light); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Fecha de registro</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->fecha_registro->format('d/m/Y') }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->fecha_actualizacion)
+                            <div class="d-flex mb-3 pb-3 border-bottom">
+                                <i class="bi bi-calendar2-event" style="font-size: 1.5rem; color: var(--sena-yellow); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Fecha de actualización</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->fecha_actualizacion->format('d/m/Y') }}</strong>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($programa->estado)
+                            <div class="d-flex mb-3">
+                                <i class="bi bi-toggle-on" style="font-size: 1.5rem; color: var(--sena-green); margin-right: 1rem;"></i>
+                                <div>
+                                    <small class="text-muted d-block">Estado</small>
+                                    <strong style="color: var(--sena-blue-dark);">{{ $programa->estado }}</strong>
+                                </div>
+                            </div>
                         @endif
 
                         <!-- Enrollment Button -->

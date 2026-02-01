@@ -144,15 +144,63 @@
                                         <div class="col-auto">
                                             <small class="text-muted">
                                                 <i class="bi bi-diagram-3 me-1" style="color: var(--sena-yellow);"></i>
-                                                <strong>{{ $programa->red->nombre }}</strong>
+                                                <strong>{{ $programa->red->nombre ?? 'Sin red' }}</strong>
                                             </small>
                                         </div>
                                         <div class="col-auto">
                                             <small class="text-muted">
                                                 <i class="bi bi-mortarboard me-1" style="color: var(--sena-green-dark);"></i>
-                                                <strong>{{ $programa->nivelFormacion->nombre }}</strong>
+                                                <strong>{{ $programa->nivelFormacion->nombre ?? 'Sin nivel' }}</strong>
                                             </small>
                                         </div>
+                                        @if($programa->numero_ficha)
+                                            <div class="col-auto">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-hash me-1" style="color: var(--sena-blue-dark);"></i>
+                                                    <strong>Ficha:</strong> {{ $programa->numero_ficha }}
+                                                </small>
+                                            </div>
+                                        @endif
+                                        @if($programa->modalidad)
+                                            <div class="col-auto">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-laptop me-1" style="color: var(--sena-green);"></i>
+                                                    <strong>{{ $programa->modalidad }}</strong>
+                                                </small>
+                                            </div>
+                                        @endif
+                                        @if($programa->jornada)
+                                            <div class="col-auto">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-clock me-1" style="color: var(--sena-yellow);"></i>
+                                                    <strong>{{ $programa->jornada }}</strong>
+                                                </small>
+                                            </div>
+                                        @endif
+                                        @if(!is_null($programa->cupos))
+                                            <div class="col-auto">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-people me-1" style="color: var(--sena-green-dark);"></i>
+                                                    <strong>Cupos:</strong> {{ $programa->cupos }}
+                                                </small>
+                                            </div>
+                                        @endif
+                                        @if($programa->centro)
+                                            <div class="col-auto">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-geo-alt me-1" style="color: var(--sena-blue-light);"></i>
+                                                    <strong>{{ $programa->centro->nombre }}</strong>
+                                                </small>
+                                            </div>
+                                        @endif
+                                        @if($programa->municipio)
+                                            <div class="col-auto">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-pin-map me-1" style="color: var(--sena-blue-dark);"></i>
+                                                    <strong>{{ $programa->municipio->nombre }}</strong>
+                                                </small>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <!-- Button -->

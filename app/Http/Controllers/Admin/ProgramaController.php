@@ -47,6 +47,7 @@ class ProgramaController extends \App\Http\Controllers\Controller
         Gate::authorize('programas.create');
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
+            'numero_ficha' => 'nullable|string|max:50',
             'descripcion' => 'nullable|string',
             'requisitos' => 'nullable|string',
             'duracion_meses' => 'nullable|integer',
@@ -63,6 +64,7 @@ class ProgramaController extends \App\Http\Controllers\Controller
             'observaciones' => 'nullable|string',
             'centro_id' => 'nullable|exists:centros,id',
             'cupos' => 'nullable|integer',
+            'municipio_id' => 'nullable|exists:municipios,id',
         ]);
 
         Programa::create($data);
@@ -107,6 +109,7 @@ class ProgramaController extends \App\Http\Controllers\Controller
         Gate::authorize('programas.edit', $programa);
         $data = $request->validate([
             'nombre' => 'required|string|max:255',
+            'numero_ficha' => 'nullable|string|max:50',
             'descripcion' => 'nullable|string',
             'requisitos' => 'nullable|string',
             'duracion_meses' => 'nullable|integer',

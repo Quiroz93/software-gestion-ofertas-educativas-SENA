@@ -299,6 +299,7 @@ class DatabaseSeeder extends Seeder
             CentroSeeder::class,
             RedSeeder::class,
             NivelFormacionSeeder::class,
+            MunicipioSeeder::class,
             CompetenciaSeeder::class,
             ProgramaSeeder::class,
             InstructorSeeder::class,

@@ -130,6 +130,7 @@
                         <p class="text-muted ms-4">
                             <strong>Modalidad:</strong> {{ $programa->modalidad ?? 'N/A' }}<br>
                             <strong>Jornada:</strong> {{ $programa->jornada ?? 'N/A' }}<br>
+                            <strong>Número de ficha:</strong> {{ $programa->numero_ficha ?? 'N/A' }}<br>
                             <strong>Título otorgado:</strong> {{ $programa->titulo_otorgado ?? 'N/A' }}<br>
                             <strong>Código SNIES:</strong> {{ $programa->codigo_snies ?? 'N/A' }}<br>
                             <strong>Registro de Calidad:</strong> {{ $programa->registro_calidad ?? 'N/A' }}<br>

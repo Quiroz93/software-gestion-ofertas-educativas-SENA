@@ -50,6 +50,19 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="numero_ficha">
+                            <strong>Número de ficha</strong>
+                        </label>
+                        <input
+                            type="text"
+                            name="numero_ficha"
+                            id="numero_ficha"
+                            class="form-control"
+                            placeholder="Ingrese el número de ficha"
+                        >
+                    </div>
+
+                    <div class="form-group">
                         <label for="descripcion">
                             <strong>Descripción</strong>
                         </label>
