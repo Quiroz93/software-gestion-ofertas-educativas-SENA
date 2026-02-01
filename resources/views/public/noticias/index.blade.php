@@ -65,8 +65,8 @@
                                     {{ $noticia->descripcion_larga }}
                                 </p>
 
-                                          <a href="{{ route('public.ultimaNoticias.show', $noticia) }}"
-                                              class="btn btn-primary-sena stretched-link">
+                                          <a href="{{ route('public.ultimaNoticias.show', ['ultimaNoticia' => $noticia->id]) }}"
+                                              class="btn btn-primary-sena d-inline-flex align-items-center">
                                     <i class="bi bi-arrow-right me-2"></i>Leer más
                                 </a>
                             </div>
@@ -123,7 +123,7 @@
                             {{ $noticia->descripcion_media }}
                         </p>
 
-                                <a href="{{ route('public.ultimaNoticias.show', $noticia) }}"
+                                <a href="{{ route('public.ultimaNoticias.show', ['ultimaNoticia' => $noticia->id]) }}"
                                     class="btn btn-outline-sena btn-sm">
                             <i class="bi bi-arrow-right me-1"></i>Leer
                         </a>

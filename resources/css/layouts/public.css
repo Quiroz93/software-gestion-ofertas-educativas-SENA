@@ -1,0 +1,422 @@
+﻿/* ============================================================================
+ * LAYOUT PÚBLICO - SISTEMA SENA
+ * Layout flex vertical para vistas públicas (programas, ofertas, noticias)
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * ESTRUCTURA BASE
+ * ============================================================================
+ */
+
+.public-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+}
+
+/* ============================================================================
+ * HEADER PÚBLICO
+ * ============================================================================
+ */
+
+.public-header {
+  background: white;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.public-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.public-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #39A900;
+  text-decoration: none;
+}
+
+.public-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.public-nav-link {
+  color: var(--sena-text-primary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-md);
+  transition: all 0.3s;
+}
+
+.public-nav-link:hover {
+  color: #39A900;
+  background-color: rgba(57, 169, 0, 0.08);
+}
+
+.public-nav-link.active {
+  color: #39A900;
+  font-weight: 600;
+}
+
+/* ============================================================================
+ * MAIN CONTENT
+ * ============================================================================
+ */
+
+.public-main {
+  flex: 1;
+  padding: 0;
+}
+
+.sticky-top-offset {
+  top: 20px;
+}
+
+.public-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.public-container-fluid {
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+/* ============================================================================
+ * SEARCH BAR
+ * ============================================================================
+ */
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  padding-right: 3rem;
+  border: 2px solid #e0e0e0;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  border-color: #39A900;
+  box-shadow: 0 0 0 0.2rem rgba(57, 169, 0, 0.15);
+  outline: none;
+}
+
+.search-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #39A900;
+  border: none;
+  color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background: #2d8500;
+}
+
+/* ============================================================================
+ * GRIDS RESPONSIVOS
+ * ============================================================================
+ */
+
+.grid-programas,
+.grid-ofertas,
+.grid-noticias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ============================================================================
+ * FEATURED ITEMS
+ * ============================================================================
+ */
+
+.featured-section {
+  background: #f8f9fa;
+  padding: 3rem 0;
+  margin: 3rem 0;
+}
+
+.featured-item {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.featured-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.featured-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sena-text-primary);
+  margin-bottom: 1rem;
+}
+
+.featured-description {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* ============================================================================
+ * DETAIL PAGES
+ * ============================================================================
+ */
+
+.detail-header {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.detail-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--sena-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.detail-meta {
+  color: #6c757d;
+  font-size: 0.875rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.detail-content {
+  line-height: 1.8;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.detail-content h2,
+.detail-content h3,
+.detail-content h4 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--sena-text-primary);
+}
+
+.detail-content p {
+  margin-bottom: 1rem;
+}
+
+.detail-content ul,
+.detail-content ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+/* ============================================================================
+ * FOOTER PÚBLICO
+ * ============================================================================
+ */
+
+.public-footer {
+  background: #2c3e50;
+  color: white;
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+}
+
+.public-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.public-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.public-footer-section {
+  color: rgba(255,255,255,0.9);
+}
+
+.public-footer-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.public-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.public-footer-link {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem 0;
+  transition: color 0.3s;
+}
+
+.public-footer-link:hover {
+  color: #39A900;
+}
+
+.public-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.875rem;
+}
+
+/* ============================================================================
+ * IMAGE LAZY LOADING
+ * ============================================================================
+ */
+
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ============================================================================
+ * ANIMACIONES
+ * ============================================================================
+ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================
+ */
+
+@media (max-width: 768px) {
+  .public-header-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .public-nav {
+    gap: 1rem;
+  }
+  
+  .public-container {
+    padding: 1rem;
+  }
+  
+  .grid-programas,
+  .grid-ofertas,
+  .grid-noticias,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .featured-item {
+    padding: 1.5rem;
+  }
+  
+  .detail-header {
+    padding: 1.5rem;
+  }
+  
+  .detail-title {
+    font-size: 1.5rem;
+  }
+  
+  .public-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .public-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .public-nav-link {
+    text-align: center;
+    padding: 0.75rem;
+  }
+  
+  .search-container {
+    margin-bottom: 2rem;
+  }
+}

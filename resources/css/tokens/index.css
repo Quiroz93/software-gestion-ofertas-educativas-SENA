@@ -1,0 +1,27 @@
+/* ============================================================================
+ * INDEX DE TOKENS - SISTEMA SENA
+ * Importa todos los tokens del sistema de diseño
+ * ============================================================================
+ */
+
+@import './_colors-sena.css';
+@import './_typography-sena.css';
+@import './_spacing-sena.css';
+@import './_shadows-sena.css';
+@import './_borders-sena.css';
+@import './_animations-sena.css';
+
+/* ============================================================================
+ * VERIFICACIÓN DE CARGA
+ * ============================================================================
+ */
+
+:root {
+  /* Flag que confirma que los tokens fueron cargados exitosamente */
+  --tokens-loaded: true;
+}
+
+/* Mensaje de confirmación en consola (desarrollo) */
+@supports (--test: var(--tokens-loaded)) {
+  /* Los tokens están disponibles */
+}

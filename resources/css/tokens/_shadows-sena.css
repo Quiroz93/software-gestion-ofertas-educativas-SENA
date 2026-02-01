@@ -1,0 +1,42 @@
+/* ============================================================================
+ * TOKENS DE SOMBRAS - SISTEMA SENA
+ * Sombras profesionales e institucionales
+ * ============================================================================
+ */
+
+:root {
+  /* SOMBRAS ELEVADAS (Elevación) */
+  
+  /* Nivel 1: Sutil, para componentes ligeros */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  /* Nivel 2: Sombra normal, para tarjetas y componentes */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  /* Nivel 3: Sombra media, para modales y componentes elevados */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  /* Nivel 4: Sombra fuerte, para overlays y modales principales */
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Nivel 5: Sombra extra fuerte, para dropdowns y tooltips */
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* SOMBRAS INTERIORES (Inset) */
+  --shadow-inner-sm: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-inner-md: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  
+  /* SOMBRAS ENFOCADAS (Para foco de elementos) */
+  --shadow-focus: 0 0 0 3px rgba(57, 169, 0, 0.1);
+  
+  /* SOMBRAS ESPECIALIZADAS */
+  --shadow-card: var(--shadow-md);
+  --shadow-button-hover: var(--shadow-lg);
+  --shadow-modal: var(--shadow-2xl);
+  --shadow-dropdown: var(--shadow-xl);
+  --shadow-tooltip: var(--shadow-lg);
+  --shadow-input-focus: 0 0 0 3px rgba(57, 169, 0, 0.1);
+}

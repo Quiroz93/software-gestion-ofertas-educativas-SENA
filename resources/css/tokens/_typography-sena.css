@@ -1,0 +1,221 @@
+/* ============================================================================
+ * TOKENS DE TIPOGRAFÍA - SISTEMA SENA
+ * Fuente institucional: Work Sans (reemplaza Nunito)
+ * ============================================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* FAMILIAS DE FUENTES */
+  --font-family-primary: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'Courier New', Courier, monospace;
+  
+  /* PESOS DE FUENTE */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* TAMAÑOS DE FUENTE (ESCALA TIPOGRÁFICA) */
+  --font-size-xs: 0.75rem;       /* 12px */
+  --font-size-sm: 0.875rem;      /* 14px */
+  --font-size-base: 1rem;        /* 16px */
+  --font-size-lg: 1.125rem;      /* 18px */
+  --font-size-xl: 1.25rem;       /* 20px */
+  --font-size-2xl: 1.5rem;       /* 24px */
+  --font-size-3xl: 1.875rem;     /* 30px */
+  --font-size-4xl: 2.25rem;      /* 36px */
+  --font-size-5xl: 3rem;         /* 48px */
+  
+  /* ALTURAS DE LÍNEA */
+  --line-height-tight: 1.2;      /* Para títulos */
+  --line-height-normal: 1.5;     /* Para párrafos */
+  --line-height-relaxed: 1.75;   /* Para lectura larga */
+  
+  /* ESPACIADO DE LETRAS */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+}
+
+/* ============================================================================
+ * ESTILOS DE TEXTO PREDEFINIDOS
+ * ============================================================================
+ */
+
+/* H1 - Título principal */
+:root {
+  --h1-size: var(--font-size-5xl);      /* 48px */
+  --h1-weight: var(--font-weight-bold); /* 700 */
+  --h1-line-height: var(--line-height-tight);
+  --h1-letter-spacing: var(--letter-spacing-tight);
+}
+
+/* H2 - Subtítulo secundario */
+:root {
+  --h2-size: var(--font-size-4xl);      /* 36px */
+  --h2-weight: var(--font-weight-bold);
+  --h2-line-height: var(--line-height-tight);
+}
+
+/* H3 - Subtítulo terciario */
+:root {
+  --h3-size: var(--font-size-3xl);      /* 30px */
+  --h3-weight: var(--font-weight-semibold);
+  --h3-line-height: var(--line-height-tight);
+}
+
+/* H4 - Subtítulo cuaternario */
+:root {
+  --h4-size: var(--font-size-2xl);      /* 24px */
+  --h4-weight: var(--font-weight-semibold);
+  --h4-line-height: var(--line-height-normal);
+}
+
+/* H5 - Subtítulo quinto */
+:root {
+  --h5-size: var(--font-size-xl);       /* 20px */
+  --h5-weight: var(--font-weight-semibold);
+  --h5-line-height: var(--line-height-normal);
+}
+
+/* H6 - Subtítulo sexto */
+:root {
+  --h6-size: var(--font-size-lg);       /* 18px */
+  --h6-weight: var(--font-weight-semibold);
+  --h6-line-height: var(--line-height-normal);
+}
+
+/* PÁRRAFO - Texto normal */
+:root {
+  --paragraph-size: var(--font-size-base);
+  --paragraph-weight: var(--font-weight-regular);
+  --paragraph-line-height: var(--line-height-relaxed);
+}
+
+/* PEQUEÑO - Texto auxiliar */
+:root {
+  --small-size: var(--font-size-sm);
+  --small-weight: var(--font-weight-regular);
+  --small-line-height: var(--line-height-normal);
+}
+
+/* BOTÓN - Texto de botón */
+:root {
+  --button-size: var(--font-size-sm);
+  --button-weight: var(--font-weight-semibold);
+  --button-line-height: var(--line-height-tight);
+  --button-letter-spacing: var(--letter-spacing-wide);
+}
+
+/* LABEL - Etiqueta de formulario */
+:root {
+  --label-size: var(--font-size-sm);
+  --label-weight: var(--font-weight-medium);
+  --label-line-height: var(--line-height-normal);
+}
+
+/* CAPTION - Pie de foto */
+:root {
+  --caption-size: var(--font-size-xs);
+  --caption-weight: var(--font-weight-regular);
+  --caption-line-height: var(--line-height-normal);
+}
+
+/* ============================================================================
+ * REGLAS DE TIPOGRAFÍA GLOBAL
+ * ============================================================================
+ */
+
+html,
+body {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-relaxed);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: var(--h1-size);
+  font-weight: var(--h1-weight);
+  line-height: var(--h1-line-height);
+  letter-spacing: var(--h1-letter-spacing);
+  margin: 0.5em 0;
+}
+
+h2 {
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: var(--h2-line-height);
+  margin: 0.5em 0;
+}
+
+h3 {
+  font-size: var(--h3-size);
+  font-weight: var(--h3-weight);
+  line-height: var(--h3-line-height);
+  margin: 0.5em 0;
+}
+
+h4 {
+  font-size: var(--h4-size);
+  font-weight: var(--h4-weight);
+  line-height: var(--h4-line-height);
+  margin: 0.5em 0;
+}
+
+h5 {
+  font-size: var(--h5-size);
+  font-weight: var(--h5-weight);
+  line-height: var(--h5-line-height);
+  margin: 0.5em 0;
+}
+
+h6 {
+  font-size: var(--h6-size);
+  font-weight: var(--h6-weight);
+  line-height: var(--h6-line-height);
+  margin: 0.5em 0;
+}
+
+p {
+  font-size: var(--paragraph-size);
+  font-weight: var(--paragraph-weight);
+  line-height: var(--paragraph-line-height);
+}
+
+small,
+.small {
+  font-size: var(--small-size);
+  font-weight: var(--small-weight);
+  line-height: var(--small-line-height);
+}
+
+button,
+.btn {
+  font-size: var(--button-size);
+  font-weight: var(--button-weight);
+  line-height: var(--button-line-height);
+  letter-spacing: var(--button-letter-spacing);
+}
+
+label {
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  line-height: var(--label-line-height);
+}
+
+caption,
+.caption {
+  font-size: var(--caption-size);
+  font-weight: var(--caption-weight);
+  line-height: var(--caption-line-height);
+}
+
+code,
+pre {
+  font-family: var(--font-family-mono);
+}

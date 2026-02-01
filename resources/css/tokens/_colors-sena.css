@@ -1,0 +1,141 @@
+/* ============================================================================
+ * TOKENS DE COLOR - SISTEMA SENA
+ * Paleta institucional autorizada - DESIGN_SYSTEM_SENA.md
+ * ============================================================================
+ */
+
+:root {
+  /* COLORES PRIMARIOS SENA */
+  --sena-primary-main: #39A900;         /* Verde principal SENA */
+  --sena-primary-dark: #2d8500;         /* Verde oscuro SENA */
+  --sena-primary-light: #5fb822;        /* Verde claro SENA */
+  
+  /* COLORES SECUNDARIOS AUTORIZADOS */
+  --sena-secondary-navy: #00304D;       /* Azul oscuro SENA */
+  --sena-secondary-light-blue: #50E5F9; /* Azul claro SENA */
+  --sena-secondary-purple: #71277A;     /* Violeta SENA */
+  --sena-secondary-yellow: #FDC300;     /* Amarillo SENA */
+  
+  /* COLORES NEUTRALES */
+  --sena-neutral-white: #FFFFFF;        /* Blanco */
+  --sena-neutral-light: #F6F6F6;        /* Gris muy claro */
+  --sena-neutral-dark: #000000;         /* Negro */
+  
+  /* GRISES DE SOPORTE */
+  --sena-gray-100: #F8F9FA;             /* Gris 100 */
+  --sena-gray-200: #E9ECEF;             /* Gris 200 */
+  --sena-gray-300: #DEE2E6;             /* Gris 300 */
+  --sena-gray-400: #CED4DA;             /* Gris 400 */
+  --sena-gray-500: #ADB5BD;             /* Gris 500 */
+  --sena-gray-600: #6C757D;             /* Gris 600 */
+  --sena-gray-700: #495057;             /* Gris 700 */
+  --sena-gray-800: #212529;             /* Gris 800 */
+  
+  /* ESTADOS SEMÁNTICOS */
+  --sena-success: #28a745;              /* Verde de éxito */
+  --sena-warning: #FDC300;              /* Amarillo de alerta */
+  --sena-danger: #dc3545;               /* Rojo de peligro */
+  --sena-info: #50E5F9;                 /* Azul de información */
+  
+  /* FONDOS */
+  --sena-bg-default: #FFFFFF;           /* Fondo por defecto */
+  --sena-bg-secondary: #F6F6F6;         /* Fondo secundario */
+  --sena-bg-tertiary: #E9ECEF;          /* Fondo terciario */
+  
+  /* TEXTOS */
+  --sena-text-primary: #212529;         /* Texto principal */
+  --sena-text-secondary: #6C757D;       /* Texto secundario */
+  --sena-text-light: #ADB5BD;           /* Texto deshabilitado */
+  --sena-text-on-primary: #FFFFFF;      /* Texto sobre color primario */
+  
+  /* BORDES */
+  --sena-border-default: #DEE2E6;       /* Borde por defecto */
+  --sena-border-light: #E9ECEF;         /* Borde claro */
+  --sena-border-dark: #ADB5BD;          /* Borde oscuro */
+}
+
+/* ============================================================================
+ * ALIASES DE COLOR POR COMPONENTE
+ * ============================================================================
+ */
+
+/* BOTONES */
+:root {
+  --btn-primary-bg: var(--sena-primary-main);
+  --btn-primary-bg-hover: var(--sena-primary-dark);
+  --btn-primary-text: var(--sena-text-on-primary);
+  
+  --btn-secondary-bg: var(--sena-gray-200);
+  --btn-secondary-bg-hover: var(--sena-gray-300);
+  --btn-secondary-text: var(--sena-text-primary);
+  
+  --btn-danger-bg: var(--sena-danger);
+  --btn-danger-bg-hover: #c82333;
+  --btn-danger-text: var(--sena-text-on-primary);
+}
+
+/* TARJETAS */
+:root {
+  --card-bg: var(--sena-bg-default);
+  --card-border: var(--sena-border-default);
+  --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ENLACES */
+:root {
+  --link-color: var(--sena-primary-main);
+  --link-color-hover: var(--sena-primary-dark);
+  --link-color-visited: var(--sena-secondary-purple);
+}
+
+/* INPUTS */
+:root {
+  --input-bg: var(--sena-bg-default);
+  --input-border: var(--sena-border-default);
+  --input-text: var(--sena-text-primary);
+  --input-placeholder: var(--sena-text-light);
+  --input-focus-border: var(--sena-primary-main);
+  --input-focus-shadow: rgba(57, 169, 0, 0.1);
+}
+
+/* ALERTAS */
+:root {
+  --alert-success-bg: #d4edda;
+  --alert-success-border: var(--sena-success);
+  --alert-success-text: #155724;
+  
+  --alert-warning-bg: #fff3cd;
+  --alert-warning-border: var(--sena-warning);
+  --alert-warning-text: #856404;
+  
+  --alert-danger-bg: #f8d7da;
+  --alert-danger-border: var(--sena-danger);
+  --alert-danger-text: #721c24;
+  
+  --alert-info-bg: #d1ecf1;
+  --alert-info-border: var(--sena-info);
+  --alert-info-text: #0c5460;
+}
+
+/* NAVEGACIÓN */
+:root {
+  --nav-bg: var(--sena-bg-default);
+  --nav-text: var(--sena-text-primary);
+  --nav-link-active: var(--sena-primary-main);
+  --nav-link-hover: var(--sena-primary-light);
+}
+
+/* ============================================================================
+ * MODOS Y VARIACIONES
+ * ============================================================================
+ */
+
+/* Modo oscuro (futuro) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sena-bg-default: #1a1a1a;
+    --sena-bg-secondary: #2d2d2d;
+    --sena-text-primary: #FFFFFF;
+    --sena-text-secondary: #B0B0B0;
+  }
+}

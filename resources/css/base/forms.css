@@ -1,0 +1,318 @@
+/* ============================================================================
+ * FORMULARIOS BASE - SISTEMA SENA
+ * Estilos globales para elementos de formulario
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * INPUTS Y TEXTAREA
+ * ============================================================================
+ */
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  border: var(--border-default);
+  border-radius: var(--border-radius-md);
+  transition: var(--transition-smooth);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Focus state */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: var(--input-focus-shadow);
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
+  opacity: 1;
+}
+
+/* Disabled state */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: var(--sena-bg-secondary);
+  color: var(--sena-text-light);
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * LABELS
+ * ============================================================================
+ */
+
+label {
+  display: inline-block;
+  margin-bottom: var(--spacing-2);
+  font-size: var(--label-size);
+  font-weight: var(--label-weight);
+  color: var(--sena-text-primary);
+  cursor: pointer;
+}
+
+label.required::after {
+  content: ' *';
+  color: var(--sena-danger);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ============================================================================
+ * GRUPOS DE FORMULARIO
+ * ============================================================================
+ */
+
+.form-group {
+  margin-bottom: var(--spacing-6);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-2);
+}
+
+/* ============================================================================
+ * CHECKBOXES Y RADIOS
+ * ============================================================================
+ */
+
+input[type='checkbox'],
+input[type='radio'] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: var(--spacing-1) var(--spacing-2) var(--spacing-1) 0;
+  cursor: pointer;
+  accent-color: var(--sena-primary-main);
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  appearance: auto;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-3);
+}
+
+.form-check input {
+  margin-top: 0;
+  margin-right: var(--spacing-2);
+}
+
+.form-check label {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+/* ============================================================================
+ * TEXTAREA
+ * ============================================================================
+ */
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+textarea.no-resize {
+  resize: none;
+}
+
+/* ============================================================================
+ * SELECT
+ * ============================================================================
+ */
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23212529' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: var(--spacing-10);
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: var(--input-focus-shadow);
+}
+
+select[multiple] {
+  background-image: none;
+  padding-right: var(--spacing-3);
+}
+
+/* ============================================================================
+ * MENSAJES DE VALIDACIÓN
+ * ============================================================================
+ */
+
+.form-text {
+  display: block;
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--sena-text-secondary);
+}
+
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--sena-danger);
+}
+
+.invalid-feedback.show,
+.was-validated .form-control:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.valid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--sena-success);
+}
+
+.valid-feedback.show,
+.was-validated .form-control:valid ~ .valid-feedback {
+  display: block;
+}
+
+/* ============================================================================
+ * CAMPOS CON ESTADO
+ * ============================================================================
+ */
+
+input.is-invalid,
+textarea.is-invalid,
+select.is-invalid {
+  border-color: var(--sena-danger);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+input.is-valid,
+textarea.is-valid,
+select.is-valid {
+  border-color: var(--sena-success);
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* ============================================================================
+ * INPUT FILE
+ * ============================================================================
+ */
+
+input[type='file'] {
+  display: block;
+  width: 100%;
+}
+
+input[type='file']::file-selector-button {
+  padding: var(--spacing-2) var(--spacing-4);
+  margin-right: var(--spacing-3);
+  background-color: var(--sena-bg-secondary);
+  border: var(--border-default);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+input[type='file']::file-selector-button:hover {
+  background-color: var(--sena-bg-tertiary);
+}
+
+/* ============================================================================
+ * RANGE INPUT
+ * ============================================================================
+ */
+
+input[type='range'] {
+  width: 100%;
+  height: 8px;
+  padding: var(--spacing-2) 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--border-radius-full);
+  background: var(--sena-primary-main);
+  cursor: pointer;
+  border: 2px solid var(--sena-primary-light);
+  transition: var(--transition-smooth);
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  box-shadow: var(--shadow-focus);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--border-radius-full);
+  background: var(--sena-primary-main);
+  cursor: pointer;
+  border: 2px solid var(--sena-primary-light);
+  transition: var(--transition-smooth);
+}
+
+input[type='range']::-moz-range-thumb:hover {
+  box-shadow: var(--shadow-focus);
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: var(--sena-bg-secondary);
+  border-radius: 3px;
+}
+
+input[type='range']::-moz-range-track {
+  background: var(--sena-bg-secondary);
+  border-radius: 3px;
+  border: none;
+}
+
+/* ============================================================================
+ * FIELDSET Y LEGEND
+ * ============================================================================
+ */
+
+fieldset {
+  padding: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+  border: var(--border-default);
+  border-radius: var(--border-radius-md);
+}
+
+legend {
+  padding: 0 var(--spacing-3);
+  margin-left: calc(var(--spacing-3) * -1);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sena-text-primary);
+}

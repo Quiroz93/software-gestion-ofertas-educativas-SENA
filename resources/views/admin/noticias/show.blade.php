@@ -45,9 +45,9 @@
                 {{-- IMAGEN --}}
                 @if($noticia->imagen)
                     <img src="{{ asset('storage/' . $noticia->imagen) }}" 
-                         class="card-img-top" 
+                         class="card-img-top card-img-cover" 
                          alt="{{ $noticia->titulo }}"
-                         style="max-height: 400px; object-fit: cover;">
+                        >
                 @endif
 
                 {{-- BODY --}}
@@ -59,7 +59,7 @@
                             <i class="fas fa-align-left"></i>
                             Descripción
                         </h5>
-                        <p class="text-muted ms-4" style="white-space: pre-line;">
+                        <p class="text-muted ms-4 text-preline">
                             {{ $noticia->descripcion }}
                         </p>
                     </div>

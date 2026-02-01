@@ -1,0 +1,267 @@
+﻿/* ============================================================================
+ * COMPONENTE FORMULARIOS - SISTEMA SENA
+ * Controles de formulario institucionalmente consistentes
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * ENTRADA BASE
+ * ============================================================================
+ */
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-family-primary);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: white;
+  color: var(--sena-text-primary);
+  line-height: 1.5;
+}
+
+.form-control:focus {
+  border-color: #39A900;
+  box-shadow: 0 0 0 0.2rem rgba(57, 169, 0, 0.25);
+  outline: none;
+}
+
+.form-control:disabled {
+  background-color: #e9ecef;
+  opacity: 1;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.form-control:read-only {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  cursor: default;
+}
+
+/* ============================================================================
+ * TAMAÑOS
+ * ============================================================================
+ */
+
+.form-control-sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.form-control-lg {
+  padding: var(--spacing-4) var(--spacing-5);
+  font-size: var(--font-size-lg);
+}
+
+/* ============================================================================
+ * STATES DE VALIDACIÓN
+ * ============================================================================
+ */
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.form-control.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control.is-valid {
+  border-color: #28a745;
+}
+
+.form-control.is-valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* ============================================================================
+ * TEXTAREA
+ * ============================================================================
+ */
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+textarea.form-control:focus {
+  border-color: #39A900;
+  box-shadow: 0 0 0 0.2rem rgba(57, 169, 0, 0.25);
+}
+
+/* ============================================================================
+ * SELECT
+ * ============================================================================
+ */
+
+select.form-control {
+  appearance: none;
+  padding-right: var(--spacing-10);
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Cpath fill=%22none%22 stroke=%22%2343474b%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M2 5l6 6 6-6%22/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-3) center;
+  background-size: 16px 12px;
+}
+
+select.form-control:focus {
+  border-color: #39A900;
+  box-shadow: 0 0 0 0.2rem rgba(57, 169, 0, 0.25);
+}
+
+/* ============================================================================
+ * INPUT FILE
+ * ============================================================================
+ */
+
+.form-control[type="file"] {
+  padding: var(--spacing-3);
+}
+
+.form-control[type="file"]::file-selector-button {
+  padding: var(--spacing-2) var(--spacing-3);
+  margin: 0 var(--spacing-2) 0 0;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.form-control[type="file"]::file-selector-button:hover {
+  background-color: #e9ecef;
+}
+
+/* ============================================================================
+ * RANGE INPUT
+ * ============================================================================
+ */
+
+input[type="range"] {
+  width: 100%;
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  background: #dee2e6;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #39A900;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #2d8500;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #39A900;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background: #2d8500;
+}
+
+/* ============================================================================
+ * CHECKBOX Y RADIO
+ * ============================================================================
+ */
+
+.form-check {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+}
+
+.form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  cursor: pointer;
+  accent-color: #39A900;
+}
+
+.form-check-input:focus {
+  outline: 2px solid #39A900;
+  outline-offset: 2px;
+}
+
+.form-check-label {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ============================================================================
+ * GRUPOS DE FORMULARIO
+ * ============================================================================
+ */
+
+.form-group {
+  margin-bottom: var(--spacing-5);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sena-text-primary);
+}
+
+.form-label.required::after {
+  content: ' *';
+  color: #dc3545;
+}
+
+.form-text {
+  display: block;
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: #6c757d;
+}
+
+.form-error {
+  display: block;
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: #dc3545;
+}
+
+.form-success {
+  display: block;
+  margin-top: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: #28a745;
+}
+
+/* ============================================================================
+ * RESPONSIVIDAD
+ * ============================================================================
+ */
+
+@media (max-width: 576px) {
+  .form-control {
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-base);
+  }
+  
+  .form-control-lg {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+}
