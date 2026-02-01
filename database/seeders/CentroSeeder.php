@@ -44,8 +44,8 @@ class CentroSeeder extends Seeder
                 'correo' => 'cauca@sena.edu.co'
             ],
             [
-                'nombre' => 'Centro Agroempresarial y turistico de los antes',
-                'direccion' => 'Cra. 10 #12-34, Los Antes, Santander',
+                'nombre' => 'Centro Agroempresarial y turistico de los Andes',
+                'direccion' => 'Cra. 11 #13-13, Málaga, Santander',
                 'telefono' => '(7) 6200000',
                 'correo' => 'agroempresarial@sena.edu.co'
             ]
