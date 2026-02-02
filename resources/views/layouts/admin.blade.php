@@ -28,159 +28,19 @@
         {{-- Sidebar Overlay --}}
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
         
-        {{-- Sidebar --}}
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h5>
-                    <i class="bi bi-speedometer2 me-2"></i>
-                    {{ config('app.name', 'SENA') }}
-                </h5>
-            </div>
-
-            <nav>
-                <ul class="sidebar-nav">
-                    {{-- Dashboard --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('dashboard') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                            <i class="bi bi-house"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    
-                    <li class="sidebar-nav-item px-3 py-2 mt-3">
-                        <small class="text-uppercase opacity-75">Contenido publico</small>
-                    </li>
-
-                    {{-- Home --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('home') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                            <i class="bi bi-house-door"></i>
-                            <span>Home</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-nav-item px-3 py-2 mt-3">
-                        <small class="text-uppercase opacity-75">Contenido</small>
-                    </li>
-
-                    {{-- Programas --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('programas.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('programas.*') ? 'active' : '' }}">
-                            <i class="bi bi-book"></i>
-                            <span>Programas</span>
-                        </a>
-                    </li>
-
-                    {{-- Ofertas --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('ofertas.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('ofertas.*') ? 'active' : '' }}">
-                            <i class="bi bi-briefcase"></i>
-                            <span>Ofertas</span>
-                        </a>
-                    </li>
-
-                    {{-- Noticias --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('noticias.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('noticias.*') ? 'active' : '' }}">
-                            <i class="bi bi-newspaper"></i>
-                            <span>Noticias</span>
-                        </a>
-                    </li>
-
-                    {{-- Historias de Éxito --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('historias_de_exito.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('historia_de_exito.*') ? 'active' : '' }}">
-                            <i class="bi bi-star"></i>
-                            <span>Historias Éxito</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-nav-item px-3 py-2 mt-3">
-                        <small class="text-uppercase opacity-75">Configuración</small>
-                    </li>
-
-                    {{-- Centros --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('centros.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('centros.*') ? 'active' : '' }}">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>Centros</span>
-                        </a>
-                    </li>
-
-                    {{-- Competencias --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('competencias.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('competencias.*') ? 'active' : '' }}">
-                            <i class="bi bi-award"></i>
-                            <span>Competencias</span>
-                        </a>
-                    </li>
-
-                    {{-- Niveles de Formación --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('niveles_formacion.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('niveles_formacion.*') ? 'active' : '' }}">
-                            <i class="bi bi-mortarboard"></i>
-                            <span>Niveles</span>
-                        </a>
-                    </li>
-
-                    {{-- Redes --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('redes_conocimiento.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('redes_conocimiento.*') ? 'active' : '' }}">
-                            <i class="bi bi-diagram-3"></i>
-                            <span>Redes</span>
-                        </a>
-                    </li>
-
-                    {{-- Municipios --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('municipios.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('municipios.*') ? 'active' : '' }}">
-                            <i class="bi bi-map"></i>
-                            <span>Municipios</span>
-                        </a>
-                    </li>
-
-                    {{-- Instructores --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('instructores.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('instructores.*') ? 'active' : '' }}">
-                            <i class="bi bi-people"></i>
-                            <span>Instructores</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-nav-item px-3 py-2 mt-3">
-                        <small class="text-uppercase opacity-75">Administración</small>
-                    </li>
-
-                    {{-- Usuarios --}}
-                    <li class="sidebar-nav-item">
-                        <a href="{{ route('users.index') }}"
-                           class="sidebar-nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                            <i class="bi bi-shield-lock"></i>
-                            <span>Usuarios</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+        {{-- Sidebar (incluido desde partials) --}}
+        @include('partials.sidebar')
 
         {{-- Main Content --}}
         <div class="main-content">
             {{-- Navbar --}}
             <nav class="navbar navbar-expand-lg navbar-light sticky-top">
                 <div class="container-fluid">
-                    <button class="btn btn-outline-success d-lg-none me-2" id="sidebarToggle" type="button">
+                    <button class="btn btn-outline-success d-lg-none me-2" 
+                            type="button"
+                            data-bs-toggle="offcanvas" 
+                            data-bs-target="#sidebar-mobile" 
+                            aria-controls="sidebar-mobile">
                         <i class="bi bi-list" style="font-size: 1.25rem;"></i>
                     </button>
 
@@ -318,44 +178,28 @@
         }
     </script>
 
-     {{-- Sidebar Toggle Mobile --}}
+     {{-- Sidebar Toggle - Ahora usa Bootstrap 5 Offcanvas --}}
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-
-        // Toggle sidebar
-        sidebarToggle?.addEventListener('click', function() {
-            sidebar.classList.toggle('show');
-            sidebarOverlay.classList.toggle('show');
-            document.body.classList.toggle('sidebar-open');
-        });
-
-        // Close sidebar when clicking overlay
-        sidebarOverlay?.addEventListener('click', function() {
-            sidebar.classList.remove('show');
-            sidebarOverlay.classList.remove('show');
-            document.body.classList.remove('sidebar-open');
-        });
-
-        // Close sidebar when clicking on a link (mobile only)
-        document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+        // No necesitamos JavaScript personalizado, Bootstrap 5 maneja el offcanvas automáticamente
+        // Pero mantenemos cierre al hacer clic en enlaces para mejor UX móvil
+        document.querySelectorAll('#sidebar-mobile .nav-link').forEach(link => {
             link.addEventListener('click', function() {
-                if (window.innerWidth < 769) {
-                    sidebar.classList.remove('show');
-                    sidebarOverlay.classList.remove('show');
-                    document.body.classList.remove('sidebar-open');
+                const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('sidebar-mobile'));
+                if (offcanvas && window.innerWidth < 992) {
+                    offcanvas.hide();
                 }
             });
         });
 
-        // Close sidebar on ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
-                sidebarOverlay.classList.remove('show');
-                document.body.classList.remove('sidebar-open');
-            }
+        // También para el sidebar desktop en tablets
+        document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 992 && document.getElementById('sidebar-desktop')) {
+                    document.getElementById('sidebar-desktop').classList.remove('show');
+                    document.getElementById('sidebarOverlay').classList.remove('show');
+                    document.body.classList.remove('sidebar-open');
+                }
+            });
         });
     </script>
 

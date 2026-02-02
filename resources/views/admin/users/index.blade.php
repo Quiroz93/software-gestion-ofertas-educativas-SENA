@@ -36,7 +36,7 @@
 
 <div class="row">
     @foreach($users as $u)
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4 mt-2">
         <div class="card card-outline card-primary shadow-sm h-100">
 
             {{-- HEADER --}}

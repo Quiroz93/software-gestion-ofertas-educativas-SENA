@@ -2,12 +2,12 @@
     <div class="container-fluid">
         <!-- Brand -->
         @auth
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <i class="bi bi-mortarboard-fill me-2"></i>
                 {{ config('app.name', 'Laravel') }}
             </a>
         @else
-            <a class="navbar-brand" href="{{ route('public.programasDeFormacion.index') }}">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <i class="bi bi-mortarboard-fill me-2"></i>
                 {{ config('app.name', 'Laravel') }}
             </a>
@@ -25,13 +25,13 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     @auth
-                        <a class="nav-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                             <i class="bi bi-house-door me-1"></i>Inicio
                         </a>
                     @else
-                        <a class="nav-link {{ request()->is('programasDeFormacion*') ? 'active' : '' }}" href="{{ route('public.programasDeFormacion.index') }}">
+                        <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}" href="{{ route('home') }}">
                             <i class="bi bi-house-door me-1"></i>Inicio
-                        </a>
+                        </a>|
                     @endauth
                 </li>
                 <li class="nav-item">
@@ -56,7 +56,7 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">
+                            <a class="btn btn-sm btn-outline-primary" href="{{ route('login') }}">
                                 <i class="bi bi-box-arrow-in-right me-1"></i>Iniciar Sesión
                             </a>
                         </li>
@@ -64,7 +64,7 @@
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">
+                            <a class="btn btn-sm btn-outline-primary" href="{{ route('register') }}">
                                 <i class="bi bi-person-plus me-1"></i>Registrarse
                             </a>
                         </li>

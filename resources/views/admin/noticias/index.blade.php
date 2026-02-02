@@ -39,7 +39,7 @@
 
         <div class="row">
             @foreach($noticias as $noticia)
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-4">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-4 mt-2">
                 <div class="card card-outline card-primary h-100">
                     
                     {{-- Imagen --}}

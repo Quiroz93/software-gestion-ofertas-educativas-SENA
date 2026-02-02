@@ -36,7 +36,7 @@
 
 <div class="row">
     @foreach($historias as $historia)
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4 mb-4 mt-2">
             <div class="card card-outline card-primary shadow-sm h-100">
 
                 {{-- HEADER --}}
