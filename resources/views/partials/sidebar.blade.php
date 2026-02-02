@@ -44,6 +44,17 @@
                 </a>
             </li>
 
+            {{-- Preinscritos --}}
+            @can('preinscritos.admin')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('preinscritos.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('preinscritos.*') ? 'active' : '' }}">
+                    <i class="bi bi-person-check"></i>
+                    <span>Preinscritos</span>
+                </a>
+            </li>
+            @endcan
+
             {{-- Ofertas --}}
             <li class="sidebar-nav-item">
                 <a href="{{ route('ofertas.index') }}"
@@ -147,7 +158,7 @@
 
 {{-- Offcanvas para móviles --}}
 <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="sidebar-mobile" aria-labelledby="sidebarMobileLabel">
-    <div class="offcanvas-header" style="background-color: var(--sena-blue-dark); color: white;">
+    <div class="offcanvas-header offcanvas-header-sena">
         <h5 class="offcanvas-title" id="sidebarMobileLabel">
             <i class="bi bi-speedometer2 me-2"></i>{{ config('app.name', 'SENA') }}
         </h5>
@@ -175,6 +186,12 @@
             <a class="nav-link {{ request()->routeIs('programas.*') ? 'active' : '' }}" href="{{ route('programas.index') }}">
                 <i class="bi bi-book me-2"></i>Programas
             </a>
+            
+            @can('preinscritos.admin')
+            <a class="nav-link {{ request()->routeIs('preinscritos.*') ? 'active' : '' }}" href="{{ route('preinscritos.index') }}">
+                <i class="bi bi-person-check me-2"></i>Preinscritos
+            </a>
+            @endcan
             
             <a class="nav-link {{ request()->routeIs('ofertas.*') ? 'active' : '' }}" href="{{ route('ofertas.index') }}">
                 <i class="bi bi-briefcase me-2"></i>Ofertas
@@ -259,11 +276,10 @@
 </style>
 
 {{-- Botón toggle para móviles (opcional, ya está en navbar) --}}
-<button class="btn btn-primary d-lg-none position-fixed bottom-0 end-0 m-3 rounded-circle shadow" 
+<button class="btn btn-primary d-lg-none position-fixed bottom-0 end-0 m-3 icon-btn-round" 
         type="button" 
         data-bs-toggle="offcanvas" 
         data-bs-target="#sidebar-mobile" 
-        aria-controls="sidebar-mobile"
-        style="width: 56px; height: 56px; z-index: 1040;">
+        aria-controls="sidebar-mobile">
     <i class="bi bi-list fs-4"></i>
 </button>

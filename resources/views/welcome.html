@@ -5,34 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOE | SENA</title>
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+    <link rel="stylesheet" href="../css/welcome.css">
 </head>
 
 <body>
     <div class="container">
         <nav>
             <div class="logo">
-                <img src="{{ asset('images/Logosimbolo-SENA.svg') }}" alt="SENA Logo">
-                <a href="{{ route('welcome') }}">SOE | SENA</a>
+                <img src="../../public/images/Logosimbolo-SENA.svg" alt="SENA Logo">
+                <a href="#">SOE | SENA</a>
             </div>
             <div class="menu-items">
-                <a href="#about">Sobre Nosotros</a>
-                <a href="#services">Programas</a>
-                <a href="#blog">Noticias</a>
-                <a href="#contact">Contacto</a>
-                
-                @auth
-                    {{-- Si el usuario está autenticado --}}
-                    <a href="{{ route('dashboard') }}" class="btn">Dashboard</a>
-                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn outlined">Cerrar Sesión</button>
-                    </form>
-                @else
-                    {{-- Si el usuario NO está autenticado --}}
-                    <a href="{{ route('login') }}" class="btn outlined">Iniciar Sesión</a>
-                    <a href="{{ route('register') }}" class="btn">Registrarse</a>
-                @endauth
+                <a href="#">Sobre Nosotros</a>
+                <a href="#">Programas</a>
+                <a href="#">Noticias</a>
+                <a href="#">Contacto</a>
+                <a href="#" class="btn">Estudia con Nosotros</a>
             </div>
         </nav>
 
@@ -42,12 +30,12 @@
                 <h1>Bienvenido a un nuevo mundo de oportunidades en la plataforma SOE SENA</h1>
                 <p class="sub-heading">Tu puerta al conocimiento y el aprendizaje.</p>
                 <div class="buttons">
-                    <a href="#services" class="btn">Explorar Programas</a>
-                    <a href="#contact" class="btn outlined">Contáctanos</a>
+                    <a href="#" class="btn">Explorar Programas</a>
+                    <a href="#" class="btn outlined">Contáctanos</a>
                 </div>
             </div>
             <div class="right">
-                <img src="{{ asset('images/hero-image.png') }}" alt="Education Illustration">
+                <img src="../../images/hero-image.png" alt="Education Illustration">
                 <div class="bg-color"></div>
             </div>
         </header>
@@ -59,10 +47,10 @@
         <div class="container">
             <h2>Encuentranos en</h2>
             <div class="logos">
-                <img src="{{ asset('images/airbnb-logo.svg') }}" alt="Logo 1">
-                <img src="{{ asset('images/spotify-logo.svg') }}" alt="Logo 2">
-                <img src="{{ asset('images/google-logo.svg') }}" alt="Logo 3">
-                <img src="{{ asset('images/canva-logo.svg') }}" alt="Logo 4">
+                <img src="../../images/airbnb-logo.svg" alt="Logo 1">
+                <img src="../../images/spotify-logo.svg" alt="Logo 2">
+                <img src="../../images/google-logo.svg" alt="Logo 3">
+                <img src="../../images/canva-logo.svg" alt="Logo 4">
             </div>
         </div>
     </div>
@@ -78,28 +66,28 @@
                 <div class="features-container">
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Mission Icon">
+                            <img src="../../images/check-icon.svg" alt="Mission Icon">
                         </div>
                         <h3>Educación de Calidad</h3>
                         <p>Programas diseñados por expertos para garantizar el mejor aprendizaje.</p>
                     </div>
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Flexible Learning Icon">
+                            <img src="../../images/check-icon.svg" alt="Flexible Learning Icon">
                         </div>
                         <h3>Aprendizaje Flexible</h3>
                         <p>Accede a nuestros cursos en cualquier momento y desde cualquier lugar.</p>
                     </div>
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Support Icon">
+                            <img src="../../images/check-icon.svg" alt="Support Icon">
                         </div>
                         <h3>Soporte Continuo</h3>
                         <p>Nuestro equipo está aquí para ayudarte en cada paso de tu proceso formativo.</p>
                     </div>
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Community Icon">
+                            <img src="../../images/check-icon.svg" alt="Community Icon">
                         </div>
                         <h3>Educacion gratuita</h3>
                         <p>El <span>SENA</span> ofrece acceso gratuito a una amplia variedad de cursos y recursos
@@ -109,7 +97,7 @@
                 <a href="#" class="btn outlined">Leer Más</a>
             </div>
             <div class="right">
-                <img src="{{ asset('images/image1.jpg') }}" alt="About Illustration">
+                <img src="../../images/image1.jpg" alt="About Illustration">
             </div>
         </div>
     </section>
@@ -124,7 +112,7 @@
             </div>
             <div class="services-container">
                 <div class="service">
-                    <img src="{{ asset('images/service1.jpg') }}" alt="">
+                    <img src="../../images/service1.jpg" alt="">
                     <div class="content">
                         <h3>Tecnología de la Información</h3>
                         <p>Desarrolla habilidades en programación, redes y ciberseguridad con nuestros cursos
@@ -132,7 +120,7 @@
                     </div>
                 </div>
                 <div class="service">
-                    <img src="{{ asset('images/service2.jpg') }}" alt="">
+                    <img src="../../images/service2.jpg" alt="">
                     <div class="content">
                         <h3>Salud y Bienestar</h3>
                         <p>Prepárate para una carrera en el sector de la salud con nuestros programas de formación
@@ -140,7 +128,7 @@
                     </div>
                 </div>
                 <div class="service">
-                    <img src="{{ asset('images/service3.jpg') }}" alt="">
+                    <img src="../../images/service3.jpg" alt="">
                     <div class="content">
                         <h3>Negocios y Emprendimiento</h3>
                         <p>Adquiere las habilidades necesarias para iniciar y gestionar tu propio negocio con éxito.</p>
@@ -155,7 +143,7 @@
     <section id="why">
         <div class="container">
             <div class="left">
-                <img src="{{ asset('images/image2.png') }}" alt="About Illustration">
+                <img src="../../images/image2.png" alt="About Illustration">
             </div>
             <div class="right">
                 <h2>¿Por qué elegirnos como la mejor opción para construir su futuro?</h2>
@@ -167,7 +155,7 @@
                 <div class="features-container">
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Mission Icon">
+                            <img src="../../images/check-icon.svg" alt="Mission Icon">
                         </div>
                         <h3>Practicas reales en el campo laboral</h3>
                         <p>Aplica los conocimientos adquiridos en entornos laborales reales, fortaleciendo tu
@@ -175,7 +163,7 @@
                     </div>
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Flexible Learning Icon">
+                            <img src="../../images/check-icon.svg" alt="Flexible Learning Icon">
                         </div>
                         <h3>Insentivos económicos</h3>
                         <p>El sena cuenta con diversos incentivos económicos para apoyar a sus estudiantes durante su
@@ -183,7 +171,7 @@
                     </div>
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Support Icon">
+                            <img src="../../images/check-icon.svg" alt="Support Icon">
                         </div>
                         <h3>Flexibilidad horaria</h3>
                         <p>Ofrecemos horarios flexibles para que puedas estudiar y trabajar al mismo tiempo,
@@ -191,14 +179,14 @@
                     </div>
                     <div class="feature">
                         <div class="icon">
-                            <img src="{{ asset('images/check-icon.svg') }}" alt="Community Icon">
+                            <img src="../../images/check-icon.svg" alt="Community Icon">
                         </div>
                         <h3>Comunidad y Networking</h3>
                         <p>Forma parte de una comunidad activa de estudiantes y profesionales, ampliando tus
                             oportunidades de contacto y colaboración.</p>
                     </div>
                 </div>
-                <a href="#contact" class="btn light">Contactanos</a>
+                <a href="#" class="btn light">Contactanos</a>
             </div>
         </div>
     </section>
@@ -214,7 +202,7 @@
             <div class="services-container">
                 <div class="service">
                     <a href="#">
-                        <img src="{{ asset('images/blog1.jpg') }}" alt="Blog Post 1">
+                        <img src="../../images/blog1.jpg" alt="Blog Post 1">
                     </a>
                     <div class="content">
                         <a href="#" class="read-more">
@@ -230,7 +218,7 @@
                 </div>
                 <div class="service">
                     <a href="#">
-                        <img src="{{ asset('images/blog2.jpg') }}" alt="Blog Post 2">
+                        <img src="../../images/blog2.jpg" alt="Blog Post 2">
                     </a>
                     <div class="content">
                         <a href="#" class="read-more">
@@ -246,7 +234,7 @@
                 </div>
                 <div class="service">
                     <a href="#">
-                        <img src="{{ asset('images/blog3.jpg') }}" alt="Blog Post 3">
+                        <img src="../../images/blog3.jpg" alt="Blog Post 3">
                     </a>
                     <div class="content">
                         <a href="#" class="read-more">
@@ -267,12 +255,12 @@
     <!--end of blog section-->
 
     <!--contact section-->
-    <div class="contact" id="contact">
+    <div class="contact">
         <div class="container">
             <div class="heading-container">
                 <h2>¿Listo para comenzar tu viaje educativo con SOE SENA?</h2>
                 <p>Estamos aquí para ayudarte a dar el siguiente paso hacia tu futuro.</p>
-                <a href="{{ route('register') }}" class="btn">Contáctanos Hoy</a>
+                <a href="#" class="btn">Contáctanos Hoy</a>
             </div>
             <form action="#">
                 <div class="group">
@@ -291,7 +279,7 @@
         <div class="container">
             <div class="top">
                 <div class="left">
-                    <a href="{{ route('welcome') }}" class="logo">Logo</a>
+                    <a href="#" class="logo">Logo</a>
                     <h3>SOE | SENA</h3>
                     <p>Empoderando tu futuro a través de la educación y el aprendizaje.</p>
                 </div>
@@ -300,13 +288,13 @@
                     <div class="social">
                         <div>
                             <a href="#">
-                                <img src="{{ asset('images/x-logo.svg') }}" alt="">
+                                <img src="../../images/x-logo.svg" alt="">
                             </a>
                             <a href="#">
-                                <img src="{{ asset('images/instagram-logo.svg') }}" alt="">
+                                <img src="../../images/instagram-logo.svg" alt="">
                             </a>
                             <a href="#">
-                                <img src="{{ asset('images/dribbble-logo.svg') }}" alt="">
+                                <img src="../../images/dribbble-logo.svg" alt="">
                             </a>
                         </div>
                     </div>
@@ -320,7 +308,7 @@
     <!--end of footer section-->
 
     <!-- JavaScript File -->
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

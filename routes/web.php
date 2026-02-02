@@ -26,6 +26,7 @@ use App\Http\Controllers\Public\PublicProgramaController;
 use App\Http\Controllers\Admin\RedController;
 use App\Http\Controllers\Admin\HomeCarouselController;
 use App\Http\Controllers\Admin\MunicipioController;
+use App\Http\Controllers\Admin\PresritoController;
 use App\Http\Controllers\Public\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
@@ -359,6 +360,40 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('programas/{programa}', [ProgramaController::class, 'destroy'])
         ->middleware('can:programas.delete')->name('programas.destroy');
     
+});
+
+/*
+|--------------------------------------------------------------------------
+| Aprendices Preinscritos
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('admin/preinscritos', [PresritoController::class, 'index'])
+        ->middleware('can:preinscritos.view')->name('preinscritos.index');
+
+    Route::get('admin/preinscritos/create', [PresritoController::class, 'create'])
+        ->middleware('can:preinscritos.create')->name('preinscritos.create');
+
+    Route::post('admin/preinscritos', [PresritoController::class, 'store'])
+        ->middleware('can:preinscritos.create')->name('preinscritos.store');
+
+    Route::get('admin/preinscritos/{presrito}', [PresritoController::class, 'show'])
+        ->middleware('can:preinscritos.view')->name('preinscritos.show');
+
+    Route::get('admin/preinscritos/{presrito}/edit', [PresritoController::class, 'edit'])
+        ->middleware('can:preinscritos.edit')->name('preinscritos.edit');
+
+    Route::put('admin/preinscritos/{presrito}', [PresritoController::class, 'update'])
+        ->middleware('can:preinscritos.edit')->name('preinscritos.update');
+
+    Route::delete('admin/preinscritos/{presrito}', [PresritoController::class, 'destroy'])
+        ->middleware('can:preinscritos.delete')->name('preinscritos.destroy');
+
+    Route::get('admin/preinscritos/reportes', [PresritoController::class, 'reportes'])
+        ->middleware('can:preinscritos.view')->name('preinscritos.reportes');
+
+    Route::post('admin/preinscritos/{id}/restore', [PresritoController::class, 'restore'])
+        ->middleware('can:preinscritos.restore')->name('preinscritos.restore');
 });
 
 /*

@@ -167,6 +167,21 @@ class DatabaseSeeder extends Seeder
 
             /*
             |--------------------------------------------------------------------------
+            | Aprendices Preinscritos
+            |--------------------------------------------------------------------------
+            */
+            'preinscritos.view',
+            'preinscritos.create',
+            'preinscritos.edit',
+            'preinscritos.update',
+            'preinscritos.delete',
+            'preinscritos.restore',
+            'preinscritos.force_delete',
+            'preinscritos.manage',
+            'preinscritos.admin',
+
+            /*
+            |--------------------------------------------------------------------------
             | Noticias y artículos
             |--------------------------------------------------------------------------
             */

@@ -5,7 +5,7 @@
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->
-    <div style="background-color: var(--sena-green);" class="text-white py-5 mb-5 rounded-lg overflow-hidden">
+    <div class="hero-section hero-bg-green py-5 mb-5">
         <div class="container">
             <!-- Breadcrumbs -->
             <nav aria-label="breadcrumb" class="mb-3">

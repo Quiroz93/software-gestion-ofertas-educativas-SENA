@@ -1,0 +1,753 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+}
+
+/* ================================================================
+   VARIABLES DE DISEÑO SENA - MANUAL DE IDENTIDAD VISUAL 2024
+   ================================================================ */
+:root {
+    /* COLORES PRINCIPALES SENA */
+    --sena-verde-principal: #39A900;
+    --sena-verde-oscuro: #007832;
+    
+    /* COLORES SECUNDARIOS AUTORIZADOS */
+    --sena-azul-oscuro: #00304D;
+    --sena-azul-claro: #50E5F9;
+    --sena-violeta: #71277A;
+    --sena-amarillo: #FDC300;
+    
+    /* COLORES NEUTROS */
+    --sena-blanco: #FFFFFF;
+    --sena-gris-claro: #F6F6F6;
+    --sena-gris-medio: #E0E0E0;
+    --sena-gris-texto: #4A4A4A;
+    --sena-negro: #000000;
+    
+    /* VARIACIONES DE VERDE PARA HOVER/ESTADOS */
+    --sena-verde-hover: #2d8000;
+    --sena-verde-light: rgba(57, 169, 0, 0.1);
+    
+    /* APLICACIÓN DE COLORES A ELEMENTOS */
+    --color-primario: var(--sena-verde-principal);
+    --color-primario-hover: var(--sena-verde-hover);
+    --color-texto-principal: var(--sena-gris-texto);
+    --color-texto-claro: var(--sena-blanco);
+    --color-fondo: var(--sena-blanco);
+    --color-fondo-alternativo: var(--sena-gris-claro);
+    --color-sombra: rgba(0, 0, 0, 0.1);
+    
+    /* TIPOGRAFÍA */
+    --fuente-principal: "Work Sans", sans-serif;
+    
+    /* ESPACIADO */
+    --espaciado-xs: 8px;
+    --espaciado-sm: 16px;
+    --espaciado-md: 24px;
+    --espaciado-lg: 32px;
+    --espaciado-xl: 48px;
+    --espaciado-2xl: 60px;
+    --espaciado-3xl: 80px;
+    
+    /* BORDES */
+    --radio-sm: 4px;
+    --radio-md: 8px;
+    --radio-lg: 16px;
+    --radio-xl: 30px;
+    
+    /* TRANSICIONES */
+    --transicion-rapida: 200ms ease;
+    --transicion-normal: 300ms ease;
+}
+
+/* ================================================================
+   ESTILOS BASE
+   ================================================================ */
+body {
+    margin: 0;
+    color: var(--color-texto-principal);
+    background: var(--color-fondo);
+    font-family: var(--fuente-principal);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-texto-principal);
+    transition: color var(--transicion-normal);
+}
+
+a:hover {
+    color: var(--color-primario);
+}
+
+.container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: var(--espaciado-lg);
+}
+
+/* ================================================================
+   BOTONES - ESTILO INSTITUCIONAL SENA
+   ================================================================ */
+.btn {
+    background: var(--color-primario);
+    color: var(--color-texto-claro);
+    padding: var(--espaciado-xs) var(--espaciado-lg);
+    border: 2px solid var(--color-primario);
+    display: inline-block;
+    border-radius: var(--radio-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transicion-normal);
+    font-family: var(--fuente-principal);
+}
+
+.btn:hover {
+    background: var(--color-primario-hover);
+    border-color: var(--color-primario-hover);
+    color: var(--color-texto-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--sena-verde-light);
+}
+
+.btn.outline, .btn.outlined {
+    background: transparent;
+    color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn.outline:hover, .btn.outlined:hover {
+    background: var(--color-primario);
+    color: var(--color-texto-claro);
+}
+
+.btn.light {
+    background: var(--color-texto-claro);
+    color: var(--color-primario);
+    border-color: var(--color-texto-claro);
+}
+
+.btn.light:hover {
+    background: var(--color-fondo-alternativo);
+    color: var(--color-primario);
+    border-color: var(--color-fondo-alternativo);
+}
+
+.img {
+    width: 100%;
+    display: flex;
+}
+
+/* ================================================================
+   TIPOGRAFÍA - WORK SANS (OBLIGATORIO SENA)
+   ================================================================ */
+h1 {
+    font-size: 48px;
+    line-height: 110%;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: var(--espaciado-sm) 0;
+    background: linear-gradient(90deg, var(--sena-azul-oscuro) 0%, var(--sena-verde-principal) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-family: var(--fuente-principal);
+}
+
+h2 {
+    font-size: 36px;
+    line-height: 120%;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: var(--espaciado-xs) 0;
+    background: linear-gradient(90deg, var(--sena-azul-oscuro) 0%, var(--sena-verde-principal) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-family: var(--fuente-principal);
+}
+
+h3 {
+    font-size: 20px;
+    line-height: 130%;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin: var(--espaciado-xs) 0;
+    color: var(--color-texto-principal);
+    font-family: var(--fuente-principal);
+}
+
+p {
+    font-size: 16px;
+    line-height: 160%;
+    color: var(--color-texto-principal);
+    font-family: var(--fuente-principal);
+}
+
+section {
+    padding: var(--espaciado-3xl) 0;
+}
+
+/* ================================================================
+   NAVEGACIÓN - ESTILO INSTITUCIONAL
+   ================================================================ */
+nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+    max-width: 1200px;
+    margin-inline: auto;
+    z-index: 5;
+    padding: var(--espaciado-sm) var(--espaciado-lg);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 16px var(--color-sombra);
+    border-radius: 0 0 var(--radio-lg) var(--radio-lg);
+}
+
+nav .menu-items {
+    display: flex;
+    align-items: center;
+    gap: var(--espaciado-xl);
+    font-weight: 500;
+}
+
+nav .menu-items a {
+    transition: color var(--transicion-normal);
+}
+
+nav .menu-items a:hover {
+    color: var(--color-primario);
+}
+
+nav .menu-items .btn {
+    font-size: 14px;
+    padding: var(--espaciado-xs) var(--espaciado-md);
+}
+
+nav .menu-items .btn:hover {
+    color: var(--color-texto-claro);
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 700;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    gap: var(--espaciado-xs);
+}
+
+.logo img {
+    height: 32px;
+    vertical-align: middle;
+    filter: brightness(0) saturate(100%) invert(54%) sepia(98%) saturate(749%) hue-rotate(66deg) brightness(97%) contrast(101%);
+}
+
+.logo a {
+    color: var(--color-texto-principal);
+    font-weight: 700;
+}
+
+/* ================================================================
+   SECCIÓN HERO - INSTITUCIONAL
+   ================================================================ */
+header {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    padding-top: 70px;
+    min-height: 600px;
+    max-height: 800px;
+    position: relative;
+}
+
+.buttons {
+    display: flex;
+    gap: var(--espaciado-md);
+    margin-top: var(--espaciado-lg);
+}
+
+header .left {
+    max-width: 50%;
+    z-index: 2;
+}
+
+header .right {
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+
+header .right img {
+    height: 600px;
+    object-fit: cover;
+    border-radius: var(--radio-lg);
+}
+
+header .bg-color {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(135deg, var(--sena-azul-oscuro) 0%, var(--sena-verde-principal) 100%);
+    top: 100px;
+    right: -50px;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+}
+
+/* ================================================================
+   SECCIÓN FEATURED - LOGOS PARTNER
+   ================================================================ */
+.featured {
+    z-index: 2;
+    position: relative;
+    margin-top: -40px;
+}
+
+.featured img {
+    width: auto;
+    height: 25px;
+    opacity: 0.6;
+    transition: opacity var(--transicion-normal);
+}
+
+.featured img:hover {
+    opacity: 1;
+}
+
+.featured .logos {
+    display: flex;
+    gap: var(--espaciado-2xl);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.featured .container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-xs);
+    align-items: center;
+    padding: var(--espaciado-xl) var(--espaciado-lg);
+    box-shadow: 0 4px 24px var(--color-sombra);
+    border-radius: var(--radio-xl);
+    background: var(--color-fondo);
+}
+
+/* ================================================================
+   SECCIÓN ABOUT - SOBRE NOSOTROS
+   ================================================================ */
+#about {
+    background: var(--color-fondo-alternativo);
+    margin-top: -60px;
+    padding-top: 180px;
+}
+
+#about .container {
+    display: flex;
+    gap: var(--espaciado-3xl);
+    align-items: center;
+}
+
+#about .right img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radio-lg);
+    box-shadow: 0 8px 32px var(--color-sombra);
+}
+
+section .icon {
+    width: 40px;
+    height: 40px;
+}
+
+section .icon img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(0) saturate(100%) invert(54%) sepia(98%) saturate(749%) hue-rotate(66deg) brightness(97%) contrast(101%);
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: var(--espaciado-lg);
+    gap: var(--espaciado-md);
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-xs);
+}
+
+.feature h3 {
+    font-size: 18px;
+    margin: var(--espaciado-sm) 0 var(--espaciado-xs) 0;
+    color: var(--sena-azul-oscuro);
+}
+
+.feature p {
+    font-size: 15px;
+    line-height: 160%;
+}
+
+section .btn {
+    margin-top: var(--espaciado-lg);
+}
+/* ================================================================
+   SECCIÓN SERVICES/PROGRAMAS
+   ================================================================ */
+section .heading-container {
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: var(--espaciado-2xl);
+    margin-inline: auto;
+}
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--espaciado-xl);
+}
+
+.services-container .service {
+    background: var(--color-fondo);
+    border-radius: var(--radio-md);
+    overflow: hidden;
+    box-shadow: 0 4px 16px var(--color-sombra);
+    transition: all var(--transicion-normal);
+    border: 1px solid var(--sena-gris-medio);
+}
+
+.services-container .service:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(57, 169, 0, 0.15);
+    border-color: var(--color-primario);
+}
+
+.services-container .service img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.services-container .content {
+    padding: var(--espaciado-md);
+}
+
+.services-container .content h3 {
+    color: var(--sena-azul-oscuro);
+    margin-bottom: var(--espaciado-xs);
+}
+
+/* ================================================================
+   SECCIÓN WHY CHOOSE US - POR QUÉ ELEGIRNOS
+   ================================================================ */
+#why {
+    background: var(--color-primario);
+    color: var(--color-texto-claro);
+}
+
+#why .container {
+    display: flex;
+    gap: var(--espaciado-3xl);
+    align-items: center;
+}
+
+#why .left {
+    flex: 0 0 45%;
+    max-width: 500px;
+}
+
+#why h2 {
+    color: var(--sena-azul-oscuro);
+    background: none;
+    -webkit-text-fill-color: var(--sena-azul-oscuro);
+}
+
+#why p {
+    color: var(--color-texto-claro);
+    opacity: 0.95;
+}
+
+#why .icon img {
+    filter: brightness(0) invert(1);
+}
+
+#why .left img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radio-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+#why .right {
+    flex: 1;
+}
+
+#why .feature {
+    padding: var(--espaciado-md);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radio-md);
+    transition: all var(--transicion-normal);
+}
+
+#why .feature:hover {
+    border-color: var(--sena-amarillo);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#why .feature h3 {
+    color: var(--sena-amarillo);
+}
+
+/* ================================================================
+   SECCIÓN BLOG/NOTICIAS
+   ================================================================ */
+#blog {
+    padding: var(--espaciado-3xl) 0;
+}
+
+#blog .btn {
+    display: block;
+    margin: var(--espaciado-xl) auto 0;
+    width: fit-content;
+}
+
+#blog .labels {
+    display: flex;
+    gap: var(--espaciado-xs);
+    margin: var(--espaciado-sm) 0;
+    flex-wrap: wrap;
+}
+
+#blog .labels a {
+    background: var(--sena-verde-light);
+    color: var(--color-primario);
+    padding: 4px 12px;
+    border-radius: var(--radio-sm);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all var(--transicion-normal);
+}
+
+#blog .labels a:hover {
+    background: var(--color-primario);
+    color: var(--color-texto-claro);
+}
+
+#blog .read-more h3 {
+    transition: color var(--transicion-normal);
+}
+
+#blog .read-more:hover h3 {
+    color: var(--color-primario);
+}
+
+/* ================================================================
+   SECCIÓN CONTACTO - FORMULARIO
+   ================================================================ */
+.contact {
+    background: var(--color-fondo-alternativo);
+    padding: var(--espaciado-3xl) 0;
+}
+
+.contact .heading-container {
+    margin-bottom: var(--espaciado-xl);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-sm);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+form .group {
+    display: flex;
+    gap: var(--espaciado-sm);
+}
+
+form input, 
+form textarea {
+    width: 100%;
+    padding: var(--espaciado-sm) var(--espaciado-md);
+    background: var(--color-fondo);
+    border: 2px solid var(--sena-gris-medio);
+    border-radius: var(--radio-sm);
+    font-size: 16px;
+    font-family: var(--fuente-principal);
+    color: var(--color-texto-principal);
+    transition: border-color var(--transicion-normal);
+}
+
+form input:focus, 
+form textarea:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px var(--sena-verde-light);
+}
+
+form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+form .btn {
+    font-size: 16px;
+    width: fit-content;
+    margin-top: var(--espaciado-sm);
+    align-self: flex-start;
+}
+
+/* ================================================================
+   FOOTER - PIE DE PÁGINA INSTITUCIONAL
+   ================================================================ */
+footer {
+    background: var(--sena-azul-oscuro);
+    color: var(--color-texto-claro);
+    padding: var(--espaciado-2xl) var(--espaciado-lg);
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaciado-xl);
+}
+
+footer .top {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--espaciado-2xl);
+    align-items: flex-start;
+    width: 100%;
+}
+
+footer .top .left {
+    flex: 0 1 auto;
+}
+
+footer .top .right {
+    flex: 0 1 auto;
+    text-align: right;
+}
+
+footer a {
+    color: var(--color-texto-claro);
+    transition: color var(--transicion-normal);
+}
+
+footer a:hover {
+    color: var(--color-primario);
+}
+
+footer .social {
+    display: flex;
+    gap: var(--espaciado-md);
+    margin-top: var(--espaciado-md);
+    justify-content: flex-end;
+}
+
+footer .social img {
+    width: 32px;
+    height: 32px;
+    transition: transform var(--transicion-normal), filter var(--transicion-normal);
+    filter: brightness(0) invert(1);
+}
+
+footer .social img:hover {
+    transform: scale(1.15);
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(66deg);
+}
+
+footer .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-texto-claro);
+}
+
+footer h3 {
+    color: var(--color-texto-claro);
+    margin: var(--espaciado-sm) 0;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+}
+
+footer .copyright {
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    padding-top: var(--espaciado-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 14px;
+}
+
+/* ================================================================
+   RESPONSIVE DESIGN
+   ================================================================ */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+    
+    h2 {
+        font-size: 28px;
+    }
+    
+    header .left {
+        max-width: 100%;
+    }
+    
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .services-container {
+        grid-template-columns: 1fr;
+    }
+    
+    #about .container,
+    #why .container {
+        flex-direction: column;
+    }
+    
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+    
+    nav .menu-items {
+        gap: var(--espaciado-sm);
+        font-size: 14px;
+    }
+    
+    footer .top {
+        flex-direction: column;
+        text-align: left;
+    }
+    
+    footer .top .right {
+        text-align: left;
+    }
+    
+    footer .social {
+        justify-content: flex-start;
+    }
+}

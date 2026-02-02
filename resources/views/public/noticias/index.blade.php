@@ -64,6 +64,13 @@
                                 <p class="card-text text-muted mb-4">
                                     {{ $noticia->descripcion_larga }}
                                 </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat veritatis saepe nisi libero, at, vero neque minus quam ducimus qui itaque sit cupiditate culpa totam voluptatum facere veniam dolore sequi?
+                                </p>
+
+                                <p>
+                                    lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat veritatis saepe nisi libero, at, vero neque minus quam ducimus qui itaque sit cupiditate culpa totam voluptatum facere veniam dolore sequi?
+                                </p>
 
                                           <a href="{{ route('public.ultimaNoticias.show', ['ultimaNoticia' => $noticia->id]) }}"
                                               class="btn btn-primary-sena d-inline-flex align-items-center">
