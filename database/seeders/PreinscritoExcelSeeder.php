@@ -9,21 +9,26 @@ use App\Models\Red;
 use App\Models\NivelFormacion;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
-use Maatwebsite\Excel\Concerns\ToArray;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class PreinscritoExcelSeeder extends Seeder
 {
     public function run(): void
     {
-        // Leer datos del Excel
-        $excelData = Excel::toArray(new class implements ToArray {
-            public function array(array $array) {
-                return $array;
-            }
-        }, 'pre incripciones.xlsx');
+        // Limpiar tablas relacionadas antes de reimportar
+        Schema::disableForeignKeyConstraints();
+        DB::table('novedades_preinscritos')->truncate();
+        DB::table('consolidacion_preinscritos_detalles')->truncate();
+        DB::table('consolidaciones_preinscritos')->truncate();
+        DB::table('preinscritos_rechazados')->truncate();
+        DB::table('preinscritos')->truncate();
+        Schema::enableForeignKeyConstraints();
 
-        $sheet = $excelData[0];
+        // Leer datos del archivo base_datos_preinscritos.md (tab-delimitado)
+        $filePath = base_path('base_datos_preinscritos.md');
+        $raw = file_get_contents($filePath);
+        $lines = preg_split("/\R/u", (string) $raw);
         
         $normalizePrograma = function (?string $nombre): string {
             $value = Str::ascii((string) $nombre);
@@ -38,6 +43,7 @@ class PreinscritoExcelSeeder extends Seeder
         foreach ($programas as $programa) {
             $programasIndex[$normalizePrograma($programa->nombre)] = $programa;
         }
+        $programasById = $programas->keyBy('id');
 
         $defaultProgram = $programas->first();
         $defaultRedId = $defaultProgram?->red_id ?? Red::query()->value('id');
@@ -46,8 +52,6 @@ class PreinscritoExcelSeeder extends Seeder
         $count = 0;
         $skipped = 0;
         $rechazados = 0;
-        $programasCreados = 0;
-        $programasNoEncontrados = [];
         $tipoDocumentoInvalidos = 0;
         $tipoDocumentoPermitidos = ['cc', 'ti', 'ce', 'ppt', 'pa', 'pep', 'nit'];
         $documentosProcesados = [];
@@ -59,6 +63,9 @@ class PreinscritoExcelSeeder extends Seeder
             $telefono = $row[3] ?? null;
             $programa = $row[4] ?? null;
             $correo = $row[6] ?? null;
+            if (($correo === '' || $correo === null) && isset($row[7]) && str_contains((string) $row[7], '@')) {
+                $correo = $row[7];
+            }
 
             PreinscritoRechazado::create([
                 'nombre_completo' => $nombreCompleto,
@@ -75,9 +82,15 @@ class PreinscritoExcelSeeder extends Seeder
             $rechazados++;
         };
 
-        foreach ($sheet as $index => $row) {
+        foreach ($lines as $index => $line) {
             // Saltar header y filas vacías
-            if ($index === 0 || empty(array_filter($row, fn($v) => !is_null($v) && $v !== ''))) {
+            if ($index === 0 || trim((string) $line) === '') {
+                continue;
+            }
+
+            $row = array_map('trim', explode("\t", (string) $line));
+
+            if (empty(array_filter($row, fn($v) => $v !== '' && $v !== null))) {
                 continue;
             }
 
@@ -86,7 +99,14 @@ class PreinscritoExcelSeeder extends Seeder
             $numeroDoc = $row[2] ?? null;
             $telefono = $row[3] ?? null;
             $programaNombre = $row[4] ?? null;
+            $numeroFicha = $row[5] ?? null;
             $correo = $row[6] ?? null;
+            $comentario = $row[7] ?? null;
+
+            if (($correo === '' || $correo === null) && isset($row[7]) && str_contains((string) $row[7], '@')) {
+                $correo = $row[7];
+                $comentario = $row[8] ?? null;
+            }
 
             // Validar que tenga al menos nombre y documento
             if (empty($nombreCompleto) || empty($numeroDoc)) {
@@ -139,29 +159,22 @@ class PreinscritoExcelSeeder extends Seeder
             // Buscar programa
             $programaId = null;
             $programaNombreLimpio = trim((string) $programaNombre);
-            if ($programaNombreLimpio !== '') {
+            $numeroFichaValue = preg_replace('/\D+/', '', (string) $numeroFicha);
+            if ($numeroFichaValue !== '' && isset($programasById[(int) $numeroFichaValue])) {
+                $programaId = (int) $numeroFichaValue;
+            }
+
+            if (!$programaId && $programaNombreLimpio !== '') {
                 $programaKey = $normalizePrograma($programaNombreLimpio);
                 $programa = $programasIndex[$programaKey] ?? null;
-                if (!$programa) {
-                    $programa = Programa::create([
-                        'nombre' => $programaNombreLimpio,
-                        'red_id' => $defaultRedId,
-                        'nivel_formacion_id' => $defaultNivelId,
-                        'centro_id' => $defaultProgram?->centro_id,
-                        'municipio_id' => $defaultProgram?->municipio_id,
-                        'estado' => $defaultProgram?->estado,
-                    ]);
-                    $programasIndex[$programaKey] = $programa;
-                    $programasCreados++;
+                if ($programa) {
+                    $programaId = $programa->id;
                 }
-                $programaId = $programa->id;
             }
 
             if (!$programaId && $defaultProgram) {
                 $programaId = $defaultProgram->id;
-                if (!empty($programaNombreLimpio)) {
-                    $programasNoEncontrados[] = $programaNombreLimpio;
-                }
+                // Se deja por defecto el primer programa configurado
             }
 
             try {
@@ -181,7 +194,7 @@ class PreinscritoExcelSeeder extends Seeder
                     'correo_alternativo' => null,
                     'programa_id' => $programaId,
                     'estado' => 'por_inscribir',
-                    'comentarios' => 'Importado desde archivo Excel pre incripciones.xlsx',
+                    'comentarios' => $comentario ?: 'Importado desde base_datos_preinscritos.md',
                     'created_by' => 1,
                     'updated_by' => 1,
                 ]);
@@ -195,12 +208,9 @@ class PreinscritoExcelSeeder extends Seeder
             }
         }
 
-        $this->command->info("✓ {$count} preinscritos importados exitosamente desde Excel.");
+        $this->command->info("✓ {$count} preinscritos importados exitosamente desde base_datos_preinscritos.md.");
         if ($skipped > 0) {
             $this->command->warn("⚠ {$skipped} registros omitidos (duplicados o datos faltantes).");
-        }
-        if ($programasCreados > 0) {
-            $this->command->info("✓ {$programasCreados} programas creados desde el Excel.");
         }
         if ($tipoDocumentoInvalidos > 0) {
             $this->command->warn("⚠ {$tipoDocumentoInvalidos} registros con tipo_documento inválido fueron normalizados a 'cc'.");
