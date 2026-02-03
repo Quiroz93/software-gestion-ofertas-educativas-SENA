@@ -34,6 +34,11 @@ class Preinscrito extends Model
         'programa_id',
         'estado',
         'comentarios',
+        'novedades',
+        'tipo_novedad',
+        'novedad_resuelta',
+        'fecha_resolucion',
+        'resuelto_por',
         'created_by',
         'updated_by',
     ];
@@ -69,6 +74,14 @@ class Preinscrito extends Model
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * Relación: Usuario que resolvió la novedad
+     */
+    public function resolvedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'resuelto_por');
     }
 
     /**
@@ -168,6 +181,41 @@ class Preinscrito extends Model
     }
 
     /**
+     * Obtener lista de tipos de novedades disponibles
+     */
+    public static function getTiposNovedades(): array
+    {
+        return [
+            'cambio_programa' => 'Cambio de Programa',
+            'cambio_contacto' => 'Cambio de Contacto',
+            'error_datos' => 'Error en Datos',
+            'no_comparecencia' => 'No Comparecencia',
+            'cambio_ubicacion' => 'Cambio de Ubicación',
+            'otra' => 'Otra',
+        ];
+    }
+
+    /**
+     * Obtener etiqueta del tipo de novedad
+     */
+    public function getEtiquetaTipoNovedadAttribute(): ?string
+    {
+        if (!$this->tipo_novedad) {
+            return null;
+        }
+        
+        return match($this->tipo_novedad) {
+            'cambio_programa' => 'Cambio de Programa',
+            'cambio_contacto' => 'Cambio de Contacto',
+            'error_datos' => 'Error en Datos',
+            'no_comparecencia' => 'No Comparecencia',
+            'cambio_ubicacion' => 'Cambio de Ubicación',
+            'otra' => 'Otra',
+            default => 'Desconocido',
+        };
+    }
+
+    /**
      * Scope: Filtrar por programa
      */
     public function scopeByPrograma($query, ?int $programaId)
@@ -221,6 +269,37 @@ class Preinscrito extends Model
                 ->orWhere('apellidos', 'like', "%{$nombre}%");
         }
         return $query;
+    }
+
+    /**
+     * Scope: Filtrar por tipo de novedad
+     */
+    public function scopeByTipoNovedad($query, ?string $tipoNovedad)
+    {
+        if ($tipoNovedad) {
+            return $query->where('tipo_novedad', $tipoNovedad);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope: Filtrar por estado de resolución de novedad
+     */
+    public function scopeByNovedadResuelta($query, ?bool $resueltas = null)
+    {
+        if ($resueltas !== null) {
+            return $query->where('novedad_resuelta', $resueltas);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope: Incluir solo preinscritos con novedades
+     */
+    public function scopeConNoveadesAbierta($query)
+    {
+        return $query->where('estado', 'con_novedad')
+            ->where('novedad_resuelta', false);
     }
 
     /**

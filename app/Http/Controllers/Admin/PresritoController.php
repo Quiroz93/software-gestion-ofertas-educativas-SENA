@@ -48,12 +48,21 @@ class PresritoController extends \App\Http\Controllers\Controller
             $query->byNombre($request->nombre);
         }
 
+        if ($request->filled('tipo_novedad')) {
+            $query->byTipoNovedad($request->tipo_novedad);
+        }
+
+        if ($request->filled('novedad_resuelta')) {
+            $query->byNovedadResuelta($request->novedad_resuelta === 'pendiente' ? false : true);
+        }
+
         $preinscritos = $query->paginate(15);
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
+        $tiposNovedades = Preinscrito::getTiposNovedades();
 
-        return view('admin.preinscritos.index', compact('preinscritos', 'programas', 'estados', 'tiposDocumento'));
+        return view('admin.preinscritos.index', compact('preinscritos', 'programas', 'estados', 'tiposDocumento', 'tiposNovedades'));
     }
 
     /**
@@ -68,8 +77,9 @@ class PresritoController extends \App\Http\Controllers\Controller
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
+        $tiposNovedades = Preinscrito::getTiposNovedades();
 
-        return view('admin.preinscritos.create', compact('programas', 'estados', 'tiposDocumento'));
+        return view('admin.preinscritos.create', compact('programas', 'estados', 'tiposDocumento', 'tiposNovedades'));
     }
 
     /**
@@ -133,8 +143,9 @@ class PresritoController extends \App\Http\Controllers\Controller
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
+        $tiposNovedades = Preinscrito::getTiposNovedades();
 
-        return view('admin.preinscritos.edit', compact('presrito', 'programas', 'estados', 'tiposDocumento'));
+        return view('admin.preinscritos.edit', compact('presrito', 'programas', 'estados', 'tiposDocumento', 'tiposNovedades'));
     }
 
     /**
@@ -226,11 +237,20 @@ class PresritoController extends \App\Http\Controllers\Controller
             $query->byTipoDocumento($request->tipo_documento);
         }
 
+        if ($request->filled('tipo_novedad')) {
+            $query->byTipoNovedad($request->tipo_novedad);
+        }
+
+        if ($request->filled('novedad_resuelta')) {
+            $query->byNovedadResuelta($request->novedad_resuelta === 'pendiente' ? false : true);
+        }
+
         // Obtener los datos
         $preinscritos = $query->orderBy('programa_id')->get();
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
+        $tiposNovedades = Preinscrito::getTiposNovedades();
 
         // Estadísticas
         $estadisticas = [
@@ -238,9 +258,11 @@ class PresritoController extends \App\Http\Controllers\Controller
             'inscrito' => $preinscritos->where('estado', 'inscrito')->count(),
             'por_inscribir' => $preinscritos->where('estado', 'por_inscribir')->count(),
             'con_novedad' => $preinscritos->where('estado', 'con_novedad')->count(),
+            'novedades_resueltas' => $preinscritos->where('novedad_resuelta', true)->count(),
+            'novedades_pendientes' => $preinscritos->where('novedad_resuelta', false)->count(),
         ];
 
-        return view('admin.preinscritos.reportes', compact('preinscritos', 'programas', 'estados', 'tiposDocumento', 'estadisticas'));
+        return view('admin.preinscritos.reportes', compact('preinscritos', 'programas', 'estados', 'tiposDocumento', 'tiposNovedades', 'estadisticas'));
     }
 
     /**

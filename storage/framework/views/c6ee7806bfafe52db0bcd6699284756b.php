@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', config('app.name', 'SENA')) - Admin</title>
+    <title><?php echo $__env->yieldContent('title', config('app.name', 'SENA')); ?> - Admin</title>
 
-    {{-- Favicon --}}
-    <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
+    
+    <link rel="icon" href="<?php echo e(asset('favicons/favicon.ico')); ?>" type="image/x-icon">
 
-    {{-- Bootstrap 5 CSS --}}
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- Bootstrap Icons --}}
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
-    {{-- Font Awesome --}}
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    {{-- Admin Assets --}}
-    @vite(['resources/css/sena-utilities.css', 'resources/css/admin/admin.css', 'resources/css/admin/admin-layout.css', 'resources/css/components/pagination-sena.css', 'resources/js/admin/admin.js'])
+    
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/sena-utilities.css', 'resources/css/admin/admin.css', 'resources/css/admin/admin-layout.css', 'resources/css/components/pagination-sena.css', 'resources/js/admin/admin.js']); ?>
 
-    @yield('css')
+    <?php echo $__env->yieldContent('css'); ?>
 </head>
 <body>
     <div class="app-wrapper">
-        {{-- Sidebar Overlay --}}
+        
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
         
-        {{-- Sidebar (incluido desde partials) --}}
-        @include('partials.sidebar')
+        
+        <?php echo $__env->make('partials.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-        {{-- Main Content --}}
+        
         <div class="main-content">
-            {{-- Navbar --}}
+            
             <nav class="navbar navbar-expand-lg navbar-light sticky-top">
                 <div class="container-fluid">
                     <button class="btn btn-outline-success d-lg-none me-2" 
@@ -44,27 +44,28 @@
                         <i class="bi bi-list" style="font-size: 1.25rem;"></i>
                     </button>
 
-                    <span class="navbar-brand mb-0 h1">@yield('title', config('app.name', 'SENA'))</span>
+                    <span class="navbar-brand mb-0 h1"><?php echo $__env->yieldContent('title', config('app.name', 'SENA')); ?></span>
 
                     <div class="ms-auto d-flex align-items-center gap-3">
-                        {{-- User Dropdown --}}
-                        @auth
+                        
+                        <?php if(auth()->guard()->check()): ?>
                         <div class="dropdown">
                             <button class="btn btn-link dropdown-toggle text-dark text-decoration-none"
                                     type="button" data-bs-toggle="dropdown">
                                 <i class="bi bi-person-circle me-2"></i>
-                                {{ Auth::user()->name }}
+                                <?php echo e(Auth::user()->name); ?>
+
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                    <a class="dropdown-item" href="<?php echo e(route('profile.edit')); ?>">
                                         <i class="bi bi-person me-2"></i>Perfil
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
+                                    <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                        <?php echo csrf_field(); ?>
                                         <button type="submit" class="dropdown-item text-danger">
                                             <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
                                         </button>
@@ -72,126 +73,128 @@
                                 </li>
                             </ul>
                         </div>
-                        @endauth
+                        <?php endif; ?>
                     </div>
                 </div>
             </nav>
 
-            {{-- Content Area --}}
+            
             <div class="content-area fade-in">
-                {{-- Content Header (page title and navigation) --}}
-                @hasSection('content_header')
+                
+                <?php if (! empty(trim($__env->yieldContent('content_header')))): ?>
                 <div class="content-header mb-4">
-                    @yield('content_header')
+                    <?php echo $__env->yieldContent('content_header'); ?>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                {{-- Breadcrumbs --}}
-                @hasSection('breadcrumbs')
+                
+                <?php if (! empty(trim($__env->yieldContent('breadcrumbs')))): ?>
                 <nav aria-label="breadcrumb" class="mb-4">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Inicio</a></li>
-                        @yield('breadcrumbs')
+                        <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>">Inicio</a></li>
+                        <?php echo $__env->yieldContent('breadcrumbs'); ?>
                     </ol>
                 </nav>
-                @endif
+                <?php endif; ?>
 
-                {{-- Alerts --}}
-                @if ($errors->any())
+                
+                <?php if($errors->any()): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-triangle me-2"></i>
                     <strong>Errores de validación:</strong>
                     <ul class="mb-0 mt-2">
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                @if (session('success'))
+                <?php if(session('success')): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-2"></i>
-                    {{ session('success') }}
+                    <?php echo e(session('success')); ?>
+
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                @if (session('error'))
+                <?php if(session('error')): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-x-circle me-2"></i>
-                    {{ session('error') }}
+                    <?php echo e(session('error')); ?>
+
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                {{-- Main Content --}}
-                @yield('content')
+                
+                <?php echo $__env->yieldContent('content'); ?>
             </div>
 
-            {{-- Footer --}}
+            
             <footer class="bg-light text-muted py-3 px-4 border-top mt-auto text-center">
-                <small>&copy; {{ date('Y') }} {{ config('app.name', 'SENA') }}. Todos los derechos reservados.</small>
+                <small>&copy; <?php echo e(date('Y')); ?> <?php echo e(config('app.name', 'SENA')); ?>. Todos los derechos reservados.</small>
             </footer>
         </div>
     </div>
 
-    {{-- Bootstrap 5 JS --}}
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    {{-- jQuery (para DataTables, etc.) --}}
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    {{-- SweetAlert2 --}}
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    {{-- DataTables --}}
+    
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
-    {{-- Success Alert --}}
-    @if (session('success'))
+    
+    <?php if(session('success')): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'success',
                 title: '¡Éxito!',
-                text: '{{ session("success") }}',
+                text: '<?php echo e(session("success")); ?>',
                 confirmButtonText: 'Aceptar',
                 timer: 3000
             });
         });
     </script>
-    @endif
+    <?php endif; ?>
 
-    @if (session('error'))
+    <?php if(session('error')): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'error',
                 title: 'Atención',
-                text: '{{ session("error") }}',
+                text: '<?php echo e(session("error")); ?>',
                 confirmButtonText: 'Aceptar'
             });
         });
     </script>
-    @endif
+    <?php endif; ?>
 
-    @if (session('permission_error'))
+    <?php if(session('permission_error')): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'info',
                 title: 'Acceso restringido',
-                text: '{{ session("permission_error") }}',
+                text: '<?php echo e(session("permission_error")); ?>',
                 confirmButtonText: 'Aceptar'
             });
         });
     </script>
-    @endif
+    <?php endif; ?>
 
-    {{-- Delete Confirmation --}}
+    
     <script>
         function confirmarEliminacion(event) {
             event.preventDefault();
@@ -212,7 +215,7 @@
         }
     </script>
 
-     {{-- Sidebar Toggle - Ahora usa Bootstrap 5 Offcanvas --}}
+     
     <script>
         // No necesitamos JavaScript personalizado, Bootstrap 5 maneja el offcanvas automáticamente
         // Pero mantenemos cierre al hacer clic en enlaces para mejor UX móvil
@@ -237,7 +240,7 @@
         });
     </script>
 
-    {{-- DataTables Initialization --}}
+    
     <script>
         $(function() {
             $('#myTable, .table').DataTable({
@@ -250,6 +253,7 @@
         });
     </script>
 
-    @yield('js')
+    <?php echo $__env->yieldContent('js'); ?>
 </body>
 </html>
+<?php /**PATH C:\Users\AdminSena\Documents\SoeSoftware2\resources\views/layouts/admin.blade.php ENDPATH**/ ?>

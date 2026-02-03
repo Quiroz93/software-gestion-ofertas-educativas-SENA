@@ -17,6 +17,7 @@ export default defineConfig({
                 'resources/css/components/buttons-sena.css',
                 'resources/css/components/badges-sena.css',
                 'resources/css/components/alerts-sena.css',
+                'resources/css/components/pagination-sena.css',
 
                 /* Area Specific Styles */
                 'resources/css/common/app.css',

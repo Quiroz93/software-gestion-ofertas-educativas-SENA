@@ -1,0 +1,192 @@
+/**
+ * COMPONENTE PAGINACIÓN - SISTEMA SENA
+ * Estilos institucionales para paginación de tablas
+ * Cumple con Manual de Identidad Visual SENA 2024
+ * 
+ * @package   Sistema Gestión SENA
+ * @author    IA Assistant
+ * @version   1.0.0
+ * @date      2026-02-02
+ */
+
+/* ============================================================================
+ * VARIABLES CSS - PAGINACIÓN SENA
+ * ============================================================================ */
+
+:root {
+  /* Tamaños */
+  --pagination-icon-size: 14px;
+  --pagination-button-size: 36px;
+  --pagination-button-padding: 0.5rem;
+  
+  /* Colores */
+  --pagination-text-color: var(--sena-blue-dark, #00304D);
+  --pagination-hover-color: var(--sena-green, #39A900);
+  --pagination-active-bg: var(--sena-green, #39A900);
+  --pagination-disabled-color: var(--text-muted, #6c757d);
+  --pagination-border-color: #dee2e6;
+  
+  /* Transiciones */
+  --pagination-transition: all 120ms ease-in-out;
+}
+
+/* ============================================================================
+ * CONTENEDOR PRINCIPAL
+ * ============================================================================ */
+
+.pagination-sena {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* ============================================================================
+ * ITEMS DE PAGINACIÓN
+ * ============================================================================ */
+
+.pagination-sena .page-item {
+  display: inline-block;
+}
+
+.pagination-sena .page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pagination-button-size);
+  height: var(--pagination-button-size);
+  padding: var(--pagination-button-padding);
+  
+  color: var(--pagination-text-color);
+  background-color: var(--white, #FFFFFF);
+  border: 1px solid var(--pagination-border-color);
+  border-radius: 0.25rem;
+  
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  
+  transition: var(--pagination-transition);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ============================================================================
+ * ICONOS DE NAVEGACIÓN
+ * ============================================================================ */
+
+.pagination-sena .icon-nav {
+  width: var(--pagination-icon-size);
+  height: var(--pagination-icon-size);
+  font-size: var(--pagination-icon-size);
+  line-height: var(--pagination-icon-size);
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Font Awesome específico */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900; /* Solid */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Iconos específicos */
+.icon-nav-prev::before {
+  content: "\f053"; /* fa-chevron-left */
+}
+
+.icon-nav-next::before {
+  content: "\f054"; /* fa-chevron-right */
+}
+
+/* ============================================================================
+ * ESTADOS INTERACTIVOS
+ * ============================================================================ */
+
+/* Hover - Verde SENA institucional */
+.pagination-sena .page-item:not(.disabled):not(.active) .page-link:hover {
+  background-color: rgba(57, 169, 0, 0.08);
+  border-color: var(--pagination-hover-color);
+  color: var(--pagination-hover-color);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(57, 169, 0, 0.15);
+}
+
+/* Active - Página actual */
+.pagination-sena .page-item.active .page-link {
+  background-color: var(--pagination-active-bg);
+  border-color: var(--pagination-active-bg);
+  color: var(--white, #FFFFFF);
+  font-weight: 600;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Disabled - Botones deshabilitados */
+.pagination-sena .page-item.disabled .page-link {
+  color: var(--pagination-disabled-color);
+  background-color: var(--neutral-bg, #F6F6F6);
+  border-color: var(--pagination-border-color);
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Focus - Accesibilidad */
+.pagination-sena .page-link:focus-visible {
+  outline: 2px solid var(--sena-green, #39A900);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(57, 169, 0, 0.1);
+}
+
+/* ============================================================================
+ * RESPONSIVE DESIGN
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --pagination-button-size: 32px;
+    --pagination-icon-size: 12px;
+  }
+  
+  .pagination-sena {
+    gap: 0.125rem;
+  }
+  
+  .pagination-sena .page-link {
+    font-size: 0.75rem;
+    padding: 0.375rem;
+  }
+}
+
+/* ============================================================================
+ * UTILIDADES
+ * ============================================================================ */
+
+/* Separador de tres puntos */
+.pagination-sena .page-item-separator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pagination-button-size);
+  height: var(--pagination-button-size);
+  color: var(--text-muted, #6c757d);
+}
+
+/* Información de registros */
+.pagination-info {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6c757d);
+  font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+}
+
+.pagination-info-value {
+  font-weight: 600;
+  color: var(--pagination-text-color);
+}

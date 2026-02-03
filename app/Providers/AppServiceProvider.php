@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use App\Services\SystemBootstrapService; // ✅ IMPORT CORRECTO
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Usar Bootstrap 5 para paginación
+        Paginator::useBootstrapFive();
+        
         // Load custom helpers
         if (file_exists(app_path('Helpers/helpers.php'))) {
             require_once app_path('Helpers/helpers.php');

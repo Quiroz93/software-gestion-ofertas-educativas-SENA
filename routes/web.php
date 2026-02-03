@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\RedController;
 use App\Http\Controllers\Admin\HomeCarouselController;
 use App\Http\Controllers\Admin\MunicipioController;
 use App\Http\Controllers\Admin\PresritoController;
+use App\Http\Controllers\Admin\ConsolidacionPreinscritoController;
 use App\Http\Controllers\Public\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
@@ -394,6 +395,25 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('admin/preinscritos/{id}/restore', [PresritoController::class, 'restore'])
         ->middleware('can:preinscritos.restore')->name('preinscritos.restore');
+
+    // Consolidaciones de preinscritos
+    Route::get('admin/preinscritos/consolidaciones', [ConsolidacionPreinscritoController::class, 'index'])
+        ->name('preinscritos.consolidaciones.index');
+
+    Route::get('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'importForm'])
+        ->name('preinscritos.consolidaciones.import');
+
+    Route::post('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'import'])
+        ->name('preinscritos.consolidaciones.store');
+
+    Route::get('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'show'])
+        ->name('preinscritos.consolidaciones.show');
+
+    Route::put('admin/preinscritos/consolidaciones/detalles/{detalle}', [ConsolidacionPreinscritoController::class, 'updateDetalle'])
+        ->name('preinscritos.consolidaciones.detalles.update');
+
+    Route::delete('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'destroy'])
+        ->name('preinscritos.consolidaciones.destroy');
 });
 
 /*

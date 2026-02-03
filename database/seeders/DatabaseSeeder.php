@@ -179,6 +179,8 @@ class DatabaseSeeder extends Seeder
             'preinscritos.force_delete',
             'preinscritos.manage',
             'preinscritos.admin',
+            'preinscritos.import',
+            'preinscritos.consolidaciones.admin',
 
             /*
             |--------------------------------------------------------------------------
@@ -311,6 +313,7 @@ class DatabaseSeeder extends Seeder
         |--------------------------------------------------------------------------
         */
         $this->call([
+                        UserSeeder::class,
             CentroSeeder::class,
             RedSeeder::class,
             NivelFormacionSeeder::class,
@@ -321,6 +324,7 @@ class DatabaseSeeder extends Seeder
             HistoriaDeExitoSeeder::class,
             OfertaSeeder::class,
             NoticiaSeeder::class,
+            PreinscritoExcelSeeder::class,
         ]);
     }
 }
