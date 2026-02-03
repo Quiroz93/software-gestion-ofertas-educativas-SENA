@@ -4,7 +4,7 @@ CONTEXTO DEL SISTEMA
 Sistema académico desarrollado en:
 - Laravel 10+
 - Blade
-- Bootstrap 5 (NO AdminLTE)
+- Bootstrap 5
 - Spatie Laravel Permission
 - SweetAlert2
 - MySQL
@@ -12,7 +12,7 @@ Sistema académico desarrollado en:
 
 IMPORTANTE:
 Todo el frontend debe:
-- Usar únicamente Bootstrap 5
+- Usar Bootstrap 5
 - Respetar colores, tipografías, espaciados y componentes definidos en:
   /docs/DESIGN_SYSTEM_SENA.md
 - NO usar clases, layouts ni dependencias de AdminLTE
@@ -61,6 +61,7 @@ FUNCIONALIDADES:
   - Ignorar filas vacías o inválidas.
   - Normalizar nombres de columnas.
 - Consolidar todos los registros válidos en memoria.
+- reporte por separado de fallos de carga o consolidacion
 - Evitar duplicados por combinación:
   - tipo_documento + numero_documento + codigo_ficha
 
@@ -70,7 +71,6 @@ DATOS A CONSOLIDAR:
 - nombre_completo
 - estado
 - codigo_ficha
-- nombre_programa
 
 RESULTADO:
 - Crear una consolidación en base de datos.
@@ -78,7 +78,7 @@ RESULTADO:
   - total_archivos
   - total_registros
   - total_descartados
-- Mostrar resultado con SweetAlert2.
+- Mostrar resultado de la operación con SweetAlert2.
 
 ================================
 2️⃣ BASE DE DATOS – CONSOLIDACIONES
@@ -88,8 +88,8 @@ Crear tabla `consolidaciones_preinscritos`:
 
 Campos:
 - id
-- nombre_consolidacion
-- descripcion
+- nombre_consolidacion (formato: prefijo->Consolidacion_preinscritos_ + fufijo->fecha/hora de la consolidacion)
+- descripcion (prefijo-> Se consolidaron: + numero de archivos cargados + total de preincritos por archivo + total de preinscritos)
 - total_archivos
 - total_registros
 - total_descartados
@@ -97,7 +97,7 @@ Campos:
 - timestamps
 - softDeletes
 
-Crear tabla `consolidacion_preinscrito_detalles`:
+Crear tabla `consolidacion_preinscritos_detalles`:
 
 Campos:
 - id

@@ -23,6 +23,7 @@ export default defineConfig({
                 'resources/css/public/components.css',
                 'resources/css/public/public.css',
                 'resources/css/public/home.css',
+                'resources/css/welcome.css',
                 'resources/css/admin/admin.css',
                 'resources/css/admin/admin-layout.css',
 
