@@ -16,6 +16,12 @@
                 Nuevo Preinscrito
             </a>
         @endcan
+        @can('preinscritos.consolidaciones.admin')
+            <a href="{{ route('preinscritos.consolidaciones.index') }}" class="btn btn-outline-primary">
+                <i class="bi bi-layers"></i>
+                Consolidaciones
+            </a>
+        @endcan
         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
@@ -94,6 +100,31 @@
                            value="{{ request('numero_documento') }}" placeholder="Buscar...">
                 </div>
 
+                <div class="col-md-3">
+                    <label for="tipo_novedad" class="form-label">Tipo de Novedad</label>
+                    <select class="form-select form-select-sm" id="tipo_novedad" name="tipo_novedad">
+                        <option value="">-- Todos los tipos --</option>
+                        @foreach($tiposNovedades as $valor => $etiqueta)
+                            <option value="{{ $valor }}" {{ request('tipo_novedad') == $valor ? 'selected' : '' }}>
+                                {{ $etiqueta }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="novedad_resuelta" class="form-label">Estado de Novedad</label>
+                    <select class="form-select form-select-sm" id="novedad_resuelta" name="novedad_resuelta">
+                        <option value="">-- Todos --</option>
+                        <option value="pendiente" {{ request('novedad_resuelta') == 'pendiente' ? 'selected' : '' }}>
+                            Pendientes
+                        </option>
+                        <option value="resuelta" {{ request('novedad_resuelta') == 'resuelta' ? 'selected' : '' }}>
+                            Resueltas
+                        </option>
+                    </select>
+                </div>
+
                 <div class="col-12">
                     <button type="submit" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-search"></i> Buscar
@@ -131,6 +162,7 @@
                                 <th style="width: 12%">Celular</th>
                                 <th style="width: 20%">Programa</th>
                                 <th style="width: 10%">Estado</th>
+                                <th style="width: 12%">Novedad</th>
                                 <th style="width: 16%">Acciones</th>
                             </tr>
                         </thead>
@@ -165,6 +197,21 @@
                                         <span class="badge bg-{{ $presrito->estado === 'inscrito' ? 'success' : ($presrito->estado === 'por_inscribir' ? 'warning' : 'danger') }}">
                                             {{ $presrito->etiqueta_estado }}
                                         </span>
+                                    </td>
+                                    <td>
+                                        @if($presrito->estado === 'con_novedad')
+                                            @if($presrito->novedad_resuelta)
+                                                <span class="badge bg-success" title="{{ $presrito->tipo_novedad ? $presrito->etiqueta_tipo_novedad : 'Novedad resuelta' }}">
+                                                    <i class="fas fa-check-circle"></i> Resuelta
+                                                </span>
+                                            @else
+                                                <span class="badge bg-danger" title="{{ $presrito->tipo_novedad ? $presrito->etiqueta_tipo_novedad : 'Novedad pendiente' }}">
+                                                    <i class="fas fa-exclamation-triangle"></i> Pendiente
+                                                </span>
+                                            @endif
+                                        @else
+                                            <span class="badge bg-light text-dark">N/A</span>
+                                        @endif
                                     </td>
                                     <td>
                                         @can('preinscritos.view')

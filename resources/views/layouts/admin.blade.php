@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     {{-- Admin Assets --}}
-    @vite(['resources/css/sena-utilities.css', 'resources/css/admin/admin.css', 'resources/css/admin/admin-layout.css', 'resources/js/admin/admin.js'])
+    @vite(['resources/css/sena-utilities.css', 'resources/css/admin/admin.css', 'resources/css/admin/admin-layout.css', 'resources/css/components/pagination-sena.css', 'resources/js/admin/admin.js'])
 
     @yield('css')
 </head>
@@ -118,6 +118,14 @@
                 </div>
                 @endif
 
+                @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-x-circle me-2"></i>
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                @endif
+
                 {{-- Main Content --}}
                 @yield('content')
             </div>
@@ -152,6 +160,32 @@
                 text: '{{ session("success") }}',
                 confirmButtonText: 'Aceptar',
                 timer: 3000
+            });
+        });
+    </script>
+    @endif
+
+    @if (session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Atención',
+                text: '{{ session("error") }}',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+    @endif
+
+    @if (session('permission_error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Acceso restringido',
+                text: '{{ session("permission_error") }}',
+                confirmButtonText: 'Aceptar'
             });
         });
     </script>

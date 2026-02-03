@@ -74,6 +74,14 @@ class Programa extends Model
     }
 
     /**
+     * Relación con preinscritos
+     */
+    public function preinscritos()
+    {
+        return $this->hasMany(Preinscrito::class);
+    }
+
+    /**
      * Relación con usuarios (aprendices) a través de inscripciones
      */
     public function aprendices()

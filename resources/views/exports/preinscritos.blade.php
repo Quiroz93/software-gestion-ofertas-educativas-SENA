@@ -1,0 +1,62 @@
+@php
+    // Calcular dimensiones de celdas combinadas
+    $headerRows = 6;
+    $dataStartRow = 8;
+@endphp
+
+<table>
+    <tr>
+        <td colspan="3" rowspan="1" style="text-align: center; font-weight: bold; font-size: 14px; background-color: #00B050; color: white; padding: 10px;">
+            {{ $header['titulo'] }}
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold; font-size: 10px;">Código Ficha:</td>
+        <td style="font-size: 10px;">{{ $header['codigo_ficha'] }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold; font-size: 10px;">Programa de Formación:</td>
+        <td style="font-size: 10px;">{{ $header['programa'] }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold; font-size: 10px;">Total de Registros:</td>
+        <td style="font-size: 10px;">{{ $totalRegistros }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold; font-size: 9px;">Fecha de Generación:</td>
+        <td style="font-size: 9px;">{{ now()->format('d/m/Y H:i:s') }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="height: 5px;"></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr style="background-color: #00B050; color: white; font-weight: bold; text-align: center;">
+        <td style="border: 1px solid #000000; padding: 8px;">Identificación</td>
+        <td style="border: 1px solid #000000; padding: 8px;">Nombre</td>
+        <td style="border: 1px solid #000000; padding: 8px;">Estado</td>
+    </tr>
+
+    @forelse($datos as $registro)
+        <tr style="text-align: center;">
+            <td style="border: 1px solid #CCCCCC; padding: 6px;">{{ $registro['Identificación'] }}</td>
+            <td style="border: 1px solid #CCCCCC; padding: 6px; text-align: left;">{{ $registro['Nombre'] }}</td>
+            <td style="border: 1px solid #CCCCCC; padding: 6px;">{{ $registro['Estado'] }}</td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="3" style="text-align: center; padding: 10px; font-style: italic; color: #666;">
+                Sin registros para mostrar
+            </td>
+        </tr>
+    @endforelse
+</table>

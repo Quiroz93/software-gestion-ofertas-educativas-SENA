@@ -65,7 +65,7 @@
             </h3>
         </div>
         <div class="card-body">
-            <form method="GET" action="{{ route('preinscritos.reportes') }}" class="row g-3">
+            <form id="form-filtros" method="GET" action="{{ route('preinscritos.reportes') }}" class="row g-3">
                 <div class="col-md-4">
                     <label for="programa_id" class="form-label">Programa</label>
                     <select class="form-select form-select-sm" id="programa_id" name="programa_id">
@@ -104,7 +104,13 @@
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-outline-primary btn-sm">
-                        <i class="fas fa-search"></i> Generar Reporte
+                        <i class="fas fa-search"></i> Aplicar filtros
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalGenerarReporte">
+                        <i class="fas fa-file-alt"></i> Generar reporte
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="generarExcel()">
+                        <i class="fas fa-file-excel"></i> Generar Excel
                     </button>
                     <a href="{{ route('preinscritos.reportes') }}" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-redo"></i> Limpiar
@@ -114,6 +120,30 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal Generar Reporte -->
+    <div class="modal fade" id="modalGenerarReporte" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Generar reporte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    Selecciona cómo deseas guardar el reporte.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="guardarSoloBD()">
+                        Guardar solo en BD
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="guardarYGenerarExcel()">
+                        Guardar y generar Excel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -233,45 +263,191 @@
         </div>
     @endif
 </div>
+@endsection
 
+@section('js')
 <script>
-    function imprimirReporte() {
-        const tabla = document.getElementById('tablaReporte');
-        if (!tabla || tabla.rows.length === 0) {
+function submitReporte(actionUrl) {
+    const form = document.getElementById('form-filtros');
+    if (!form) {
+        return;
+    }
+
+    const formData = new FormData(form);
+    const postForm = document.createElement('form');
+    postForm.method = 'POST';
+    postForm.action = actionUrl;
+
+    const csrf = document.createElement('input');
+    csrf.type = 'hidden';
+    csrf.name = '_token';
+    csrf.value = @json(csrf_token());
+    postForm.appendChild(csrf);
+
+    for (const [key, value] of formData.entries()) {
+        if (value !== null && value !== '') {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            postForm.appendChild(input);
+        }
+    }
+
+    document.body.appendChild(postForm);
+    postForm.submit();
+}
+
+function generarExcel() {
+    submitReporte('{{ route('preinscritos.exportar') }}');
+}
+
+function guardarSoloBD() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalGenerarReporte'));
+    if (modal) {
+        modal.hide();
+    }
+    submitReporte('{{ route('preinscritos.reportar') }}');
+}
+
+function guardarYGenerarExcel() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalGenerarReporte'));
+    if (modal) {
+        modal.hide();
+    }
+    submitReporte('{{ route('preinscritos.exportar') }}');
+}
+
+async function downloadWithChooser(url, filename) {
+    if (!url) {
+        return;
+    }
+
+    if (window.showSaveFilePicker) {
+        try {
+            const response = await fetch(url, { credentials: 'same-origin' });
+            if (!response.ok) {
+                throw new Error('No se pudo descargar el archivo.');
+            }
+            const blob = await response.blob();
+            const handle = await window.showSaveFilePicker({
+                suggestedName: filename || 'reporte_preinscritos.xlsx',
+                types: [
+                    {
+                        description: 'Archivo Excel',
+                        accept: {
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']
+                        }
+                    }
+                ]
+            });
+            const writable = await handle.createWritable();
+            await writable.write(blob);
+            await writable.close();
+
             Swal.fire({
-                icon: 'warning',
-                title: 'Sin datos',
-                text: 'No hay datos para imprimir.'
+                icon: 'success',
+                title: 'Archivo guardado',
+                text: 'El reporte se guardó correctamente.'
             });
             return;
-        }
+        } catch (error) {
+            if (error && error.name === 'AbortError') {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Descarga cancelada',
+                    text: 'No se guardó el archivo.'
+                });
+                return;
+            }
 
-        const ventana = window.open('', '_blank');
-        ventana.document.write(`
-            <html>
-                <head>
-                    <title>Reporte de Preinscritos - SENA</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        h2 { text-align: center; color: #333; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                        th { background-color: #f2f2f2; font-weight: bold; }
-                        tr:nth-child(even) { background-color: #f9f9f9; }
-                        .fecha { text-align: center; margin-top: 20px; color: #666; font-size: 12px; }
-                    </style>
-                </head>
-                <body>
-                    <h2>Reporte de Preinscritos - SENA</h2>
-                    ${tabla.outerHTML}
-                    <div class="fecha">
-                        Reporte generado el ${new Date().toLocaleString('es-CO')}
-                    </div>
-                </body>
-            </html>
-        `);
-        ventana.document.close();
-        ventana.print();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Descarga directa',
+                text: 'No fue posible abrir el selector. Se iniciará la descarga.'
+            });
+        }
+    }
+
+    window.location.href = url;
+}
+
+function imprimirReporte() {
+    const tabla = document.getElementById('tablaReporte');
+    if (!tabla || tabla.rows.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Sin datos',
+            text: 'No hay datos para imprimir.'
+        });
+        return;
+    }
+
+    const ventana = window.open('', '_blank');
+    const html = `
+        <html>
+            <head>
+                <title>Reporte de Preinscritos - SENA</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    h2 { text-align: center; color: #333; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                    th { background-color: #f2f2f2; font-weight: bold; }
+                    tr:nth-child(even) { background-color: #f9f9f9; }
+                    .fecha { text-align: center; margin-top: 20px; color: #666; font-size: 12px; }
+                </style>
+            </head>
+            <body>
+                <h2>Reporte de Preinscritos - SENA</h2>
+                ${tabla.outerHTML}
+                <div class="fecha">
+                    Reporte generado el ${new Date().toLocaleString('es-CO')}
+                </div>
+            </body>
+        </html>
+    `;
+    ventana.document.write(html);
+    ventana.document.close();
+    ventana.print();
+}
+</script>
+
+@if(session('success'))
+<script>
+    const downloadUrl = @json(session('download_url'));
+    const downloadName = @json(session('download_name'));
+
+    if (downloadUrl) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Reporte generado',
+            text: @json(session('success')),
+            showCancelButton: true,
+            confirmButtonText: 'Descargar',
+            cancelButtonText: 'Cerrar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                downloadWithChooser(downloadUrl, downloadName);
+            }
+        });
+    } else {
+        Swal.fire({
+            icon: 'success',
+            title: 'Reporte generado',
+            text: @json(session('success'))
+        });
     }
 </script>
+@endif
+
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: @json(session('error'))
+    });
+</script>
+@endif
 @endsection

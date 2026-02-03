@@ -17,12 +17,14 @@ export default defineConfig({
                 'resources/css/components/buttons-sena.css',
                 'resources/css/components/badges-sena.css',
                 'resources/css/components/alerts-sena.css',
+                'resources/css/components/pagination-sena.css',
 
                 /* Area Specific Styles */
                 'resources/css/common/app.css',
                 'resources/css/public/components.css',
                 'resources/css/public/public.css',
                 'resources/css/public/home.css',
+                'resources/css/welcome.css',
                 'resources/css/admin/admin.css',
                 'resources/css/admin/admin-layout.css',
 

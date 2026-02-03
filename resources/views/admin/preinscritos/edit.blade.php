@@ -236,6 +236,88 @@
                             </div>
                         </div>
 
+                        <!-- Sección de Novedad (Opcional) -->
+                        <hr class="my-4">
+                        <h5 class="mb-3">
+                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                            Registrar Novedad (Opcional)
+                        </h5>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Nota:</strong> Si el preinscrito requiere una novedad desde el inicio, completa esta sección. Esto es independiente del estado del preinscrito.
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="tiene_novedad" name="tiene_novedad" 
+                                           value="1" {{ old('tiene_novedad') ? 'checked' : '' }}
+                                           onchange="toggleNovedadFields()">
+                                    <label class="form-check-label" for="tiene_novedad">
+                                        <strong>Este preinscrito tiene una novedad</strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="novedad_fields" style="display: {{ old('tiene_novedad') ? 'block' : 'none' }};">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="tipo_novedad_id" class="form-label">
+                                        Tipo de Novedad
+                                    </label>
+                                    <select class="form-select @error('tipo_novedad_id') is-invalid @enderror" 
+                                            id="tipo_novedad_id" name="tipo_novedad_id">
+                                        <option value="">-- Selecciona un tipo (opcional) --</option>
+                                        @foreach($tiposNovedades as $key => $tipo)
+                                            @php
+                                                $tipoId = is_object($tipo) ? $tipo->id : $key;
+                                                $tipoNombre = is_object($tipo) ? $tipo->nombre : $tipo;
+                                            @endphp
+                                            <option value="{{ $tipoId }}" {{ old('tipo_novedad_id') == $tipoId ? 'selected' : '' }}>
+                                                {{ $tipoNombre }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('tipo_novedad_id')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="novedad_estado" class="form-label">
+                                        Estado de la Novedad <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select @error('novedad_estado') is-invalid @enderror" 
+                                            id="novedad_estado" name="novedad_estado">
+                                        <option value="">-- Selecciona un estado --</option>
+                                        <option value="abierta" {{ old('novedad_estado') == 'abierta' ? 'selected' : '' }}>Abierta</option>
+                                        <option value="en_gestion" {{ old('novedad_estado') == 'en_gestion' ? 'selected' : '' }}>En Gestión</option>
+                                        <option value="resuelta" {{ old('novedad_estado') == 'resuelta' ? 'selected' : '' }}>Resuelta</option>
+                                        <option value="cancelada" {{ old('novedad_estado') == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
+                                    </select>
+                                    @error('novedad_estado')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label for="novedad_descripcion" class="form-label">
+                                        Descripción de la Novedad <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control @error('novedad_descripcion') is-invalid @enderror" 
+                                              id="novedad_descripcion" name="novedad_descripcion" rows="4" 
+                                              placeholder="Describe la novedad o situación especial del preinscrito...">{{ old('novedad_descripcion') }}</textarea>
+                                    @error('novedad_descripcion')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                    <small class="text-muted">Este campo es requerido cuando se marca que el preinscrito tiene novedad.</small>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Información de Auditoría -->
                         <div class="alert alert-light border mt-3">
                             <small class="text-muted d-block">
@@ -270,6 +352,27 @@
 </div>
 
 <script>
+    // Mostrar/ocultar campos de novedad
+    function toggleNovedadFields() {
+        const checkbox = document.getElementById('tiene_novedad');
+        const fields = document.getElementById('novedad_fields');
+        const estado = document.getElementById('novedad_estado');
+        const descripcion = document.getElementById('novedad_descripcion');
+        
+        if (checkbox.checked) {
+            fields.style.display = 'block';
+            estado.required = true;
+            descripcion.required = true;
+        } else {
+            fields.style.display = 'none';
+            estado.required = false;
+            descripcion.required = false;
+            estado.value = '';
+            descripcion.value = '';
+            document.getElementById('tipo_novedad_id').value = '';
+        }
+    }
+
     // Validación de formulario
     document.getElementById('formPresrito').addEventListener('submit', function(e) {
         const numeroDocumento = document.getElementById('numero_documento').value;
@@ -280,7 +383,30 @@
                 title: 'Error',
                 text: 'El número de documento debe tener al menos 5 caracteres.'
             });
+            return false;
         }
+
+        // Validar campos de novedad si está marcado
+        const tieneNovedad = document.getElementById('tiene_novedad').checked;
+        if (tieneNovedad) {
+            const estadoNovedad = document.getElementById('novedad_estado').value;
+            const descripcionNovedad = document.getElementById('novedad_descripcion').value;
+            
+            if (!estadoNovedad || !descripcionNovedad) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Debes completar el estado y descripción de la novedad.'
+                });
+                return false;
+            }
+        }
+    });
+
+    // Inicializar estado de campos al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleNovedadFields();
     });
 </script>
 @endsection
