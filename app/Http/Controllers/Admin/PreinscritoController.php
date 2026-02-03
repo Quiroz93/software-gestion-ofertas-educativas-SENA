@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Gate;
  * Controlador para la gestión de Preinscritos
  * Gestiona las operaciones CRUD completas del módulo de aprendices preinscritos
  */
-class PresritoController extends \App\Http\Controllers\Controller
+class PreinscritoController extends \App\Http\Controllers\Controller
 {
     /**
      * Mostrar la lista de aprendices preinscritos
