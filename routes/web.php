@@ -31,6 +31,8 @@ use App\Http\Controllers\Admin\ConsolidacionPreinscritoController;
 use App\Http\Controllers\Public\WelcomeController;
 use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
+use App\Http\Controllers\Admin\TipoNovedadController;
+use App\Http\Controllers\Admin\NovedadPreinscritoController;
 
 
 
@@ -627,3 +629,34 @@ Route::prefix('/')
             ->only(['index', 'show']);
     });
 
+
+/*|--------------------------------------------------------------------------
+| Tipos de Novedad (Admin)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified', 'can:novedad.tipos.admin'])
+    ->prefix('admin')
+    ->group(function () {
+        Route::resource('tipos-novedad', TipoNovedadController::class)
+            ->names('tipos-novedad');
+    });
+
+
+/*|--------------------------------------------------------------------------
+| Novedades de Preinscritos (Admin)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified', 'can:preinscritos.novedades.admin'])
+    ->prefix('admin')
+    ->group(function () {
+        Route::resource('novedades', NovedadPreinscritoController::class)
+            ->names('novedades');
+        
+        // Custom route for changing novedad estado
+        Route::post('novedades/{novedad}/cambiar-estado', [NovedadPreinscritoController::class, 'cambiarEstado'])
+            ->name('novedades.cambiar-estado');
+        
+        // Custom route for getting novedades by preinscrito
+        Route::get('preinscritos/{preinscrito}/novedades', [NovedadPreinscritoController::class, 'porPreinscrito'])
+            ->name('novedades.por-preinscrito');
+    });

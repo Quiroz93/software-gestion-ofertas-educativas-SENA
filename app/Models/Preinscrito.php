@@ -272,6 +272,14 @@ class Preinscrito extends Model
     }
 
     /**
+     * Relación: Novedades del preinscrito
+     */
+    public function novedades()
+    {
+        return $this->hasMany(NovedadPreinscrito::class);
+    }
+
+    /**
      * Scope: Filtrar por tipo de novedad
      */
     public function scopeByTipoNovedad($query, ?string $tipoNovedad)

@@ -181,6 +181,14 @@ class DatabaseSeeder extends Seeder
             'preinscritos.admin',
             'preinscritos.import',
             'preinscritos.consolidaciones.admin',
+            'preinscritos.novedades.admin',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Novedades de Preinscritos
+            |--------------------------------------------------------------------------
+            */
+            'novedad.tipos.admin',
 
             /*
             |--------------------------------------------------------------------------
