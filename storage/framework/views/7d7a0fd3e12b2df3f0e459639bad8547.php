@@ -393,6 +393,132 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
+                        <!-- Sección de Novedad (Opcional) -->
+                        <hr class="my-4">
+                        <h5 class="mb-3">
+                            <i class="fas fa-exclamation-triangle text-warning"></i>
+                            Registrar Novedad (Opcional)
+                        </h5>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Nota:</strong> Si el preinscrito requiere una novedad desde el inicio, completa esta sección. Esto es independiente del estado del preinscrito.
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="tiene_novedad" name="tiene_novedad" 
+                                           value="1" <?php echo e(old('tiene_novedad') ? 'checked' : ''); ?>
+
+                                           onchange="toggleNovedadFields()">
+                                    <label class="form-check-label" for="tiene_novedad">
+                                        <strong>Este preinscrito tiene una novedad</strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="novedad_fields" style="display: <?php echo e(old('tiene_novedad') ? 'block' : 'none'); ?>;">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="tipo_novedad_id" class="form-label">
+                                        Tipo de Novedad
+                                    </label>
+                                    <select class="form-select <?php $__errorArgs = ['tipo_novedad_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
+                                            id="tipo_novedad_id" name="tipo_novedad_id">
+                                        <option value="">-- Selecciona un tipo (opcional) --</option>
+                                        <?php $__currentLoopData = $tiposNovedades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $tipo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php
+                                                $tipoId = is_object($tipo) ? $tipo->id : $key;
+                                                $tipoNombre = is_object($tipo) ? $tipo->nombre : $tipo;
+                                            ?>
+                                            <option value="<?php echo e($tipoId); ?>" <?php echo e(old('tipo_novedad_id') == $tipoId ? 'selected' : ''); ?>>
+                                                <?php echo e($tipoNombre); ?>
+
+                                            </option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                    <?php $__errorArgs = ['tipo_novedad_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <div class="invalid-feedback d-block"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="novedad_estado" class="form-label">
+                                        Estado de la Novedad <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select <?php $__errorArgs = ['novedad_estado'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
+                                            id="novedad_estado" name="novedad_estado">
+                                        <option value="">-- Selecciona un estado --</option>
+                                        <option value="abierta" <?php echo e(old('novedad_estado') == 'abierta' ? 'selected' : ''); ?>>Abierta</option>
+                                        <option value="en_gestion" <?php echo e(old('novedad_estado') == 'en_gestion' ? 'selected' : ''); ?>>En Gestión</option>
+                                        <option value="resuelta" <?php echo e(old('novedad_estado') == 'resuelta' ? 'selected' : ''); ?>>Resuelta</option>
+                                        <option value="cancelada" <?php echo e(old('novedad_estado') == 'cancelada' ? 'selected' : ''); ?>>Cancelada</option>
+                                    </select>
+                                    <?php $__errorArgs = ['novedad_estado'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <div class="invalid-feedback d-block"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label for="novedad_descripcion" class="form-label">
+                                        Descripción de la Novedad <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea class="form-control <?php $__errorArgs = ['novedad_descripcion'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
+                                              id="novedad_descripcion" name="novedad_descripcion" rows="4" 
+                                              placeholder="Describe la novedad o situación especial del preinscrito..."><?php echo e(old('novedad_descripcion')); ?></textarea>
+                                    <?php $__errorArgs = ['novedad_descripcion'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <div class="invalid-feedback d-block"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                    <small class="text-muted">Este campo es requerido cuando se marca que el preinscrito tiene novedad.</small>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Información de Auditoría -->
                         <div class="alert alert-light border mt-3">
                             <small class="text-muted d-block">
@@ -431,6 +557,27 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 <script>
+    // Mostrar/ocultar campos de novedad
+    function toggleNovedadFields() {
+        const checkbox = document.getElementById('tiene_novedad');
+        const fields = document.getElementById('novedad_fields');
+        const estado = document.getElementById('novedad_estado');
+        const descripcion = document.getElementById('novedad_descripcion');
+        
+        if (checkbox.checked) {
+            fields.style.display = 'block';
+            estado.required = true;
+            descripcion.required = true;
+        } else {
+            fields.style.display = 'none';
+            estado.required = false;
+            descripcion.required = false;
+            estado.value = '';
+            descripcion.value = '';
+            document.getElementById('tipo_novedad_id').value = '';
+        }
+    }
+
     // Validación de formulario
     document.getElementById('formPresrito').addEventListener('submit', function(e) {
         const numeroDocumento = document.getElementById('numero_documento').value;
@@ -441,7 +588,30 @@ unset($__errorArgs, $__bag); ?>
                 title: 'Error',
                 text: 'El número de documento debe tener al menos 5 caracteres.'
             });
+            return false;
         }
+
+        // Validar campos de novedad si está marcado
+        const tieneNovedad = document.getElementById('tiene_novedad').checked;
+        if (tieneNovedad) {
+            const estadoNovedad = document.getElementById('novedad_estado').value;
+            const descripcionNovedad = document.getElementById('novedad_descripcion').value;
+            
+            if (!estadoNovedad || !descripcionNovedad) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Debes completar el estado y descripción de la novedad.'
+                });
+                return false;
+            }
+        }
+    });
+
+    // Inicializar estado de campos al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleNovedadFields();
     });
 </script>
 <?php $__env->stopSection(); ?>

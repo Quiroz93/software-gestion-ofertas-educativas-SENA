@@ -178,6 +178,7 @@ class DatabaseSeeder extends Seeder
             'preinscritos.restore',
             'preinscritos.force_delete',
             'preinscritos.manage',
+            'preinscritos.export',
             'preinscritos.admin',
             'preinscritos.import',
             'preinscritos.consolidaciones.admin',

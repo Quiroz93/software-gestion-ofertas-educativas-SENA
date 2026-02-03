@@ -87,6 +87,17 @@
             </li>
             @endcan
 
+            {{-- Reportes de Preinscritos --}}
+            @can('preinscritos.export')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('preinscritos.reportes') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                    <span>Reportes</span>
+                </a>
+            </li>
+            @endcan
+
             {{-- Ofertas --}}
             <li class="sidebar-nav-item">
                 <a href="{{ route('ofertas.index') }}"
@@ -240,6 +251,12 @@
             @can('novedad.tipos.admin')
             <a class="nav-link {{ request()->routeIs('tipos-novedad.*') ? 'active' : '' }}" href="{{ route('tipos-novedad.index') }}">
                 <i class="bi bi-tag me-2"></i>Tipos de Novedad
+            </a>
+            @endcan
+
+            @can('preinscritos.export')
+            <a class="nav-link {{ request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : '' }}" href="{{ route('preinscritos.reportes') }}">
+                <i class="bi bi-file-earmark-spreadsheet me-2"></i>Reportes
             </a>
             @endcan
             

@@ -33,6 +33,7 @@ use App\Http\Controllers\Public\CustomContentController;
 use App\Http\Controllers\Public\MediaContentController;
 use App\Http\Controllers\Admin\TipoNovedadController;
 use App\Http\Controllers\Admin\NovedadPreinscritoController;
+use App\Http\Controllers\Admin\ExportController;
 
 
 
@@ -392,8 +393,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('admin/preinscritos/{presrito}', [PresritoController::class, 'destroy'])
         ->middleware('can:preinscritos.delete')->name('preinscritos.destroy');
 
-    Route::get('admin/preinscritos/reportes', [PresritoController::class, 'reportes'])
-        ->middleware('can:preinscritos.view')->name('preinscritos.reportes');
+    Route::get('admin/preinscritos/reportes', [ExportController::class, 'reportes'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.reportes');
+
+    Route::post('admin/preinscritos/exportar', [ExportController::class, 'exportar'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.exportar');
+
+    Route::get('admin/preinscritos/historial-exportaciones', [ExportController::class, 'historial'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.historial-exportaciones');
 
     Route::post('admin/preinscritos/{id}/restore', [PresritoController::class, 'restore'])
         ->middleware('can:preinscritos.restore')->name('preinscritos.restore');

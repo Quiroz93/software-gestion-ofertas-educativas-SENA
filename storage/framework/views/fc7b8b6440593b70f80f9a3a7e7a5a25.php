@@ -49,7 +49,7 @@
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.admin')): ?>
             <li class="sidebar-nav-item">
                 <a href="<?php echo e(route('preinscritos.index')); ?>"
-                   class="sidebar-nav-link <?php echo e(request()->routeIs('preinscritos.*') ? 'active' : ''); ?>">
+                   class="sidebar-nav-link <?php echo e(request()->routeIs('preinscritos.*') && !request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : ''); ?>">
                     <i class="bi bi-person-check"></i>
                     <span>Preinscritos</span>
                 </a>
@@ -62,6 +62,28 @@
                    class="sidebar-nav-link <?php echo e(request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : ''); ?>">
                     <i class="bi bi-layers"></i>
                     <span>Consolidaciones</span>
+                </a>
+            </li>
+            <?php endif; ?>
+
+            
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.novedades.admin')): ?>
+            <li class="sidebar-nav-item">
+                <a href="<?php echo e(route('novedades.index')); ?>"
+                   class="sidebar-nav-link <?php echo e(request()->routeIs('novedades.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span>Novedades</span>
+                </a>
+            </li>
+            <?php endif; ?>
+
+            
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('novedad.tipos.admin')): ?>
+            <li class="sidebar-nav-item">
+                <a href="<?php echo e(route('tipos-novedad.index')); ?>"
+                   class="sidebar-nav-link <?php echo e(request()->routeIs('tipos-novedad.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-tag"></i>
+                    <span>Tipos de Novedad</span>
                 </a>
             </li>
             <?php endif; ?>
@@ -200,7 +222,7 @@
             </a>
             
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.admin')): ?>
-            <a class="nav-link <?php echo e(request()->routeIs('preinscritos.*') ? 'active' : ''); ?>" href="<?php echo e(route('preinscritos.index')); ?>">
+            <a class="nav-link <?php echo e(request()->routeIs('preinscritos.*') && !request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : ''); ?>" href="<?php echo e(route('preinscritos.index')); ?>">
                 <i class="bi bi-person-check me-2"></i>Preinscritos
             </a>
             <?php endif; ?>
@@ -208,6 +230,18 @@
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.consolidaciones.admin')): ?>
             <a class="nav-link <?php echo e(request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : ''); ?>" href="<?php echo e(route('preinscritos.consolidaciones.index')); ?>">
                 <i class="bi bi-layers me-2"></i>Consolidaciones
+            </a>
+            <?php endif; ?>
+
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.novedades.admin')): ?>
+            <a class="nav-link <?php echo e(request()->routeIs('novedades.*') ? 'active' : ''); ?>" href="<?php echo e(route('novedades.index')); ?>">
+                <i class="bi bi-exclamation-circle me-2"></i>Novedades
+            </a>
+            <?php endif; ?>
+
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('novedad.tipos.admin')): ?>
+            <a class="nav-link <?php echo e(request()->routeIs('tipos-novedad.*') ? 'active' : ''); ?>" href="<?php echo e(route('tipos-novedad.index')); ?>">
+                <i class="bi bi-tag me-2"></i>Tipos de Novedad
             </a>
             <?php endif; ?>
             
