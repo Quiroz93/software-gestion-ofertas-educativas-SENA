@@ -333,6 +333,7 @@ class DatabaseSeeder extends Seeder
             HistoriaDeExitoSeeder::class,
             OfertaSeeder::class,
             NoticiaSeeder::class,
+            TipoNovedadSeeder::class,
             PreinscritoExcelSeeder::class,
         ]);
     }
