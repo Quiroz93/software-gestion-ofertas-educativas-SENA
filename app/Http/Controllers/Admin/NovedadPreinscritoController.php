@@ -8,9 +8,11 @@ use App\Models\NovedadPreinscrito;
 use App\Models\Preinscrito;
 use App\Models\TipoNovedad;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class NovedadPreinscritoController extends \Illuminate\Routing\Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +32,7 @@ class NovedadPreinscritoController extends \Illuminate\Routing\Controller
         }
 
         if ($request->filled('search')) {
-            $query->whereHas('preinscrito', function ($q) {
+            $query->whereHas('preinscrito', function ($q) use ($request) {
                 $q->where('nombres', 'like', "%{$request->search}%")
                   ->orWhere('apellidos', 'like', "%{$request->search}%")
                   ->orWhere('numero_documento', 'like', "%{$request->search}%");

@@ -205,6 +205,88 @@
                 </div>
             </div>
 
+            <!-- Card Novedades Asociadas -->
+            @can('preinscritos.novedades.admin')
+            <div class="card card-outline card-danger mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Novedades Asociadas
+                    </h3>
+                    <a href="{{ route('novedades.create') }}?preinscrito_id={{ $presrito->id }}" class="btn btn-sm btn-danger">
+                        <i class="fas fa-plus"></i>
+                        Nueva Novedad
+                    </a>
+                </div>
+                <div class="card-body">
+                    @if($presrito->novedades && $presrito->novedades->count() > 0)
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Estado</th>
+                                        <th>Descripción</th>
+                                        <th>Fecha</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($presrito->novedades->sortByDesc('created_at') as $novedad)
+                                        <tr>
+                                            <td>
+                                                @if($novedad->tipoNovedad)
+                                                    <span class="badge bg-info">{{ $novedad->tipoNovedad->nombre }}</span>
+                                                @else
+                                                    <span class="badge bg-secondary">Sin tipo</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $estadoClasses = [
+                                                        'abierta' => 'danger',
+                                                        'en_gestion' => 'warning',
+                                                        'resuelta' => 'success',
+                                                        'cancelada' => 'secondary'
+                                                    ];
+                                                    $estadoClass = $estadoClasses[$novedad->estado] ?? 'secondary';
+                                                @endphp
+                                                <span class="badge bg-{{ $estadoClass }}">
+                                                    {{ ucfirst(str_replace('_', ' ', $novedad->estado)) }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <small>{{ Str::limit($novedad->descripcion, 50) }}</small>
+                                            </td>
+                                            <td>
+                                                <small class="text-muted">{{ $novedad->created_at->format('d/m/Y H:i') }}</small>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('novedades.show', $novedad->id) }}" class="btn btn-sm btn-outline-primary" title="Ver detalle">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <a href="{{ route('novedades.por-preinscrito', $presrito->id) }}" class="btn btn-sm btn-outline-info">
+                                <i class="fas fa-list"></i>
+                                Ver todas las novedades ({{ $presrito->novedades->count() }})
+                            </a>
+                        </div>
+                    @else
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle"></i>
+                            No hay novedades registradas para este preinscrito.
+                        </div>
+                    @endif
+                </div>
+            </div>
+            @endcan
+
             <!-- Botones de Acción -->
             <div class="card card-outline card-light">
                 <div class="card-footer">

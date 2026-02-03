@@ -43,6 +43,25 @@ class UpdatePresritoRequest extends FormRequest
             'programa_id' => ['required', 'exists:programas,id'],
             'estado' => ['required', Rule::in(array_keys(Preinscrito::getEstados()))],
             'comentarios' => ['nullable', 'string', 'max:1000'],
+            
+            // Campos de novedad (opcionales, pero si se marca tiene_novedad, algunos son requeridos)
+            'tiene_novedad' => ['nullable', 'boolean'],
+            'tipo_novedad_id' => ['nullable', 'exists:tipos_novedad,id'],
+            'novedad_estado' => [
+                Rule::requiredIf(function() {
+                    return $this->has('tiene_novedad') && $this->tiene_novedad;
+                }),
+                'nullable',
+                Rule::in(['abierta', 'en_gestion', 'resuelta', 'cancelada'])
+            ],
+            'novedad_descripcion' => [
+                Rule::requiredIf(function() {
+                    return $this->has('tiene_novedad') && $this->tiene_novedad;
+                }),
+                'nullable',
+                'string',
+                'max:2000'
+            ],
         ];
     }
 
@@ -65,6 +84,13 @@ class UpdatePresritoRequest extends FormRequest
             'programa_id.exists' => 'El programa seleccionado no existe.',
             'estado.required' => 'El estado es obligatorio.',
             'estado.in' => 'El estado seleccionado no es válido.',
+            
+            // Mensajes para campos de novedad
+            'tipo_novedad_id.exists' => 'El tipo de novedad seleccionado no existe.',
+            'novedad_estado.required' => 'El estado de la novedad es obligatorio cuando se marca que el preinscrito tiene novedad.',
+            'novedad_estado.in' => 'El estado de la novedad seleccionado no es válido.',
+            'novedad_descripcion.required' => 'La descripción de la novedad es obligatoria cuando se marca que el preinscrito tiene novedad.',
+            'novedad_descripcion.max' => 'La descripción de la novedad no puede exceder los 2000 caracteres.',
         ];
     }
 

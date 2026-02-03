@@ -48,7 +48,7 @@
             @can('preinscritos.admin')
             <li class="sidebar-nav-item">
                 <a href="{{ route('preinscritos.index') }}"
-                   class="sidebar-nav-link {{ request()->routeIs('preinscritos.*') ? 'active' : '' }}">
+                   class="sidebar-nav-link {{ request()->routeIs('preinscritos.*') && !request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : '' }}">
                     <i class="bi bi-person-check"></i>
                     <span>Preinscritos</span>
                 </a>
@@ -61,6 +61,28 @@
                    class="sidebar-nav-link {{ request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : '' }}">
                     <i class="bi bi-layers"></i>
                     <span>Consolidaciones</span>
+                </a>
+            </li>
+            @endcan
+
+            {{-- Novedades de Preinscritos --}}
+            @can('preinscritos.novedades.admin')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('novedades.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('novedades.*') ? 'active' : '' }}">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <span>Novedades</span>
+                </a>
+            </li>
+            @endcan
+
+            {{-- Tipos de Novedad --}}
+            @can('novedad.tipos.admin')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('tipos-novedad.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('tipos-novedad.*') ? 'active' : '' }}">
+                    <i class="bi bi-tag"></i>
+                    <span>Tipos de Novedad</span>
                 </a>
             </li>
             @endcan
@@ -198,7 +220,7 @@
             </a>
             
             @can('preinscritos.admin')
-            <a class="nav-link {{ request()->routeIs('preinscritos.*') ? 'active' : '' }}" href="{{ route('preinscritos.index') }}">
+            <a class="nav-link {{ request()->routeIs('preinscritos.*') && !request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : '' }}" href="{{ route('preinscritos.index') }}">
                 <i class="bi bi-person-check me-2"></i>Preinscritos
             </a>
             @endcan
@@ -206,6 +228,18 @@
             @can('preinscritos.consolidaciones.admin')
             <a class="nav-link {{ request()->routeIs('preinscritos.consolidaciones.*') ? 'active' : '' }}" href="{{ route('preinscritos.consolidaciones.index') }}">
                 <i class="bi bi-layers me-2"></i>Consolidaciones
+            </a>
+            @endcan
+
+            @can('preinscritos.novedades.admin')
+            <a class="nav-link {{ request()->routeIs('novedades.*') ? 'active' : '' }}" href="{{ route('novedades.index') }}">
+                <i class="bi bi-exclamation-circle me-2"></i>Novedades
+            </a>
+            @endcan
+
+            @can('novedad.tipos.admin')
+            <a class="nav-link {{ request()->routeIs('tipos-novedad.*') ? 'active' : '' }}" href="{{ route('tipos-novedad.index') }}">
+                <i class="bi bi-tag me-2"></i>Tipos de Novedad
             </a>
             @endcan
             

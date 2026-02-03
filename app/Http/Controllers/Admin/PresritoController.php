@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StorePresritoRequest;
 use App\Http\Requests\UpdatePresritoRequest;
 use App\Models\Preinscrito;
+use App\Models\TipoNovedad;
 use App\Models\Programa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -77,7 +78,10 @@ class PresritoController extends \App\Http\Controllers\Controller
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
-        $tiposNovedades = Preinscrito::getTiposNovedades();
+        $tiposNovedades = TipoNovedad::query()
+            ->activos()
+            ->orderBy('nombre')
+            ->get();
 
         return view('admin.preinscritos.create', compact('programas', 'estados', 'tiposDocumento', 'tiposNovedades'));
     }
@@ -102,12 +106,38 @@ class PresritoController extends \App\Http\Controllers\Controller
             }
 
             // Crear el nuevo preinscrito
-            Preinscrito::create($request->validated());
+            $preinscrito = Preinscrito::create($request->validated());
+
+            // Crear novedad si se marcó la opción
+            if ($request->has('tiene_novedad') && $request->tiene_novedad) {
+                $novedad = $preinscrito->novedades()->create([
+                    'tipo_novedad_id' => $request->tipo_novedad_id,
+                    'estado' => $request->novedad_estado,
+                    'descripcion' => $request->novedad_descripcion,
+                    'created_by' => auth()->id(),
+                    'updated_by' => auth()->id(),
+                ]);
+
+                // Crear entrada en historial
+                if ($novedad) {
+                    $novedad->historial()->create([
+                        'estado_anterior' => null,
+                        'estado_nuevo' => $request->novedad_estado,
+                        'comentario' => 'Novedad creada al momento de registrar el preinscrito',
+                        'changed_by' => auth()->id(),
+                    ]);
+                }
+            }
 
             DB::commit();
 
+            $mensaje = 'Preinscrito creado exitosamente.';
+            if ($request->has('tiene_novedad') && $request->tiene_novedad) {
+                $mensaje .= ' Se registró la novedad asociada.';
+            }
+
             return redirect()->route('preinscritos.index')
-                ->with('success', 'Preinscrito creado exitosamente.');
+                ->with('success', $mensaje);
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
@@ -125,7 +155,13 @@ class PresritoController extends \App\Http\Controllers\Controller
     public function show(Preinscrito $presrito)
     {
         Gate::authorize('preinscritos.view', $presrito);
-        $presrito->load('programa', 'createdBy', 'updatedBy');
+        $presrito->load([
+            'programa', 
+            'createdBy', 
+            'updatedBy',
+            'novedades.tipoNovedad',
+            'novedades.createdBy'
+        ]);
 
         return view('admin.preinscritos.show', compact('presrito'));
     }
@@ -143,7 +179,10 @@ class PresritoController extends \App\Http\Controllers\Controller
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
-        $tiposNovedades = Preinscrito::getTiposNovedades();
+        $tiposNovedades = TipoNovedad::query()
+            ->activos()
+            ->orderBy('nombre')
+            ->get();
 
         return view('admin.preinscritos.edit', compact('presrito', 'programas', 'estados', 'tiposDocumento', 'tiposNovedades'));
     }
@@ -173,10 +212,36 @@ class PresritoController extends \App\Http\Controllers\Controller
             // Actualizar el preinscrito
             $presrito->update($request->validated());
 
+            // Crear novedad si se marcó la opción
+            if ($request->has('tiene_novedad') && $request->tiene_novedad) {
+                $novedad = $presrito->novedades()->create([
+                    'tipo_novedad_id' => $request->tipo_novedad_id,
+                    'estado' => $request->novedad_estado,
+                    'descripcion' => $request->novedad_descripcion,
+                    'created_by' => auth()->id(),
+                    'updated_by' => auth()->id(),
+                ]);
+
+                // Crear entrada en historial
+                if ($novedad) {
+                    $novedad->historial()->create([
+                        'estado_anterior' => null,
+                        'estado_nuevo' => $request->novedad_estado,
+                        'comentario' => 'Novedad creada durante la edición del preinscrito',
+                        'changed_by' => auth()->id(),
+                    ]);
+                }
+            }
+
             DB::commit();
 
+            $mensaje = 'Preinscrito actualizado exitosamente.';
+            if ($request->has('tiene_novedad') && $request->tiene_novedad) {
+                $mensaje .= ' Se registró la novedad asociada.';
+            }
+
             return redirect()->route('preinscritos.index')
-                ->with('success', 'Preinscrito actualizado exitosamente.');
+                ->with('success', $mensaje);
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()

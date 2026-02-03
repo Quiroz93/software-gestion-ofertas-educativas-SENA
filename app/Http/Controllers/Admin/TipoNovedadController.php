@@ -6,9 +6,11 @@ use App\Http\Requests\StoreTipoNovedadRequest;
 use App\Http\Requests\UpdateTipoNovedadRequest;
 use App\Models\TipoNovedad;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TipoNovedadController extends \Illuminate\Routing\Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
