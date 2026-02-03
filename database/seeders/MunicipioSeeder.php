@@ -36,7 +36,10 @@ class MunicipioSeeder extends Seeder
         ];
 
         foreach ($municipios as $municipio) {
-            Municipio::create($municipio);
+            Municipio::updateOrCreate(
+                ['codigo' => $municipio['codigo']],
+                $municipio
+            );
         }
     }
 }

@@ -11,39 +11,47 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Usuario administrador principal
-        $admin = User::create([
-            'name' => 'Administrador',
-            'email' => 'admin@sena.edu.co',
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@sena.edu.co'],
+            [
+                'name' => 'Administrador',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
         $admin->assignRole('admin');
 
         // Usuario instructor
-        $instructor = User::create([
-            'name' => 'Instructor Demo',
-            'email' => 'instructor@sena.edu.co',
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+        $instructor = User::updateOrCreate(
+            ['email' => 'instructor@sena.edu.co'],
+            [
+                'name' => 'Instructor Demo',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
         $instructor->assignRole('instructor');
 
         // Usuario publicista
-        $publicista = User::create([
-            'name' => 'Publicista Demo',
-            'email' => 'publicista@sena.edu.co',
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+        $publicista = User::updateOrCreate(
+            ['email' => 'publicista@sena.edu.co'],
+            [
+                'name' => 'Publicista Demo',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
         $publicista->assignRole('publicista');
 
         // Usuario aprendiz
-        $aprendiz = User::create([
-            'name' => 'Aprendiz Demo',
-            'email' => 'aprendiz@sena.edu.co',
-            'password' => Hash::make('password'),
-            'email_verified_at' => now(),
-        ]);
+        $aprendiz = User::updateOrCreate(
+            ['email' => 'aprendiz@sena.edu.co'],
+            [
+                'name' => 'Aprendiz Demo',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
         $aprendiz->assignRole('aprendiz');
 
         $this->command->info('✓ 4 usuarios creados exitosamente.');
