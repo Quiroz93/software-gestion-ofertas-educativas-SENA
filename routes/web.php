@@ -378,8 +378,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/preinscritos/create', [PresritoController::class, 'create'])
         ->middleware('can:preinscritos.create')->name('preinscritos.create');
 
+    Route::get('admin/preinscritos/reportes', [ExportController::class, 'reportes'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.reportes');
+
+    Route::get('admin/preinscritos/historial-exportaciones', [ExportController::class, 'historial'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.historial-exportaciones');
+
     Route::post('admin/preinscritos', [PresritoController::class, 'store'])
         ->middleware('can:preinscritos.create')->name('preinscritos.store');
+
+    Route::post('admin/preinscritos/exportar', [ExportController::class, 'exportar'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.exportar');
+
+    Route::post('admin/preinscritos/reportar', [ExportController::class, 'reportar'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.reportar');
+
+    Route::get('admin/preinscritos/exportaciones/{exportacion}/descargar', [ExportController::class, 'descargar'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.exportaciones.descargar');
 
     Route::get('admin/preinscritos/{presrito}', [PresritoController::class, 'show'])
         ->middleware('can:preinscritos.view')->name('preinscritos.show');
@@ -392,15 +407,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('admin/preinscritos/{presrito}', [PresritoController::class, 'destroy'])
         ->middleware('can:preinscritos.delete')->name('preinscritos.destroy');
-
-    Route::get('admin/preinscritos/reportes', [ExportController::class, 'reportes'])
-        ->middleware('can:preinscritos.export')->name('preinscritos.reportes');
-
-    Route::post('admin/preinscritos/exportar', [ExportController::class, 'exportar'])
-        ->middleware('can:preinscritos.export')->name('preinscritos.exportar');
-
-    Route::get('admin/preinscritos/historial-exportaciones', [ExportController::class, 'historial'])
-        ->middleware('can:preinscritos.export')->name('preinscritos.historial-exportaciones');
 
     Route::post('admin/preinscritos/{id}/restore', [PresritoController::class, 'restore'])
         ->middleware('can:preinscritos.restore')->name('preinscritos.restore');

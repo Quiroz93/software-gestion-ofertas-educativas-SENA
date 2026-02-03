@@ -89,6 +89,17 @@
             <?php endif; ?>
 
             
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.export')): ?>
+            <li class="sidebar-nav-item">
+                <a href="<?php echo e(route('preinscritos.reportes')); ?>"
+                   class="sidebar-nav-link <?php echo e(request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : ''); ?>">
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                    <span>Reportes</span>
+                </a>
+            </li>
+            <?php endif; ?>
+
+            
             <li class="sidebar-nav-item">
                 <a href="<?php echo e(route('ofertas.index')); ?>"
                    class="sidebar-nav-link <?php echo e(request()->routeIs('ofertas.*') ? 'active' : ''); ?>">
@@ -242,6 +253,12 @@
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('novedad.tipos.admin')): ?>
             <a class="nav-link <?php echo e(request()->routeIs('tipos-novedad.*') ? 'active' : ''); ?>" href="<?php echo e(route('tipos-novedad.index')); ?>">
                 <i class="bi bi-tag me-2"></i>Tipos de Novedad
+            </a>
+            <?php endif; ?>
+
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.export')): ?>
+            <a class="nav-link <?php echo e(request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : ''); ?>" href="<?php echo e(route('preinscritos.reportes')); ?>">
+                <i class="bi bi-file-earmark-spreadsheet me-2"></i>Reportes
             </a>
             <?php endif; ?>
             
