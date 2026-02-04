@@ -11,10 +11,13 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=work-sans:400,500,600,700&display=swap" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Common CSS/JS -->
+    @vite(['resources/css/sena-utilities.css', 'resources/css/common/app.css', 'resources/js/common/app.js'])
 
     @stack('styles')
 </head>
@@ -27,7 +30,7 @@
                 <!-- Logo + Title -->
                 <div class="text-center mb-4 mt-5">
                     <div class="brand-image mb-3">
-                        {!! file_get_contents(public_path('images/logosimbolo-SENA.svg')) !!}
+                        <img src="{{ asset('images/logosimbolo-SENA.svg') }}" alt="SENA Logo">
                     </div>
                     <h4 class="fw-bold mb-1 mt-3">{{ config('app.name') }}</h4>
                     <span class="text-muted mb-5">SENA</span>
@@ -45,8 +48,8 @@
     <!-- Custom styles -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            font-family: 'Work Sans', sans-serif;
+            background-color: #F6F6F6;
             min-height: 100vh;
         }
 
@@ -57,13 +60,21 @@
         .auth-card {
             border-radius: 1rem;
             box-shadow: 0 10px 25px rgba(0, 48, 77, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         /* Logo SENA */
-        .brand-image svg {
+        .brand-image {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .brand-image img {
             width: 8rem;
             height: 8rem;
-            color: #39A900;
+            display: block;
+            margin: 0 auto;
+            filter: brightness(0) saturate(100%) invert(56%) sepia(96%) saturate(445%) hue-rotate(56deg) brightness(97%) contrast(95%);
         }
 
         /* Divider */

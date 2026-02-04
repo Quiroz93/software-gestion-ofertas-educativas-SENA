@@ -12,48 +12,42 @@
 
     <link rel="icon" href="{{ asset('favicons/favicon.ico') }}" type="image/x-icon">
 
-    <div class="logosimbolo">
-        <a href="/">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-20 h-20">
-        </a>
-    </div>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=work-sans:400,500,600,700&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/sena-utilities.css', 'resources/css/common/app.css', 'resources/js/common/app.js'])
 </head>
 
-<body class="font-sans antialiased text-gray-900">
+<body style="font-family: 'Work Sans', sans-serif; background-color: #F6F6F6; color: #00304D;">
 
-    <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
+    <div class="container-fluid min-vh-100">
+        <div class="row min-vh-100">
 
-        <!-- 🟢 COLUMNA IZQUIERDA (IMÁGENES) -->
-        <div class="hidden md:flex items-center justify-center bg-green-700 text-white p-12">
-            <div class="text-center">
-                <h1 class="text-3xl font-bold mb-4">SoeSoftware</h1>
-                <p class="text-lg mb-6">
-                    Sistema de gestión institucional
-                </p>
+            <!-- COLUMNA IZQUIERDA (IMÁGENES) -->
+            <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center text-white p-5" style="background-color: #39A900;">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 64px; height: 64px;">
+                    </div>
+                    <h1 class="h3 fw-bold mb-3">SoeSoftware</h1>
+                    <p class="mb-4">Sistema de gestión institucional</p>
 
-                <!-- Espacio para imagen -->
-                <div class="w-full h-64 bg-white/20 rounded-lg flex items-center justify-center">
-                    <span class="text-sm opacity-80">
-                        Espacio para imágenes representativas
-                    </span>
+                    <div class="w-100" style="max-width: 320px; height: 220px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                        <span style="opacity: 0.85;">Espacio para imágenes representativas</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 🟢 COLUMNA DERECHA (FORMULARIO) -->
-        <div class="flex items-center justify-center bg-gray-100">
-            <div class="w-full max-w-md px-6 py-8">
-                {{ $slot }}
+            <!-- COLUMNA DERECHA (FORMULARIO) -->
+            <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: #F6F6F6;">
+                <div class="w-100" style="max-width: 420px; padding: 2rem 1.5rem;">
+                    {{ $slot }}
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
 </body>

@@ -34,7 +34,7 @@
 
 <div class="row">
     @foreach($roles as $role)
-    <div class="col-md-6 col-lg-4">
+    <div class="col-md-6 col-lg-4 mb-4 mt-2">
         <div class="card card-outline card-primary shadow-sm h-100">
 
             {{-- HEADER --}}
@@ -49,14 +49,14 @@
 
                 <p class="mb-2">
                     <strong>Guard:</strong>
-                    <span class="badge badge-secondary">
+                    <span class="badge bg-secondary">
                         {{ $role->guard_name }}
                     </span>
                 </p>
 
                 <p class="mb-0">
                     <strong>Permisos:</strong>
-                    <span class="badge badge-info">
+                    <span class="badge bg-info text-dark">
                         {{ $role->permissions->count() }}
                     </span>
                 </p>

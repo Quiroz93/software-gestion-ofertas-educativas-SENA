@@ -19,4 +19,28 @@ class HistoriaExito extends Model
         'programa_id',
         'imagen',
     ];
+
+    /**
+     * Accessor: Título limitado a 30 caracteres
+     */
+    public function getTituloCortaAttribute()
+    {
+        return \Illuminate\Support\Str::limit($this->titulo ?? '', 30);
+    }
+
+    /**
+     * Accessor: Descripción limitada a 150 caracteres
+     */
+    public function getDescripcionCortaAttribute()
+    {
+        return \Illuminate\Support\Str::limit($this->descripcion ?? '', 150);
+    }
+
+    /**
+     * Método: Obtener descripción limitada a una cantidad específica
+     */
+    public function getDescripcionLimitada($length = 150)
+    {
+        return \Illuminate\Support\Str::limit($this->descripcion ?? '', $length);
+    }
 }

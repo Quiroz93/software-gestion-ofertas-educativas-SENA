@@ -1,0 +1,324 @@
+/* ============================================================================
+ * COMPONENTE TARJETAS - SISTEMA SENA
+ * Tarjetas institucionalmente consistentes
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * TARJETA BASE
+ * ============================================================================
+ */
+
+.card {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: var(--border-radius-card);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
+}
+
+/* ============================================================================
+ * SECCIONES DE TARJETA
+ * ============================================================================
+ */
+
+.card-header {
+  padding: var(--spacing-4);
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.card-header h1,
+.card-header h2,
+.card-header h3,
+.card-header h4,
+.card-header h5,
+.card-header h6 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sena-text-primary);
+}
+
+.card-body {
+  padding: var(--spacing-6);
+  flex: 1;
+}
+
+.card-footer {
+  padding: var(--spacing-4);
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ============================================================================
+ * ELEMENTOS DE TARJETA
+ * ============================================================================
+ */
+
+.card-title {
+  margin: 0 0 var(--spacing-2) 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sena-text-primary);
+}
+
+.card-subtitle {
+  margin: 0 0 var(--spacing-4) 0;
+  font-size: var(--font-size-sm);
+  color: #6c757d;
+}
+
+.card-text {
+  margin-bottom: var(--spacing-3);
+  color: var(--sena-text-primary);
+  line-height: 1.6;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Imagen de tarjeta */
+.card-image,
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-img-cover {
+  max-height: 400px;
+}
+
+.card-img-top {
+  border-radius: var(--border-radius-card) var(--border-radius-card) 0 0;
+}
+
+.card-img-bottom {
+  border-radius: 0 0 var(--border-radius-card) var(--border-radius-card);
+}
+
+/* ============================================================================
+ * VARIANTE PROGRAMA
+ * ============================================================================
+ */
+
+.card-programa {
+  border-left: 5px solid #39A900;
+}
+
+.card-programa:hover {
+  border-left-color: #2d8500;
+}
+
+/* ============================================================================
+ * VARIANTE OFERTA
+ * ============================================================================
+ */
+
+.card-oferta {
+  border-left: 5px solid #FDC300;
+  position: relative;
+}
+
+.card-oferta::before {
+  content: 'OFERTA';
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  background: #FDC300;
+  color: #212529;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: 4px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+/* ============================================================================
+ * VARIANTE NOTICIA
+ * ============================================================================
+ */
+
+.card-noticia {
+  border-left: 5px solid #50E5F9;
+}
+
+.card-noticia:hover {
+  border-left-color: #17c9d9;
+}
+
+/* ============================================================================
+ * VARIANTE ADMIN
+ * ============================================================================
+ */
+
+.card-admin {
+  border: none;
+  background: white;
+}
+
+.card-admin:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* ============================================================================
+ * VARIANTES DE BORDE
+ * ============================================================================
+ */
+
+.card-bordered {
+  border: 2px solid #39A900;
+}
+
+.card-bordered.active {
+  box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.2);
+}
+
+.card-elevated {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.card-flat {
+  box-shadow: none;
+  border-color: #e9ecef;
+}
+
+/* ============================================================================
+ * VARIANTES DE COLOR
+ * ============================================================================
+ */
+
+.card-success {
+  border-top: 4px solid #28a745;
+}
+
+.card-warning {
+  border-top: 4px solid #ffc107;
+}
+
+.card-danger {
+  border-top: 4px solid #dc3545;
+}
+
+.card-info {
+  border-top: 4px solid #17a2b8;
+}
+
+/* ============================================================================
+ * TAMAÑOS
+ * ============================================================================
+ */
+
+.card-sm {
+  border-radius: 6px;
+}
+
+.card-sm .card-body {
+  padding: var(--spacing-3);
+}
+
+.card-lg {
+  border-radius: 12px;
+}
+
+.card-lg .card-body {
+  padding: var(--spacing-8);
+}
+
+/* ============================================================================
+ * ESTADOS
+ * ============================================================================
+ */
+
+.card.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.card.active {
+  border: 2px solid #39A900;
+  box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.2);
+}
+
+.card.loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * TARJETA COMO ENLACE
+ * ============================================================================
+ */
+
+a.card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================================================================
+ * GRUPO DE TARJETAS
+ * ============================================================================
+ */
+
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+}
+
+@media (max-width: 768px) {
+  .card-group {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-4);
+  }
+}
+
+@media (max-width: 576px) {
+  .card-group {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3);
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVIDAD
+ * ============================================================================
+ */
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: var(--spacing-4);
+  }
+  
+  .card-header,
+  .card-footer {
+    padding: var(--spacing-3);
+  }
+  
+  .card-img-top,
+  .card-image {
+    height: 150px;
+  }
+}

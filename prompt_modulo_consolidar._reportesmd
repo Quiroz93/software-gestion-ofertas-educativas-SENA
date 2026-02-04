@@ -1,0 +1,131 @@
+Actúa como un desarrollador senior Laravel y arquitecto de software, con experiencia en sistemas académicos y carga masiva de datos.
+
+CONTEXTO DEL SISTEMA
+Sistema académico desarrollado en:
+- Laravel 10+
+- Blade
+- Bootstrap 5
+- Spatie Laravel Permission
+- SweetAlert2
+- MySQL
+- Maatwebsite/Laravel-Excel
+
+IMPORTANTE:
+Todo el frontend debe:
+- Usar Bootstrap 5
+- Respetar colores, tipografías, espaciados y componentes definidos en:
+  /docs/DESIGN_SYSTEM_SENA.md
+- NO usar clases, layouts ni dependencias de AdminLTE
+
+OBJETIVO GENERAL
+Crear un MÓDULO ADMINISTRATIVO que permita:
+1. Cargar múltiples archivos Excel con datos de preinscritos.
+2. Consolidar la información.
+3. Guardar las consolidaciones en la base de datos.
+4. Gestionar las consolidaciones mediante un CRUD independiente.
+5. Mantener trazabilidad, integridad y control de duplicados.
+
+================================
+ACCESO Y PERMISOS
+================================
+
+- El módulo se accede desde el sidebar administrativo del sistema.
+- Validar permisos con Spatie:
+  - `preinscritos.import`
+  - `preinscritos.consolidaciones.admin`
+
+Flujo:
+- Si el usuario NO tiene permisos:
+  - Mostrar SweetAlert2 informativo y bloquear acceso.
+- Si tiene permisos:
+  - Acceso total al módulo.
+
+================================
+ESTRUCTURA DEL MÓDULO
+================================
+
+El módulo se divide en dos partes claramente separadas:
+
+1️⃣ Importación y Consolidación de Excel  
+2️⃣ CRUD de Consolidaciones (módulo independiente)
+
+================================
+1️⃣ IMPORTACIÓN Y CONSOLIDACIÓN
+================================
+
+FUNCIONALIDADES:
+- Formulario Bootstrap 5 para carga múltiple de archivos Excel.
+- Validar extensiones permitidas (.xls, .xlsx).
+- Procesar cada archivo:
+  - Detectar automáticamente la fila de encabezados.
+  - Ignorar filas vacías o inválidas.
+  - Normalizar nombres de columnas.
+- Consolidar todos los registros válidos en memoria.
+- reporte por separado de fallos de carga o consolidacion
+- Evitar duplicados por combinación:
+  - tipo_documento + numero_documento + codigo_ficha
+
+DATOS A CONSOLIDAR:
+- tipo_documento
+- numero_documento
+- nombre_completo
+- estado
+- codigo_ficha
+
+RESULTADO:
+- Crear una consolidación en base de datos.
+- Generar resumen:
+  - total_archivos
+  - total_registros
+  - total_descartados
+- Mostrar resultado de la operación con SweetAlert2.
+
+================================
+2️⃣ BASE DE DATOS – CONSOLIDACIONES
+================================
+
+Crear tabla `consolidaciones_preinscritos`:
+
+Campos:
+- id
+- nombre_consolidacion (formato: prefijo->Consolidacion_preinscritos_ + fufijo->fecha/hora de la consolidacion)
+- descripcion (prefijo-> Se consolidaron: + numero de archivos cargados + total de preincritos por archivo + total de preinscritos)
+- total_archivos
+- total_registros
+- total_descartados
+- created_by
+- timestamps
+- softDeletes
+
+Crear tabla `consolidacion_preinscritos_detalles`:
+
+Campos:
+- id
+- consolidacion_id (FK)
+- tipo_documento
+- numero_documento
+- nombre_completo
+- estado
+- codigo_ficha
+- nombre_programa
+- observaciones
+- timestamps
+
+Relaciones:
+- ConsolidacionPreinscrito hasMany Detalles
+- Detalle belongsTo ConsolidacionPreinscrito
+
+================================
+3️⃣ CRUD DE CONSOLIDACIONES (INDEPENDIENTE)
+================================
+
+FUNCIONALIDADES DEL CRUD:
+- Listar consolidaciones realizadas.
+- Ver detalle completo de una consolidación.
+- Filtros por:
+  - fecha
+  - usuario
+  - ficha
+  - estado
+- Editar observaciones de los registros consolidados.
+- Eliminación lóg

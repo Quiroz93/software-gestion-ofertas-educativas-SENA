@@ -17,4 +17,12 @@ class Instructor extends Model
         'experiencia',
         'correo',
     ];
+
+    /**
+     * Accessor: Experiencia limitada a 100 caracteres
+     */
+    public function getExperienciaCortaAttribute()
+    {
+        return \Illuminate\Support\Str::limit($this->experiencia ?? '', 100);
+    }
 }

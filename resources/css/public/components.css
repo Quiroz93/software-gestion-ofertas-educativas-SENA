@@ -1,0 +1,564 @@
+/**
+ * Public Area Reusable Components
+ * ================================
+ * 
+ * Estilos reutilizables para componentes comunes en el área pública
+ * Cumple con Design System SENA
+ * 
+ * Estos estilos reemplazan inline styles <div style="...">
+ * Fecha: 31 de Enero 2026
+ * Version: 1.0
+ */
+
+/* ============================================================
+   HERO SECTIONS - Secciones principales
+   ============================================================ */
+
+.hero-section {
+    padding: var(--spacing-xl) 0;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+}
+
+.hero-section.hero-bg-green {
+    background-color: var(--sena-green);
+    color: var(--white);
+}
+
+.hero-section.hero-bg-blue {
+    background-color: var(--sena-blue-dark);
+    color: var(--white);
+}
+
+.hero-section.hero-bg-yellow {
+    background-color: var(--sena-yellow);
+    color: var(--sena-blue-dark);
+}
+
+.hero-section.hero-bg-light {
+    background-color: var(--neutral-bg);
+    color: var(--sena-blue-dark);
+}
+
+/* ============================================================
+   ICONOS - Sizes y colores consistentes
+   ============================================================ */
+
+/* Icono muy grande (para hero sections) */
+.icon-huge {
+    font-size: 3rem;
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+    opacity: 0.3;
+}
+
+.icon-huge-white {
+    color: var(--white);
+}
+
+.icon-huge-muted {
+    color: var(--text-muted);
+}
+
+.icon-huge-danger {
+    font-size: 3rem;
+    color: #dc3545;
+}
+
+/* Icono grande */
+.icon-large {
+    font-size: 1.5rem;
+    display: inline-block;
+    margin-right: var(--spacing-md);
+    vertical-align: middle;
+}
+
+.icon-large-green {
+    color: var(--sena-green);
+}
+
+.icon-large-yellow {
+    color: var(--sena-yellow);
+}
+
+.icon-large-blue {
+    color: var(--sena-blue-dark);
+}
+
+.icon-large-dark {
+    color: var(--sena-green-dark);
+}
+
+.icon-large-muted {
+    color: var(--text-muted);
+}
+
+/* Icono mediano */
+.icon-medium {
+    font-size: 2rem;
+    display: inline-block;
+}
+
+.icon-medium-green {
+    color: var(--sena-green);
+}
+
+/* Icono pequeño */
+.icon-small {
+    font-size: 1rem;
+    margin-right: var(--spacing-sm);
+    vertical-align: middle;
+}
+
+/* ============================================================
+   CIRCLES CON ICONO - Fondo circular
+   ============================================================ */
+
+.circle-bg {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.circle-bg-green {
+    background-color: rgba(57, 169, 0, 0.08);
+}
+
+.circle-bg-blue {
+    background-color: rgba(0, 48, 77, 0.08);
+}
+
+.circle-bg-yellow {
+    background-color: rgba(253, 195, 0, 0.08);
+}
+
+.circle-icon-green {
+    font-size: 1.5rem;
+    color: var(--sena-green);
+}
+
+.circle-icon-blue {
+    font-size: 1.5rem;
+    color: var(--sena-blue-dark);
+}
+
+.circle-icon-yellow {
+    font-size: 1.5rem;
+    color: var(--sena-yellow);
+}
+
+/* ============================================================
+   EDITOR COMPONENTS - Modales y editores
+   ============================================================ */
+
+/* Contenedores de editor */
+.editor-container {
+    display: none;
+}
+
+.editor-container.active {
+    display: block;
+}
+
+.editor-hidden {
+    display: none !important;
+}
+
+/* ============================================================
+   MEDIA & FILE MANAGEMENT
+   ============================================================ */
+
+/* Grid de archivos */
+.files-grid {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Preview area */
+.media-preview-container {
+    min-height: 150px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    text-align: center;
+    background-color: var(--white);
+}
+
+/* Previews de media */
+.media-preview {
+    max-height: 250px;
+    max-width: 100%;
+}
+
+.video-responsive {
+    width: 100%;
+    max-height: 200px;
+    background: #000;
+}
+
+.img-responsive-media {
+    width: 100%;
+    height: auto;
+}
+
+/* Thumbnails */
+.media-thumbnail {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+/* Drop zone */
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.drop-zone:hover {
+    background-color: var(--gray-100);
+    border-color: var(--sena-green);
+}
+
+.drop-zone.dragover {
+    background-color: rgba(57, 169, 0, 0.08);
+    border-color: var(--sena-green);
+}
+
+/* Upload progress */
+.upload-progress {
+    display: none;
+    margin-top: var(--spacing-md);
+}
+
+.upload-progress.active {
+    display: block;
+}
+
+/* File card */
+.file-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition-base);
+    cursor: pointer;
+}
+
+.file-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   OFFCANVAS PERSONALIZADO
+   ============================================================ */
+
+.offcanvas-header-sena {
+    background-color: var(--sena-blue-dark);
+    color: var(--white);
+}
+
+/* ============================================================
+   INFO BOXES & ALERTS
+   ============================================================ */
+
+.info-box {
+    background-color: var(--neutral-bg);
+    border: 1px solid var(--sena-blue-light);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    color: var(--sena-blue-dark);
+}
+
+.info-box-icon {
+    font-size: 1.5rem;
+    margin-right: var(--spacing-md);
+    vertical-align: middle;
+}
+
+/* ============================================================
+   BOTONES & ACCIONES
+   ============================================================ */
+
+/* Icon button redondo */
+.icon-btn-round {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: var(--z-fixed);
+    transition: var(--transition-base);
+}
+
+.icon-btn-round:hover {
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   TIPOGRAFÍA & TÍTULOS
+   ============================================================ */
+
+/* Títulos con colores */
+.title-green {
+    color: var(--sena-green);
+}
+
+.title-blue {
+    color: var(--sena-blue-dark);
+}
+
+.title-yellow {
+    color: var(--sena-yellow);
+}
+
+/* Navbar personalizado */
+.navbar-sena {
+    background-color: var(--sena-blue-dark);
+}
+
+.navbar-brand-sena {
+    font-size: var(--fs-body);
+    color: var(--white) !important;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ============================================================
+   PROGRAMA / FICHA DETAILS
+   ============================================================ */
+
+/* Item de información del programa */
+.program-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.program-info-item:last-child {
+    border-bottom: none;
+}
+
+/* Icono de programa */
+.program-info-icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.program-info-icon-green {
+    color: var(--sena-green);
+}
+
+.program-info-icon-yellow {
+    color: var(--sena-yellow);
+}
+
+.program-info-icon-blue {
+    color: var(--sena-blue-dark);
+}
+
+.program-info-icon-dark {
+    color: var(--sena-green-dark);
+}
+
+/* Contenido del programa */
+.program-info-content {
+    flex: 1;
+}
+
+.program-info-text {
+    color: var(--sena-blue-dark);
+    line-height: 1.6;
+}
+
+.program-info-value {
+    font-weight: var(--font-weight-semibold);
+    color: var(--sena-blue-dark);
+}
+
+.program-info-label {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ============================================================
+   COMPETENCIAS
+   ============================================================ */
+
+.competencies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.competency-card {
+    background-color: var(--neutral-bg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    transition: var(--transition-base);
+    border: 1px solid transparent;
+}
+
+.competency-card:hover {
+    border-color: var(--sena-green);
+    box-shadow: var(--shadow-sm);
+}
+
+.competency-title {
+    color: var(--sena-blue-dark);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--fs-h6);
+}
+
+.competency-description {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   TARJETAS EDITABLES
+   ============================================================ */
+
+.editable-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-base);
+    border: 1px solid transparent;
+}
+
+.editable-card:hover {
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+}
+
+/* ============================================================
+   RESPONSIVE - Media queries
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .icon-huge {
+        font-size: 2rem;
+    }
+
+    .program-info-item {
+        padding: var(--spacing-md) 0;
+    }
+
+    .competencies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .files-grid {
+        max-height: 250px;
+    }
+}
+
+/* ============================================================
+   ANIMACIONES
+   ============================================================ */
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* ============================================================
+   UTILIDADES FINALES
+   ============================================================ */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.opacity-half { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+
+.no-wrap { white-space: nowrap; }
+.word-break { word-break: break-word; }
+
+/* ============================================================
+   NOTAS
+   ============================================================ */
+
+/*
+ * USO:
+ * 
+ * 1. Reemplazar style inline con class:
+ *    ❌ <div style="background-color: var(--sena-green);">
+ *    ✅ <div class="hero-section hero-bg-green">
+ * 
+ * 2. Iconos:
+ *    ❌ <i style="font-size: 3rem; color: var(--text-muted);">
+ *    ✅ <i class="icon-huge">
+ * 
+ * 3. Info items:
+ *    ❌ <div style="..."><i style="..."></i><strong style="...">
+ *    ✅ <div class="program-info-item">
+ *            <i class="program-info-icon program-info-icon-green"></i>
+ *            <div class="program-info-content">...</div>
+ *       </div>
+ * 
+ * 4. Combinar clases:
+ *    ✅ <div class="circle-bg circle-bg-green">
+ *    ✅ <i class="icon-large icon-large-green">
+ */

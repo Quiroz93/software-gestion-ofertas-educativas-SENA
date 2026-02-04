@@ -1,0 +1,337 @@
+/* ============================================================================
+ * COMPONENTE HERO - SISTEMA SENA
+ * Secciones hero institucionalmente consistentes
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * HERO BASE
+ * ============================================================================
+ */
+
+.hero,
+.hero-section {
+  background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
+  color: white;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.hero-description {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-cta .btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+}
+
+.hero-cta .btn-primary {
+  background-color: white;
+  color: #39A900;
+  border-color: white;
+}
+
+.hero-cta .btn-primary:hover {
+  background-color: rgba(255,255,255,0.9);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.hero-cta .btn-outline {
+  border-color: white;
+  color: white;
+  background-color: transparent;
+}
+
+.hero-cta .btn-outline:hover {
+  background-color: rgba(255,255,255,0.1);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+/* ============================================================================
+ * VARIANTES DE HERO
+ * ============================================================================
+ */
+
+/* Hero Programa */
+.hero-programa {
+  background: linear-gradient(135deg, #39A900 0%, #2d8500 100%);
+}
+
+/* Hero Oferta */
+.hero-oferta {
+  background: linear-gradient(135deg, #FDC300 0%, #f5b000 100%);
+  color: #212529;
+}
+
+.hero-oferta .hero-title,
+.hero-oferta .hero-subtitle {
+  color: #212529;
+}
+
+.hero-oferta .hero-description {
+  color: rgba(33, 37, 41, 0.9);
+}
+
+/* Hero Noticia */
+.hero-noticia {
+  background: linear-gradient(135deg, #50E5F9 0%, #1db9cc 100%);
+  color: white;
+}
+
+/* Hero Admin */
+.hero-admin {
+  background: linear-gradient(135deg, #71277A 0%, #4a1850 100%);
+  padding: 3rem 0;
+  margin-bottom: 2rem;
+}
+
+/* ============================================================================
+ * HERO CON IMAGEN DE FONDO
+ * ============================================================================
+ */
+
+.hero-with-image {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-with-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+/* ============================================================================
+ * TAMAÑOS
+ * ============================================================================
+ */
+
+.hero-sm {
+  padding: 2rem 0;
+}
+
+.hero-sm .hero-title {
+  font-size: 1.75rem;
+}
+
+.hero-md {
+  padding: 4rem 0;
+}
+
+.hero-lg {
+  padding: 6rem 0;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-lg .hero-title {
+  font-size: 3rem;
+}
+
+.hero-xl {
+  padding: 8rem 0;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-xl .hero-title {
+  font-size: 3.5rem;
+}
+
+/* ============================================================================
+ * ALINEACIÓN
+ * ============================================================================
+ */
+
+.hero-left {
+  text-align: left;
+}
+
+.hero-left .hero-cta {
+  justify-content: flex-start;
+}
+
+.hero-center {
+  text-align: center;
+}
+
+.hero-center .hero-cta {
+  justify-content: center;
+}
+
+.hero-right {
+  text-align: right;
+}
+
+.hero-right .hero-cta {
+  justify-content: flex-end;
+}
+
+/* ============================================================================
+ * HERO CON CONTENIDO LATERAL
+ * ============================================================================
+ */
+
+.hero-with-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-with-content .hero-content {
+  text-align: left;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================================
+ * ANIMACIONES
+ * ============================================================================
+ */
+
+.hero-title {
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.hero-subtitle {
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.hero-cta {
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================
+ */
+
+@media (max-width: 768px) {
+  .hero,
+  .hero-section {
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-lg {
+    padding: 4rem 0;
+    min-height: 300px;
+  }
+
+  .hero-lg .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-xl {
+    padding: 4rem 0;
+    min-height: 300px;
+  }
+
+  .hero-xl .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-with-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,194 @@
+/* ============================================================================
+ * TOKENS DE ANIMACIONES - SISTEMA SENA
+ * Transiciones profesionales y consistentes
+ * ============================================================================
+ */
+
+:root {
+  /* DURACIONES DE TRANSICIÓN */
+  
+  /* Muy rápido: para micros interacciones (focus, hover rápido) */
+  --transition-duration-fast: 100ms;
+  
+  /* Rápido: para cambios normales (hover, foco) */
+  --transition-duration-base: 200ms;
+  
+  /* Normal: para transiciones de contenido */
+  --transition-duration-slow: 300ms;
+  
+  /* Lento: para animaciones complejas */
+  --transition-duration-slower: 500ms;
+  
+  /* FUNCIONES DE TEMPORIZACIÓN (Easing) */
+  
+  /* Lineal: cambio uniforme */
+  --transition-timing-linear: linear;
+  
+  /* Ease in: comienza lentamente, acelera */
+  --transition-timing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  
+  /* Ease out: comienza rápido, desacelera (natural) */
+  --transition-timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  
+  /* Ease in out: suave al inicio y al final */
+  --transition-timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Material: Google Material Design easing */
+  --transition-timing-material: cubic-bezier(0.4, 0, 0.6, 1);
+  
+  /* TRANSICIONES PREDEFINIDAS */
+  
+  /* Para botones e interacciones rápidas */
+  --transition-button: all var(--transition-duration-fast) var(--transition-timing-ease-out);
+  
+  /* Para links y hover effects */
+  --transition-link: color var(--transition-duration-base) var(--transition-timing-ease-out);
+  
+  /* Para cambios de opacidad */
+  --transition-fade: opacity var(--transition-duration-base) var(--transition-timing-ease-out);
+  
+  /* Para cambios de color */
+  --transition-color: background-color var(--transition-duration-base) var(--transition-timing-ease-out);
+  
+  /* Para transforms (escala, rotación) */
+  --transition-transform: transform var(--transition-duration-base) var(--transition-timing-ease-out);
+  
+  /* Para transiciones suaves generales */
+  --transition-smooth: all var(--transition-duration-base) var(--transition-timing-ease-out);
+  
+  /* ANIMACIONES KEYFRAME PREDEFINIDAS */
+  
+  /* Duración de animaciones principales */
+  --animation-duration-base: 1s;
+  --animation-duration-slow: 2s;
+}
+
+/* ============================================================================
+ * KEYFRAMES DE ANIMACIONES REUTILIZABLES
+ * ============================================================================
+ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+ * CLASES DE UTILIDAD DE ANIMACIÓN
+ * ============================================================================
+ */
+
+.animate-fade-in {
+  animation: fadeIn var(--animation-duration-base) var(--transition-timing-ease-out);
+}
+
+.animate-slide-in-up {
+  animation: slideInUp var(--animation-duration-base) var(--transition-timing-ease-out);
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--animation-duration-base) var(--transition-timing-ease-out);
+}
+
+.animate-pulse {
+  animation: pulse 2s var(--transition-timing-linear) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s var(--transition-timing-linear) infinite;
+}

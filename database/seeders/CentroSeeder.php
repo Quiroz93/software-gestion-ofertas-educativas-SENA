@@ -42,6 +42,12 @@ class CentroSeeder extends Seeder
                 'direccion' => 'Cra. 6 #4-50, Popayán, Cauca',
                 'telefono' => '(2) 8244444',
                 'correo' => 'cauca@sena.edu.co'
+            ],
+            [
+                'nombre' => 'Centro Agroempresarial y turistico de los Andes',
+                'direccion' => 'Cra. 11 #13-13, Málaga, Santander',
+                'telefono' => '(7) 6200000',
+                'correo' => 'agroempresarial@sena.edu.co'
             ]
         ];
 

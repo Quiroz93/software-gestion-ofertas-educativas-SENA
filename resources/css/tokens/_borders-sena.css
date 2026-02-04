@@ -1,0 +1,47 @@
+/* ============================================================================
+ * TOKENS DE BORDES - SISTEMA SENA
+ * Radios y grosores de borde institucionalmente consistentes
+ * ============================================================================
+ */
+
+:root {
+  /* GROSORES DE BORDE */
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --border-width-4: 4px;
+  --border-width-8: 8px;
+  
+  /* RADIOS DE ESQUINA (Border Radius) */
+  
+  /* Sin borde redondeado */
+  --border-radius-none: 0;
+  
+  /* Pequeño: para elementos pequeños */
+  --border-radius-sm: 0.25rem;  /* 4px */
+  
+  /* Normal: para botones y inputs */
+  --border-radius-md: 0.5rem;   /* 8px */
+  
+  /* Grande: para tarjetas y componentes medianos */
+  --border-radius-lg: 0.75rem;  /* 12px */
+  
+  /* Extra grande: para componentes grandes */
+  --border-radius-xl: 1rem;     /* 16px */
+  
+  /* Redondo: para avatares y badges */
+  --border-radius-full: 9999px;
+  
+  /* ALIAS DE USO COMÚN */
+  --border-radius-default: var(--border-radius-md);
+  --border-radius-button: var(--border-radius-md);
+  --border-radius-card: var(--border-radius-lg);
+  --border-radius-modal: var(--border-radius-xl);
+  --border-radius-avatar: var(--border-radius-full);
+  --border-radius-badge: var(--border-radius-full);
+  
+  /* ESTILOS DE BORDE PREDEFINIDOS */
+  --border-default: var(--border-width-1) solid var(--sena-border-default, #DEE2E6);
+  --border-light: var(--border-width-1) solid var(--sena-border-light, #E9ECEF);
+  --border-dark: var(--border-width-1) solid var(--sena-border-dark, #ADB5BD);
+  --border-primary: var(--border-width-2) solid var(--sena-primary-main, #39A900);
+}

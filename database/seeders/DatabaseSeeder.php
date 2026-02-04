@@ -167,6 +167,32 @@ class DatabaseSeeder extends Seeder
 
             /*
             |--------------------------------------------------------------------------
+            | Aprendices Preinscritos
+            |--------------------------------------------------------------------------
+            */
+            'preinscritos.view',
+            'preinscritos.create',
+            'preinscritos.edit',
+            'preinscritos.update',
+            'preinscritos.delete',
+            'preinscritos.restore',
+            'preinscritos.force_delete',
+            'preinscritos.manage',
+            'preinscritos.export',
+            'preinscritos.admin',
+            'preinscritos.import',
+            'preinscritos.consolidaciones.admin',
+            'preinscritos.novedades.admin',
+
+            /*
+            |--------------------------------------------------------------------------
+            | Novedades de Preinscritos
+            |--------------------------------------------------------------------------
+            */
+            'novedad.tipos.admin',
+
+            /*
+            |--------------------------------------------------------------------------
             | Noticias y artículos
             |--------------------------------------------------------------------------
             */
@@ -296,15 +322,19 @@ class DatabaseSeeder extends Seeder
         |--------------------------------------------------------------------------
         */
         $this->call([
+                        UserSeeder::class,
             CentroSeeder::class,
             RedSeeder::class,
             NivelFormacionSeeder::class,
+            MunicipioSeeder::class,
             CompetenciaSeeder::class,
             ProgramaSeeder::class,
             InstructorSeeder::class,
             HistoriaDeExitoSeeder::class,
             OfertaSeeder::class,
             NoticiaSeeder::class,
+            TipoNovedadSeeder::class,
+            PreinscritoExcelSeeder::class,
         ]);
     }
 }

@@ -5,12 +5,33 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
-                'resources/css/admin.css',
-                'resources/css/public.css',
-                'resources/js/app.js',
-                'resources/js/admin.js',
-                'resources/js/public.js'
+                /* Design System Base - DEBE SER PRIMERO */
+                'resources/css/design-system.css',
+                'resources/css/sena-utilities.css',
+
+                /* Component Styles */
+                'resources/css/components/navigation-sena.css',
+                'resources/css/components/hero-sena.css',
+                'resources/css/components/forms-sena.css',
+                'resources/css/components/cards-sena.css',
+                'resources/css/components/buttons-sena.css',
+                'resources/css/components/badges-sena.css',
+                'resources/css/components/alerts-sena.css',
+                'resources/css/components/pagination-sena.css',
+
+                /* Area Specific Styles */
+                'resources/css/common/app.css',
+                'resources/css/public/components.css',
+                'resources/css/public/public.css',
+                'resources/css/public/home.css',
+                'resources/css/welcome.css',
+                'resources/css/admin/admin.css',
+                'resources/css/admin/admin-layout.css',
+
+                /* JavaScript */
+                'resources/js/common/app.js',
+                'resources/js/admin/admin.js',
+                'resources/js/public/public.js'
             ],
             refresh: true,
         }),

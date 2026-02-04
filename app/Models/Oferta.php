@@ -50,4 +50,22 @@ class Oferta extends Model
         return $content?->value ?? $default;
     }
 
+    /**
+     * Accessor: Descripción limitada a 100 caracteres
+     */
+    public function getDescripcionCortaAttribute()
+    {
+        $description = $this->custom('descripcion', '');
+        return \Illuminate\Support\Str::limit($description, 100);
+    }
+
+    /**
+     * Accessor: Descripción limitada a 150 caracteres
+     */
+    public function getDescripcionMediaAttribute()
+    {
+        $description = $this->custom('descripcion', '');
+        return \Illuminate\Support\Str::limit($description, 150);
+    }
+
 }
