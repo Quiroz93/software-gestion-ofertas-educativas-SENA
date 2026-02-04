@@ -259,7 +259,7 @@
                             </div>
                         </div>
 
-                        <div id="novedad_fields" style="display: {{ old('tiene_novedad') ? 'block' : 'none' }};">
+                        <div id="novedad_fields" style="display: '{{ old('tiene_novedad') ? 'block' : 'none' }}';"></div>
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="tipo_novedad_id" class="form-label">

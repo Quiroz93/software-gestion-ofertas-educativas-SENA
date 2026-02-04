@@ -260,7 +260,11 @@
                             </div>
                         </div>
 
-                        <div id="novedad_fields" style="display: {{ old('tiene_novedad') ? 'block' : 'none' }};">
+                        @if(old('tiene_novedad'))
+                            <div id="novedad_fields">
+                        @else
+                            <div id="novedad_fields" style="display: none;">
+                        @endif
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="tipo_novedad_id" class="form-label">
@@ -317,6 +321,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Información de Auditoría -->
                         <div class="alert alert-light border mt-3">

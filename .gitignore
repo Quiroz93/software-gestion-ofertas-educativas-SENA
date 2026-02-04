@@ -78,3 +78,30 @@ Homestead.yaml
 /vendor/bin/sail
 
 # =========================
+# Sensitive Data
+# =========================
+*.xlsx
+*.xls
+*.csv
+preinscritos*.json
+datos_*.json
+*.backup
+*.bak
+importar_*.json
+
+# =========================
+# Debug and Temporary Files
+# =========================
+*.debug
+*.test
+test-*.sh
+*-test.php
+*-test.js
+audit-*.txt
+fase*-*.txt
+*-reportes*.md
+debug/
+temp/
+tmp/
+
+# =========================
