@@ -8,7 +8,12 @@
         <i class="bi bi-layers text-primary"></i>
         {{ $consolidacion->nombre_consolidacion }}
     </h1>
-    <div>
+    <div class="d-flex gap-2">
+        <a href="{{ route('preinscritos.consolidaciones.exportar', ['consolidacion' => $consolidacion->id] + request()->only(['codigo_ficha', 'estado'])) }}" 
+           class="btn btn-success">
+            <i class="bi bi-file-earmark-excel"></i>
+            Exportar a Excel
+        </a>
         <a href="{{ route('preinscritos.consolidaciones.index') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i>
             Volver

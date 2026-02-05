@@ -109,7 +109,7 @@ class Preinscrito extends Model
     }
 
     /**
-     * Validar que el número de documento sea único
+     * Validar que el número de documento sea único (solo entre registros no eliminados)
      */
     public static function documentoExiste(string $numeroDocumento, ?int $exceptId = null): bool
     {
@@ -119,7 +119,8 @@ class Preinscrito extends Model
             $query->where('id', '!=', $exceptId);
         }
         
-        return $query->exists();
+        // Solo buscar en registros no eliminados
+        return $query->whereNull('deleted_at')->exists();
     }
 
     /**

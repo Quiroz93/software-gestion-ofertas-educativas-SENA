@@ -76,6 +76,17 @@
             </li>
             @endcan
 
+            {{-- Preinscritos Rechazados --}}
+            @can('preinscritos.admin')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('admin.preinscritos-rechazados.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('admin.preinscritos-rechazados.*') ? 'active' : '' }}">
+                    <i class="bi bi-x-circle"></i>
+                    <span>Registros Rechazados</span>
+                </a>
+            </li>
+            @endcan
+
             {{-- Tipos de Novedad --}}
             @can('novedad.tipos.admin')
             <li class="sidebar-nav-item">
@@ -94,6 +105,13 @@
                    class="sidebar-nav-link {{ request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-spreadsheet"></i>
                     <span>Reportes</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="{{ route('preinscritos.historial-exportaciones') }}"
+                   class="sidebar-nav-link ps-4 {{ request()->routeIs('preinscritos.historial-exportaciones') ? 'active' : '' }}">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Historial de Exportaciones</span>
                 </a>
             </li>
             @endcan
@@ -257,6 +275,9 @@
             @can('preinscritos.export')
             <a class="nav-link {{ request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : '' }}" href="{{ route('preinscritos.reportes') }}">
                 <i class="bi bi-file-earmark-spreadsheet me-2"></i>Reportes
+            </a>
+            <a class="nav-link ms-3 {{ request()->routeIs('preinscritos.historial-exportaciones') ? 'active' : '' }}" href="{{ route('preinscritos.historial-exportaciones') }}" style="font-size: 0.9rem;">
+                <i class="bi bi-clock-history me-2"></i>Historial de Exportaciones
             </a>
             @endcan
             

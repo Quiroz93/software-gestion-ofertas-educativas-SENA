@@ -402,6 +402,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/preinscritos/exportaciones/{exportacion}/descargar', [ReportesController::class, 'descargar'])
         ->middleware('can:preinscritos.export')->name('preinscritos.exportaciones.descargar');
 
+    // Consolidaciones de preinscritos - MUST come before {preinscrito} parameter route
+    Route::get('admin/preinscritos/consolidaciones', [ConsolidacionPreinscritoController::class, 'index'])
+        ->middleware('can:preinscritos.consolidaciones.admin')->name('preinscritos.consolidaciones.index');
+
+    Route::get('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'importForm'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.import');
+
+    Route::post('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'import'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.store');
+
+    Route::get('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'show'])
+        ->middleware('can:preinscritos.consolidaciones.admin')->name('preinscritos.consolidaciones.show');
+
+    Route::get('admin/preinscritos/consolidaciones/{consolidacion}/exportar', [ConsolidacionPreinscritoController::class, 'exportar'])
+        ->middleware('can:preinscritos.consolidaciones.admin')->name('preinscritos.consolidaciones.exportar');
+
+    Route::put('admin/preinscritos/consolidaciones/detalles/{detalle}', [ConsolidacionPreinscritoController::class, 'updateDetalle'])
+        ->middleware('can:preinscritos.consolidaciones.admin')->name('preinscritos.consolidaciones.detalles.update');
+
+    Route::delete('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'destroy'])
+        ->middleware('can:preinscritos.consolidaciones.admin')->name('preinscritos.consolidaciones.destroy');
+
     Route::get('admin/preinscritos/{preinscrito}', [PreinscritoController::class, 'show'])
         ->middleware('can:preinscritos.view')->name('preinscritos.show');
 
@@ -416,25 +438,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('admin/preinscritos/{preinscrito}/restore', [PreinscritoController::class, 'restore'])
         ->middleware('can:preinscritos.restore')->name('preinscritos.restore');
-
-    // Consolidaciones de preinscritos
-    Route::get('admin/preinscritos/consolidaciones', [ConsolidacionPreinscritoController::class, 'index'])
-        ->name('preinscritos.consolidaciones.index');
-
-    Route::get('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'importForm'])
-        ->name('preinscritos.consolidaciones.import');
-
-    Route::post('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'import'])
-        ->name('preinscritos.consolidaciones.store');
-
-    Route::get('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'show'])
-        ->name('preinscritos.consolidaciones.show');
-
-    Route::put('admin/preinscritos/consolidaciones/detalles/{detalle}', [ConsolidacionPreinscritoController::class, 'updateDetalle'])
-        ->name('preinscritos.consolidaciones.detalles.update');
-
-    Route::delete('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'destroy'])
-        ->name('preinscritos.consolidaciones.destroy');
 });
 
 /*
@@ -554,6 +557,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.home-carousel.')->grou
 
 /*
 |--------------------------------------------------------------------------
+| Preinscritos Rechazados
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('preinscritos-rechazados', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'index'])
+        ->name('preinscritos-rechazados.index');
+    
+    Route::get('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'show'])
+        ->name('preinscritos-rechazados.show');
+    
+    Route::delete('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'destroy'])
+        ->name('preinscritos-rechazados.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Perfil de usuario
 |--------------------------------------------------------------------------
 */
@@ -657,7 +676,8 @@ Route::middleware(['auth', 'verified', 'can:novedad.tipos.admin'])
     ->prefix('admin')
     ->group(function () {
         Route::resource('tipos-novedad', TipoNovedadController::class)
-            ->names('tipos-novedad');
+            ->names('tipos-novedad')
+            ->parameters(['tipos-novedad' => 'tipoNovedad']);
     });
 
 

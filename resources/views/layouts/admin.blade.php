@@ -240,7 +240,7 @@
     {{-- DataTables Initialization --}}
     <script>
         $(function() {
-            $('#myTable, .table').DataTable({
+            $('#myTable, #preinscritos-table').DataTable({
                 responsive: true,
                 autoWidth: false,
                 language: {

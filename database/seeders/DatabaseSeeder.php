@@ -322,7 +322,7 @@ class DatabaseSeeder extends Seeder
         |--------------------------------------------------------------------------
         */
         $this->call([
-                        UserSeeder::class,
+            UserSeeder::class,
             CentroSeeder::class,
             RedSeeder::class,
             NivelFormacionSeeder::class,
@@ -334,7 +334,9 @@ class DatabaseSeeder extends Seeder
             OfertaSeeder::class,
             NoticiaSeeder::class,
             TipoNovedadSeeder::class,
-            PreinscritoExcelSeeder::class,
+            // Preinscritos: solo desde BaseDeDatosDos.md
+            BaseDatosDosSeeder::class,
+            PreinscritosRechazadosSeeder::class,
         ]);
     }
 }

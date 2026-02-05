@@ -14,13 +14,21 @@ use Illuminate\Support\Facades\Gate;
 /**
  * Controlador para la gestión de Preinscritos
  * Gestiona las operaciones CRUD completas del módulo de aprendices preinscritos
+ * 
+ * LÓGICA DE EDICIÓN MEJORADA:
+ * 1. Al cargar edit(): se guardan datos originales en JavaScript
+ * 2. Al enviar formulario: se comparan datos originales vs editados
+ * 3. Si cambió documento o nombre/apellidos: SweetAlert ruidosa (warning)
+ * 4. Si NO cambió esos datos: SweetAlert simple (info)
+ * 5. Si usuario cancela: no se guardan cambios
+ * 6. Si usuario confirma: 
+ *    - Si hay cambios sensibles: se valida que documento no sea duplicado
+ *    - Si NO hay cambios sensibles: se actualiza directamente
  */
 class PreinscritoController extends \App\Http\Controllers\Controller
 {
     /**
      * Mostrar la lista de aprendices preinscritos
-     * 
-     * @return \Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
@@ -28,31 +36,24 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
         $query = Preinscrito::with('programa', 'createdBy', 'updatedBy');
 
-        // Aplicar filtros si existen
         if ($request->filled('programa_id')) {
             $query->byPrograma($request->programa_id);
         }
-
         if ($request->filled('estado')) {
             $query->byEstado($request->estado);
         }
-
         if ($request->filled('tipo_documento')) {
             $query->byTipoDocumento($request->tipo_documento);
         }
-
         if ($request->filled('numero_documento')) {
             $query->byNumeroDocumento($request->numero_documento);
         }
-
         if ($request->filled('nombre')) {
             $query->byNombre($request->nombre);
         }
-
         if ($request->filled('tipo_novedad')) {
             $query->byTipoNovedad($request->tipo_novedad);
         }
-
         if ($request->filled('novedad_resuelta')) {
             $query->byNovedadResuelta($request->novedad_resuelta === 'pendiente' ? false : true);
         }
@@ -68,8 +69,6 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Mostrar el formulario para crear un nuevo preinscrito
-     * 
-     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -88,16 +87,14 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Almacenar un nuevo preinscrito en la base de datos
-     * 
-     * @param StorePresritoRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * SOLO VALIDA DOCUMENTO DUPLICADO EN CREACIÓN
      */
     public function store(StorePresritoRequest $request)
     {
         try {
             DB::beginTransaction();
 
-            // Validar que el documento no exista
+            // Validación de documento duplicado SOLO en creación
             if (Preinscrito::documentoExiste($request->numero_documento)) {
                 DB::rollBack();
                 return redirect()->back()
@@ -105,20 +102,17 @@ class PreinscritoController extends \App\Http\Controllers\Controller
                     ->withInput();
             }
 
-            // Crear el nuevo preinscrito
             $preinscrito = Preinscrito::create($request->validated());
 
-            // Crear novedad si se marcó la opción
             if ($request->has('tiene_novedad') && $request->tiene_novedad) {
                 $novedad = $preinscrito->novedades()->create([
                     'tipo_novedad_id' => $request->tipo_novedad_id,
                     'estado' => $request->novedad_estado,
                     'descripcion' => $request->novedad_descripcion,
-                    'created_by' => auth()->id(),
+                    'created_by' => auth()->user()->id(),
                     'updated_by' => auth()->id(),
                 ]);
 
-                // Crear entrada en historial
                 if ($novedad) {
                     $novedad->historial()->create([
                         'estado_anterior' => null,
@@ -148,19 +142,18 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Mostrar los detalles de un preinscrito
-     * 
-     * @param Preinscrito $presrito
-     * @return \Illuminate\Contracts\View\View
      */
-    public function show(Preinscrito $presrito)
+    public function show(Preinscrito $preinscrito)
     {
+        $presrito = $preinscrito;
         Gate::authorize('preinscritos.view', $presrito);
         $presrito->load([
             'programa', 
             'createdBy', 
             'updatedBy',
             'novedades.tipoNovedad',
-            'novedades.createdBy'
+            'novedades.createdBy',
+            'novedades.historial.changedBy'
         ]);
 
         return view('admin.preinscritos.show', compact('presrito'));
@@ -168,12 +161,11 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Mostrar el formulario para editar un preinscrito
-     * 
-     * @param Preinscrito $presrito
-     * @return \Illuminate\Contracts\View\View
+     * Pasa datos originales para comparación en JavaScript
      */
-    public function edit(Preinscrito $presrito)
+    public function edit(Preinscrito $preinscrito)
     {
+        $presrito = $preinscrito;
         Gate::authorize('preinscritos.edit', $presrito);
 
         $programas = Programa::all();
@@ -184,28 +176,47 @@ class PreinscritoController extends \App\Http\Controllers\Controller
             ->orderBy('nombre')
             ->get();
 
-        return view('admin.preinscritos.edit', compact('presrito', 'programas', 'estados', 'tiposDocumento', 'tiposNovedades'));
+        // Datos originales para comparación en JavaScript
+        $datosOriginales = [
+            'numero_documento' => $presrito->numero_documento,
+            'nombres' => $presrito->nombres,
+            'apellidos' => $presrito->apellidos,
+        ];
+
+        return view('admin.preinscritos.edit', compact('presrito', 'programas', 'estados', 'tiposDocumento', 'tiposNovedades', 'datosOriginales'));
     }
 
     /**
      * Actualizar un preinscrito en la base de datos
      * 
-     * @param UpdatePresritoRequest $request
-     * @param Preinscrito $presrito
-     * @return \Illuminate\Http\RedirectResponse
+     * FLUJO:
+     * 1. Recibe flag "cambios_sensibles" desde JavaScript
+     * 2. Si hay cambios sensibles (doc/nombre/apellidos) → VALIDA documento duplicado
+     * 3. Si NO hay cambios sensibles → ACTUALIZA directamente sin validar
+     * 4. Guarda novedades si las hay
      */
-    public function update(UpdatePresritoRequest $request, Preinscrito $presrito)
+    public function update(UpdatePresritoRequest $request, Preinscrito $preinscrito)
     {
+        $presrito = $preinscrito;
         try {
             DB::beginTransaction();
 
-            // Validar que el documento no esté duplicado (excluyendo el registro actual)
-            if ($request->numero_documento !== $presrito->numero_documento) {
-                if (Preinscrito::documentoExiste($request->numero_documento, $presrito->id)) {
-                    DB::rollBack();
-                    return redirect()->back()
-                        ->with('error', 'El número de documento ya está registrado.')
-                        ->withInput();
+            // Verificar si hay cambios sensibles (documento, nombres, apellidos)
+            $tieneChangiosSensibles = $request->has('cambios_sensibles') && $request->cambios_sensibles === 'true';
+
+            // SOLO si hay cambios sensibles, validar documento duplicado
+            if ($tieneChangiosSensibles) {
+                $docOriginal = $request->input('documento_original');
+                $docNuevo = (string)$request->numero_documento;
+
+                // Si el documento fue modificado, validar que no exista
+                if ((string)$docOriginal !== $docNuevo) {
+                    if (Preinscrito::documentoExiste($docNuevo, $presrito->id)) {
+                        DB::rollBack();
+                        return redirect()->back()
+                            ->with('error', 'El número de documento ya está registrado en la base de datos.')
+                            ->withInput();
+                    }
                 }
             }
 
@@ -222,10 +233,10 @@ class PreinscritoController extends \App\Http\Controllers\Controller
                     'updated_by' => auth()->id(),
                 ]);
 
-                // Crear entrada en historial
+                // Registrar historial de la creación (estado_anterior = null porque es nueva)
                 if ($novedad) {
                     $novedad->historial()->create([
-                        'estado_anterior' => null,
+                        'estado_anterior' => null, // NULL indica que es una creación nueva
                         'estado_nuevo' => $request->novedad_estado,
                         'comentario' => 'Novedad creada durante la edición del preinscrito',
                         'changed_by' => auth()->id(),
@@ -252,12 +263,10 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Eliminar un preinscrito (Soft Delete)
-     * 
-     * @param Preinscrito $presrito
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Preinscrito $presrito)
+    public function destroy(Preinscrito $preinscrito)
     {
+        $presrito = $preinscrito;
         Gate::authorize('preinscritos.delete', $presrito);
 
         try {
@@ -278,10 +287,6 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Mostrar reporte de preinscritos con filtros
-     * Preparado para futura exportación a Excel
-     * 
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\View
      */
     public function reportes(Request $request)
     {
@@ -289,35 +294,28 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
         $query = Preinscrito::with('programa');
 
-        // Aplicar filtros
         if ($request->filled('programa_id')) {
             $query->byPrograma($request->programa_id);
         }
-
         if ($request->filled('estado')) {
             $query->byEstado($request->estado);
         }
-
         if ($request->filled('tipo_documento')) {
             $query->byTipoDocumento($request->tipo_documento);
         }
-
         if ($request->filled('tipo_novedad')) {
             $query->byTipoNovedad($request->tipo_novedad);
         }
-
         if ($request->filled('novedad_resuelta')) {
             $query->byNovedadResuelta($request->novedad_resuelta === 'pendiente' ? false : true);
         }
 
-        // Obtener los datos
         $preinscritos = $query->orderBy('programa_id')->get();
         $programas = Programa::all();
         $estados = Preinscrito::getEstados();
         $tiposDocumento = Preinscrito::getTiposDocumento();
         $tiposNovedades = Preinscrito::getTiposNovedades();
 
-        // Estadísticas
         $estadisticas = [
             'total' => $preinscritos->count(),
             'inscrito' => $preinscritos->where('estado', 'inscrito')->count(),
@@ -332,9 +330,6 @@ class PreinscritoController extends \App\Http\Controllers\Controller
 
     /**
      * Restaurar un preinscrito eliminado
-     * 
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function restore($id)
     {

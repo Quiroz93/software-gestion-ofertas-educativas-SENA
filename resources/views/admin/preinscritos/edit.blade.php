@@ -260,11 +260,7 @@
                             </div>
                         </div>
 
-                        @if(old('tiene_novedad'))
-                            <div id="novedad_fields">
-                        @else
-                            <div id="novedad_fields" style="display: none;">
-                        @endif
+                        <div id="novedad_fields" style="{{ old('tiene_novedad') ? '' : 'display: none;' }}">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="tipo_novedad_id" class="form-label">
@@ -321,7 +317,6 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
 
                         <!-- Información de Auditoría -->
                         <div class="alert alert-light border mt-3">
@@ -357,6 +352,9 @@
 </div>
 
 <script>
+    // Bandera para evitar múltiples envíos del formulario
+    let isSubmitting = false;
+
     // Mostrar/ocultar campos de novedad
     function toggleNovedadFields() {
         const checkbox = document.getElementById('tiene_novedad');
@@ -378,18 +376,37 @@
         }
     }
 
-    // Validación de formulario
-    document.getElementById('formPresrito').addEventListener('submit', function(e) {
-        const numeroDocumento = document.getElementById('numero_documento').value;
-        if (!numeroDocumento || numeroDocumento.length < 5) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'El número de documento debe tener al menos 5 caracteres.'
-            });
-            return false;
+    // Variables para almacenar datos originales
+    let datosOriginales = {
+        numero_documento: '{{ $datosOriginales["numero_documento"] }}',
+        nombres: '{{ $datosOriginales["nombres"] }}',
+        apellidos: '{{ $datosOriginales["apellidos"] }}'
+    };
+
+    // Prevenir envío del formulario automático
+    const formulario = document.getElementById('formPresrito');
+    
+    formulario.addEventListener('submit', function(e) {
+        // Si ya está enviando, permitir que proceda
+        if (isSubmitting) {
+            return;
         }
+
+        e.preventDefault();
+
+        // Obtener valores actuales del formulario
+        const datosActuales = {
+            numero_documento: document.getElementById('numero_documento').value.trim(),
+            nombres: document.getElementById('nombres').value.trim(),
+            apellidos: document.getElementById('apellidos').value.trim()
+        };
+
+        // Detectar si hay cambios sensibles
+        const cambioDocumento = datosOriginales.numero_documento !== datosActuales.numero_documento;
+        const cambioNombres = datosOriginales.nombres !== datosActuales.nombres;
+        const cambioApellidos = datosOriginales.apellidos !== datosActuales.apellidos;
+        
+        const tieneChangiosSensibles = cambioDocumento || cambioNombres || cambioApellidos;
 
         // Validar campos de novedad si está marcado
         const tieneNovedad = document.getElementById('tiene_novedad').checked;
@@ -398,7 +415,6 @@
             const descripcionNovedad = document.getElementById('novedad_descripcion').value;
             
             if (!estadoNovedad || !descripcionNovedad) {
-                e.preventDefault();
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -407,9 +423,69 @@
                 return false;
             }
         }
+
+        // Crear campos ocultos para enviar flags al servidor
+        const cambiosSensiblesInput = document.createElement('input');
+        cambiosSensiblesInput.type = 'hidden';
+        cambiosSensiblesInput.name = 'cambios_sensibles';
+        cambiosSensiblesInput.value = tieneChangiosSensibles ? 'true' : 'false';
+        formulario.appendChild(cambiosSensiblesInput);
+
+        const documentoOriginalInput = document.createElement('input');
+        documentoOriginalInput.type = 'hidden';
+        documentoOriginalInput.name = 'documento_original';
+        documentoOriginalInput.value = datosOriginales.numero_documento;
+        formulario.appendChild(documentoOriginalInput);
+
+        // Determinar qué alert mostrar
+        if (tieneChangiosSensibles) {
+            // Alert ruidosa para cambios sensibles
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cambios Significativos Detectados',
+                html: `<p>Se han detectado cambios en datos sensibles del preinscrito:</p>
+                        <div style="text-align: left;">
+                            ${cambioDocumento ? `<p><strong>• Número de Documento:</strong> ${datosOriginales.numero_documento} → ${datosActuales.numero_documento}</p>` : ''}
+                            ${cambioNombres ? `<p><strong>• Nombres:</strong> ${datosOriginales.nombres} → ${datosActuales.nombres}</p>` : ''}
+                            ${cambioApellidos ? `<p><strong>• Apellidos:</strong> ${datosOriginales.apellidos} → ${datosActuales.apellidos}</p>` : ''}
+                        </div>
+                        <p>¿Deseas confirmar estos cambios?</p>`,
+                confirmButtonText: 'Sí, confirmar cambios',
+                cancelButtonText: 'No, descartar cambios',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    isSubmitting = true;
+                    formulario.submit();
+                } else {
+                    cambiosSensiblesInput.remove();
+                    documentoOriginalInput.remove();
+                }
+            });
+        } else {
+            // Alert simple para cambios no sensibles
+            Swal.fire({
+                icon: 'info',
+                title: 'Confirmar Cambios',
+                text: '¿Deseas guardar los cambios realizados?',
+                confirmButtonText: 'Sí, guardar',
+                cancelButtonText: 'No, descartar',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    isSubmitting = true;
+                    formulario.submit();
+                } else {
+                    cambiosSensiblesInput.remove();
+                    documentoOriginalInput.remove();
+                }
+            });
+        }
     });
 
-    // Inicializar estado de campos al cargar
+    // Inicializar al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
         toggleNovedadFields();
     });

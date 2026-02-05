@@ -85,6 +85,9 @@ class ConsolidacionPreinscritoController extends Controller
                 continue;
             }
 
+            // Extraer metadatos del archivo (código de ficha, programa, etc.)
+            $metadata = $this->extractMetadata($rows);
+
             [$headerIndex, $headerMap] = $this->detectHeader($rows);
             if ($headerIndex === null) {
                 $erroresArchivos[] = "No se encontró encabezado válido en {$originalName}.";
@@ -95,7 +98,7 @@ class ConsolidacionPreinscritoController extends Controller
 
             for ($i = $headerIndex + 1; $i < count($rows); $i++) {
                 $row = $rows[$i];
-                $mapped = $this->mapRow($row, $headerMap);
+                $mapped = $this->mapRow($row, $headerMap, $metadata);
 
                 if ($this->rowIsEmpty($mapped)) {
                     continue;
@@ -248,11 +251,73 @@ class ConsolidacionPreinscritoController extends Controller
             ->with('success', 'Consolidación eliminada correctamente.');
     }
 
+    public function exportar(Request $request, ConsolidacionPreinscrito $consolidacion)
+    {
+        if (Gate::denies('preinscritos.consolidaciones.admin')) {
+            return redirect()->route('dashboard')
+                ->with('permission_error', 'No tienes permisos para administrar consolidaciones.');
+        }
+
+        $filtros = [
+            'codigo_ficha' => $request->input('codigo_ficha'),
+            'estado' => $request->input('estado'),
+        ];
+
+        $filename = $consolidacion->nombre_consolidacion . '.xlsx';
+
+        return Excel::download(
+            new \App\Exports\ConsolidacionDetallesExport($consolidacion, $filtros),
+            $filename
+        );
+    }
+
+    /**
+     * Extraer metadatos del archivo (código de ficha, programa, etc.)
+     * que aparecen en las primeras filas antes del encabezado de datos
+     */
+    private function extractMetadata(array $rows): array
+    {
+        $metadata = [];
+        
+        // Buscar en las primeras 25 filas
+        for ($i = 0; $i < min(25, count($rows)); $i++) {
+            $row = $rows[$i];
+            
+            if (!is_array($row) || count($row) < 3) {
+                continue;
+            }
+            
+            $label = isset($row[2]) ? strtoupper(trim((string)$row[2])) : '';
+            $value = isset($row[3]) ? trim((string)$row[3]) : '';
+            
+            if (empty($label) || empty($value)) {
+                continue;
+            }
+            
+            // Buscar código de ficha
+            if (in_array($label, ['CODIGO FICHA', 'CODIGO_FICHA', 'FICHA'])) {
+                $metadata['codigo_ficha'] = $value;
+            }
+            
+            // Buscar nombre del programa
+            if (in_array($label, ['DENOMINACION PROGRAMA', 'DENOMINACION_PROGRAMA', 'NOMBRE PROGRAMA', 'PROGRAMA'])) {
+                $metadata['nombre_programa'] = $value;
+            }
+        }
+        
+        return $metadata;
+    }
+
     private function detectHeader(array $rows): array
     {
         $requiredFields = ['tipo_documento', 'numero_documento', 'nombre_completo', 'estado', 'codigo_ficha'];
 
-        foreach ($rows as $index => $row) {
+        // Buscar en las primeras 30 filas para archivos con metadatos
+        $maxRows = min(30, count($rows));
+        
+        for ($index = 0; $index < $maxRows; $index++) {
+            $row = $rows[$index];
+            
             if (!is_array($row)) {
                 continue;
             }
@@ -271,12 +336,16 @@ class ConsolidacionPreinscritoController extends Controller
     private function buildHeaderMap(array $row): array
     {
         $aliases = [
-            'tipo_documento' => ['tipo_documento', 'tipo_de_documento', 'tipo doc', 'tipodocumento', 'documento_tipo', 'tdoc'],
+            'tipo_documento' => ['tipo_documento', 'tipo_de_documento', 'tipo doc', 'tipodocumento', 'documento_tipo', 'tdoc', 'tipo_doc'],
             'numero_documento' => ['numero_documento', 'n_documento', 'documento', 'num_documento', 'no_documento', 'documento_numero', 'numero de documento'],
-            'nombre_completo' => ['nombre_completo', 'nombre', 'nombres', 'nombre y apellido', 'aprendiz', 'apellidos_nombres'],
+            'nombre_completo' => ['nombre_completo', 'nombre', 'nombres', 'nombre y apellido', 'aprendiz', 'apellidos_nombres', 'nombres_apellidos'],
+            'apellidos' => ['apellidos', 'apellido'],
             'estado' => ['estado', 'estado_aprendiz', 'estado_preinscripcion', 'estado preinscripcion'],
-            'codigo_ficha' => ['codigo_ficha', 'ficha', 'codigo', 'codigo de ficha', 'ficha_codigo'],
-            'nombre_programa' => ['nombre_programa', 'programa', 'programa_formacion', 'nombre de programa'],
+            'codigo_ficha' => ['codigo_ficha', 'ficha', 'codigo', 'codigo de ficha', 'ficha_codigo', 'numero_ficha', 'no_ficha'],
+            'nombre_programa' => ['nombre_programa', 'programa', 'programa_formacion', 'nombre de programa', 'denominacion_programa'],
+            'correo' => ['correo', 'correo_e', 'correo_electronico', 'email', 'e_mail'],
+            'telefono_movil' => ['tel_movil', 'telefono_movil', 'celular', 'movil', 'telefono'],
+            'telefono_fijo' => ['tel_fijo', 'telefono_fijo', 'fijo'],
         ];
 
         $normalizedAliases = [];
@@ -297,15 +366,40 @@ class ConsolidacionPreinscritoController extends Controller
         return $map;
     }
 
-    private function mapRow(array $row, array $headerMap): array
+    private function mapRow(array $row, array $headerMap, array $metadata = []): array
     {
+        // Combinar nombres y apellidos si vienen separados
+        $nombreCompleto = $this->getCellValue($row, $headerMap['nombre_completo'] ?? null);
+        
+        // Si nombre_completo está vacío pero tenemos nombres y apellidos separados
+        if (empty($nombreCompleto) && isset($headerMap['apellidos'])) {
+            $nombres = $this->getCellValue($row, $headerMap['nombre_completo'] ?? null);
+            $apellidos = $this->getCellValue($row, $headerMap['apellidos']);
+            
+            if (!empty($nombres) || !empty($apellidos)) {
+                $nombreCompleto = trim(($nombres ?? '') . ' ' . ($apellidos ?? ''));
+            }
+        }
+        
+        // Obtener codigo_ficha del encabezado o de los metadatos
+        $codigoFicha = $this->getCellValue($row, $headerMap['codigo_ficha'] ?? null);
+        if (empty($codigoFicha) && !empty($metadata['codigo_ficha'])) {
+            $codigoFicha = $metadata['codigo_ficha'];
+        }
+        
+        // Obtener nombre_programa del encabezado o de los metadatos
+        $nombrePrograma = $this->getCellValue($row, $headerMap['nombre_programa'] ?? null);
+        if (empty($nombrePrograma) && !empty($metadata['nombre_programa'])) {
+            $nombrePrograma = $metadata['nombre_programa'];
+        }
+        
         return [
             'tipo_documento' => $this->getCellValue($row, $headerMap['tipo_documento'] ?? null),
             'numero_documento' => $this->getCellValue($row, $headerMap['numero_documento'] ?? null),
-            'nombre_completo' => $this->getCellValue($row, $headerMap['nombre_completo'] ?? null),
-            'estado' => $this->getCellValue($row, $headerMap['estado'] ?? null),
-            'codigo_ficha' => $this->getCellValue($row, $headerMap['codigo_ficha'] ?? null),
-            'nombre_programa' => $this->getCellValue($row, $headerMap['nombre_programa'] ?? null),
+            'nombre_completo' => $nombreCompleto ?: null,
+            'estado' => $this->getCellValue($row, $headerMap['estado'] ?? null) ?? 'por_inscribir',
+            'codigo_ficha' => $codigoFicha,
+            'nombre_programa' => $nombrePrograma,
         ];
     }
 
