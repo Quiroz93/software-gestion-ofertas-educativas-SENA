@@ -96,7 +96,7 @@ class PreinscritosPlantillaSheet implements WithHeadings, WithTitle, WithEvents,
 
                 // Nota de uso
                 $sheet->mergeCells('A4:J4');
-                $sheet->setCellValue('A4', 'Complete una fila por preinscrito. Seleccione el programa desde la lista. NO MODIFIQUE la columna "Número de Ficha" (se calcula automáticamente).');
+                $sheet->setCellValue('A4', 'Complete una fila por preinscrito. Use listas desplegables en Tipo Documento, Programa y Estado. NO MODIFIQUE la columna "Número de Ficha" (se calcula automáticamente).');
                 $sheet->getStyle('A4')->applyFromArray([
                     'font' => ['size' => 10, 'color' => ['rgb' => '666666']],
                     'alignment' => [
@@ -153,6 +153,44 @@ class PreinscritosPlantillaSheet implements WithHeadings, WithTitle, WithEvents,
                 // Agregar fórmula VLOOKUP en columna H (Número de Ficha) para buscar el código
                 for ($row = 8; $row <= 1000; $row++) {
                     $sheet->setCellValue('H' . $row, '=IF(G' . $row . '="","",VLOOKUP(G' . $row . ',Programas!$B$2:$C$1000,2,0))');
+                }
+
+                // Dropdown para Tipo de Documento (columna A)
+                $validationTipoDoc = $sheet->getCell('A8')->getDataValidation();
+                $validationTipoDoc->setType(DataValidation::TYPE_LIST);
+                $validationTipoDoc->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                $validationTipoDoc->setAllowBlank(false);
+                $validationTipoDoc->setShowInputMessage(true);
+                $validationTipoDoc->setShowErrorMessage(true);
+                $validationTipoDoc->setShowDropDown(true);
+                $validationTipoDoc->setErrorTitle('Tipo de documento no válido');
+                $validationTipoDoc->setError('Debe seleccionar un tipo de documento de la lista: cc, ti, ce, ppt, pa, pep, nit');
+                $validationTipoDoc->setPromptTitle('Seleccione tipo de documento');
+                $validationTipoDoc->setPrompt('Tipos disponibles: cc (Cédula), ti (Tarjeta Identidad), ce (Cédula Extranjería), ppt (Pasaporte), pa (Permiso Asilo), pep (PEP), nit (NIT)');
+                $validationTipoDoc->setFormula1('"cc,ti,ce,ppt,pa,pep,nit"');
+
+                // Copiar validación a todas las filas de columna A
+                for ($row = 8; $row <= 1000; $row++) {
+                    $sheet->getCell('A' . $row)->setDataValidation(clone $validationTipoDoc);
+                }
+
+                // Dropdown para Estado (columna I)
+                $validationEstado = $sheet->getCell('I8')->getDataValidation();
+                $validationEstado->setType(DataValidation::TYPE_LIST);
+                $validationEstado->setErrorStyle(DataValidation::STYLE_INFORMATION);
+                $validationEstado->setAllowBlank(true); // Estado es opcional
+                $validationEstado->setShowInputMessage(true);
+                $validationEstado->setShowErrorMessage(true);
+                $validationEstado->setShowDropDown(true);
+                $validationEstado->setErrorTitle('Estado no válido');
+                $validationEstado->setError('Debe seleccionar un estado de la lista: inscrito, por_inscribir, con_novedad');
+                $validationEstado->setPromptTitle('Seleccione estado');
+                $validationEstado->setPrompt('Estados disponibles: inscrito, por_inscribir (predeterminado), con_novedad. Si se deja vacío, se asignará "por_inscribir".');
+                $validationEstado->setFormula1('"inscrito,por_inscribir,con_novedad"');
+
+                // Copiar validación a todas las filas de columna I
+                for ($row = 8; $row <= 1000; $row++) {
+                    $sheet->getCell('I' . $row)->setDataValidation(clone $validationEstado);
                 }
             },
         ];

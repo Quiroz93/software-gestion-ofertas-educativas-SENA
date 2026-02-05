@@ -61,7 +61,7 @@
                 <div class="card-body">
                     <p class="mb-2">La fila de encabezados debe estar en las primeras 15 filas y contener:</p>
                     <ul class="small mb-3">
-                        <li>Tipo Documento</li>
+                        <li><strong class="text-success">Tipo Documento (lista desplegable)</strong></li>
                         <li>Número Documento</li>
                         <li>Nombres</li>
                         <li>Apellidos</li>
@@ -69,13 +69,17 @@
                         <li>Celular (opcional)</li>
                         <li><strong class="text-success">Programa de Formación (lista desplegable)</strong></li>
                         <li><strong class="text-success">Número de Ficha (automático)</strong></li>
-                        <li>Estado (opcional)</li>
+                        <li><strong class="text-success">Estado (lista desplegable, opcional)</strong></li>
                     </ul>
 
                     <div class="alert alert-info small mb-3">
                         <i class="fas fa-lightbulb"></i>
-                        <strong>Nueva funcionalidad:</strong> La plantilla incluye lista desplegable de programas. 
-                        Al seleccionar un programa, el número de ficha se calcula automáticamente.
+                        <strong>Listas desplegables incluidas:</strong>
+                        <ul class="mb-0 mt-1">
+                            <li><strong>Tipo Documento:</strong> cc, ti, ce, ppt, pa, pep, nit</li>
+                            <li><strong>Programa:</strong> Lista completa de programas activos</li>
+                            <li><strong>Estado:</strong> inscrito, por_inscribir, con_novedad</li>
+                        </ul>
                     </div>
 
                     <p class="small text-danger mb-3">
@@ -86,7 +90,7 @@
                     </p>
 
                     <p class="mb-2"><strong>Valores válidos de Tipo Documento:</strong></p>
-                    <p class="small text-muted mb-0">cc, ti, ce, ppt, pa, pep, nit</p>
+                    <p class="small text-muted mb-0">cc (Cédula), ti (Tarjeta Identidad), ce (Cédula Extranjería), ppt (Pasaporte), pa (Permiso Asilo), pep (PEP), nit (NIT)</p>
                 </div>
             </div>
         </div>
@@ -116,15 +120,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>cc</td>
+                            <td><span class="badge bg-success">Lista</span></td>
                             <td>123456789</td>
                             <td>Juan</td>
                             <td>Pérez</td>
                             <td>juan.perez@correo.com</td>
                             <td>3001234567</td>
-                            <td><span class="badge bg-success">Seleccionar de lista</span></td>
+                            <td><span class="badge bg-success">Lista</span></td>
                             <td><span class="badge bg-secondary">Automático</span></td>
-                            <td>por_inscribir</td>
+                            <td><span class="badge bg-success">Lista</span></td>
                         </tr>
                     </tbody>
                 </table>
