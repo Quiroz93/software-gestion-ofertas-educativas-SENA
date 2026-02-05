@@ -175,6 +175,7 @@ class Preinscrito extends Model
             'ti' => 'Tarjeta de Identidad',
             'ce' => 'Cédula de Extranjería',
             'ppt' => 'Permiso por Protección Temporal',
+            'pas' => 'Pasaporte',
             'pa' => 'Permiso de Asilo',
             'pep' => 'Permiso Especial de Permanencia',
             'nit' => 'NIT',

@@ -90,7 +90,7 @@
                     </p>
 
                     <p class="mb-2"><strong>Valores válidos de Tipo Documento:</strong></p>
-                    <p class="small text-muted mb-0">cc (Cédula), ti (Tarjeta Identidad), ce (Cédula Extranjería), ppt (Permiso Protección Temporal), pa (Permiso Asilo), pep (PEP), nit (NIT)</p>
+                    <p class="small text-muted mb-0">cc (Cédula), ti (Tarjeta Identidad), ce (Cédula Extranjería), ppt (Permiso Protección Temporal), pas (Pasaporte), pa (Permiso Asilo), pep (PEP), nit (NIT)</p>
                 </div>
             </div>
         </div>
