@@ -260,7 +260,10 @@
                             </div>
                         </div>
 
-                        <div id="novedad_fields" style="{{ old('tiene_novedad') ? '' : 'display: none;' }}">
+                        @php
+                            $mostrarNovedad = old('tiene_novedad') ? '' : 'd-none';
+                        @endphp
+                        <div id="novedad_fields" class="{{ $mostrarNovedad }}">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="tipo_novedad_id" class="form-label">
@@ -363,11 +366,11 @@
         const descripcion = document.getElementById('novedad_descripcion');
         
         if (checkbox.checked) {
-            fields.style.display = 'block';
+            fields.classList.remove('d-none');
             estado.required = true;
             descripcion.required = true;
         } else {
-            fields.style.display = 'none';
+            fields.classList.add('d-none');
             estado.required = false;
             descripcion.required = false;
             estado.value = '';
