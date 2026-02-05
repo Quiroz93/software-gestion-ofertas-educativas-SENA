@@ -166,7 +166,7 @@ class PreinscritosPlantillaSheet implements WithHeadings, WithTitle, WithEvents,
                 $validationTipoDoc->setErrorTitle('Tipo de documento no válido');
                 $validationTipoDoc->setError('Debe seleccionar un tipo de documento de la lista: cc, ti, ce, ppt, pa, pep, nit');
                 $validationTipoDoc->setPromptTitle('Seleccione tipo de documento');
-                $validationTipoDoc->setPrompt('Tipos disponibles: cc (Cédula), ti (Tarjeta Identidad), ce (Cédula Extranjería), ppt (Pasaporte), pa (Permiso Asilo), pep (PEP), nit (NIT)');
+                $validationTipoDoc->setPrompt('Tipos disponibles: cc (Cédula), ti (Tarjeta Identidad), ce (Cédula Extranjería), ppt (Permiso Protección Temporal), pa (Permiso Asilo), pep (PEP), nit (NIT)');
                 $validationTipoDoc->setFormula1('"cc,ti,ce,ppt,pa,pep,nit"');
 
                 // Copiar validación a todas las filas de columna A
