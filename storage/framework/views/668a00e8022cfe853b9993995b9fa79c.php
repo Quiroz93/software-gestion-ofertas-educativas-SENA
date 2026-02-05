@@ -1,8 +1,6 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Preinscritos'); ?>
 
-@section('title', 'Preinscritos')
-
-@section('content_header')
+<?php $__env->startSection('content_header'); ?>
 <div class="d-flex justify-content-between align-items-center">
     <h1 class="m-0">
         <i class="fas fa-clipboard-list text-primary"></i>
@@ -10,53 +8,55 @@
     </h1>
 
     <div>
-        @can('preinscritos.create')
-            <a href="{{ route('preinscritos.create') }}" class="btn btn-outline-success">
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.create')): ?>
+            <a href="<?php echo e(route('preinscritos.create')); ?>" class="btn btn-outline-success">
                 <i class="fas fa-plus-circle"></i>
                 Nuevo Preinscrito
             </a>
-        @endcan
-        @can('preinscritos.import')
-            <a href="{{ route('preinscritos.import.form') }}" class="btn btn-outline-success">
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.import')): ?>
+            <a href="<?php echo e(route('preinscritos.import.form')); ?>" class="btn btn-outline-success">
                 <i class="fas fa-file-upload"></i>
                 Cargar archivo externo
             </a>
-            <a href="{{ route('preinscritos.import.template') }}" class="btn btn-outline-primary">
+            <a href="<?php echo e(route('preinscritos.import.template')); ?>" class="btn btn-outline-primary">
                 <i class="fas fa-file-excel"></i>
                 Descargar plantilla
             </a>
-        @endcan
-        @can('preinscritos.consolidaciones.admin')
-            <a href="{{ route('preinscritos.consolidaciones.index') }}" class="btn btn-outline-primary">
+        <?php endif; ?>
+        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.consolidaciones.admin')): ?>
+            <a href="<?php echo e(route('preinscritos.consolidaciones.index')); ?>" class="btn btn-outline-primary">
                 <i class="bi bi-layers"></i>
                 Consolidaciones
             </a>
-        @endcan
-        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
+        <?php endif; ?>
+        <a href="<?php echo e(route('dashboard')); ?>" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver
         </a>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
-    @if(session('success'))
+    <?php if(session('success')): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="fas fa-check-circle"></i>
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
+    <?php endif; ?>
 
-    @if(session('error'))
+    <?php if(session('error')): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <i class="fas fa-exclamation-circle"></i>
-            {{ session('error') }}
+            <?php echo e(session('error')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
+    <?php endif; ?>
 
     <!-- Filtros -->
     <div class="card card-outline card-primary mb-4">
@@ -67,16 +67,17 @@
             </h3>
         </div>
         <div class="card-body">
-            <form method="GET" action="{{ route('preinscritos.index') }}" class="row g-3">
+            <form method="GET" action="<?php echo e(route('preinscritos.index')); ?>" class="row g-3">
                 <div class="col-md-3">
                     <label for="programa_id" class="form-label">Programa</label>
                     <select class="form-select form-select-sm" id="programa_id" name="programa_id">
                         <option value="">-- Todos los programas --</option>
-                        @foreach($programas as $programa)
-                            <option value="{{ $programa->id }}" {{ request('programa_id') == $programa->id ? 'selected' : '' }}>
-                                {{ $programa->nombre }}
+                        <?php $__currentLoopData = $programas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $programa): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($programa->id); ?>" <?php echo e(request('programa_id') == $programa->id ? 'selected' : ''); ?>>
+                                <?php echo e($programa->nombre); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -84,11 +85,12 @@
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-select form-select-sm" id="estado" name="estado">
                         <option value="">-- Todos los estados --</option>
-                        @foreach($estados as $valor => $etiqueta)
-                            <option value="{{ $valor }}" {{ request('estado') == $valor ? 'selected' : '' }}>
-                                {{ $etiqueta }}
+                        <?php $__currentLoopData = $estados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $valor => $etiqueta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($valor); ?>" <?php echo e(request('estado') == $valor ? 'selected' : ''); ?>>
+                                <?php echo e($etiqueta); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -96,29 +98,31 @@
                     <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                     <select class="form-select form-select-sm" id="tipo_documento" name="tipo_documento">
                         <option value="">-- Todos --</option>
-                        @foreach($tiposDocumento as $valor => $etiqueta)
-                            <option value="{{ $valor }}" {{ request('tipo_documento') == $valor ? 'selected' : '' }}>
-                                {{ $etiqueta }}
+                        <?php $__currentLoopData = $tiposDocumento; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $valor => $etiqueta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($valor); ?>" <?php echo e(request('tipo_documento') == $valor ? 'selected' : ''); ?>>
+                                <?php echo e($etiqueta); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
                 <div class="col-md-3">
                     <label for="numero_documento" class="form-label">Nº de Documento</label>
                     <input type="text" class="form-control form-control-sm" id="numero_documento" name="numero_documento" 
-                           value="{{ request('numero_documento') }}" placeholder="Buscar...">
+                           value="<?php echo e(request('numero_documento')); ?>" placeholder="Buscar...">
                 </div>
 
                 <div class="col-md-3">
                     <label for="tipo_novedad" class="form-label">Tipo de Novedad</label>
                     <select class="form-select form-select-sm" id="tipo_novedad" name="tipo_novedad">
                         <option value="">-- Todos los tipos --</option>
-                        @foreach($tiposNovedades as $valor => $etiqueta)
-                            <option value="{{ $valor }}" {{ request('tipo_novedad') == $valor ? 'selected' : '' }}>
-                                {{ $etiqueta }}
+                        <?php $__currentLoopData = $tiposNovedades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $valor => $etiqueta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($valor); ?>" <?php echo e(request('tipo_novedad') == $valor ? 'selected' : ''); ?>>
+                                <?php echo e($etiqueta); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -126,10 +130,10 @@
                     <label for="novedad_resuelta" class="form-label">Estado de Novedad</label>
                     <select class="form-select form-select-sm" id="novedad_resuelta" name="novedad_resuelta">
                         <option value="">-- Todos --</option>
-                        <option value="pendiente" {{ request('novedad_resuelta') == 'pendiente' ? 'selected' : '' }}>
+                        <option value="pendiente" <?php echo e(request('novedad_resuelta') == 'pendiente' ? 'selected' : ''); ?>>
                             Pendientes
                         </option>
-                        <option value="resuelta" {{ request('novedad_resuelta') == 'resuelta' ? 'selected' : '' }}>
+                        <option value="resuelta" <?php echo e(request('novedad_resuelta') == 'resuelta' ? 'selected' : ''); ?>>
                             Resueltas
                         </option>
                     </select>
@@ -139,26 +143,26 @@
                     <button type="submit" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-search"></i> Buscar
                     </button>
-                    <a href="{{ route('preinscritos.index') }}" class="btn btn-outline-secondary btn-sm">
+                    <a href="<?php echo e(route('preinscritos.index')); ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-redo"></i> Limpiar
                     </a>
-                    @can('preinscritos.view')
-                        <a href="{{ route('preinscritos.reportes') }}" class="btn btn-outline-info btn-sm">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.view')): ?>
+                        <a href="<?php echo e(route('preinscritos.reportes')); ?>" class="btn btn-outline-info btn-sm">
                             <i class="fas fa-chart-bar"></i> Reportes
                         </a>
-                    @endcan
+                    <?php endif; ?>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Tabla de Preinscritos -->
-    @if($preinscritos->count() > 0)
+    <?php if($preinscritos->count() > 0): ?>
         <div class="card card-outline card-primary">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-list"></i>
-                    Listado de Preinscritos ({{ $preinscritos->total() }})
+                    Listado de Preinscritos (<?php echo e($preinscritos->total()); ?>)
                 </h3>
             </div>
             <div class="card-body">
@@ -177,102 +181,108 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($preinscritos as $presrito)
+                            <?php $__currentLoopData = $preinscritos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $presrito): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>
-                                        <strong>{{ $presrito->nombre_completo }}</strong>
+                                        <strong><?php echo e($presrito->nombre_completo); ?></strong>
                                     </td>
                                     <td>
                                         <span class="badge bg-light text-dark">
-                                            {{ strtoupper($presrito->tipo_documento) }}-{{ $presrito->numero_documento }}
+                                            <?php echo e(strtoupper($presrito->tipo_documento)); ?>-<?php echo e($presrito->numero_documento); ?>
+
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="mailto:{{ $presrito->correo_principal }}">
-                                            {{ $presrito->correo_principal }}
+                                        <a href="mailto:<?php echo e($presrito->correo_principal); ?>">
+                                            <?php echo e($presrito->correo_principal); ?>
+
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="tel:{{ $presrito->celular_principal }}">
-                                            {{ $presrito->celular_principal }}
+                                        <a href="tel:<?php echo e($presrito->celular_principal); ?>">
+                                            <?php echo e($presrito->celular_principal); ?>
+
                                         </a>
                                     </td>
                                     <td>
                                         <small class="d-block text-muted">
-                                            {{ $presrito->programa->nombre ?? 'Sin asignar' }}<br>
-                                            <em>({{ $presrito->programa->numero_ficha ?? 'N/A' }})</em>
+                                            <?php echo e($presrito->programa->nombre ?? 'Sin asignar'); ?><br>
+                                            <em>(<?php echo e($presrito->programa->numero_ficha ?? 'N/A'); ?>)</em>
                                         </small>
                                     </td>
                                     <td>
-                                        <span class="badge bg-{{ $presrito->estado === 'inscrito' ? 'success' : ($presrito->estado === 'por_inscribir' ? 'warning' : 'danger') }}">
-                                            {{ $presrito->etiqueta_estado }}
+                                        <span class="badge bg-<?php echo e($presrito->estado === 'inscrito' ? 'success' : ($presrito->estado === 'por_inscribir' ? 'warning' : 'danger')); ?>">
+                                            <?php echo e($presrito->etiqueta_estado); ?>
+
                                         </span>
                                     </td>
                                     <td>
-                                        @php
+                                        <?php
                                             $novedadesActivas = $presrito->novedades()
                                                 ->whereNull('deleted_at')
                                                 ->exists();
-                                        @endphp
-                                        @if($novedadesActivas)
-                                            @php
+                                        ?>
+                                        <?php if($novedadesActivas): ?>
+                                            <?php
                                                 $novedadActiva = $presrito->novedades()
                                                     ->whereNull('deleted_at')
                                                     ->first();
-                                            @endphp
-                                            @if($novedadActiva->estado === 'resuelta')
+                                            ?>
+                                            <?php if($novedadActiva->estado === 'resuelta'): ?>
                                                 <span class="badge bg-success" title="Novedad resuelta">
                                                     <i class="fas fa-check-circle"></i> Resuelta
                                                 </span>
-                                            @else
-                                                <span class="badge bg-danger" title="Novedad pendiente: {{ $novedadActiva->estado }}">
-                                                    <i class="fas fa-exclamation-triangle"></i> {{ ucfirst(str_replace('_', ' ', $novedadActiva->estado)) }}
+                                            <?php else: ?>
+                                                <span class="badge bg-danger" title="Novedad pendiente: <?php echo e($novedadActiva->estado); ?>">
+                                                    <i class="fas fa-exclamation-triangle"></i> <?php echo e(ucfirst(str_replace('_', ' ', $novedadActiva->estado))); ?>
+
                                                 </span>
-                                            @endif
-                                        @else
+                                            <?php endif; ?>
+                                        <?php else: ?>
                                             <span class="badge bg-light text-dark">Sin novedad</span>
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
                                     <td>
-                                        @can('preinscritos.view')
-                                            <a href="{{ route('preinscritos.show', $presrito->id) }}" class="btn btn-outline-info btn-sm" title="Ver">
+                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.view')): ?>
+                                            <a href="<?php echo e(route('preinscritos.show', $presrito->id)); ?>" class="btn btn-outline-info btn-sm" title="Ver">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                        @endcan
-                                        @can('preinscritos.edit')
-                                            <a href="{{ route('preinscritos.edit', $presrito->id) }}" class="btn btn-outline-warning btn-sm" title="Editar">
+                                        <?php endif; ?>
+                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.edit')): ?>
+                                            <a href="<?php echo e(route('preinscritos.edit', $presrito->id)); ?>" class="btn btn-outline-warning btn-sm" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                        @endcan
-                                        @can('preinscritos.delete')
-                                            <form action="{{ route('preinscritos.destroy', $presrito->id) }}" 
+                                        <?php endif; ?>
+                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.delete')): ?>
+                                            <form action="<?php echo e(route('preinscritos.destroy', $presrito->id)); ?>" 
                                                   method="POST" 
                                                   style="display: inline-block;"
                                                   onsubmit="return confirmarEliminacion(event)">
-                                                @csrf
-                                                @method('DELETE')
+                                                <?php echo csrf_field(); ?>
+                                                <?php echo method_field('DELETE'); ?>
                                                 <button type="submit" class="btn btn-outline-danger btn-sm" title="Eliminar">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
-                                        @endcan
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="card-footer">
-                {{ $preinscritos->links() }}
+                <?php echo e($preinscritos->links()); ?>
+
             </div>
         </div>
-    @else
+    <?php else: ?>
         <div class="alert alert-info">
             <i class="fas fa-info-circle"></i>
             No hay preinscritos registrados.
         </div>
-    @endif
+    <?php endif; ?>
 </div>
 
 <script>
@@ -297,4 +307,6 @@
         return false;
     }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\AdminSena\Documents\SoeSoftware2\resources\views/admin/preinscritos/index.blade.php ENDPATH**/ ?>

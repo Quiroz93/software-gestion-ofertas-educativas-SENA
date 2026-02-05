@@ -187,6 +187,10 @@
             {{-- Acciones --}}
             <div class="card mt-3">
                 <div class="card-body">
+                    <a href="{{ route('admin.preinscritos-rechazados.edit', $rechazado->id) }}" class="btn btn-success w-100 mb-2">
+                        <i class="bi bi-pencil"></i>
+                        Editar Registro
+                    </a>
                     <form action="{{ route('admin.preinscritos-rechazados.destroy', $rechazado->id) }}" 
                           method="POST"
                           onsubmit="return confirm('¿Está seguro de eliminar este registro?')">

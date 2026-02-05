@@ -376,6 +376,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/preinscritos', [PreinscritoController::class, 'index'])
         ->middleware('can:preinscritos.view')->name('preinscritos.index');
 
+    Route::get('admin/preinscritos/importar-externo', [PreinscritoController::class, 'importForm'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.import.form');
+
+    Route::get('admin/preinscritos/plantilla-importacion', [PreinscritoController::class, 'downloadPlantilla'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.import.template');
+
+    Route::post('admin/preinscritos/importar-externo', [PreinscritoController::class, 'importStore'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.import.store');
+
     Route::get('admin/preinscritos/create', [PreinscritoController::class, 'create'])
         ->middleware('can:preinscritos.create')->name('preinscritos.create');
 
@@ -561,11 +570,23 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.home-carousel.')->grou
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('preinscritos-rechazados/create', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'create'])
+        ->name('preinscritos-rechazados.create');
+
+    Route::post('preinscritos-rechazados', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'store'])
+        ->name('preinscritos-rechazados.store');
+
     Route::get('preinscritos-rechazados', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'index'])
         ->name('preinscritos-rechazados.index');
+
+    Route::get('preinscritos-rechazados/{id}/edit', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'edit'])
+        ->name('preinscritos-rechazados.edit');
     
     Route::get('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'show'])
         ->name('preinscritos-rechazados.show');
+
+    Route::put('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'update'])
+        ->name('preinscritos-rechazados.update');
     
     Route::delete('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'destroy'])
         ->name('preinscritos-rechazados.destroy');

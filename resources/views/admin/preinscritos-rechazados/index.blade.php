@@ -16,6 +16,12 @@
                         Preinscritos con problemas durante la importación
                     </p>
                 </div>
+                <div>
+                    <a href="{{ route('admin.preinscritos-rechazados.create') }}" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i>
+                        Nuevo Rechazado
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -164,6 +170,11 @@
                                        class="btn btn-sm btn-outline-primary"
                                        title="Ver detalles">
                                         <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="{{ route('admin.preinscritos-rechazados.edit', $rechazado->id) }}"
+                                       class="btn btn-sm btn-outline-success"
+                                       title="Editar">
+                                        <i class="bi bi-pencil"></i>
                                     </a>
                                     <form action="{{ route('admin.preinscritos-rechazados.destroy', $rechazado->id) }}" 
                                           method="POST" 
