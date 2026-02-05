@@ -20,6 +20,12 @@ Desktop.ini
 .auth.json
 
 # =========================
+# Archivos de Sustentación
+# =========================
+archivos de sustentacion/
+*.md
+
+# =========================
 # PHP / Composer
 # =========================
 /vendor/
