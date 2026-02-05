@@ -405,6 +405,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/preinscritos/generar-excel', [ReportesController::class, 'exportarExcel'])
         ->middleware('can:preinscritos.export')->name('preinscritos.generar-excel');
 
+    Route::post('admin/preinscritos/exportar-sofia-plus', [ReportesController::class, 'exportarSOFIAPlus'])
+        ->middleware('can:preinscritos.export')->name('preinscritos.exportar-sofia-plus');
+
     Route::get('admin/preinscritos/reportes/imprimir', [ReportesController::class, 'imprimir'])
         ->middleware('can:preinscritos.export')->name('reportes.imprimir');
 

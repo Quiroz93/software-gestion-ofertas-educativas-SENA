@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\PresritosExport;
+use App\Exports\InscripcionAspirantesSOFIAPlusExport;
 use App\Http\Controllers\Controller;
 use App\Models\Exportacion;
 use App\Models\Preinscrito;
@@ -184,6 +185,63 @@ class ReportesController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('preinscritos.reportes')
                 ->with('error', 'Error al generar el reporte: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Exportar inscripción de aspirantes en formato SOFIA Plus
+     * 
+     * Genera un archivo Excel compatible con el sistema SOFIA Plus del SENA
+     * para la inscripción de aspirantes a programas de formación.
+     */
+    public function exportarSOFIAPlus(Request $request)
+    {
+        Gate::authorize('preinscritos.export');
+
+        try {
+            // Validar filtros
+            $estado = $request->input('estado');
+            $programa_id = $request->input('programa_id');
+            $fecha_desde = $request->input('fecha_desde');
+            $fecha_hasta = $request->input('fecha_hasta');
+
+            // Validar fechas si se proporcionan
+            if ($fecha_desde) {
+                $fecha_desde = date('Y-m-d', strtotime($fecha_desde));
+            }
+            if ($fecha_hasta) {
+                $fecha_hasta = date('Y-m-d', strtotime($fecha_hasta));
+            }
+
+            // Crear instancia del export con filtros
+            $export = new InscripcionAspirantesSOFIAPlusExport(
+                $estado,
+                $programa_id,
+                $fecha_desde,
+                $fecha_hasta
+            );
+
+            // Obtener datos para validar que existan registros
+            $datos = $export->collection();
+
+            if ($datos->isEmpty()) {
+                return redirect()->route('preinscritos.reportes')
+                    ->with('error', 'No hay registros de preinscritos que cumplan con los filtros especificados.');
+            }
+
+            // Generar nombre del archivo con timestamp
+            $timestamp = now()->format('Ymd_His');
+            $nombreArchivo = "FormatoInscripcionAspirantesSOFIAPlus_{$timestamp}.xlsx";
+
+            // Descargar Excel
+            return Excel::download(
+                $export,
+                $nombreArchivo
+            );
+
+        } catch (\Exception $e) {
+            return redirect()->route('preinscritos.reportes')
+                ->with('error', 'Error al generar el archivo SOFIA Plus: ' . $e->getMessage());
         }
     }
 

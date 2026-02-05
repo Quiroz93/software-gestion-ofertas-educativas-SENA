@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formato SOFIA Plus - Centro de Documentación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #00304D 0%, #39A900 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #4CAF50;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            border: 2px solid #00304D;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #39A900;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .card-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+        
+        .card h3 {
+            color: #00304D;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .card-meta {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .quick-access {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .quick-access h3 {
+            color: #00304D;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #39A900;
+            padding-bottom: 10px;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .quick-links a {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #00304D;
+            border-left: 4px solid #39A900;
+            transition: all 0.2s;
+        }
+        
+        .quick-links a:hover {
+            background: #f0f0f0;
+            border-left-color: #00304D;
+        }
+        
+        .table-section {
+            margin: 30px 0;
+        }
+        
+        .table-section h3 {
+            color: #00304D;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #39A900;
+            padding-bottom: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        table th {
+            background: #00304D;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .highlight {
+            background: #fffacd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .success {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: #ff9800;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .profile-section {
+            margin: 30px 0;
+        }
+        
+        .profile-button {
+            display: inline-block;
+            background: #39A900;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px 10px 10px 0;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .profile-button:hover {
+            background: #00304D;
+            transform: scale(1.05);
+        }
+        
+        .profile-button.secondary {
+            background: #00304D;
+        }
+        
+        .profile-button.secondary:hover {
+            background: #39A900;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .badge-success {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        .badge-warning {
+            background: #ffe0b2;
+            color: #e65100;
+        }
+        
+        .update-info {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Formato SOFIA Plus</h1>
+            <p>Inscripción de Aspirantes - Centro de Documentación</p>
+            <div class="status-badge">✅ Documentación Completa v1.0</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Information Update -->
+            <div class="update-info">
+                <strong>📅 Última Actualización:</strong> 5 de Febrero de 2026<br>
+                <strong>📊 Documentos:</strong> 6 documentos completos (15,000+ líneas)<br>
+                <strong>📈 Cobertura:</strong> 100% del formato SOFIA Plus
+            </div>
+            
+            <!-- Quick Start -->
+            <div class="profile-section">
+                <h2 style="color: #00304D; margin-bottom: 15px; border-bottom: 3px solid #39A900; padding-bottom: 10px;">🚀 Comienza Aquí</h2>
+                <p style="margin: 15px 0; color: #666;">Selecciona tu perfil para acceder a la documentación recomendada:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    <button class="profile-button" onclick="location.href='#usuarios'">👤 Usuario Final</button>
+                    <button class="profile-button secondary" onclick="location.href='#desarrolladores'">💻 Desarrollador</button>
+                    <button class="profile-button" onclick="location.href='#ejecutivos'">📊 Ejecutivo</button>
+                </div>
+            </div>
+            
+            <!-- Grid of Documents -->
+            <div id="usuarios" style="margin-top: 40px;">
+                <h2 style="color: #00304D; margin-bottom: 15px; border-bottom: 3px solid #39A900; padding-bottom: 10px;">📚 Para Usuarios Finales</h2>
+            </div>
+            
+            <div class="grid">
+                <a href="GUIA_PRACTICA_FORMATO_SOFIA_PLUS.md" style="text-decoration: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📖</div>
+                            <h3>Guía Práctica</h3>
+                        </div>
+                        <p>Ejemplos reales y paso a paso para cargar datos. Incluye 30+ ejemplos con soluciones de errores comunes.</p>
+                        <div class="card-meta">
+                            <span class="badge badge-success">RECOMENDADO</span>
+                            <span>⏱️ 15 min</span> | 
+                            <span>📄 1,200+ líneas</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="TABLA_REFERENCIA_RAPIDA_FORMATO_SOFIA_PLUS.md" style="text-decoration: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⚡</div>
+                            <h3>Tabla Referencia Rápida</h3>
+                        </div>
+                        <p>Consulta instantánea en tablas visuales. Todo lo que necesitas saber en máximo 2 minutos.</p>
+                        <div class="card-meta">
+                            <span>⏱️ 2-5 min</span> | 
+                            <span>📊 20 tablas</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- For Developers -->
+            <div id="desarrolladores" style="margin-top: 40px;">
+                <h2 style="color: #00304D; margin-bottom: 15px; border-bottom: 3px solid #39A900; padding-bottom: 10px;">💻 Para Desarrolladores</h2>
+            </div>
+            
+            <div class="grid">
+                <a href="ESPECIFICACIONES_TECNICAS_FORMATO_SOFIA_PLUS.md" style="text-decoration: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⚙️</div>
+                            <h3>Especificaciones Técnicas</h3>
+                        </div>
+                        <p>Implementación técnica, código Laravel, algoritmos de validación y integración con sistemas.</p>
+                        <div class="card-meta">
+                            <span class="badge badge-success">RECOMENDADO</span>
+                            <span>⏱️ 45 min</span> | 
+                            <span>💻 Código incluido</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="FORMATO_INSCRIPCION_ASPIRANTES_SOFIA_PLUS.md" style="text-decoration: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📋</div>
+                            <h3>Especificación Completa</h3>
+                        </div>
+                        <p>Especificación técnica exhaustiva de todas las columnas, validaciones, tipos de datos y restricciones.</p>
+                        <div class="card-meta">
+                            <span>⏱️ 30 min</span> | 
+                            <span>📄 3,200+ líneas</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- For Executives -->
+            <div id="ejecutivos" style="margin-top: 40px;">
+                <h2 style="color: #00304D; margin-bottom: 15px; border-bottom: 3px solid #39A900; padding-bottom: 10px;">📊 Para Ejecutivos</h2>
+            </div>
+            
+            <div class="grid">
+                <a href="RESUMEN_EJECUTIVO_FORMATO_SOFIA_PLUS.md" style="text-decoration: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📈</div>
+                            <h3>Resumen Ejecutivo</h3>
+                        </div>
+                        <p>Resumen consolidado con hallazgos principales, estructura, validaciones clave y recomendaciones.</p>
+                        <div class="card-meta">
+                            <span class="badge badge-success">RECOMENDADO</span>
+                            <span>⏱️ 5-10 min</span> | 
+                            <span>📊 8 tablas</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- All Documents -->
+            <div style="margin-top: 40px;">
+                <h2 style="color: #00304D; margin-bottom: 15px; border-bottom: 3px solid #39A900; padding-bottom: 10px;">📚 Todos los Documentos</h2>
+            </div>
+            
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>📄 Documento</th>
+                            <th>📝 Descripción</th>
+                            <th>⏱️ Tiempo</th>
+                            <th>👥 Audiencia</th>
+                            <th>📊 Contenido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Guía Práctica</strong></td>
+                            <td>Ejemplos y guía paso a paso</td>
+                            <td>15 min</td>
+                            <td>Usuarios</td>
+                            <td>30+ ejemplos, casos de error</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tabla Referencia Rápida</strong></td>
+                            <td>Consulta instantánea en tablas</td>
+                            <td>2-5 min</td>
+                            <td>Todos</td>
+                            <td>20 tablas de referencia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Especificaciones Técnicas</strong></td>
+                            <td>Código, algoritmos, APIs</td>
+                            <td>45 min</td>
+                            <td>Desarrolladores</td>
+                            <td>Código Laravel, BD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Especificación Completa</strong></td>
+                            <td>Detalles técnicos exhaustivos</td>
+                            <td>30 min</td>
+                            <td>Analistas</td>
+                            <td>3,200+ líneas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resumen Ejecutivo</strong></td>
+                            <td>Visión general consolidada</td>
+                            <td>5-10 min</td>
+                            <td>Ejecutivos</td>
+                            <td>Hallazgos, conclusiones</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Índice Navegación</strong></td>
+                            <td>Centro de documentación</td>
+                            <td>5 min</td>
+                            <td>Todos</td>
+                            <td>Búsqueda rápida</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Quick Access -->
+            <div class="quick-access">
+                <h3>⚡ Acceso Rápido por Pregunta</h3>
+                <div class="quick-links">
+                    <a href="TABLA_REFERENCIA_RAPIDA_FORMATO_SOFIA_PLUS.md#tipos-de-documento-válidos" onclick="return confirm('Se abrirá el documento de tabla de referencia. ¿Continuar?')">
+                        ¿Cuáles son los tipos de documento?
+                    </a>
+                    <a href="GUIA_PRACTICA_FORMATO_SOFIA_PLUS.md#errores-comunes-y-soluciones" onclick="return confirm('Se abrirá el documento de guía práctica. ¿Continuar?')">
+                        ¿Por qué se rechaza mi archivo?
+                    </a>
+                    <a href="TABLA_REFERENCIA_RAPIDA_FORMATO_SOFIA_PLUS.md#motivos-de-rechazo" onclick="return confirm('Se abrirá el documento de tabla de referencia. ¿Continuar?')">
+                        ¿Cuáles son los motivos de rechazo?
+                    </a>
+                    <a href="GUIA_PRACTICA_FORMATO_SOFIA_PLUS.md#pasos-para-cargar" onclick="return confirm('Se abrirá el documento de guía práctica. ¿Continuar?')">
+                        ¿Cómo cargo un archivo?
+                    </a>
+                    <a href="TABLA_REFERENCIA_RAPIDA_FORMATO_SOFIA_PLUS.md#programas-comunes-ejemplos" onclick="return confirm('Se abrirá el documento de tabla de referencia. ¿Continuar?')">
+                        ¿Cuáles son los programas disponibles?
+                    </a>
+                    <a href="ESPECIFICACIONES_TECNICAS_FORMATO_SOFIA_PLUS.md#código-de-implementación" onclick="return confirm('Se abrirá el documento de especificaciones técnicas. ¿Continuar?')">
+                        ¿Cómo es la implementación técnica?
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Summary Statistics -->
+            <div style="margin-top: 40px; background: #f5f5f5; padding: 20px; border-radius: 8px; border-left: 4px solid #39A900;">
+                <h3 style="color: #00304D; margin-bottom: 15px;">📊 Estadísticas de Documentación</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div>
+                        <strong>Documentos Generados:</strong><br>
+                        <span style="font-size: 1.8em; color: #39A900;">6</span>
+                    </div>
+                    <div>
+                        <strong>Total de Líneas:</strong><br>
+                        <span style="font-size: 1.8em; color: #39A900;">15,000+</span>
+                    </div>
+                    <div>
+                        <strong>Ejemplos Incluidos:</strong><br>
+                        <span style="font-size: 1.8em; color: #39A900;">50+</span>
+                    </div>
+                    <div>
+                        <strong>Tablas de Referencia:</strong><br>
+                        <span style="font-size: 1.8em; color: #39A900;">20+</span>
+                    </div>
+                    <div>
+                        <strong>Cobertura del Formato:</strong><br>
+                        <span style="font-size: 1.8em; color: #39A900;">100%</span>
+                    </div>
+                    <div>
+                        <strong>Audiencias Soportadas:</strong><br>
+                        <span style="font-size: 1.8em; color: #39A900;">5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Information -->
+            <div style="margin-top: 40px;">
+                <h3 style="color: #00304D; margin-bottom: 15px; border-bottom: 3px solid #39A900; padding-bottom: 10px;">🎯 Información Clave</h3>
+                
+                <div style="margin: 20px 0;">
+                    <h4 style="color: #00304D;">✅ Estructura del Formato</h4>
+                    <table style="margin-top: 10px;">
+                        <tr>
+                            <td><strong>Columnas Obligatorias:</strong></td>
+                            <td>Tipo Documento, Nro Documento, Nombres, Apellidos, Programa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Columnas Opcionales:</strong></td>
+                            <td>Correo, Celular, Estado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Columnas Generadas:</strong></td>
+                            <td>Número de Ficha (NO EDITAR)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Formatos Soportados:</strong></td>
+                            <td>.xlsx, .xls, .csv</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4 style="color: #00304D;">⚠️ Motivos de Rechazo</h4>
+                    <table style="margin-top: 10px;">
+                        <tr>
+                            <td><strong>datos_incompletos</strong></td>
+                            <td>Faltan campos obligatorios</td>
+                        </tr>
+                        <tr>
+                            <td><strong>documento_duplicado</strong></td>
+                            <td>Número de documento repetido</td>
+                        </tr>
+                        <tr>
+                            <td><strong>sin_programa_asignado</strong></td>
+                            <td>Programa no existe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>inconsistencia_programa</strong></td>
+                            <td>Número de ficha modificado</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Formato de Inscripción de Aspirantes SOFIA Plus</strong></p>
+            <p>Sistema: SoeSoftware - SENA Centro Agroempresarial</p>
+            <p>Documentación Completada: 5 de Febrero de 2026 | Versión 1.0</p>
+            <p style="margin-top: 15px; opacity: 0.7;">
+                Para más información, consulta el Índice de Navegación o los documentos Markdown disponibles.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

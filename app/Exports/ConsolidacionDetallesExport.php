@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\ConsolidacionPreinscrito;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -172,7 +173,7 @@ class ConsolidacionDetallesExport implements FromQuery, WithHeadings, WithMappin
                 $sheet->mergeCells('A6:I6');
                 
                 // Usuario que genera
-                $usuario = auth()->user();
+                $usuario = Auth::user();
                 $nombreUsuario = $usuario ? $usuario->name : 'Sistema';
                 
                 $sheet->setCellValue('E4', 'Fecha:');

@@ -1,21 +1,19 @@
-@extends('layouts.admin')
+<?php $__env->startSection('title', 'Reportes - Preinscritos'); ?>
 
-@section('title', 'Reportes - Preinscritos')
-
-@section('content_header')
+<?php $__env->startSection('content_header'); ?>
 <div class="d-flex justify-content-between align-items-center">
     <h1 class="m-0">
         <i class="fas fa-chart-bar text-primary"></i>
         Reportes de Preinscritos
     </h1>
-    <a href="{{ route('preinscritos.index') }}" class="btn btn-outline-secondary">
+    <a href="<?php echo e(route('preinscritos.index')); ?>" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left"></i>
         Volver
     </a>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
     <!-- Estadísticas -->
     <div class="row mb-4">
@@ -23,7 +21,7 @@
             <div class="card bg-primary text-white">
                 <div class="card-body">
                     <h6 class="card-title">Total de Preinscritos</h6>
-                    <h2 class="mb-0">{{ $estadisticas['total'] }}</h2>
+                    <h2 class="mb-0"><?php echo e($estadisticas['total']); ?></h2>
                 </div>
             </div>
         </div>
@@ -32,7 +30,7 @@
             <div class="card bg-success text-white">
                 <div class="card-body">
                     <h6 class="card-title">Inscritos</h6>
-                    <h2 class="mb-0">{{ $estadisticas['inscrito'] }}</h2>
+                    <h2 class="mb-0"><?php echo e($estadisticas['inscrito']); ?></h2>
                 </div>
             </div>
         </div>
@@ -41,7 +39,7 @@
             <div class="card bg-warning text-white">
                 <div class="card-body">
                     <h6 class="card-title">Por Inscribir</h6>
-                    <h2 class="mb-0">{{ $estadisticas['por_inscribir'] }}</h2>
+                    <h2 class="mb-0"><?php echo e($estadisticas['por_inscribir']); ?></h2>
                 </div>
             </div>
         </div>
@@ -50,7 +48,7 @@
             <div class="card bg-danger text-white">
                 <div class="card-body">
                     <h6 class="card-title">Con Novedad</h6>
-                    <h2 class="mb-0">{{ $estadisticas['con_novedad'] }}</h2>
+                    <h2 class="mb-0"><?php echo e($estadisticas['con_novedad']); ?></h2>
                 </div>
             </div>
         </div>
@@ -65,16 +63,17 @@
             </h3>
         </div>
         <div class="card-body">
-            <form id="form-filtros" method="GET" action="{{ route('preinscritos.reportes') }}" class="row g-3">
+            <form id="form-filtros" method="GET" action="<?php echo e(route('preinscritos.reportes')); ?>" class="row g-3">
                 <div class="col-md-4">
                     <label for="programa_id" class="form-label">Programa</label>
                     <select class="form-select form-select-sm" id="programa_id" name="programa_id">
                         <option value="">-- Todos los programas --</option>
-                        @foreach($programas as $programa)
-                            <option value="{{ $programa->id }}" {{ request('programa_id') == $programa->id ? 'selected' : '' }}>
-                                {{ $programa->nombre }}
+                        <?php $__currentLoopData = $programas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $programa): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($programa->id); ?>" <?php echo e(request('programa_id') == $programa->id ? 'selected' : ''); ?>>
+                                <?php echo e($programa->nombre); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -82,11 +81,12 @@
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-select form-select-sm" id="estado" name="estado">
                         <option value="">-- Todos los estados --</option>
-                        @foreach($estados as $valor => $etiqueta)
-                            <option value="{{ $valor }}" {{ request('estado') == $valor ? 'selected' : '' }}>
-                                {{ $etiqueta }}
+                        <?php $__currentLoopData = $estados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $valor => $etiqueta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($valor); ?>" <?php echo e(request('estado') == $valor ? 'selected' : ''); ?>>
+                                <?php echo e($etiqueta); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -94,11 +94,12 @@
                     <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                     <select class="form-select form-select-sm" id="tipo_documento" name="tipo_documento">
                         <option value="">-- Todos --</option>
-                        @foreach($tiposDocumento as $valor => $etiqueta)
-                            <option value="{{ $valor }}" {{ request('tipo_documento') == $valor ? 'selected' : '' }}>
-                                {{ $etiqueta }}
+                        <?php $__currentLoopData = $tiposDocumento; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $valor => $etiqueta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($valor); ?>" <?php echo e(request('tipo_documento') == $valor ? 'selected' : ''); ?>>
+                                <?php echo e($etiqueta); ?>
+
                             </option>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
 
@@ -115,7 +116,7 @@
                     <button type="button" class="btn btn-info btn-sm" onclick="exportarSOFIAPlus()" title="Exportar en formato SOFIA Plus del SENA">
                         <i class="fas fa-file-upload"></i> SOFIA Plus
                     </button>
-                    <a href="{{ route('preinscritos.reportes') }}" class="btn btn-outline-secondary btn-sm">
+                    <a href="<?php echo e(route('preinscritos.reportes')); ?>" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-redo"></i> Limpiar
                     </a>
                     <button type="button" class="btn btn-outline-info btn-sm" onclick="imprimirReporte()">
@@ -127,12 +128,12 @@
     </div>
 
     <!-- Tabla de Reportes -->
-    @if($preinscritos->count() > 0)
+    <?php if($preinscritos->count() > 0): ?>
         <div class="card card-outline card-primary">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-list"></i>
-                    Datos del Reporte ({{ $preinscritos->count() }} registros)
+                    Datos del Reporte (<?php echo e($preinscritos->count()); ?> registros)
                 </h3>
             </div>
             <div class="card-body">
@@ -151,100 +152,105 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($preinscritos as $presrito)
+                            <?php $__currentLoopData = $preinscritos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $presrito): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td>{{ $presrito->nombre_completo }}</td>
+                                    <td><?php echo e($presrito->nombre_completo); ?></td>
                                     <td>
                                         <small>
-                                            {{ strtoupper($presrito->tipo_documento) }}-{{ $presrito->numero_documento }}
+                                            <?php echo e(strtoupper($presrito->tipo_documento)); ?>-<?php echo e($presrito->numero_documento); ?>
+
                                         </small>
                                     </td>
                                     <td>
-                                        <small>{{ $presrito->celular_principal }}</small>
+                                        <small><?php echo e($presrito->celular_principal); ?></small>
                                     </td>
                                     <td>
-                                        <small>{{ $presrito->correo_principal }}</small>
+                                        <small><?php echo e($presrito->correo_principal); ?></small>
                                     </td>
                                     <td>
-                                        <small>{{ $presrito->programa->nombre ?? 'Sin asignar' }}</small>
+                                        <small><?php echo e($presrito->programa->nombre ?? 'Sin asignar'); ?></small>
                                     </td>
                                     <td>
-                                        <small>{{ $presrito->programa->numero_ficha ?? 'N/A' }}</small>
+                                        <small><?php echo e($presrito->programa->numero_ficha ?? 'N/A'); ?></small>
                                     </td>
                                     <td>
                                         <small>
-                                            <span class="badge bg-{{ $presrito->estado === 'inscrito' ? 'success' : ($presrito->estado === 'por_inscribir' ? 'warning' : 'danger') }}">
-                                                {{ $presrito->etiqueta_estado }}
+                                            <span class="badge bg-<?php echo e($presrito->estado === 'inscrito' ? 'success' : ($presrito->estado === 'por_inscribir' ? 'warning' : 'danger')); ?>">
+                                                <?php echo e($presrito->etiqueta_estado); ?>
+
                                             </span>
                                         </small>
                                     </td>
                                     <td>
-                                        <small>{{ $presrito->created_at->format('d/m/Y') }}</small>
+                                        <small><?php echo e($presrito->created_at->format('d/m/Y')); ?></small>
                                     </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="card-footer">
                 <small class="text-muted">
-                    Reporte generado el {{ now()->format('d/m/Y H:i:s') }}
+                    Reporte generado el <?php echo e(now()->format('d/m/Y H:i:s')); ?>
+
                 </small>
             </div>
         </div>
 
         <!-- Resumen por Programa -->
         <div class="row mt-4">
-            @php
+            <?php
                 $porPrograma = $preinscritos->groupBy('programa_id');
-            @endphp
+            ?>
 
-            @foreach($porPrograma as $programaId => $grupo)
-                @php
+            <?php $__currentLoopData = $porPrograma; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $programaId => $grupo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php
                     $programa = $grupo->first()->programa;
                     $porEstado = $grupo->groupBy('estado');
-                @endphp
+                ?>
                 <div class="col-md-6 mb-4">
                     <div class="card card-outline card-info">
                         <div class="card-header">
                             <h5 class="card-title mb-0">
-                                {{ $programa->nombre ?? 'Sin asignar' }}
+                                <?php echo e($programa->nombre ?? 'Sin asignar'); ?>
+
                             </h5>
                         </div>
                         <div class="card-body">
                             <ul class="list-unstyled">
                                 <li class="mb-2">
                                     <strong>Total:</strong>
-                                    <span class="badge bg-primary">{{ $grupo->count() }}</span>
+                                    <span class="badge bg-primary"><?php echo e($grupo->count()); ?></span>
                                 </li>
-                                @foreach($estados as $valor => $etiqueta)
-                                    @php
+                                <?php $__currentLoopData = $estados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $valor => $etiqueta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php
                                         $cantidad = $porEstado->get($valor, collect())->count();
-                                    @endphp
+                                    ?>
                                     <li class="mb-2">
-                                        <strong>{{ $etiqueta }}:</strong>
-                                        <span class="badge bg-{{ $valor === 'inscrito' ? 'success' : ($valor === 'por_inscribir' ? 'warning' : 'danger') }}">
-                                            {{ $cantidad }}
+                                        <strong><?php echo e($etiqueta); ?>:</strong>
+                                        <span class="badge bg-<?php echo e($valor === 'inscrito' ? 'success' : ($valor === 'por_inscribir' ? 'warning' : 'danger')); ?>">
+                                            <?php echo e($cantidad); ?>
+
                                         </span>
                                     </li>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
-    @else
+    <?php else: ?>
         <div class="alert alert-info">
             <i class="fas fa-info-circle"></i>
             No hay datos para mostrar con los filtros aplicados.
         </div>
-    @endif
+    <?php endif; ?>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
 <script>
     /**
      * Función para generar reporte (solo registrar en BD)
@@ -256,13 +262,13 @@
         // Crear formulario temporal y enviarlo
         const tempForm = document.createElement('form');
         tempForm.method = 'POST';
-        tempForm.action = "{{ route('preinscritos.reportar') }}";
+        tempForm.action = "<?php echo e(route('preinscritos.reportar')); ?>";
         
         // Agregar token CSRF
         const csrfInput = document.createElement('input');
         csrfInput.type = 'hidden';
         csrfInput.name = '_token';
-        csrfInput.value = '{{ csrf_token() }}';
+        csrfInput.value = '<?php echo e(csrf_token()); ?>';
         tempForm.appendChild(csrfInput);
         
         // Agregar todos los campos del formulario
@@ -297,13 +303,13 @@
         // Crear formulario temporal y enviarlo
         const tempForm = document.createElement('form');
         tempForm.method = 'POST';
-        tempForm.action = "{{ route('preinscritos.generar-excel') }}";
+        tempForm.action = "<?php echo e(route('preinscritos.generar-excel')); ?>";
         
         // Agregar token CSRF
         const csrfInput = document.createElement('input');
         csrfInput.type = 'hidden';
         csrfInput.name = '_token';
-        csrfInput.value = '{{ csrf_token() }}';
+        csrfInput.value = '<?php echo e(csrf_token()); ?>';
         tempForm.appendChild(csrfInput);
         
         // Agregar todos los campos del formulario
@@ -329,13 +335,13 @@
         // Crear formulario temporal
         const tempForm = document.createElement('form');
         tempForm.method = 'POST';
-        tempForm.action = "{{ route('preinscritos.exportar-sofia-plus') }}";
+        tempForm.action = "<?php echo e(route('preinscritos.exportar-sofia-plus')); ?>";
         
         // Agregar token CSRF
         const csrfInput = document.createElement('input');
         csrfInput.type = 'hidden';
         csrfInput.name = '_token';
-        csrfInput.value = '{{ csrf_token() }}';
+        csrfInput.value = '<?php echo e(csrf_token()); ?>';
         tempForm.appendChild(csrfInput);
         
         // Agregar todos los campos del formulario
@@ -358,7 +364,7 @@
     function imprimirReporte() {
         const form = document.getElementById('form-filtros');
         const params = new URLSearchParams(new FormData(form)).toString();
-        const url = "{{ route('reportes.imprimir') }}" + (params ? '?' + params : '');
+        const url = "<?php echo e(route('reportes.imprimir')); ?>" + (params ? '?' + params : '');
         
         window.open(url, '_blank');
     }
@@ -376,16 +382,16 @@
     }
 </script>
 
-@if(session('success'))
+<?php if(session('success')): ?>
 <script>
-    const downloadUrl = "{{ session('download_url') }}";
-    const downloadName = "{{ session('download_name') }}";
+    const downloadUrl = "<?php echo e(session('download_url')); ?>";
+    const downloadName = "<?php echo e(session('download_name')); ?>";
 
     if (downloadUrl) {
         Swal.fire({
             icon: 'success',
             title: 'Reporte generado',
-            text: "{{ session('success') }}",
+            text: "<?php echo e(session('success')); ?>",
             showCancelButton: true,
             confirmButtonText: 'Descargar',
             cancelButtonText: 'Cerrar'
@@ -398,19 +404,21 @@
         Swal.fire({
             icon: 'success',
             title: 'Reporte generado',
-            text: "{{ session('success') }}",
+            text: "<?php echo e(session('success')); ?>",
         });
     }
 </script>
-@endif
+<?php endif; ?>
 
-@if(session('error'))
+<?php if(session('error')): ?>
 <script>
     Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: "{{ session('error') }}"
+        text: "<?php echo e(session('error')); ?>"
     });
 </script>
-@endif
-@endsection
+<?php endif; ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\AdminSena\Documents\SoeSoftware2\resources\views/admin/preinscritos/reportes.blade.php ENDPATH**/ ?>
