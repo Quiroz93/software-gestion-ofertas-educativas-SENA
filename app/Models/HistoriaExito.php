@@ -43,4 +43,12 @@ class HistoriaExito extends Model
     {
         return \Illuminate\Support\Str::limit($this->descripcion ?? '', $length);
     }
+    
+        /**
+         * Relación con Programa
+         */
+        public function programa()
+        {
+            return $this->belongsTo(Programa::class);
+        }
 }

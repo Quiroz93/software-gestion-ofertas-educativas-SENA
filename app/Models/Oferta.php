@@ -35,6 +35,20 @@ class Oferta extends Model
     /**
      * Definir las relaciones con otros modelos
      */
+    public function centro()
+    {
+        return $this->belongsTo(Centro::class);
+    }
+
+    /**
+     * Relación muchos a muchos con programas
+     */
+    public function programas()
+    {
+        return $this->belongsToMany(Programa::class, 'oferta_programas', 'oferta_id', 'programa_id')
+            ->withTimestamps();
+    }
+
     public function customContents()
     {
         return $this->morphMany(CustomContent::class, 'contentable');

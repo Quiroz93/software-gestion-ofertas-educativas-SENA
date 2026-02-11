@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\Public\PublicCentroController;
@@ -35,32 +36,24 @@ use App\Http\Controllers\Public\MediaContentController;
 use App\Http\Controllers\Admin\TipoNovedadController;
 use App\Http\Controllers\Admin\NovedadPreinscritoController;
 use App\Http\Controllers\Admin\ExportController;
+use App\Http\Controllers\InscripcionController;
 
-
-
-
-/*|--------------------------------------------------------------------------
-| Rutas para gestión de contenidos personalizados (PUBLIC CONTENT)
+/*
+|--------------------------------------------------------------------------
+| Programa Detalle (ADMIN)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'can:public_content.edit'])
-    ->post('/public-content', [CustomContentController::class, 'store'])
-    ->name('public.content.store');
 
-/*|--------------------------------------------------------------------------
-| Rutas para gestión de archivos multimedia (MEDIA CONTENT)
-|--------------------------------------------------------------------------
-*/
 Route::middleware(['auth', 'can:public_content.edit'])->group(function () {
     Route::get('/public/media/list', [MediaContentController::class, 'list'])
         ->name('public.media.list');
-    
+
     Route::post('/public/media/upload', [MediaContentController::class, 'upload'])
         ->name('public.media.upload');
-    
+
     Route::post('/public/media/store', [MediaContentController::class, 'store'])
         ->name('public.media.store');
-    
+
     Route::delete('/public/media/delete', [MediaContentController::class, 'delete'])
         ->name('public.media.delete');
 });
@@ -356,7 +349,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('programas/{programa}', [ProgramaController::class, 'show'])
         ->middleware('can:programas.view')->name('programas.show');
 
-    Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit']) 
+    Route::get('programas/{programa}/edit', [ProgramaController::class, 'edit'])
         ->middleware('can:programas.edit')->name('programas.edit');
 
     Route::put('programas/{programa}', [ProgramaController::class, 'update'])
@@ -364,15 +357,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('programas/{programa}', [ProgramaController::class, 'destroy'])
         ->middleware('can:programas.delete')->name('programas.destroy');
-    
+
     // Generación y descarga de códigos QR para programas
     Route::get('programas/{programa}/qr', [ProgramaController::class, 'generarQR'])
         ->middleware('can:programas.view')->name('programas.qr.generar');
-    
+
     Route::get('programas/{programa}/qr/descargar', [ProgramaController::class, 'descargarQR'])
         ->middleware('can:programas.view')->name('programas.qr.descargar');
-    
 });
+
+    // Ruta pública para formulario de inscripción a programas
+    Route::get('programasDeFormacion/{programa}/inscribirse', [InscripcionController::class, 'create'])
+        ->name('public.inscripcion.formulario');
 
 /*
 |--------------------------------------------------------------------------
@@ -563,25 +559,25 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('admin')->name('admin.home-carousel.')->group(function () {
-    
+
     Route::get('carousel', [HomeCarouselController::class, 'index'])
         ->name('index');
-    
+
     Route::get('carousel/create', [HomeCarouselController::class, 'create'])
         ->name('create');
-    
+
     Route::post('carousel', [HomeCarouselController::class, 'store'])
         ->name('store');
-    
+
     Route::get('carousel/{homeCarousel}/edit', [HomeCarouselController::class, 'edit'])
         ->name('edit');
-    
+
     Route::put('carousel/{homeCarousel}', [HomeCarouselController::class, 'update'])
         ->name('update');
-    
+
     Route::delete('carousel/{homeCarousel}', [HomeCarouselController::class, 'destroy'])
         ->name('destroy');
-    
+
     Route::patch('carousel/{homeCarousel}/toggle-active', [HomeCarouselController::class, 'toggleActive'])
         ->name('toggle-active');
 });
@@ -603,13 +599,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::get('preinscritos-rechazados/{id}/edit', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'edit'])
         ->name('preinscritos-rechazados.edit');
-    
+
     Route::get('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'show'])
         ->name('preinscritos-rechazados.show');
 
     Route::put('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'update'])
         ->name('preinscritos-rechazados.update');
-    
+
     Route::delete('preinscritos-rechazados/{id}', [\App\Http\Controllers\Admin\PreinscritoRechazadoController::class, 'destroy'])
         ->name('preinscritos-rechazados.destroy');
 });
@@ -624,7 +620,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     // Rutas de foto de perfil
     Route::put('/profile/photo', [ProfileController::class, 'photoUpdate'])
         ->name('profile.photo.update');
@@ -638,19 +634,19 @@ Route::middleware(['auth'])->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-    
+
     // Mostrar formulario de inscripción
     Route::get('programas/{programa}/inscribirse', [App\Http\Controllers\InscripcionController::class, 'create'])
         ->name('inscripcion.create');
-    
+
     // Guardar inscripción
     Route::post('programas/{programa}/inscribir', [App\Http\Controllers\InscripcionController::class, 'store'])
         ->name('inscripcion.store');
-    
+
     // Retirar inscripción
     Route::delete('inscripciones/{inscripcion}', [App\Http\Controllers\InscripcionController::class, 'destroy'])
         ->name('inscripcion.destroy');
-    
+
     // Listar mis inscripciones
     Route::get('mis-inscripciones', [App\Http\Controllers\InscripcionController::class, 'misinscripciones'])
         ->name('inscripcion.index');
@@ -710,6 +706,23 @@ Route::prefix('/')
             ->only(['index', 'show']);
     });
 
+/*
+        |--------------------------------------------------------------------------
+        | Programa Detalle (ADMIN)
+        |--------------------------------------------------------------------------
+        */
+Route::middleware(['auth', 'verified', 'can:programas.view'])
+    ->prefix('admin')
+    ->group(function () {
+        Route::resource('programa_detalles', App\Http\Controllers\Admin\ProgramaDetalleController::class)
+            ->names('admin.programa_detalles')
+            ->parameters(['programa_detalles' => 'programa_detalle'])
+            ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    });
+
+
+
+
 
 /*|--------------------------------------------------------------------------
 | Tipos de Novedad (Admin)
@@ -733,11 +746,11 @@ Route::middleware(['auth', 'verified', 'can:preinscritos.novedades.admin'])
     ->group(function () {
         Route::resource('novedades', NovedadPreinscritoController::class)
             ->names('novedades');
-        
+
         // Custom route for changing novedad estado
         Route::post('novedades/{novedad}/cambiar-estado', [NovedadPreinscritoController::class, 'cambiarEstado'])
             ->name('novedades.cambiar-estado');
-        
+
         // Custom route for getting novedades by preinscrito
         Route::get('preinscritos/{preinscrito}/novedades', [NovedadPreinscritoController::class, 'porPreinscrito'])
             ->name('novedades.por-preinscrito');

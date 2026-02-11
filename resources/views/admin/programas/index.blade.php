@@ -15,6 +15,10 @@
             <i class="fas fa-plus-circle"></i>
             Crear programa
         </a>
+        <a href="{{ route('admin.content_public_programas.index') }}" class="btn btn-outline-info ms-2">
+            <i class="fas fa-globe"></i>
+            Editar contenido público
+        </a>
         @endcan
         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
