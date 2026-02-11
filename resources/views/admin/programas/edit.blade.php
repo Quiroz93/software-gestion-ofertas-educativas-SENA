@@ -199,6 +199,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="instructor_id"><strong>Instructor responsable</strong></label>
+                        <select name="instructor_id" id="instructor_id" class="form-control">
+                            <option value="" disabled {{ old('instructor_id', $programa->instructor_id) ? '' : 'selected' }}>Seleccione un instructor</option>
+                            @foreach($instructores as $instructor)
+                            <option value="{{ $instructor->id }}" {{ old('instructor_id', $programa->instructor_id) == $instructor->id ? 'selected' : '' }}>
+                                {{ $instructor->nombre }} {{ $instructor->apellidos }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="cupos"><strong>Cupos</strong></label>
                         <input type="number" name="cupos" id="cupos" class="form-control" value="{{ old('cupos', $programa->cupos) }}">
                     </div>
@@ -211,13 +223,26 @@
                                 id="is_featured"
                                 name="is_featured"
                                 value="1"
-                                {{ old('is_featured', $programa->is_featured) ? 'checked' : '' }}
-                            >
+                                {{ old('is_featured', $programa->is_featured) ? 'checked' : '' }}>
                             <label class="form-check-label" for="is_featured">
                                 <strong>Destacar en home</strong>
                             </label>
                         </div>
                         <small class="text-muted d-block mt-1">Se mostrara en Programas Destacados del home.</small>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        @if(!empty($programa_detalle) && $programa_detalle->id)
+                        <a href="{{ route('admin.programa_detalles.edit', ['programa_detalle' => $programa_detalle->id]) }}" class="btn btn-info">
+                            <i class="fas fa-cogs"></i> Editar detalles del programa
+                        </a>
+                        <small class="text-muted d-block mt-1">Accede a la edición de contextualización, video e imágenes.</small>
+                        @else
+                        <a href="{{ route('admin.programa_detalles.create', ['programa_id' => $programa->id]) }}" class="btn btn-success">
+                            <i class="fas fa-plus"></i> Crear detalles del programa
+                        </a>
+                        <small class="text-muted d-block mt-1">Aún no existen detalles para este programa.</small>
+                        @endif
                     </div>
                 </div>
 

@@ -66,6 +66,7 @@ class ProgramaController extends \App\Http\Controllers\Controller
             'cupos' => 'nullable|integer',
             'municipio_id' => 'nullable|exists:municipios,id',
             'is_featured' => 'boolean',
+            'instructor_id' => 'nullable|exists:instructores,id',
         ]);
 
         $data['is_featured'] = $request->has('is_featured');
@@ -98,7 +99,9 @@ class ProgramaController extends \App\Http\Controllers\Controller
         $redes = Red::all();
         $centros = Centro::all();
         $municipios = Municipio::all();
-        return view('admin.programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros', 'municipios'));
+        $instructores = \App\Models\Instructor::all();
+        $programa_detalle = $programa->detalle;
+        return view('admin.programas.edit', compact('programa', 'nivel_formaciones', 'redes', 'centros', 'municipios', 'instructores', 'programa_detalle'));
     }
 
     /**
@@ -131,6 +134,7 @@ class ProgramaController extends \App\Http\Controllers\Controller
             'cupos' => 'nullable|integer',
             'municipio_id' => 'nullable|exists:municipios,id',
             'is_featured' => 'boolean',
+            'instructor_id' => 'nullable|exists:instructores,id',
         ]);
 
         $data['is_featured'] = $request->has('is_featured');

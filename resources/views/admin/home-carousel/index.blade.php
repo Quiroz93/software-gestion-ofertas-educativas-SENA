@@ -60,13 +60,16 @@
                                 <i class="bi bi-hash text-muted"></i>
                             </th>
                             <th style="width: 15%">Imagen</th>
-                            <th style="width: 30%">Título</th>
+                            <th style="width: 20%">Título</th>
+                            <th style="width: 15%">Texto botón</th>
+                            <th style="width: 15%">URL botón</th>
                             <th style="width: 20%" class="text-center">Estado</th>
                             <th style="width: 15%" class="text-center">Orden</th>
                             <th style="width: 15%" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
+
                         @forelse($slides as $slide)
                             <tr>
                                 {{-- ID --}}
@@ -95,6 +98,24 @@
                                         <small class="text-muted">
                                             {{ Str::limit($slide->description, 60) }}
                                         </small>
+                                    @endif
+                                </td>
+
+                                {{-- Texto botón --}}
+                                <td>
+                                    @if($slide->button_text)
+                                        <span class="badge bg-sena text-white">{{ $slide->button_text }}</span>
+                                    @else
+                                        <span class="text-muted">—</span>
+                                    @endif
+                                </td>
+
+                                {{-- URL botón --}}
+                                <td>
+                                    @if($slide->button_url)
+                                        <a href="{{ $slide->button_url }}" target="_blank" class="text-decoration-underline small">{{ Str::limit($slide->button_url, 30) }}</a>
+                                    @else
+                                        <span class="text-muted">—</span>
                                     @endif
                                 </td>
 

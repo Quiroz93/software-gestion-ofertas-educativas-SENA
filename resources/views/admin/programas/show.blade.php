@@ -192,6 +192,43 @@
                         </div>
                     @endif
 
+                    {{-- DETALLES DE PROGRAMA --}}
+                    @if($programa->detalle)
+                        <div class="card mt-4 border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"><i class="fas fa-info-circle"></i> Detalles adicionales del programa</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Contextualización:</strong><br>{{ $programa->detalle->contextualizacion ?? 'N/A' }}</p>
+                                <div class="mb-3">
+                                    <strong>Video:</strong><br>
+                                    @if($programa->detalle->video_url)
+                                        <iframe width="320" height="180" src="{{ $programa->detalle->video_url }}" frameborder="0" allowfullscreen></iframe>
+                                    @elseif($programa->detalle->video_file)
+                                        <video width="320" height="180" controls>
+                                            <source src="data:video/mp4;base64,{{ base64_encode($programa->detalle->video_file) }}" type="video/mp4">
+                                            Tu navegador no soporta la reproducción de video.
+                                        </video>
+                                    @else
+                                        <span class="text-muted">No hay video registrado.</span>
+                                    @endif
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Imágenes:</strong><br>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        @if($programa->detalle->imagenes_blob && is_array($programa->detalle->imagenes_blob))
+                                            @foreach($programa->detalle->imagenes_blob as $img)
+                                                <img src="data:image/jpeg;base64,{{ $img }}" alt="Imagen" style="max-width:120px; max-height:90px; border:1px solid #ccc; border-radius:4px;">
+                                            @endforeach
+                                        @else
+                                            <span class="text-muted">No hay imágenes registradas.</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
 
                 {{-- FOOTER --}}

@@ -93,6 +93,19 @@
                             @foreach($slides as $slide)
                                 <div class="carousel-slide {{ $loop->first ? 'active' : '' }}">
                                     <img src="{{ asset('storage/' . $slide->image_path) }}" alt="{{ $slide->title }}">
+                                    <div class="carousel-caption">
+                                        @if($slide->title)
+                                            <h2 class="carousel-title">{{ $slide->title }}</h2>
+                                        @endif
+                                        @if($slide->description)
+                                            <p class="carousel-description">{{ $slide->description }}</p>
+                                        @endif
+                                        @if($slide->button_text && $slide->button_url)
+                                            <a href="{{ $slide->button_url }}" class="carousel-btn btn btn-sena" target="_blank" rel="noopener">
+                                                {{ $slide->button_text }}
+                                            </a>
+                                        @endif
+                                    </div>
                                 </div>
                             @endforeach
                         @else
@@ -101,6 +114,39 @@
                             </div>
                         @endif
                         <div class="carousel-overlay"></div>
+                        <style>
+                        .carousel-caption {
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: rgba(0,0,0,0.45);
+                            color: #fff;
+                            padding: 2rem 2.5rem 1.5rem 2.5rem;
+                            border-bottom-left-radius: 1rem;
+                            border-bottom-right-radius: 1rem;
+                            text-align: left;
+                        }
+                        .carousel-title {
+                            font-size: 2rem;
+                            font-weight: 700;
+                            margin-bottom: 0.5rem;
+                        }
+                        .carousel-description {
+                            font-size: 1.1rem;
+                            margin-bottom: 1rem;
+                        }
+                        .carousel-btn {
+                            font-weight: 600;
+                            padding: 0.5rem 1.5rem;
+                            border-radius: 2rem;
+                            font-size: 1rem;
+                        }
+                        @media (max-width: 768px) {
+                            .carousel-caption { padding: 1rem; font-size: 0.95rem; }
+                            .carousel-title { font-size: 1.2rem; }
+                        }
+                        </style>
                         <div class="carousel-indicators">
                             @if($slides->isNotEmpty())
                                 @foreach($slides as $slide)
