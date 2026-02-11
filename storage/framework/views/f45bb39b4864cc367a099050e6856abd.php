@@ -91,6 +91,20 @@
                             <?php $__currentLoopData = $slides; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slide): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <div class="carousel-slide <?php echo e($loop->first ? 'active' : ''); ?>">
                                     <img src="<?php echo e(asset('storage/' . $slide->image_path)); ?>" alt="<?php echo e($slide->title); ?>">
+                                    <div class="carousel-caption">
+                                        <?php if($slide->title): ?>
+                                            <h2 class="carousel-title"><?php echo e($slide->title); ?></h2>
+                                        <?php endif; ?>
+                                        <?php if($slide->description): ?>
+                                            <p class="carousel-description"><?php echo e($slide->description); ?></p>
+                                        <?php endif; ?>
+                                        <?php if($slide->button_text && $slide->button_url): ?>
+                                            <a href="<?php echo e($slide->button_url); ?>" class="carousel-btn btn btn-sena" target="_blank" rel="noopener">
+                                                <?php echo e($slide->button_text); ?>
+
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php else: ?>
@@ -99,6 +113,39 @@
                             </div>
                         <?php endif; ?>
                         <div class="carousel-overlay"></div>
+                        <style>
+                        .carousel-caption {
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: rgba(0,0,0,0.45);
+                            color: #fff;
+                            padding: 2rem 2.5rem 1.5rem 2.5rem;
+                            border-bottom-left-radius: 1rem;
+                            border-bottom-right-radius: 1rem;
+                            text-align: left;
+                        }
+                        .carousel-title {
+                            font-size: 2rem;
+                            font-weight: 700;
+                            margin-bottom: 0.5rem;
+                        }
+                        .carousel-description {
+                            font-size: 1.1rem;
+                            margin-bottom: 1rem;
+                        }
+                        .carousel-btn {
+                            font-weight: 600;
+                            padding: 0.5rem 1.5rem;
+                            border-radius: 2rem;
+                            font-size: 1rem;
+                        }
+                        @media (max-width: 768px) {
+                            .carousel-caption { padding: 1rem; font-size: 0.95rem; }
+                            .carousel-title { font-size: 1.2rem; }
+                        }
+                        </style>
                         <div class="carousel-indicators">
                             <?php if($slides->isNotEmpty()): ?>
                                 <?php $__currentLoopData = $slides; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slide): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
