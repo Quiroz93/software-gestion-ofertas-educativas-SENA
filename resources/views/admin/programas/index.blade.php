@@ -28,7 +28,43 @@
 </div>
 @stop
 
+
+
 @section('content')
+
+@php
+    $redes = \App\Models\Red::all();
+    $filtroRed = request('red');
+    $filtroNombre = request('nombre');
+    $filtroFicha = request('ficha');
+@endphp
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Red tecnológica</label>
+                <select name="red" class="form-select" onchange="this.form.submit()">
+                    <option value="">Todas las redes</option>
+                    @foreach ($redes as $red)
+                        <option value="{{ $red->id }}" @selected($filtroRed == $red->id)>{{ $red->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Nombre</label>
+                <input type="text" name="nombre" class="form-control" value="{{ $filtroNombre }}" placeholder="Buscar por nombre..." autocomplete="off">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">Número de ficha</label>
+                <input type="text" name="ficha" class="form-control" value="{{ $filtroFicha }}" placeholder="Buscar por ficha..." autocomplete="off">
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary w-100"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
 
 @if($programas->isEmpty())
 <div class="alert alert-info">
