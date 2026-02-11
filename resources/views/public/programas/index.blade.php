@@ -208,6 +208,29 @@
                         @endif
                     </div>
 
+                    <!-- Associated Offers -->
+                    @if($programa->ofertas()->count() > 0)
+                    <div class="mb-3 p-2 rounded-3" style="background-color: var(--neutral-bg); border-left: 3px solid var(--sena-green);">
+                        <small class="text-muted d-block mb-2">
+                            <i class="bi bi-collection me-1"></i><strong>Oferta(s) asociada(s):</strong>
+                        </small>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach($programa->ofertas()->take(2) as $oferta)
+                            <a href="{{ route('public.ofertasEducativas.show', $oferta) }}" 
+                               class="badge rounded-pill text-decoration-none" 
+                               style="background-color: var(--sena-green); color: white; cursor: pointer;">
+                                {{ $oferta->nombre }}
+                            </a>
+                            @endforeach
+                            @if($programa->ofertas()->count() > 2)
+                            <span class="badge rounded-pill" style="background-color: rgba(57, 169, 0, 0.15); color: var(--sena-green);">
+                                +{{ $programa->ofertas()->count() - 2 }} más
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    @endif
+
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted"><i class="bi bi-info-circle me-1"></i>Informacion publica</small>
                         <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-primary-sena btn-sm">

@@ -91,6 +91,30 @@
                 </div>
                 @endif
 
+                <!-- Associated Offers Section -->
+                @if($programa->ofertas && $programa->ofertas()->count() > 0)
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold mb-3 title-green">
+                            <i class="bi bi-collection me-2"></i>Ofertas que contienen este programa
+                        </h4>
+                        <div class="row g-2">
+                            @foreach($programa->ofertas()->take(3) as $oferta)
+                            <div class="col-md-6">
+                                <a href="{{ route('public.ofertasEducativas.show', $oferta) }}" 
+                                   class="card text-decoration-none h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-bold mb-1" style="color: var(--sena-green);">{{ $oferta->nombre }}</h6>
+                                        <small class="text-muted d-block">{{ $oferta->año ?? 'Sin año especificado' }}</small>
+                                    </div>
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 <!-- Success Stories / Projects Section -->
                 @if($programa->historiasExito && $programa->historiasExito->count() > 0)
                 <div class="card mb-4">
@@ -309,6 +333,28 @@
                         <button class="btn btn-primary-sena w-100 mt-4" data-bs-toggle="modal" data-bs-target="#enrollModal">
                             <i class="bi bi-check-circle me-2"></i>Solicitar Inscripción
                         </button>
+
+                        <!-- Associated Offers Info -->
+                        @if($programa->ofertas()->count() > 0)
+                        <div class="mt-3 p-3 rounded-lg" style="background-color: var(--neutral-bg); border-left: 4px solid var(--sena-green);">
+                            <small class="d-block text-muted mb-2">
+                                <i class="bi bi-info-circle me-1"></i>Parte de ofertas:
+                            </small>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach($programa->ofertas()->take(2) as $oferta)
+                                <a href="{{ route('public.ofertasEducativas.show', $oferta) }}" 
+                                   class="badge rounded-pill" style="background-color: var(--sena-green); text-decoration: none;">
+                                    {{ $oferta->nombre }}
+                                </a>
+                                @endforeach
+                                @if($programa->ofertas()->count() > 2)
+                                <span class="badge rounded-pill" style="background-color: rgba(57, 169, 0, 0.2); color: var(--sena-green);">
+                                    +{{ $programa->ofertas()->count() - 2 }} más
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
 
