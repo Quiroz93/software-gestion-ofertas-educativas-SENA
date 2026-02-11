@@ -3,245 +3,138 @@
 @section('title', 'Programas de Formación')
 
 @push('styles')
-    @vite(['resources/css/public/programas.css'])
+    @vite(['resources/css/design-system.css'])
 @endpush
 
 @section('content')
-<div class="container-fluid">
-    <!-- Hero Section -->
-    <div style="background-color: var(--sena-green);" class="text-white py-5 mb-5 rounded-bottom-lg">
+<div class="container py-5">
+    <!-- HERO MODERNO -->
+    @php
+        // Usar el primer content_public_programas que exista para algún programa como contenido general
+        $publicContent = null;
+        foreach($programas as $p) {
+            if ($p->contentPublicPrograma) {
+                $publicContent = $p->contentPublicPrograma;
+                break;
+            }
+        }
+    @endphp
+    <section class="hero-section hero-bg-green mb-5 shadow-lg">
         <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-8">
-                    <h1 class="display-4 fw-bold mb-3">Programas de Formación</h1>
-                    <p class="lead mb-4">
-                        <i class="bi bi-info-circle me-2"></i>
-                        Descubre nuestra oferta educativa diseñada para fortalecer tus competencias
-                        y abrir nuevas oportunidades laborales
-                    </p>
-                    <a href="#listado" class="btn btn-outline-sena bg-white">
-                        <i class="bi bi-arrow-down me-2"></i>Ver Programas
-                    </a>
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-lg-start text-center">
+                    <h1 class="display-4 fw-bold mb-3">{{ $publicContent->hero_title ?? 'Descubre tu futuro en el SENA' }}</h1>
+                    <p class="lead mb-4">{{ $publicContent->hero_description ?? 'Formación de calidad, docentes expertos y trayectorias que transforman vidas. ¡Elige tu programa y da el siguiente paso hacia tus metas!' }}</p>
+                    <div class="d-flex flex-wrap gap-3 justify-content-lg-start justify-content-center">
+                        <a href="#listado" class="btn btn-light btn-lg shadow-sm px-4 py-2 fw-semibold">
+                            <i class="bi bi-search me-2"></i>Explorar programas
+                        </a>
+                        <a href="mailto:info@example.com" class="btn btn-outline-light btn-lg px-4 py-2 fw-semibold">
+                            <i class="bi bi-chat-dots me-2"></i>Solicitar orientación
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-4 text-center">
-                    <i class="bi bi-book-half display-3 text-white opacity-50"></i>
+                <div class="col-lg-4 d-none d-lg-block text-end">
+                    @if(!empty($publicContent->hero_image))
+                        <img src="{{ $publicContent->hero_image }}" alt="Programas SENA" class="img-fluid rounded shadow-lg" style="max-height: 260px;">
+                    @else
+                        <img src="/images/hero-programas.svg" alt="Programas SENA" class="img-fluid rounded shadow-lg" style="max-height: 260px;">
+                    @endif
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Benefits Section -->
-    <div class="container mb-5 py-4">
-        <h3 class="h2 text-center fw-bold mb-5" style="color: var(--sena-blue-dark);">¿Por qué elegirnos?</h3>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="text-center">
-                    <div style="background-color: rgba(57,169,0,0.08);" class="rounded-circle p-4 d-inline-block mb-3">
-                        <i class="bi bi-check-circle" style="font-size: 2rem; color: var(--sena-green);"></i>
-                    </div>
-                    <h5 class="fw-bold" style="color: var(--sena-blue-dark);">Programas Actualizados</h5>
-                    <p class="text-muted">Alineados con las tendencias del mercado laboral</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="text-center">
-                    <div style="background-color: rgba(80,229,249,0.12);" class="rounded-circle p-4 d-inline-block mb-3">
-                        <i class="bi bi-person-check" style="font-size: 2rem; color: var(--sena-blue-light);"></i>
-                    </div>
-                    <h5 class="fw-bold" style="color: var(--sena-blue-dark);">Docentes Expertos</h5>
-                    <p class="text-muted">Profesionales con experiencia real en la industria</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="text-center">
-                    <div style="background-color: rgba(253,195,0,0.12);" class="rounded-circle p-4 d-inline-block mb-3">
-                        <i class="bi bi-award" style="font-size: 2rem; color: var(--sena-yellow);"></i>
-                    </div>
-                    <h5 class="fw-bold" style="color: var(--sena-blue-dark);">Certificación</h5>
-                    <p class="text-muted">Respaldo institucional y reconocimiento laboral</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Filters Section -->
-    <div class="container mb-5">
-        <div style="background-color: var(--neutral-bg);" class="p-4 rounded-lg">
-            <h5 class="fw-bold mb-4" style="color: var(--sena-blue-dark);">
-                <i class="bi bi-funnel me-2"></i>Filtrar Programas
-            </h5>
-            <form method="GET" class="row g-3">
+    <!-- FILTROS MODERNOS -->
+    <section class="mb-5">
+        <div class="bg-white rounded shadow p-4">
+            <form method="GET" class="row g-3 align-items-end">
                 <div class="col-md-4">
-                    <label class="form-label fw-semibold" style="color: var(--sena-blue-dark);">Red</label>
+                    <label class="form-label fw-semibold text-sena-blue">Red de conocimiento</label>
                     <select name="red" class="form-select" onchange="this.form.submit()">
                         <option value="">Todas las redes</option>
                         @foreach ($redes as $red)
-                            <option value="{{ $red->id }}" @selected(request('red') == $red->id)>
-                                {{ $red->nombre }}
-                            </option>
+                            <option value="{{ $red->id }}" @selected(request('red') == $red->id)>{{ $red->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
-
                 <div class="col-md-4">
-                    <label class="form-label fw-semibold" style="color: var(--sena-blue-dark);">Nivel de Formación</label>
+                    <label class="form-label fw-semibold text-sena-blue">Nivel de formación</label>
                     <select name="nivel" class="form-select" onchange="this.form.submit()">
                         <option value="">Todos los niveles</option>
                         @foreach ($niveles as $nivel)
-                            <option value="{{ $nivel->id }}" @selected(request('nivel') == $nivel->id)>
-                                {{ $nivel->nombre }}
-                            </option>
+                            <option value="{{ $nivel->id }}" @selected(request('nivel') == $nivel->id)>{{ $nivel->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
-
-                <div class="col-md-4 d-flex align-items-end">
+                <div class="col-md-4">
                     <a href="{{ url()->current() }}" class="btn btn-outline-sena w-100">
-                        <i class="bi bi-arrow-counterclockwise me-2"></i>Limpiar Filtros
+                        <i class="bi bi-arrow-counterclockwise me-2"></i>Limpiar filtros
                     </a>
                 </div>
             </form>
         </div>
-    </div>
+    </section>
 
-    <!-- Programs List -->
-    <div class="container mb-5" id="listado">
-        <h3 class="h4 fw-bold mb-4" style="color: var(--sena-blue-dark);">
-            <i class="bi bi-grid-3x2-gap me-2" style="color: var(--sena-green);"></i>
-            Programas Disponibles ({{ count($programas) }})
-        </h3>
-
-        @forelse ($programas as $programa)
-            <div class="row mb-4">
-                <div class="col-lg-12">
-                    <div class="card overflow-hidden">
-                        <div class="row g-0">
-                            <!-- Image -->
-                            <div class="col-md-3 bg-light d-flex align-items-center justify-content-center" style="min-height: 250px; background-color: var(--neutral-bg) !important;">
-                                <div class="text-center">
-                                    <i class="bi bi-book-half" style="font-size: 3rem; color: var(--sena-green);"></i>
-                                </div>
+    <!-- LISTADO MODERNO DE PROGRAMAS -->
+    <section id="listado">
+        <div class="row g-4">
+            @forelse ($programas as $programa)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow h-100 border-0 rounded-lg animate__animated animate__fadeInUp">
+                        <div class="card-body d-flex flex-column">
+                            <div class="mb-3">
+                                <span class="badge bg-sena-accent text-sena-green mb-2">{{ $programa->nivelFormacion->nombre ?? 'Nivel' }}</span>
+                                <h3 class="h5 fw-bold text-sena-blue mb-1">{{ $programa->nombre }}</h3>
+                                <p class="text-muted mb-2">{{ $programa->descripcion_corta }}</p>
                             </div>
-
-                            <!-- Content -->
-                            <div class="col-md-9">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-start mb-2">
-                                        <h5 class="card-title fw-bold" style="color: var(--sena-green);">{{ $programa->nombre }}</h5>
-                                        <span class="badge badge-programa">
-                                            <i class="bi bi-check-circle me-1"></i>Activo
-                                        </span>
-                                    </div>
-
-                                    <p class="card-text text-muted" style="margin-bottom: 1rem;">
-                                        {{ $programa->descripcion_larga ?? '' }}
-                                    </p>
-
-                                    <!-- Details -->
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-auto">
-                                            <small class="text-muted">
-                                                <i class="bi bi-hourglass-split me-1" style="color: var(--sena-blue-light);"></i>
-                                                <strong>{{ $programa->duracion_meses ?? 'N/D' }}</strong> meses
-                                            </small>
-                                        </div>
-                                        <div class="col-auto">
-                                            <small class="text-muted">
-                                                <i class="bi bi-diagram-3 me-1" style="color: var(--sena-yellow);"></i>
-                                                <strong>{{ $programa->red->nombre ?? 'Sin red' }}</strong>
-                                            </small>
-                                        </div>
-                                        <div class="col-auto">
-                                            <small class="text-muted">
-                                                <i class="bi bi-mortarboard me-1" style="color: var(--sena-green-dark);"></i>
-                                                <strong>{{ $programa->nivelFormacion->nombre ?? 'Sin nivel' }}</strong>
-                                            </small>
-                                        </div>
-                                        @if($programa->numero_ficha)
-                                            <div class="col-auto">
-                                                <small class="text-muted">
-                                                    <i class="bi bi-hash me-1" style="color: var(--sena-blue-dark);"></i>
-                                                    <strong>Ficha:</strong> {{ $programa->numero_ficha }}
-                                                </small>
-                                            </div>
-                                        @endif
-                                        @if($programa->modalidad)
-                                            <div class="col-auto">
-                                                <small class="text-muted">
-                                                    <i class="bi bi-laptop me-1" style="color: var(--sena-green);"></i>
-                                                    <strong>{{ $programa->modalidad }}</strong>
-                                                </small>
-                                            </div>
-                                        @endif
-                                        @if($programa->jornada)
-                                            <div class="col-auto">
-                                                <small class="text-muted">
-                                                    <i class="bi bi-clock me-1" style="color: var(--sena-yellow);"></i>
-                                                    <strong>{{ $programa->jornada }}</strong>
-                                                </small>
-                                            </div>
-                                        @endif
-                                        @if(!is_null($programa->cupos))
-                                            <div class="col-auto">
-                                                <small class="text-muted">
-                                                    <i class="bi bi-people me-1" style="color: var(--sena-green-dark);"></i>
-                                                    <strong>Cupos:</strong> {{ $programa->cupos }}
-                                                </small>
-                                            </div>
-                                        @endif
-                                        @if($programa->centro)
-                                            <div class="col-auto">
-                                                <small class="text-muted">
-                                                    <i class="bi bi-geo-alt me-1" style="color: var(--sena-blue-light);"></i>
-                                                    <strong>{{ $programa->centro->nombre }}</strong>
-                                                </small>
-                                            </div>
-                                        @endif
-                                        @if($programa->municipio)
-                                            <div class="col-auto">
-                                                <small class="text-muted">
-                                                    <i class="bi bi-pin-map me-1" style="color: var(--sena-blue-dark);"></i>
-                                                    <strong>{{ $programa->municipio->nombre }}</strong>
-                                                </small>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <!-- Button -->
-                                                <a href="{{ route('public.programasDeFormacion.show', $programa) }}"
-                                                    class="btn btn-primary-sena btn-sm">
-                                        <i class="bi bi-arrow-right me-1"></i>Ver Detalles Completos
-                                    </a>
-                                </div>
+                            <ul class="list-unstyled mb-3">
+                                <li class="mb-1"><i class="bi bi-clock icon-small text-sena-yellow"></i> <strong>Duración:</strong> {{ $programa->duracion_meses ?? 'N/D' }} meses</li>
+                                <li class="mb-1"><i class="bi bi-geo-alt icon-small text-sena-blue"></i> <strong>Centro:</strong> {{ $programa->centro->nombre ?? 'N/A' }}</li>
+                                <li class="mb-1"><i class="bi bi-diagram-3 icon-small text-sena-green"></i> <strong>Red:</strong> {{ $programa->red->nombre ?? 'N/A' }}</li>
+                                <li class="mb-1"><i class="bi bi-laptop icon-small text-sena-green"></i> <strong>Modalidad:</strong> {{ $programa->modalidad ?? 'N/A' }}</li>
+                                <li class="mb-1"><i class="bi bi-people icon-small text-sena-blue"></i> <strong>Cupos:</strong> {{ $programa->cupos ?? 'N/A' }}</li>
+                            </ul>
+                            <div class="mt-auto d-flex flex-column gap-2">
+                                <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-sena w-100 fw-semibold">
+                                    <i class="bi bi-eye me-2"></i>Ver detalles
+                                </a>
+                                <a href="{{ route('public.inscripcion.formulario', $programa) }}" class="btn btn-sena-green w-100 fw-semibold" style="background: var(--sena-green); color: #fff;">
+                                    <i class="bi bi-pencil-square me-2"></i>Inscribirme ahora
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div class="alert text-center py-5" style="background-color: var(--neutral-bg); border: 1px solid var(--sena-blue-light); color: var(--sena-blue-dark);">
-                <i class="bi bi-info-circle me-2" style="font-size: 2rem;"></i>
-                <p class="mb-0">No hay programas disponibles con los filtros seleccionados</p>
-            </div>
-        @endforelse
-
-        <!-- Pagination -->
+            @empty
+                <div class="col-12">
+                    <div class="alert alert-info text-center py-5">
+                        <i class="bi bi-info-circle me-2" style="font-size: 2rem;"></i>
+                        <p class="mb-0">No hay programas disponibles con los filtros seleccionados</p>
+                    </div>
+                </div>
+            @endforelse
+        </div>
         @if(method_exists($programas, 'render'))
             <div class="d-flex justify-content-center mt-5">
                 {{ $programas->appends(request()->query())->links() }}
             </div>
         @endif
-    </div>
+    </section>
 
-    <!-- CTA Section -->
-    <div style="background-color: var(--neutral-bg);" class="py-5 rounded-lg mb-5">
-        <div class="container text-center">
-            <h3 class="h4 fw-bold mb-3" style="color: var(--sena-blue-dark);">¿Necesitas más información?</h3>
-            <p class="text-muted" style="margin-bottom: 1.5rem;">Contacta con nuestro equipo de asesoría académica</p>
-            <a href="mailto:info@example.com" class="btn btn-primary-sena">
-                <i class="bi bi-envelope me-2"></i>Enviar Consulta
-            </a>
+    <!-- SECCIÓN MOTIVACIONAL -->
+    <section class="hero-section hero-bg-blue mt-5 mb-0 shadow-lg">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-9 text-lg-start text-center">
+                    <h2 class="fw-bold mb-3">¡Transforma tu vida con el SENA!</h2>
+                    <p class="lead mb-0">Nuestros egresados acceden a mejores oportunidades laborales y contribuyen al desarrollo regional. ¡Tú puedes ser el próximo caso de éxito!</p>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block text-end">
+                    <img src="/images/motivacion-sena.svg" alt="Motivación SENA" class="img-fluid rounded shadow-lg" style="max-height: 140px;">
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 </div>
 @endsection

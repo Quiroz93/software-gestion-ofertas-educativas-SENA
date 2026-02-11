@@ -352,6 +352,7 @@ class DatabaseSeeder extends Seeder
             MunicipioSeeder::class,
             CompetenciaSeeder::class,
             ProgramaSeeder::class,
+            ProgramaDetalleSeeder::class,
             InstructorSeeder::class,
             HistoriaDeExitoSeeder::class,
             OfertaSeeder::class,

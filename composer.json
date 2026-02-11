@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.10.1",
         "maatwebsite/excel": "4.x-dev",
         "phpoffice/phpspreadsheet": "^5.4",
+        "simplesoftwareio/simple-qrcode": "*",
         "spatie/laravel-permission": "^6.24"
     },
     "require-dev": {

@@ -31,8 +31,13 @@ class Programa extends Model
         'cupos',
         'municipio_id',
         'is_featured',
+        'instructor_id',
     ];
     // Definir las relaciones con otros modelos
+    public function contentPublicPrograma()
+    {
+        return $this->hasOne(ContentPublicPrograma::class);
+    }
     public function red()
     {
         return $this->belongsTo(Red::class);
@@ -68,6 +73,15 @@ class Programa extends Model
     }
 
     /**
+     * Relación muchos a muchos con ofertas educativas
+     */
+    public function ofertas()
+    {
+        return $this->belongsToMany(Oferta::class, 'oferta_programas', 'programa_id', 'oferta_id')
+            ->withTimestamps();
+    }
+
+    /**
      * Relación con inscripciones
      */
     public function inscripciones()
@@ -90,6 +104,14 @@ class Programa extends Model
     {
         return $this->hasMany(HistoriaExito::class, 'programa_id');
     }
+
+        /**
+         * Relación uno a uno con ProgramaDetalle
+         */
+        public function detalle()
+        {
+            return $this->hasOne(ProgramaDetalle::class);
+        }
 
     /**
      * Relación polimórfica con contenido personalizado (custom_contents)
@@ -124,5 +146,13 @@ class Programa extends Model
     public function getDescripcionLargaAttribute()
     {
         return \Illuminate\Support\Str::limit($this->descripcion ?? 'Sin descripción', 200);
+    }
+
+    /**
+     * Relación con instructor
+     */
+    public function instructor()
+    {
+        return $this->belongsTo(Instructor::class);
     }
 }
