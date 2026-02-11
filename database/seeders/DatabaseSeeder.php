@@ -159,6 +159,7 @@ class DatabaseSeeder extends Seeder
             |--------------------------------------------------------------------------
             */
             'programas.view',
+            'programas.show',
             'programas.create',
             'programas.edit',
             'programas.update',
@@ -260,6 +261,11 @@ class DatabaseSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        $aspirante = Role::firstOrCreate([
+            'name'       => 'aspirante',
+            'guard_name' => 'web',
+        ]);
+
         /*
         |--------------------------------------------------------------------------
         | Asignación de permisos a roles
@@ -284,6 +290,7 @@ class DatabaseSeeder extends Seeder
             'competencias.update',
 
             'programas.view',
+            'programas.show',
             'programas.create',
             'programas.edit',
             'programas.update',
@@ -301,6 +308,7 @@ class DatabaseSeeder extends Seeder
             'dashboard.view',
             'centros.view',
             'programas.view',
+            'programas.show',
             'ofertas.view',
             'historias_de_exito.view',
             'redes_conocimiento.view',
@@ -312,8 +320,23 @@ class DatabaseSeeder extends Seeder
             'dashboard.view',
 
             'programas.view',
+            'programas.show',
             'ofertas.view',
             'historias_de_exito.view',
+        ]);
+
+        // 📝 Aspirante: acceso público / informativo + inscripciones
+        $aspirante->syncPermissions([
+            'dashboard.view',
+
+            'programas.view',
+            'programas.show',
+            'ofertas.view',
+            'ofertas.show',
+            'historias_de_exito.view',
+            'redes_conocimiento.view',
+            'centros.view',
+            'noticias.view',
         ]);
 
         /*

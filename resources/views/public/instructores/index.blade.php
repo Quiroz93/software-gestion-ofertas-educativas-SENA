@@ -2,6 +2,10 @@
 
 @section('title', 'Instructores')
 
+@push('styles')
+    @vite(['resources/css/public/instructores.css'])
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->

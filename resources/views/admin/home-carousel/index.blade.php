@@ -1,4 +1,4 @@
-@extends('layouts.bootstrap')
+@extends('layouts.admin')
 
 @section('title', 'Carousel del Home')
 
@@ -157,7 +157,7 @@
     @endif
 </div>
 
-@push('scripts')
+@section('js')
 <script>
     // Toggle de estado activo/inactivo
     document.querySelectorAll('.toggle-active-slide').forEach(toggle => {
@@ -214,5 +214,5 @@
         }
     }
 </script>
-@endpush
+@endsection
 @endsection

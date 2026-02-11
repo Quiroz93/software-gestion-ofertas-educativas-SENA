@@ -61,7 +61,13 @@ class ConsolidacionDetallesExport implements FromQuery, WithHeadings, WithMappin
 
     public function headings(): array
     {
-        return [
+        // Si es consolidación flexible: usar columnas seleccionadas desde observaciones
+        if ($this->consolidacion->tipo_consolidacion === 'flexible') {
+            return $this->getFlexibleHeadings();
+        }
+        
+        // Headings básicos comunes
+        $commonHeadings = [
             'ID',
             'Tipo Documento',
             'Número Documento',
@@ -69,16 +75,102 @@ class ConsolidacionDetallesExport implements FromQuery, WithHeadings, WithMappin
             'Estado',
             'Código Ficha',
             'Nombre Programa',
-            'Observaciones',
-            'Fecha del Reporte',
         ];
+        
+        // Si es consolidación esencial de REGIONAL: sin observaciones, con teléfonos
+        if ($this->consolidacion->tipo_consolidacion === 'regional_esencial') {
+            return array_merge($commonHeadings, [
+                'Teléfono Fijo',
+                'Teléfono Móvil',
+            ]);
+        }
+        
+        // Si es consolidación completa de REGIONAL: con observaciones y todos los campos
+        if ($this->consolidacion->tipo_consolidacion === 'regional_completo') {
+            return array_merge($commonHeadings, [
+                'Observaciones',
+                'NIS',
+                'Correo Electrónico',
+                'Teléfono Fijo',
+                'Teléfono Móvil',
+                'Tipo Prueba',
+                'Resultado Prueba',
+                'Fecha Cargue',
+                'Estado Prueba',
+                'Motivo Prueba',
+                'Fecha Prueba',
+                'Acceso Preferente',
+                'Dígito',
+                'Día Pico y Placa',
+            ]);
+        }
+        
+        // Otros tipos de consolidación (preinscritos normales): headings básicos con observaciones
+        return array_merge($commonHeadings, [
+            'Observaciones',
+        ]);
+    }
+    
+    /**
+     * Obtiene headings para consolidación flexible basándose en columnas seleccionadas
+     */
+    private function getFlexibleHeadings(): array
+    {
+        $metadata = $this->consolidacion->observaciones;
+        if (!is_array($metadata)) {
+            $metadata = json_decode((string)$metadata, true) ?? [];
+        }
+        $columnasSeleccionadas = $metadata['columnas_seleccionadas'] ?? [];
+        
+        if (empty($columnasSeleccionadas)) {
+            // Fallback a headings básicos
+            return ['ID', 'Tipo Documento', 'Número Documento', 'Nombre Completo', 'Estado', 'Código Ficha', 'Nombre Programa'];
+        }
+        
+        $headings = ['ID'];
+        
+        $labelMap = [
+            'tipo_documento' => 'Tipo Documento',
+            'numero_documento' => 'Número Documento',
+            'nombre_completo' => 'Nombre Completo',
+            'nombres' => 'Nombres',
+            'apellidos' => 'Apellidos',
+            'estado' => 'Estado',
+            'codigo_ficha' => 'Código Ficha',
+            'nombre_programa' => 'Nombre Programa',
+            'correo_electronico' => 'Correo Electrónico',
+            'telefono_fijo' => 'Teléfono Fijo',
+            'telefono_movil' => 'Teléfono Móvil',
+            'nis' => 'NIS',
+            'tipo_prueba' => 'Tipo Prueba',
+            'resultado_prueba' => 'Resultado Prueba',
+            'fecha_cargue' => 'Fecha Cargue',
+            'estado_prueba' => 'Estado Prueba',
+            'motivo_prueba' => 'Motivo Prueba',
+            'fecha_prueba' => 'Fecha Prueba',
+            'acceso_preferente' => 'Acceso Preferente',
+            'digito' => 'Dígito',
+            'dia_pico_placa' => 'Día Pico y Placa',
+        ];
+        
+        foreach ($columnasSeleccionadas as $col) {
+            $headings[] = $labelMap[$col] ?? ucwords(str_replace('_', ' ', $col));
+        }
+        
+        return $headings;
     }
 
     public function map($detalle): array
     {
         $this->rowCount++;
         
-        return [
+        // Si es consolidación flexible: mapear solo columnas seleccionadas
+        if ($this->consolidacion->tipo_consolidacion === 'flexible') {
+            return $this->mapFlexible($detalle);
+        }
+        
+        // Datos básicos comunes
+        $row = [
             $detalle->id,
             $detalle->tipo_documento,
             $detalle->numero_documento,
@@ -86,9 +178,71 @@ class ConsolidacionDetallesExport implements FromQuery, WithHeadings, WithMappin
             $detalle->estado ?? 'N/A',
             $detalle->codigo_ficha ?? 'N/A',
             $detalle->nombre_programa ?? 'N/A',
-            $detalle->observaciones ?? '',
-            $detalle->created_at ? $detalle->created_at->format('Y-m-d H:i:s') : '',
         ];
+        
+        // Si es consolidación esencial: sin observaciones, agregar teléfonos
+        if ($this->consolidacion->tipo_consolidacion === 'regional_esencial') {
+            $row = array_merge($row, [
+                $detalle->telefono_fijo ?? '',
+                $detalle->telefono_movil ?? '',
+            ]);
+            return $row;
+        }
+        
+        // Si es consolidación completa: observaciones + todos los campos REGIONAL
+        if ($this->consolidacion->tipo_consolidacion === 'regional_completo') {
+            $row = array_merge($row, [
+                $detalle->observaciones ?? '',
+                $detalle->nis ?? '',
+                $detalle->correo_electronico ?? '',
+                $detalle->telefono_fijo ?? '',
+                $detalle->telefono_movil ?? '',
+                $detalle->tipo_prueba ?? '',
+                $detalle->resultado_prueba ?? '',
+                $detalle->fecha_cargue ?? '',
+                $detalle->estado_prueba ?? '',
+                $detalle->motivo_prueba ?? '',
+                $detalle->fecha_prueba ?? '',
+                $detalle->acceso_preferente ?? '',
+                $detalle->digito ?? '',
+                $detalle->dia_pico_placa ?? '',
+            ]);
+            return $row;
+        }
+        
+        // Otros tipos: datos básicos con observaciones
+        $row = array_merge($row, [
+            $detalle->observaciones ?? '',
+        ]);
+        
+        return $row;
+    }
+    
+    /**
+     * Mapea detalle para consolidación flexible (columnas dinámicas)
+     */
+    private function mapFlexible($detalle): array
+    {
+        $metadata = $this->consolidacion->observaciones;
+        if (!is_array($metadata)) {
+            $metadata = json_decode((string)$metadata, true) ?? [];
+        }
+        $columnasSeleccionadas = $metadata['columnas_seleccionadas'] ?? [];
+        
+        $row = [$detalle->id];
+        
+        foreach ($columnasSeleccionadas as $col) {
+            $value = $detalle->{$col} ?? '';
+            
+            // Formateo especial para algunos campos
+            if (in_array($col, ['fecha_cargue', 'fecha_prueba']) && $value) {
+                $value = \Carbon\Carbon::parse($value)->format('Y-m-d H:i:s');
+            }
+            
+            $row[] = $value;
+        }
+        
+        return $row;
     }
 
     public function title(): string

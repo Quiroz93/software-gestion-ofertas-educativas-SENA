@@ -26,7 +26,7 @@ class PublicProgramaController extends Controller
 
     public function show(Programa $programasDeFormacion)
     {
-        $programa = $programasDeFormacion;
+        $programa = $programasDeFormacion->load('historiasExito');
         return view('public.programas.show', compact('programa'));
     }
 }

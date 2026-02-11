@@ -1,11 +1,9 @@
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center"
+<li class="nav-item dropdown user-menu">
+    <a class="nav-link dropdown-toggle d-flex align-items-center user-menu-toggle"
         href="#"
         id="userDropdown"
         role="button"
-        data-bs-toggle="dropdown"
         aria-expanded="false">
-        <span class="bi bi-hand text-light me-2">¡Bienvenido!</span>
         <img src="{{ Auth::user()->profile_photo_url }}"
             class="rounded-circle me-2"
             style="width: 32px; height: 32px; object-fit: cover;"
@@ -81,17 +79,3 @@
         </li>
     </ul>
 </li>
-
-<style>
-    .dropdown-item {
-        transition: background-color 0.2s ease;
-    }
-
-    .dropdown-item:hover {
-        background-color: #f8f9fa;
-    }
-
-    .dropdown-item.text-danger:hover {
-        background-color: #f8d7da;
-    }
-</style>

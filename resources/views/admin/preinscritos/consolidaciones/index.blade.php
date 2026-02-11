@@ -69,6 +69,7 @@
                 <thead class="table-light">
                     <tr>
                         <th>Consolidación</th>
+                        <th>Tipo</th>
                         <th>Archivos</th>
                         <th>Registros</th>
                         <th>Descartados</th>
@@ -82,7 +83,18 @@
                         <tr>
                             <td>
                                 <div class="fw-semibold">{{ $consolidacion->nombre_consolidacion }}</div>
-                                <div class="text-muted small">{{ $consolidacion->descripcion }}</div>
+                                <div class="text-muted small">{{ Str::limit($consolidacion->descripcion, 60) }}</div>
+                            </td>
+                            <td>
+                                @if($consolidacion->tipo_consolidacion === 'preinscritos')
+                                    <span class="badge bg-primary">Preinscritos</span>
+                                @elseif($consolidacion->tipo_consolidacion === 'regional_completo')
+                                    <span class="badge bg-success">REGIONAL Completo</span>
+                                @elseif($consolidacion->tipo_consolidacion === 'regional_esencial')
+                                    <span class="badge bg-info">REGIONAL Esencial</span>
+                                @else
+                                    <span class="badge bg-secondary">{{ $consolidacion->tipo_consolidacion }}</span>
+                                @endif
                             </td>
                             <td>{{ $consolidacion->total_archivos }}</td>
                             <td>{{ $consolidacion->total_registros }}</td>

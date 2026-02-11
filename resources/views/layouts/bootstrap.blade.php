@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
 
     <!-- Assets -->
-    @vite(['resources/css/sena-utilities.css', 'resources/css/public/public.css', 'resources/js/public/public.js'])
+    @vite(['resources/css/sena-utilities.css', 'resources/js/public/public.js'])
 
     @stack('styles')
 </head>
@@ -31,7 +31,9 @@
 <div id="app">
 
     {{-- NAVBAR --}}
-    @include('partials.navbar')
+    @if (!View::hasSection('hide_navbar'))
+        @include('partials.navbar')
+    @endif
 
     {{-- CONTENIDO PRINCIPAL --}}
     <main class="py-4">
@@ -41,6 +43,7 @@
 </div>
 
 {{-- FOOTER --}}
+@if (!View::hasSection('hide_footer'))
 <footer class="bg-light py-5" style="font-family: 'Work Sans', sans-serif;">
     <div class="container">
         <div class="row">
@@ -91,6 +94,7 @@
         </div>
     </div>
 </footer>
+@endif
 
 {{-- BOTÓN FLOTANTE --}}
 @auth

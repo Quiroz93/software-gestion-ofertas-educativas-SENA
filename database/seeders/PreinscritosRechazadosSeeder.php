@@ -11,7 +11,7 @@ class PreinscritosRechazadosSeeder extends Seeder
 {
     public function run(): void
     {
-        $file = storage_path('../docs/BaseDeDatosDos.md');
+        $file = base_path('archivos de sustentacion/BaseDeDatosDos.md');
         if (!file_exists($file)) {
             $this->command->error('Archivo BaseDeDatosDos.md no encontrado');
             return;

@@ -2,6 +2,10 @@
 
 @section('title', 'Inscribirse - ' . $programa->nombre)
 
+@push('styles')
+    @vite(['resources/css/public/inscribirse.css'])
+@endpush
+
 @section('content')
 <div class="container py-4">
     <div class="row justify-content-center">

@@ -65,7 +65,10 @@ class ProgramaController extends \App\Http\Controllers\Controller
             'centro_id' => 'nullable|exists:centros,id',
             'cupos' => 'nullable|integer',
             'municipio_id' => 'nullable|exists:municipios,id',
+            'is_featured' => 'boolean',
         ]);
+
+        $data['is_featured'] = $request->has('is_featured');
 
         Programa::create($data);
 
@@ -127,7 +130,10 @@ class ProgramaController extends \App\Http\Controllers\Controller
             'centro_id' => 'nullable|exists:centros,id',
             'cupos' => 'nullable|integer',
             'municipio_id' => 'nullable|exists:municipios,id',
+            'is_featured' => 'boolean',
         ]);
+
+        $data['is_featured'] = $request->has('is_featured');
 
         $programa->update($data);
 
@@ -144,5 +150,75 @@ class ProgramaController extends \App\Http\Controllers\Controller
         Gate::authorize('programas.delete', $programa);
         $programa->delete();
         return redirect()->route('programas.index')->with('success', 'Programa eliminado exitosamente');
+    }
+
+    /**
+     * Genera y retorna el código QR del enlace de inscripción del programa
+     * @param Programa $programa
+     * @return \Illuminate\Http\Response
+     */
+    public function generarQR(Programa $programa)
+    {
+        Gate::authorize('programas.view', $programa);
+        
+        // Obtener enlace de inscripción desde custom_contents
+        $enlaceInscripcion = $programa->customContents()
+            ->where('key', 'enlace_inscripcion')
+            ->value('value');
+        
+        if (!$enlaceInscripcion) {
+            return response()->json([
+                'error' => 'Este programa no tiene un enlace de inscripción configurado'
+            ], 404);
+        }
+        
+        // Generar QR code
+        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)
+            ->format('svg')
+            ->generate($enlaceInscripcion);
+        
+        // Guardar en custom_contents para futura referencia
+        $programa->customContents()->updateOrCreate(
+            ['key' => 'qr_code'],
+            ['value' => $qrCode]
+        );
+        
+        return response($qrCode)->header('Content-Type', 'image/svg+xml');
+    }
+
+    /**
+     * Descarga el código QR del programa como archivo SVG
+     * @param Programa $programa
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    public function descargarQR(Programa $programa)
+    {
+        Gate::authorize('programas.view', $programa);
+        
+        // Obtener QR almacenado o generar nuevo
+        $qrCode = $programa->customContents()
+            ->where('key', 'qr_code')
+            ->value('value');
+        
+        if (!$qrCode) {
+            // Si no existe, generar uno nuevo
+            $enlaceInscripcion = $programa->customContents()
+                ->where('key', 'enlace_inscripcion')
+                ->value('value');
+            
+            if (!$enlaceInscripcion) {
+                abort(404, 'Este programa no tiene un enlace de inscripción configurado');
+            }
+            
+            $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::size(300)
+                ->format('svg')
+                ->generate($enlaceInscripcion);
+        }
+        
+        $fileName = 'qr_' . \Illuminate\Support\Str::slug($programa->nombre) . '.svg';
+        
+        return response($qrCode)
+            ->header('Content-Type', 'image/svg+xml')
+            ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
     }
 }

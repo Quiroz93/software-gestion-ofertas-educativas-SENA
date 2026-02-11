@@ -20,7 +20,7 @@ class BaseDatosDosSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         // Leer archivo BaseDeDatosDos.md
-        $file = storage_path('../docs/BaseDeDatosDos.md');
+        $file = base_path('archivos de sustentacion/BaseDeDatosDos.md');
         if (!file_exists($file)) {
             $this->command->error('Archivo BaseDeDatosDos.md no encontrado');
             return;

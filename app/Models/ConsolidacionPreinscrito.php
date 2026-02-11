@@ -14,11 +14,17 @@ class ConsolidacionPreinscrito extends Model
     protected $fillable = [
         'nombre_consolidacion',
         'descripcion',
+            'observaciones',
+        'tipo_consolidacion',
         'total_archivos',
         'total_registros',
         'total_descartados',
         'created_by',
     ];
+
+        protected $casts = [
+            'observaciones' => 'array',
+        ];
 
     public function detalles()
     {

@@ -365,6 +365,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('programas/{programa}', [ProgramaController::class, 'destroy'])
         ->middleware('can:programas.delete')->name('programas.destroy');
     
+    // Generación y descarga de códigos QR para programas
+    Route::get('programas/{programa}/qr', [ProgramaController::class, 'generarQR'])
+        ->middleware('can:programas.view')->name('programas.qr.generar');
+    
+    Route::get('programas/{programa}/qr/descargar', [ProgramaController::class, 'descargarQR'])
+        ->middleware('can:programas.view')->name('programas.qr.descargar');
+    
 });
 
 /*
@@ -423,6 +430,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('admin/preinscritos/consolidaciones/importar', [ConsolidacionPreinscritoController::class, 'import'])
         ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.store');
+
+    Route::get('admin/preinscritos/consolidaciones/preview-columnas', [ConsolidacionPreinscritoController::class, 'previewColumns'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.previewColumns');
+
+    Route::post('admin/preinscritos/consolidaciones/procesar-columnas', [ConsolidacionPreinscritoController::class, 'processColumns'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.processColumns');
+
+    Route::get('admin/preinscritos/consolidaciones/opciones-regional', [ConsolidacionPreinscritoController::class, 'selectOptions'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.selectOptions');
+
+    Route::post('admin/preinscritos/consolidaciones/procesar-opciones', [ConsolidacionPreinscritoController::class, 'processWithOptions'])
+        ->middleware('can:preinscritos.import')->name('preinscritos.consolidaciones.processOptions');
 
     Route::get('admin/preinscritos/consolidaciones/{consolidacion}', [ConsolidacionPreinscritoController::class, 'show'])
         ->middleware('can:preinscritos.consolidaciones.admin')->name('preinscritos.consolidaciones.show');

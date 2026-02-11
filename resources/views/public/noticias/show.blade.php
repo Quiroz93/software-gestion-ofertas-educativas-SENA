@@ -2,6 +2,10 @@
 
 @section('title', $ultimaNoticia->titulo . ' - SENA')
 
+@push('styles')
+    @vite(['resources/css/public/noticias.css'])
+@endpush
+
 @section('content')
 <div class="container" style="max-width: 900px; margin-top: 2rem; margin-bottom: 4rem;">
 

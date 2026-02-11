@@ -2,6 +2,10 @@
 
 @section('title', $historia_exito->titulo)
 
+@push('styles')
+    @vite(['resources/css/public/historias-exito.css'])
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->

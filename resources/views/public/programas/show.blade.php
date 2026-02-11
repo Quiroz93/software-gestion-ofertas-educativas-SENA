@@ -2,6 +2,10 @@
 
 @section('title', $programa->nombre)
 
+@push('styles')
+    @vite(['resources/css/public/programas.css'])
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section with Breadcrumbs -->
@@ -81,6 +85,59 @@
                                 <h6 class="competency-title">{{ $competencia->nombre }}</h6>
                                     <small class="text-muted">{{ $competencia->descripcion_corta ?? '' }}</small>
                                 </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+                <!-- Success Stories / Projects Section -->
+                @if($programa->historiasExito && $programa->historiasExito->count() > 0)
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold mb-4 title-green">
+                            <i class="bi bi-trophy me-2" style="color: var(--sena-yellow);"></i>Proyectos Destacados
+                        </h4>
+                        <div class="row g-4">
+                            @foreach($programa->historiasExito as $historia)
+                            <div class="col-12">
+                                <div class="historia-card p-3 border rounded">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0 me-3">
+                                            <i class="bi bi-lightbulb-fill text-warning" style="font-size: 2rem;"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-2 fw-bold">{{ $historia->titulo }}</h5>
+                                            
+                                            @if($historia->autor)
+                                            <p class="mb-2 text-muted">
+                                                <i class="bi bi-person-fill me-1"></i>
+                                                <strong>Autor:</strong> {{ $historia->autor }}
+                                            </p>
+                                            @endif
+
+                                            <p class="mb-3 text-muted">{{ $historia->descripcion }}</p>
+
+                                            @if($historia->logros)
+                                            <div class="mb-2">
+                                                <strong class="text-success">
+                                                    <i class="bi bi-check-circle-fill me-1"></i>
+                                                    Logros:
+                                                </strong>
+                                                <p class="mb-0 ms-4">{{ $historia->logros }}</p>
+                                            </div>
+                                            @endif
+
+                                            @if($historia->fecha)
+                                            <small class="text-muted">
+                                                <i class="bi bi-calendar3 me-1"></i>
+                                                {{ \Carbon\Carbon::parse($historia->fecha)->format('F Y') }}
+                                            </small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
                         </div>
                     </div>
