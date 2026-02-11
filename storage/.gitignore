@@ -1,0 +1,4 @@
+# Keep the storage directory in the repository when cloning,
+# but ignore all files inside so runtime files (logs, caches, uploads) are not tracked.
+*
+!.gitignore
