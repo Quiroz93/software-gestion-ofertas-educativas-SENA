@@ -1,4 +1,4 @@
-@extends('layouts.bootstrap')
+@extends('layouts.admin')
 
 @section('title', 'Editar Slide - Carousel del Home')
 

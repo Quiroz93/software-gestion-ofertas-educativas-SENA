@@ -1,5 +1,0 @@
-﻿AUDITORIA DE TIPOGRAFIA - SISTEMA ACTUAL
-=========================================
-
-Buscando font-family en resources/
-C:\Users\AdminSena\Documents\SoeSoftware2\resources\sass\_variables.scss:5:$font-family-sans-serif: 'Nunito', sans-serif;

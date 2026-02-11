@@ -30,6 +30,7 @@ class Programa extends Model
         'centro_id',
         'cupos',
         'municipio_id',
+        'is_featured',
     ];
     // Definir las relaciones con otros modelos
     public function red()
@@ -55,6 +56,7 @@ class Programa extends Model
     protected $casts = [
         'fecha_registro' => 'date',
         'fecha_actualizacion' => 'date',
+        'is_featured' => 'boolean',
     ];
 
     /**
@@ -79,6 +81,22 @@ class Programa extends Model
     public function preinscritos()
     {
         return $this->hasMany(Preinscrito::class);
+    }
+
+    /**
+     * Relación con historias de éxito / proyectos destacados
+     */
+    public function historiasExito()
+    {
+        return $this->hasMany(HistoriaExito::class, 'programa_id');
+    }
+
+    /**
+     * Relación polimórfica con contenido personalizado (custom_contents)
+     */
+    public function customContents()
+    {
+        return $this->morphMany(\App\Models\CustomContent::class, 'contentable');
     }
 
     /**

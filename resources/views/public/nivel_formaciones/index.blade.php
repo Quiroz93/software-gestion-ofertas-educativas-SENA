@@ -2,6 +2,10 @@
 
 @section('title', 'Niveles de Formación')
 
+@push('styles')
+    @vite(['resources/css/public/nivel-formaciones.css'])
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->

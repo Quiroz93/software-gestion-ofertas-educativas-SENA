@@ -2,6 +2,10 @@
 
 @section('title', 'Redes de Conocimiento')
 
+@push('styles')
+    @vite(['resources/css/public/redes.css'])
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->

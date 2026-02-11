@@ -2,6 +2,9 @@
 
 @section('title', $oferta->nombre)
 
+@push('styles')
+    @vite(['resources/css/public/ofertas.css'])
+@endpush
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->

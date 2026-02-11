@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('novedades_historial', function (Blueprint $table) {
             $table->id();
             $table->foreignId('novedad_id')->constrained('novedades_preinscritos')->cascadeOnDelete();
-            $table->enum('estado_anterior', ['abierta', 'en_gestion', 'resuelta', 'cancelada']);
+            $table->enum('estado_anterior', ['abierta', 'en_gestion', 'resuelta', 'cancelada'])->nullable();
             $table->enum('estado_nuevo', ['abierta', 'en_gestion', 'resuelta', 'cancelada']);
             $table->text('comentario')->nullable();
             $table->foreignId('changed_by')->nullable()->constrained('users')->setNullOnDelete();

@@ -184,7 +184,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted">Creado</label>
                             <p class="h6">
-                                {{ $presrito->created_at->format('d/m/Y H:i:s') }}
+                                {{ $presrito->created_at?->format('d/m/Y H:i:s') ?? '-' }}
                                 @if($presrito->createdBy)
                                     <br>
                                     <small class="text-muted">Por: {{ $presrito->createdBy->name }}</small>
@@ -194,7 +194,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted">Última Actualización</label>
                             <p class="h6">
-                                {{ $presrito->updated_at->format('d/m/Y H:i:s') }}
+                                {{ $presrito->updated_at?->format('d/m/Y H:i:s') ?? '-' }}
                                 @if($presrito->updatedBy)
                                     <br>
                                     <small class="text-muted">Por: {{ $presrito->updatedBy->name }}</small>
@@ -206,20 +206,22 @@
             </div>
 
             <!-- Card Novedades Asociadas -->
-            @can('preinscritos.novedades.admin')
             <div class="card card-outline card-danger mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="card-title">
                         <i class="fas fa-exclamation-triangle"></i>
                         Novedades Asociadas
                     </h3>
-                    <a href="{{ route('novedades.create') }}?preinscrito_id={{ $presrito->id }}" class="btn btn-sm btn-danger">
-                        <i class="fas fa-plus"></i>
-                        Nueva Novedad
-                    </a>
                 </div>
                 <div class="card-body">
-                    @if($presrito->novedades && $presrito->novedades->count() > 0)
+                    @php
+                        $novedadesActivas = $presrito->novedades()
+                            ->whereNull('deleted_at')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+                    @endphp
+                    
+                    @if($novedadesActivas && $novedadesActivas->count() > 0)
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -228,11 +230,11 @@
                                         <th>Estado</th>
                                         <th>Descripción</th>
                                         <th>Fecha</th>
-                                        <th>Acciones</th>
+                                        <th>Creado Por</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($presrito->novedades->sortByDesc('created_at') as $novedad)
+                                    @foreach($novedadesActivas as $novedad)
                                         <tr>
                                             <td>
                                                 @if($novedad->tipoNovedad)
@@ -256,27 +258,58 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <small>{{ Str::limit($novedad->descripcion, 50) }}</small>
+                                                <small>{{ $novedad->descripcion }}</small>
                                             </td>
                                             <td>
                                                 <small class="text-muted">{{ $novedad->created_at->format('d/m/Y H:i') }}</small>
                                             </td>
                                             <td>
-                                                <a href="{{ route('novedades.show', $novedad->id) }}" class="btn btn-sm btn-outline-primary" title="Ver detalle">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
+                                                <small class="text-muted">
+                                                    @if($novedad->createdBy)
+                                                        {{ $novedad->createdBy->name }}
+                                                    @else
+                                                        Sistema
+                                                    @endif
+                                                </small>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        <div class="mt-3">
-                            <a href="{{ route('novedades.por-preinscrito', $presrito->id) }}" class="btn btn-sm btn-outline-info">
-                                <i class="fas fa-list"></i>
-                                Ver todas las novedades ({{ $presrito->novedades->count() }})
-                            </a>
-                        </div>
+
+                        <!-- Historial de Cambios de la Novedad -->
+                        @foreach($novedadesActivas as $novedad)
+                            @php
+                                $historialChanges = $novedad->historial()
+                                    ->orderBy('created_at', 'asc')
+                                    ->get();
+                            @endphp
+                            @if($historialChanges && $historialChanges->count() > 0)
+                                <div class="mt-4">
+                                    <h6>Historial de cambios - {{ $novedad->tipoNovedad->nombre ?? 'Novedad' }} ({{ $novedad->created_at->format('d/m/Y') }})</h6>
+                                    <div class="alert alert-light p-3 border">
+                                        @foreach($historialChanges as $cambio)
+                                            <div class="mb-3">
+                                                <strong class="text-muted">{{ $cambio->created_at->format('d/m/Y H:i') }}</strong>
+                                                <span class="badge bg-secondary">{{ $cambio->changedBy->name ?? 'Sistema' }}</span>
+                                                <div class="mt-2">
+                                                    @if($cambio->estado_anterior)
+                                                        <small><strong>De:</strong> <span class="badge bg-danger">{{ ucfirst(str_replace('_', ' ', $cambio->estado_anterior)) }}</span></small>
+                                                    @else
+                                                        <small><strong>Creación nueva</strong></small>
+                                                    @endif
+                                                    <small><strong>A:</strong> <span class="badge bg-success">{{ ucfirst(str_replace('_', ' ', $cambio->estado_nuevo)) }}</span></small>
+                                                </div>
+                                                @if($cambio->comentario)
+                                                    <small class="text-muted d-block mt-2">{{ $cambio->comentario }}</small>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     @else
                         <div class="alert alert-info mb-0">
                             <i class="fas fa-info-circle"></i>
@@ -285,19 +318,22 @@
                     @endif
                 </div>
             </div>
-            @endcan
 
             <!-- Botones de Acción -->
             <div class="card card-outline card-light">
                 <div class="card-footer">
+                    @php($preinscritoId = $presrito->getKey())
                     @can('preinscritos.edit')
-                        <a href="{{ route('preinscritos.edit', $presrito->id) }}" class="btn btn-outline-warning">
+                        @if($preinscritoId)
+                        <a href="{{ route('preinscritos.edit', $preinscritoId) }}" class="btn btn-outline-warning">
                             <i class="fas fa-edit"></i>
                             Editar
                         </a>
+                        @endif
                     @endcan
                     @can('preinscritos.delete')
-                        <form action="{{ route('preinscritos.destroy', $presrito->id) }}" 
+                        @if($preinscritoId)
+                        <form action="{{ route('preinscritos.destroy', $preinscritoId) }}" 
                               method="POST" 
                               style="display: inline-block;"
                               onsubmit="return confirmarEliminacion(event)">
@@ -308,6 +344,7 @@
                                 Eliminar
                             </button>
                         </form>
+                        @endif
                     @endcan
                     <a href="{{ route('preinscritos.index') }}" class="btn btn-outline-secondary">
                         <i class="fas fa-arrow-left"></i>

@@ -20,6 +20,12 @@ Desktop.ini
 .auth.json
 
 # =========================
+# Archivos de Sustentación
+# =========================
+archivos de sustentacion/
+*.md
+
+# =========================
 # PHP / Composer
 # =========================
 /vendor/
@@ -51,6 +57,14 @@ yarn-debug.log*
 /storage/*.key
 /storage/pail
 /bootstrap/cache/*
+/storage/framework/cache/
+/storage/framework/views/
+
+# =========================
+# Compiled public assets
+# =========================
+/public/css/
+/public/js/
 
 # =========================
 # IDEs / Editors
@@ -76,5 +90,32 @@ Homestead.json
 Homestead.yaml
 /.vagrant/
 /vendor/bin/sail
+
+# =========================
+# Sensitive Data
+# =========================
+*.xlsx
+*.xls
+*.csv
+preinscritos*.json
+datos_*.json
+*.backup
+*.bak
+importar_*.json
+
+# =========================
+# Debug and Temporary Files
+# =========================
+*.debug
+*.test
+test-*.sh
+*-test.php
+*-test.js
+audit-*.txt
+fase*-*.txt
+*-reportes*.md
+debug/
+temp/
+tmp/
 
 # =========================

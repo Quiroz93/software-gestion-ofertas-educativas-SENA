@@ -16,6 +16,16 @@
                 Nuevo Preinscrito
             </a>
         @endcan
+        @can('preinscritos.import')
+            <a href="{{ route('preinscritos.import.form') }}" class="btn btn-outline-success">
+                <i class="fas fa-file-upload"></i>
+                Cargar archivo externo
+            </a>
+            <a href="{{ route('preinscritos.import.template') }}" class="btn btn-outline-primary">
+                <i class="fas fa-file-excel"></i>
+                Descargar plantilla
+            </a>
+        @endcan
         @can('preinscritos.consolidaciones.admin')
             <a href="{{ route('preinscritos.consolidaciones.index') }}" class="btn btn-outline-primary">
                 <i class="bi bi-layers"></i>
@@ -153,7 +163,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
+                    <table id="preinscritos-table" class="table table-striped table-hover">
                         <thead class="table-primary">
                             <tr>
                                 <th style="width: 15%">Nombre Completo</th>
@@ -199,18 +209,28 @@
                                         </span>
                                     </td>
                                     <td>
-                                        @if($presrito->estado === 'con_novedad')
-                                            @if($presrito->novedad_resuelta)
-                                                <span class="badge bg-success" title="{{ $presrito->tipo_novedad ? $presrito->etiqueta_tipo_novedad : 'Novedad resuelta' }}">
+                                        @php
+                                            $novedadesActivas = $presrito->novedades()
+                                                ->whereNull('deleted_at')
+                                                ->exists();
+                                        @endphp
+                                        @if($novedadesActivas)
+                                            @php
+                                                $novedadActiva = $presrito->novedades()
+                                                    ->whereNull('deleted_at')
+                                                    ->first();
+                                            @endphp
+                                            @if($novedadActiva->estado === 'resuelta')
+                                                <span class="badge bg-success" title="Novedad resuelta">
                                                     <i class="fas fa-check-circle"></i> Resuelta
                                                 </span>
                                             @else
-                                                <span class="badge bg-danger" title="{{ $presrito->tipo_novedad ? $presrito->etiqueta_tipo_novedad : 'Novedad pendiente' }}">
-                                                    <i class="fas fa-exclamation-triangle"></i> Pendiente
+                                                <span class="badge bg-danger" title="Novedad pendiente: {{ $novedadActiva->estado }}">
+                                                    <i class="fas fa-exclamation-triangle"></i> {{ ucfirst(str_replace('_', ' ', $novedadActiva->estado)) }}
                                                 </span>
                                             @endif
                                         @else
-                                            <span class="badge bg-light text-dark">N/A</span>
+                                            <span class="badge bg-light text-dark">Sin novedad</span>
                                         @endif
                                     </td>
                                     <td>
