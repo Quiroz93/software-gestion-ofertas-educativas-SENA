@@ -57,6 +57,14 @@ yarn-debug.log*
 /storage/*.key
 /storage/pail
 /bootstrap/cache/*
+/storage/framework/cache/
+/storage/framework/views/
+
+# =========================
+# Compiled public assets
+# =========================
+/public/css/
+/public/js/
 
 # =========================
 # IDEs / Editors
