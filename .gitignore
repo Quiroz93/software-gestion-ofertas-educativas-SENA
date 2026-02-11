@@ -119,3 +119,9 @@ temp/
 tmp/
 
 # =========================
+
+# Ignore Laravel storage directory (do not track uploads/logs/cache)
+# Keep the storage/.gitignore placeholder if present
+/storage/
+!/storage/.gitignore
+
