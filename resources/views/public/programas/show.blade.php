@@ -92,14 +92,14 @@
                 @endif
 
                 <!-- Associated Offers Section -->
-                @if($programa->ofertas && $programa->ofertas()->count() > 0)
+                @if($programa->ofertas && $programa->ofertas->count() > 0)
                 <div class="card mb-4">
                     <div class="card-body">
                         <h4 class="card-title fw-bold mb-3 title-green">
                             <i class="bi bi-collection me-2"></i>Ofertas que contienen este programa
                         </h4>
                         <div class="row g-2">
-                            @foreach($programa->ofertas()->take(3) as $oferta)
+                            @foreach($programa->ofertas->take(3) as $oferta)
                             <div class="col-md-6">
                                 <a href="{{ route('public.ofertasEducativas.show', $oferta) }}" 
                                    class="card text-decoration-none h-100">
