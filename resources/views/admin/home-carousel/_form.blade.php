@@ -188,7 +188,7 @@
     </div>
 </form>
 
-@push('scripts')
+@section('js')
 <script>
     // Preview de imagen
     function previewImage(event) {
@@ -230,4 +230,4 @@
         }, false);
     })();
 </script>
-@endpush
+@endsection

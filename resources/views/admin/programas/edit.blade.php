@@ -202,6 +202,23 @@
                         <label for="cupos"><strong>Cupos</strong></label>
                         <input type="number" name="cupos" id="cupos" class="form-control" value="{{ old('cupos', $programa->cupos) }}">
                     </div>
+
+                    <div class="form-group mt-3">
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="is_featured"
+                                name="is_featured"
+                                value="1"
+                                {{ old('is_featured', $programa->is_featured) ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="is_featured">
+                                <strong>Destacar en home</strong>
+                            </label>
+                        </div>
+                        <small class="text-muted d-block mt-1">Se mostrara en Programas Destacados del home.</small>
+                    </div>
                 </div>
 
         </div>

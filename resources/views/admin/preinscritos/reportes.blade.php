@@ -106,11 +106,14 @@
                     <button type="submit" class="btn btn-outline-primary btn-sm">
                         <i class="fas fa-search"></i> Aplicar filtros
                     </button>
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalGenerarReporte">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="generarReporte()">
                         <i class="fas fa-file-alt"></i> Generar reporte
                     </button>
                     <button type="button" class="btn btn-success btn-sm" onclick="generarExcel()">
                         <i class="fas fa-file-excel"></i> Generar Excel
+                    </button>
+                    <button type="button" class="btn btn-info btn-sm" onclick="exportarSOFIAPlus()" title="Exportar en formato SOFIA Plus del SENA">
+                        <i class="fas fa-file-upload"></i> SOFIA Plus
                     </button>
                     <a href="{{ route('preinscritos.reportes') }}" class="btn btn-outline-secondary btn-sm">
                         <i class="fas fa-redo"></i> Limpiar
@@ -120,30 +123,6 @@
                     </button>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- Modal Generar Reporte -->
-    <div class="modal fade" id="modalGenerarReporte" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Generar reporte</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    Selecciona cómo deseas guardar el reporte.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="guardarSoloBD()">
-                        Guardar solo en BD
-                    </button>
-                    <button type="button" class="btn btn-success" onclick="guardarYGenerarExcel()">
-                        Guardar y generar Excel
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -267,162 +246,146 @@
 
 @section('js')
 <script>
-function submitReporte(actionUrl) {
-    const form = document.getElementById('form-filtros');
-    if (!form) {
-        return;
-    }
-
-    const formData = new FormData(form);
-    const postForm = document.createElement('form');
-    postForm.method = 'POST';
-    postForm.action = actionUrl;
-
-    const csrf = document.createElement('input');
-    csrf.type = 'hidden';
-    csrf.name = '_token';
-    csrf.value = @json(csrf_token());
-    postForm.appendChild(csrf);
-
-    for (const [key, value] of formData.entries()) {
-        if (value !== null && value !== '') {
+    /**
+     * Función para generar reporte (solo registrar en BD)
+     */
+    function generarReporte() {
+        const form = document.getElementById('form-filtros');
+        const formData = new FormData(form);
+        
+        // Crear formulario temporal y enviarlo
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = "{{ route('preinscritos.reportar') }}";
+        
+        // Agregar token CSRF
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = '{{ csrf_token() }}';
+        tempForm.appendChild(csrfInput);
+        
+        // Agregar todos los campos del formulario
+        for (let [key, value] of formData.entries()) {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = key;
             input.value = value;
-            postForm.appendChild(input);
+            tempForm.appendChild(input);
         }
+        
+        document.body.appendChild(tempForm);
+        tempForm.submit();
     }
 
-    document.body.appendChild(postForm);
-    postForm.submit();
-}
-
-function generarExcel() {
-    submitReporte('{{ route('preinscritos.exportar') }}');
-}
-
-function guardarSoloBD() {
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalGenerarReporte'));
-    if (modal) {
-        modal.hide();
-    }
-    submitReporte('{{ route('preinscritos.reportar') }}');
-}
-
-function guardarYGenerarExcel() {
-    const modal = bootstrap.Modal.getInstance(document.getElementById('modalGenerarReporte'));
-    if (modal) {
-        modal.hide();
-    }
-    submitReporte('{{ route('preinscritos.exportar') }}');
-}
-
-async function downloadWithChooser(url, filename) {
-    if (!url) {
-        return;
-    }
-
-    if (window.showSaveFilePicker) {
-        try {
-            const response = await fetch(url, { credentials: 'same-origin' });
-            if (!response.ok) {
-                throw new Error('No se pudo descargar el archivo.');
-            }
-            const blob = await response.blob();
-            const handle = await window.showSaveFilePicker({
-                suggestedName: filename || 'reporte_preinscritos.xlsx',
-                types: [
-                    {
-                        description: 'Archivo Excel',
-                        accept: {
-                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']
-                        }
-                    }
-                ]
-            });
-            const writable = await handle.createWritable();
-            await writable.write(blob);
-            await writable.close();
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Archivo guardado',
-                text: 'El reporte se guardó correctamente.'
-            });
-            return;
-        } catch (error) {
-            if (error && error.name === 'AbortError') {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Descarga cancelada',
-                    text: 'No se guardó el archivo.'
-                });
-                return;
-            }
-
-            Swal.fire({
-                icon: 'warning',
-                title: 'Descarga directa',
-                text: 'No fue posible abrir el selector. Se iniciará la descarga.'
-            });
-        }
-    }
-
-    window.location.href = url;
-}
-
-function imprimirReporte() {
-    const tabla = document.getElementById('tablaReporte');
-    if (!tabla || tabla.rows.length === 0) {
+    /**
+     * Función para generar Excel
+     */
+    function generarExcel() {
+        const form = document.getElementById('form-filtros');
+        const formData = new FormData(form);
+        
         Swal.fire({
-            icon: 'warning',
-            title: 'Sin datos',
-            text: 'No hay datos para imprimir.'
+            title: 'Generando Excel...',
+            text: 'Por favor espere',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
         });
-        return;
+
+        // Crear formulario temporal y enviarlo
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = "{{ route('preinscritos.generar-excel') }}";
+        
+        // Agregar token CSRF
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = '{{ csrf_token() }}';
+        tempForm.appendChild(csrfInput);
+        
+        // Agregar todos los campos del formulario
+        for (let [key, value] of formData.entries()) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            tempForm.appendChild(input);
+        }
+        
+        document.body.appendChild(tempForm);
+        tempForm.submit();
     }
 
-    const ventana = window.open('', '_blank');
-    const html = `
-        <html>
-            <head>
-                <title>Reporte de Preinscritos - SENA</title>
-                <style>
-                    body { font-family: Arial, sans-serif; margin: 20px; }
-                    h2 { text-align: center; color: #333; }
-                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                    th { background-color: #f2f2f2; font-weight: bold; }
-                    tr:nth-child(even) { background-color: #f9f9f9; }
-                    .fecha { text-align: center; margin-top: 20px; color: #666; font-size: 12px; }
-                </style>
-            </head>
-            <body>
-                <h2>Reporte de Preinscritos - SENA</h2>
-                ${tabla.outerHTML}
-                <div class="fecha">
-                    Reporte generado el ${new Date().toLocaleString('es-CO')}
-                </div>
-            </body>
-        </html>
-    `;
-    ventana.document.write(html);
-    ventana.document.close();
-    ventana.print();
-}
+    /**
+     * Función para descargar archivo Excel en formato SOFIA Plus
+     */
+    function exportarSOFIAPlus() {
+        const form = document.getElementById('form-filtros');
+        const formData = new FormData(form);
+        
+        // Crear formulario temporal
+        const tempForm = document.createElement('form');
+        tempForm.method = 'POST';
+        tempForm.action = "{{ route('preinscritos.exportar-sofia-plus') }}";
+        
+        // Agregar token CSRF
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = '{{ csrf_token() }}';
+        tempForm.appendChild(csrfInput);
+        
+        // Agregar todos los campos del formulario
+        for (let [key, value] of formData.entries()) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            tempForm.appendChild(input);
+        }
+        
+        document.body.appendChild(tempForm);
+        tempForm.submit();
+        document.body.removeChild(tempForm);
+    }
+
+    /**
+     * Función para imprimir reporte
+     */
+    function imprimirReporte() {
+        const form = document.getElementById('form-filtros');
+        const params = new URLSearchParams(new FormData(form)).toString();
+        const url = "{{ route('reportes.imprimir') }}" + (params ? '?' + params : '');
+        
+        window.open(url, '_blank');
+    }
+
+    /**
+     * Función auxiliar para descargar archivos
+     */
+    function downloadWithChooser(url, filename) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 </script>
 
 @if(session('success'))
 <script>
-    const downloadUrl = @json(session('download_url'));
-    const downloadName = @json(session('download_name'));
+    const downloadUrl = "{{ session('download_url') }}";
+    const downloadName = "{{ session('download_name') }}";
 
     if (downloadUrl) {
         Swal.fire({
             icon: 'success',
             title: 'Reporte generado',
-            text: @json(session('success')),
+            text: "{{ session('success') }}",
             showCancelButton: true,
             confirmButtonText: 'Descargar',
             cancelButtonText: 'Cerrar'
@@ -435,7 +398,7 @@ function imprimirReporte() {
         Swal.fire({
             icon: 'success',
             title: 'Reporte generado',
-            text: @json(session('success'))
+            text: "{{ session('success') }}",
         });
     }
 </script>
@@ -446,7 +409,7 @@ function imprimirReporte() {
     Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: @json(session('error'))
+        text: "{{ session('error') }}"
     });
 </script>
 @endif

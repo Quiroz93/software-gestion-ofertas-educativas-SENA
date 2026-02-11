@@ -34,7 +34,8 @@ class UpdatePresritoRequest extends FormRequest
                 'required',
                 'string',
                 'max:50',
-                Rule::unique('preinscritos', 'numero_documento')->ignore($presritoId),
+                // Nota: La validación de duplicado se realiza en el controlador
+                // basada en si los datos sensibles fueron modificados
             ],
             'celular_principal' => ['required', 'string', 'max:20'],
             'celular_alternativo' => ['nullable', 'string', 'max:20'],
@@ -76,7 +77,6 @@ class UpdatePresritoRequest extends FormRequest
             'tipo_documento.required' => 'El tipo de documento es obligatorio.',
             'tipo_documento.in' => 'El tipo de documento seleccionado no es válido.',
             'numero_documento.required' => 'El número de documento es obligatorio.',
-            'numero_documento.unique' => 'Este número de documento ya está registrado.',
             'celular_principal.required' => 'El celular principal es obligatorio.',
             'correo_principal.required' => 'El correo principal es obligatorio.',
             'correo_principal.email' => 'El correo principal debe ser un email válido.',

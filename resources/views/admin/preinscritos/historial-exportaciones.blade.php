@@ -79,7 +79,7 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-xs btn-outline-info" 
-                                                        onclick="mostrarDetalles({{ $exportacion->id }})"
+                                                        onclick="mostrarDetalles('{{ $exportacion->id }}')"
                                                         title="Ver detalles">
                                                     <i class="fas fa-eye"></i>
                                                 </button>

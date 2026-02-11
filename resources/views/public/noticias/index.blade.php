@@ -2,6 +2,10 @@
 
 @section('title', 'Noticias y Artículos')
 
+@push('styles')
+    @vite(['resources/css/public/noticias.css'])
+@endpush
+
 @section('content')
 <div class="container-fluid">
     <!-- Hero Section -->

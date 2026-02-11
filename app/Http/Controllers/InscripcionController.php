@@ -26,6 +26,11 @@ class InscripcionController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        // Verificar que el usuario tenga rol 'aprendiz' o 'aspirante'
+        if (!$user->hasAnyRole(['aprendiz', 'aspirante'])) {
+            throw new AuthorizationException('Solo los aprendices y aspirantes pueden inscribirse en programas');
+        }
+
         // Verificar si ya está inscrito
         $yaInscrito = Inscripcion::where('user_id', $user->id)
             ->where('programa_id', $programa->id)
@@ -58,6 +63,11 @@ class InscripcionController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        // Verificar que el usuario tenga rol 'aprendiz' o 'aspirante'
+        if (!$user->hasAnyRole(['aprendiz', 'aspirante'])) {
+            return back()->with('error', 'Solo los aprendices y aspirantes pueden inscribirse en programas');
+        }
+
         try {
             DB::beginTransaction();
 
@@ -72,19 +82,7 @@ class InscripcionController extends Controller
                 return back()->with('error', 'Ya estás inscrito en este programa');
             }
 
-            // 2. Validar cupo disponible (si está configurado)
-            if ($programa->cupo_maximo !== null) {
-                $inscritosActivos = Inscripcion::where('programa_id', $programa->id)
-                    ->where('estado', 'activo')
-                    ->count();
-
-                if ($inscritosActivos >= $programa->cupo_maximo) {
-                    DB::rollBack();
-                    return back()->with('error', 'El programa ha alcanzado su cupo máximo de inscritos');
-                }
-            }
-
-            // 3. Validar requisitos del programa (si existen)
+            // 2. Validar requisitos del programa (si existen)
             if ($programa->requisitos) {
                 $cumpleRequisitos = $this->validarRequisitos($user, $programa);
                 if (!$cumpleRequisitos) {
@@ -93,11 +91,11 @@ class InscripcionController extends Controller
                 }
             }
 
-            // 4. Crear la inscripción
+            // 3. Crear la inscripción
             $inscripcion = Inscripcion::create([
                 'user_id' => $user->id,
                 'programa_id' => $programa->id,
-                'instructor_id' => $programa->instructor_id,
+                'instructor_id' => null, // Se asignará posteriormente por el administrador
                 'fecha_inscripcion' => now()->toDateString(),
                 'estado' => 'activo',
                 'observaciones' => $request->input('observaciones', null),

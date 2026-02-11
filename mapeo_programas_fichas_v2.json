@@ -1,0 +1,176 @@
+{
+    "Análisis y Desarrollo de Software": {
+        "ficha": "3410551",
+        "nombre_seeder": "Análisis y Desarrollo de Software",
+        "preinscritos": 17,
+        "razon": "Coincidencia directa"
+    },
+    "Cosmetología y Estética Integral": {
+        "ficha": "3410528",
+        "nombre_seeder": "Cosmetología y Estética Integral",
+        "preinscritos": 29,
+        "razon": "Coincidencia directa"
+    },
+    "Dibujo Arquitectónico - FIC": {
+        "ficha": "3410525",
+        "nombre_seeder": "Dibujo Arquitectónico - FIC",
+        "preinscritos": 12,
+        "razon": "Coincidencia directa"
+    },
+    "Gestión Administrativa": {
+        "ficha": "3410568",
+        "nombre_seeder": "Gestión Administrativa",
+        "preinscritos": 18,
+        "razon": "Coincidencia directa"
+    },
+    "Actividad Física": {
+        "ficha": "3410548",
+        "nombre_seeder": "Actividad Física",
+        "preinscritos": 17,
+        "razon": "Coincidencia directa"
+    },
+    "Topografía": {
+        "ficha": "3410569",
+        "nombre_seeder": "Levantamientos Topográficos y Georreferenciación",
+        "preinscritos": 46,
+        "razon": "Detección de variante: Topografía"
+    },
+    "Gestión Contable y de Información Financiera": {
+        "ficha": "3410558",
+        "nombre_seeder": "Gestión Contable y de Información Financiera",
+        "preinscritos": 27,
+        "razon": "Coincidencia directa"
+    },
+    "Sistemas": {
+        "ficha": "3410564",
+        "nombre_seeder": "Coordinación en Sistemas Integrados de Gestión",
+        "preinscritos": 1,
+        "razon": "Coincidencia directa"
+    },
+    "Procesos de Panadería": {
+        "ficha": "3410523",
+        "nombre_seeder": "Procesos de Panadería",
+        "preinscritos": 7,
+        "razon": "Coincidencia directa"
+    },
+    "Atención Integral a la Primera Infancia": {
+        "ficha": "3410527",
+        "nombre_seeder": "Atención Integral a la Primera Infancia",
+        "preinscritos": 10,
+        "razon": "Coincidencia directa"
+    },
+    "Actividad Fisica": {
+        "ficha": "3410548",
+        "nombre_seeder": "Actividad Física",
+        "preinscritos": 3,
+        "razon": "Coincidencia directa"
+    },
+    "Topografia": {
+        "ficha": "3410569",
+        "nombre_seeder": "Levantamientos Topográficos y Georreferenciación",
+        "preinscritos": 4,
+        "razon": "Detección de variante: Topografía"
+    },
+    "Coordinacion en sistemas integrados de gestion": {
+        "ficha": "3410564",
+        "nombre_seeder": "Coordinación en Sistemas Integrados de Gestión",
+        "preinscritos": 1,
+        "razon": "Coincidencia directa"
+    },
+    "adso": {
+        "ficha": "3410551",
+        "nombre_seeder": "Análisis y Desarrollo de Software",
+        "preinscritos": 1,
+        "razon": "Regla especial: ADSO = Análisis y Desarrollo de Software"
+    },
+    "Adso": {
+        "ficha": "3410551",
+        "nombre_seeder": "Análisis y Desarrollo de Software",
+        "preinscritos": 2,
+        "razon": "Regla especial: ADSO = Análisis y Desarrollo de Software"
+    },
+    "Dibujo Arquitectonico": {
+        "ficha": "3410525",
+        "nombre_seeder": "Dibujo Arquitectónico - FIC",
+        "preinscritos": 1,
+        "razon": "Coincidencia directa"
+    },
+    "atencion integral a la primera infancia": {
+        "ficha": "3410527",
+        "nombre_seeder": "Atención Integral a la Primera Infancia",
+        "preinscritos": 1,
+        "razon": "Coincidencia directa"
+    },
+    "Gestion administrativa": {
+        "ficha": "3410568",
+        "nombre_seeder": "Gestión Administrativa",
+        "preinscritos": 6,
+        "razon": "Coincidencia directa"
+    },
+    "Primera infancia": {
+        "ficha": "3410527",
+        "nombre_seeder": "Atención Integral a la Primera Infancia",
+        "preinscritos": 3,
+        "razon": "Coincidencia directa"
+    },
+    "Mantenimiento de motos y motocarros": {
+        "ficha": "1000001",
+        "preinscritos": 2
+    },
+    "Enfermería": {
+        "ficha": "1000002",
+        "preinscritos": 7
+    },
+    "Procesamiento de carnes": {
+        "ficha": "1000003",
+        "preinscritos": 1
+    },
+    "Producción ganadera": {
+        "ficha": "1000004",
+        "preinscritos": 1
+    },
+    "Gestión de la Producción Agrícola": {
+        "ficha": "1000005",
+        "preinscritos": 1
+    },
+    "Construcción en edificaciones": {
+        "ficha": "1000006",
+        "preinscritos": 3
+    },
+    "Cocina": {
+        "ficha": "1000007",
+        "preinscritos": 1
+    },
+    "Cuidador": {
+        "ficha": "1000008",
+        "preinscritos": 1
+    },
+    "Coordinación de sistemas integrados de gestión": {
+        "ficha": "1000009",
+        "preinscritos": 11
+    },
+    "GESTIO A LA PRIMERA INFANCA": {
+        "ficha": "1000010",
+        "preinscritos": 1
+    },
+    "N\/A": {
+        "ficha": "1000011",
+        "preinscritos": 1
+    },
+    "Cultivos agrícolas": {
+        "ficha": "1000012",
+        "preinscritos": 2
+    },
+    "Salud Ocupacional": {
+        "ficha": "1000013",
+        "preinscritos": 1
+    },
+    "Inglés": {
+        "ficha": "1000014",
+        "preinscritos": 1
+    },
+    "costruccion\/electricidad": {
+        "ficha": "1000015",
+        "preinscritos": 1
+    }
+}

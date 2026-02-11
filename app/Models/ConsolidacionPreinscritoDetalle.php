@@ -17,6 +17,20 @@ class ConsolidacionPreinscritoDetalle extends Model
         'codigo_ficha',
         'nombre_programa',
         'observaciones',
+        // Campos opcionales para REGIONAL SANTANDER
+        'nis',
+        'correo_electronico',
+        'telefono_fijo',
+        'telefono_movil',
+        'tipo_prueba',
+        'resultado_prueba',
+        'fecha_cargue',
+        'estado_prueba',
+        'motivo_prueba',
+        'fecha_prueba',
+        'acceso_preferente',
+        'digito',
+        'dia_pico_placa',
     ];
 
     public function consolidacion()

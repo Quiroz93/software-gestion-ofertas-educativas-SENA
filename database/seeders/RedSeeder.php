@@ -30,12 +30,21 @@ class RedSeeder extends Seeder
                 'descripcion' => 'Competencias en gestión, liderazgo y desarrollo de personas.'
             ],
             [
+<<<<<<< HEAD
                 'nombre' => 'Red de Sostenibilidad Ambiental',
                 'descripcion' => 'Programas enfocados en sostenibilidad, medio ambiente y energías limpias.'
             ],
             [
                 'nombre' => 'Red de Deportes y Recreación',
                 'descripcion' => 'Programas en actividades físicas, deportes y recreación.'
+=======
+                'nombre' => 'Red de Salud y Bienestar',
+                'descripcion' => 'Formación en servicios de salud, estética, cosmetología y bienestar personal.'
+            ],
+            [
+                'nombre' => 'Red de Deportes y Recreación',
+                'descripcion' => 'Programas de actividad física, entrenamiento deportivo y recreación.'
+>>>>>>> develop
             ]
         ];
 

@@ -2,6 +2,10 @@
 
 @section('title', 'Detalle del Centro')
 
+@push('styles')
+    @vite(['resources/css/public/centros.css'])
+@endpush
+
 @section('content')
 <div class="container py-5">
     <div class="card">

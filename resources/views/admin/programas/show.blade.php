@@ -144,6 +144,54 @@
                         </p>
                     </div>
 
+                    {{-- Código QR de Inscripción --}}
+                    @php
+                        $enlaceInscripcion = $programa->customContents()
+                            ->where('key', 'enlace_inscripcion')
+                            ->value('value');
+                    @endphp
+
+                    @if($enlaceInscripcion)
+                        <div class="mb-4 mt-4 border-top pt-4">
+                            <h5 class="text-primary mb-3">
+                                <i class="fas fa-qrcode"></i>
+                                Código QR de Inscripción
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <img src="{{ route('programas.qr.generar', $programa) }}" 
+                                             alt="QR Code" 
+                                             class="img-fluid"
+                                             style="max-width: 300px;">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <div>
+                                        <p class="text-muted mb-3">
+                                            <i class="fas fa-info-circle"></i>
+                                            Escanea este código QR para acceder directamente al formulario de inscripción del programa.
+                                        </p>
+                                        <div class="d-grid gap-2">
+                                            <a href="{{ route('programas.qr.descargar', $programa) }}" 
+                                               class="btn btn-success"
+                                               download>
+                                                <i class="fas fa-download"></i>
+                                                Descargar QR en SVG
+                                            </a>
+                                            <a href="{{ $enlaceInscripcion }}" 
+                                               class="btn btn-info" 
+                                               target="_blank">
+                                                <i class="fas fa-external-link-alt"></i>
+                                                Abrir enlace de inscripción
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
 
                 {{-- FOOTER --}}
