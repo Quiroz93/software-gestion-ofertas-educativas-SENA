@@ -32,6 +32,10 @@ class RedSeeder extends Seeder
             [
                 'nombre' => 'Red de Sostenibilidad Ambiental',
                 'descripcion' => 'Programas enfocados en sostenibilidad, medio ambiente y energías limpias.'
+            ],
+            [
+                'nombre' => 'Red de Deportes y Recreación',
+                'descripcion' => 'Programas en actividades físicas, deportes y recreación.'
             ]
         ];
 

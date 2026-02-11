@@ -452,6 +452,32 @@ unset($__errorArgs, $__bag); ?>
 <?php endif; ?>
                 </div>
             </div>
+
+            <!-- User Programs Section (Full Width) -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <?php if (isset($component)) { $__componentOriginal4194c2e75d40e812c83896ed625e2022 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal4194c2e75d40e812c83896ed625e2022 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.profile.user-programs','data' => ['user' => $user]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('profile.user-programs'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['user' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($user)]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal4194c2e75d40e812c83896ed625e2022)): ?>
+<?php $attributes = $__attributesOriginal4194c2e75d40e812c83896ed625e2022; ?>
+<?php unset($__attributesOriginal4194c2e75d40e812c83896ed625e2022); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal4194c2e75d40e812c83896ed625e2022)): ?>
+<?php $component = $__componentOriginal4194c2e75d40e812c83896ed625e2022; ?>
+<?php unset($__componentOriginal4194c2e75d40e812c83896ed625e2022); ?>
+<?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

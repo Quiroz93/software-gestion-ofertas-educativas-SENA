@@ -224,10 +224,26 @@
     </div>
     <?php endif; ?>
 
+    
+    <div class="col-md-4 mt-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-header">
+                <i class="bi bi-images fa-3x text-sena"></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Carousel del Home</h5>
+                <p class="text-muted small">Administra los slides del carousel institucional</p>
+                <a href="<?php echo e(route('admin.home-carousel.index')); ?>" class="btn btn-sena btn-sm mt-3">
+                    Gestionar carousel
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </div>
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Saave\Documents\project\SOES\SoeSoftware2\resources\views/dashboard.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Saave\Documents\project\SOES\SoeSoftware2\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

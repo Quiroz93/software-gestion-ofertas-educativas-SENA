@@ -17,12 +17,11 @@
                 <!-- Delete Photo Button -->
                 <form method="POST" 
                       action="<?php echo e(route('profile.photo.destroy')); ?>" 
-                      class="d-inline"
-                      onsubmit="return confirm('¿Estás seguro de eliminar tu foto de perfil?');">
+                      class="d-inline deletePhotoForm">
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('DELETE'); ?>
-                    <button type="submit" 
-                            class="btn btn-danger btn-sm rounded-circle position-absolute top-0 end-0"
+                    <button type="button" 
+                            class="btn btn-danger btn-sm rounded-circle position-absolute top-0 end-0 deletePhotoBtn"
                             style="width: 32px; height: 32px; padding: 0;">
                         <i class="bi bi-trash"></i>
                     </button>
@@ -89,6 +88,39 @@ function previewPhoto(event) {
         reader.readAsDataURL(file);
     }
 }
+
+// Confirmación para eliminar foto con SweetAlert2
+document.addEventListener('DOMContentLoaded', function() {
+    const deletePhotoBtn = document.querySelector('.deletePhotoBtn');
+    const deletePhotoForm = document.querySelector('.deletePhotoForm');
+    
+    if (deletePhotoBtn && deletePhotoForm) {
+        deletePhotoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            Swal.fire({
+                title: '¿Eliminar foto de perfil?',
+                text: 'Esta acción no se puede deshacer',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="bi bi-trash me-1"></i> Sí, eliminar',
+                cancelButtonText: '<i class="bi bi-x-circle me-1"></i> Cancelar',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: 'btn btn-danger btn-sm',
+                    cancelButton: 'btn btn-secondary btn-sm'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deletePhotoForm.submit();
+                }
+            });
+        });
+    }
+});
 </script>
 <?php $__env->stopPush(); ?>
 <?php /**PATH C:\Users\Saave\Documents\project\SOES\SoeSoftware2\resources\views/components/profile/photo-upload.blade.php ENDPATH**/ ?>
