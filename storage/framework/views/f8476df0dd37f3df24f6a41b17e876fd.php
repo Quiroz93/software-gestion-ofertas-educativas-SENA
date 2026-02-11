@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
 
     <!-- Assets -->
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/sena-utilities.css', 'resources/css/public/public.css', 'resources/js/public/public.js']); ?>
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/sena-utilities.css', 'resources/js/public/public.js']); ?>
 
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
@@ -31,7 +31,9 @@
 <div id="app">
 
     
-    <?php echo $__env->make('partials.navbar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php if(!View::hasSection('hide_navbar')): ?>
+        <?php echo $__env->make('partials.navbar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php endif; ?>
 
     
     <main class="py-4">
@@ -41,6 +43,7 @@
 </div>
 
 
+<?php if(!View::hasSection('hide_footer')): ?>
 <footer class="bg-light py-5" style="font-family: 'Work Sans', sans-serif;">
     <div class="container">
         <div class="row">
@@ -94,6 +97,7 @@
         </div>
     </div>
 </footer>
+<?php endif; ?>
 
 
 <?php if(auth()->guard()->check()): ?>

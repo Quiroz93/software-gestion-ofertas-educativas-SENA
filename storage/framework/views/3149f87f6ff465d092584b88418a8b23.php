@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title><?php echo $__env->yieldContent('title', config('app.name', 'SENA')); ?> - Admin</title>
 
     
@@ -243,7 +244,7 @@
     
     <script>
         $(function() {
-            $('#myTable, .table').DataTable({
+            $('#myTable, #preinscritos-table').DataTable({
                 responsive: true,
                 autoWidth: false,
                 language: {

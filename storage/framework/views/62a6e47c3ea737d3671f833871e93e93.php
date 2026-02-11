@@ -1,11 +1,9 @@
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center"
+<li class="nav-item dropdown user-menu">
+    <a class="nav-link dropdown-toggle d-flex align-items-center user-menu-toggle"
         href="#"
         id="userDropdown"
         role="button"
-        data-bs-toggle="dropdown"
         aria-expanded="false">
-        <span class="bi bi-hand text-light me-2">¡Bienvenido!</span>
         <img src="<?php echo e(Auth::user()->profile_photo_url); ?>"
             class="rounded-circle me-2"
             style="width: 32px; height: 32px; object-fit: cover;"
@@ -80,18 +78,4 @@
             </form>
         </li>
     </ul>
-</li>
-
-<style>
-    .dropdown-item {
-        transition: background-color 0.2s ease;
-    }
-
-    .dropdown-item:hover {
-        background-color: #f8f9fa;
-    }
-
-    .dropdown-item.text-danger:hover {
-        background-color: #f8d7da;
-    }
-</style><?php /**PATH C:\Users\Saave\Documents\project\SOES\SoeSoftware2\resources\views/partials/user-menu.blade.php ENDPATH**/ ?>
+</li><?php /**PATH C:\Users\Saave\Documents\project\SOES\SoeSoftware2\resources\views/partials/user-menu.blade.php ENDPATH**/ ?>

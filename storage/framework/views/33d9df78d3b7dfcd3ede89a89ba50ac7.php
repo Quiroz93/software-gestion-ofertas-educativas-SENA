@@ -78,6 +78,17 @@
             <?php endif; ?>
 
             
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.admin')): ?>
+            <li class="sidebar-nav-item">
+                <a href="<?php echo e(route('admin.preinscritos-rechazados.index')); ?>"
+                   class="sidebar-nav-link <?php echo e(request()->routeIs('admin.preinscritos-rechazados.*') ? 'active' : ''); ?>">
+                    <i class="bi bi-x-circle"></i>
+                    <span>Registros Rechazados</span>
+                </a>
+            </li>
+            <?php endif; ?>
+
+            
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('novedad.tipos.admin')): ?>
             <li class="sidebar-nav-item">
                 <a href="<?php echo e(route('tipos-novedad.index')); ?>"
@@ -95,6 +106,13 @@
                    class="sidebar-nav-link <?php echo e(request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : ''); ?>">
                     <i class="bi bi-file-earmark-spreadsheet"></i>
                     <span>Reportes</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="<?php echo e(route('preinscritos.historial-exportaciones')); ?>"
+                   class="sidebar-nav-link ps-4 <?php echo e(request()->routeIs('preinscritos.historial-exportaciones') ? 'active' : ''); ?>">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Historial de Exportaciones</span>
                 </a>
             </li>
             <?php endif; ?>
@@ -259,6 +277,9 @@
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('preinscritos.export')): ?>
             <a class="nav-link <?php echo e(request()->routeIs('preinscritos.reportes', 'preinscritos.exportar', 'preinscritos.historial-exportaciones') ? 'active' : ''); ?>" href="<?php echo e(route('preinscritos.reportes')); ?>">
                 <i class="bi bi-file-earmark-spreadsheet me-2"></i>Reportes
+            </a>
+            <a class="nav-link ms-3 <?php echo e(request()->routeIs('preinscritos.historial-exportaciones') ? 'active' : ''); ?>" href="<?php echo e(route('preinscritos.historial-exportaciones')); ?>" style="font-size: 0.9rem;">
+                <i class="bi bi-clock-history me-2"></i>Historial de Exportaciones
             </a>
             <?php endif; ?>
             
