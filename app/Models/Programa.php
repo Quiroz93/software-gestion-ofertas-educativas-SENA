@@ -68,6 +68,15 @@ class Programa extends Model
     }
 
     /**
+     * Relación muchos a muchos con ofertas educativas
+     */
+    public function ofertas()
+    {
+        return $this->belongsToMany(Oferta::class, 'oferta_programas', 'programa_id', 'oferta_id')
+            ->withTimestamps();
+    }
+
+    /**
      * Relación con inscripciones
      */
     public function inscripciones()
