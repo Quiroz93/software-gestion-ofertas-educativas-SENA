@@ -3,6 +3,7 @@
         href="#"
         id="userDropdown"
         role="button"
+        data-bs-toggle="dropdown"
         aria-expanded="false">
         <img src="{{ Auth::user()->profile_photo_url }}"
             class="rounded-circle me-2"
