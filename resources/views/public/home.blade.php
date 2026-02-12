@@ -175,6 +175,11 @@
             <h2 class="section-title">Programas Destacados</h2>
             <p class="section-subtitle">Explora rutas formativas con alta empleabilidad y cupos limitados</p>
             <p class="section-subtitle">Recomendado: programas tecnicos, tecnologicos y cursos cortos con enfoque practico</p>
+            <div class="d-flex justify-content-end mt-2">
+                <a href="{{ route('public.programasDeFormacion.index') }}" class="btn btn-outline-sena fw-semibold">
+                    <i class="bi bi-list-ul me-2"></i>Ver todos los programas
+                </a>
+            </div>
         </div>
         
         <div class="category-tabs">
@@ -210,6 +215,11 @@
                             {{ $programa->modalidad ?? 'Presencial' }}
                         </p>
                         <p class="card-price">Formación 100% gratuita</p>
+                        <div class="mt-2">
+                            <a href="{{ route('public.programasDeFormacion.show', $programa) }}" class="btn btn-outline-sena btn-sm fw-semibold">
+                                <i class="bi bi-eye me-1"></i>Ver detalles
+                            </a>
+                        </div>
                     </div>
                 </div>
             @empty

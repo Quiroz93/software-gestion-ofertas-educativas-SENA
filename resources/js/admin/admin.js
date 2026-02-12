@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     });
 
+
     // DataTables initialization with Spanish
     if (typeof $.fn.dataTable !== 'undefined') {
         $('.data-table').DataTable({

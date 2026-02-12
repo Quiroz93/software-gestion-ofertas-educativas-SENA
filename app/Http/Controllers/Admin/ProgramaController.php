@@ -19,7 +19,24 @@ class ProgramaController extends \App\Http\Controllers\Controller
     public function index()
     {
         Gate::authorize('programas.view');
-        $programas = Programa::all();
+        $query = Programa::query();
+
+        // Filtro por red tecnológica
+        if (request('red')) {
+            $query->where('red_id', request('red'));
+        }
+
+        // Filtro por nombre
+        if (request('nombre')) {
+            $query->where('nombre', 'like', '%' . request('nombre') . '%');
+        }
+
+        // Filtro por número de ficha
+        if (request('ficha')) {
+            $query->where('numero_ficha', 'like', '%' . request('ficha') . '%');
+        }
+
+        $programas = $query->get();
         return view('admin.programas.index', compact('programas'));
     }
 

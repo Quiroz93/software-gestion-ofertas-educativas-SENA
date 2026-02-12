@@ -35,6 +35,17 @@
                 <small class="text-uppercase opacity-75">Contenido</small>
             </li>
 
+            {{-- Estadísticas de Preinscritos --}}
+            @can('preinscritos.estadisticas.view')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('admin.estadisticas-preinscritos.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('admin.estadisticas-preinscritos.*') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Estadísticas Preinscritos</span>
+                </a>
+            </li>
+            @endcan
+
             {{-- Programas --}}
             <li class="sidebar-nav-item">
                 <a href="{{ route('programas.index') }}"
@@ -43,6 +54,17 @@
                     <span>Programas</span>
                 </a>
             </li>
+
+                {{-- Detalles de Programas --}}
+                @can('programa_detalles.view')
+                <li class="sidebar-nav-item">
+                    <a href="{{ route('programa_detalles.index') }}"
+                       class="sidebar-nav-link {{ request()->routeIs('programa_detalles.*') ? 'active' : '' }}">
+                        <i class="bi bi-info-circle"></i>
+                        <span>Detalles de Programas</span>
+                    </a>
+                </li>
+                @endcan
 
             {{-- Preinscritos --}}
             @can('preinscritos.admin')
@@ -98,6 +120,17 @@
             </li>
             @endcan
 
+                {{-- Permisos por Categorías --}}
+                @can('permissions_categorias.view')
+                <li class="sidebar-nav-item">
+                    <a href="{{ route('permissions.categorias.index') }}"
+                       class="sidebar-nav-link {{ request()->routeIs('permissions.categorias.*') ? 'active' : '' }}">
+                        <i class="bi bi-layers"></i>
+                        <span>Permisos por Categorías</span>
+                    </a>
+                </li>
+                @endcan
+
             {{-- Reportes de Preinscritos --}}
             @can('preinscritos.export')
             <li class="sidebar-nav-item">
@@ -133,6 +166,17 @@
                     <span>Noticias</span>
                 </a>
             </li>
+
+                {{-- Carousel del Home --}}
+                @can('admin.home-carousel.view')
+                <li class="sidebar-nav-item">
+                    <a href="{{ route('admin.home-carousel.index') }}"
+                       class="sidebar-nav-link {{ request()->routeIs('admin.home-carousel.*') ? 'active' : '' }}">
+                        <i class="bi bi-images"></i>
+                        <span>Carousel del Home</span>
+                    </a>
+                </li>
+                @endcan
 
             {{-- Historias de Éxito --}}
             <li class="sidebar-nav-item">

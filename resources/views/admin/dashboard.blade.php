@@ -22,6 +22,83 @@
 <div class="container-fluid">
     <div class="row">
 
+    {{-- Preinscritos --}}
+    @can('preinscritos.view')
+    <div class="col-md-4 mt-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-header">
+                <i class="fas fa-user-check fa-3x"></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Preinscritos</h5>
+                <a href="{{ route('preinscritos.index') }}" class="btn btn-outline-success btn-sm mt-3">
+                    Gestionar preinscritos
+                </a>
+                <a href="{{ route('preinscritos.reportes') }}" class="btn btn-outline-info btn-sm mt-3 ms-2">
+                    Reportes
+                </a>
+                <a href="{{ route('preinscritos.historial-exportaciones') }}" class="btn btn-outline-secondary btn-sm mt-3 ms-2">
+                    Historial de exportaciones
+                </a>
+                <a href="{{ route('preinscritos.consolidaciones.index') }}" class="btn btn-outline-primary btn-sm mt-3 ms-2">
+                    Consolidaciones
+                </a>
+            </div>
+        </div>
+    </div>
+    @endcan
+
+    {{-- Programa Detalles --}}
+    @can('programa_detalles.view')
+    <div class="col-md-4 mt-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-header">
+                <i class="fas fa-info-circle fa-3x"></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Detalles de Programas</h5>
+                <a href="{{ route('programa_detalles.index') }}" class="btn btn-outline-warning btn-sm mt-3">
+                    Gestionar detalles
+                </a>
+            </div>
+        </div>
+    </div>
+    @endcan
+
+    {{-- Novedades (tipos) --}}
+    @can('novedades_tipos.view')
+    <div class="col-md-4 mt-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-header">
+                <i class="fas fa-exclamation-circle fa-3x"></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Tipos de Novedades</h5>
+                <a href="{{ route('novedades.tipos.index') }}" class="btn btn-outline-danger btn-sm mt-3">
+                    Gestionar tipos
+                </a>
+            </div>
+        </div>
+    </div>
+    @endcan
+
+    {{-- Permisos por Categorías --}}
+    @can('permissions_categorias.view')
+    <div class="col-md-4 mt-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-header">
+                <i class="fas fa-layer-group fa-3x"></i>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Permisos por Categorías</h5>
+                <a href="{{ route('permissions.categorias.index') }}" class="btn btn-outline-dark btn-sm mt-3">
+                    Gestionar categorías
+                </a>
+            </div>
+        </div>
+    </div>
+    @endcan
+
     {{-- Centros --}}
     @can('centros.view')
     <div class="col-md-4 mt-4">
