@@ -54,6 +54,7 @@ class EstadisticasPreinscritosController extends Controller
 
         // Inscritos, faltantes y rechazados por programa
         // Agrupar por programa y estado
+
         $estadosPorPrograma = Preinscrito::select('programa_id', 'estado', DB::raw('count(*) as total'))
             ->groupBy('programa_id', 'estado')
             ->get();
@@ -64,8 +65,22 @@ class EstadisticasPreinscritosController extends Controller
         foreach ($estadosPorPrograma as $row) {
             if ($row->estado === 'inscrito') {
                 $inscritosPorPrograma[$row->programa_id] = $row->total;
-            } elseif ($row->estado === 'rechazado') {
-                $rechazadosPorPrograma[$row->programa_id] = $row->total;
+            }
+        }
+
+        // Sumar rechazados desde preinscritos_rechazados
+        $rechazadosPorPrograma = [];
+        $rechazadosRaw = \DB::table('preinscritos_rechazados')
+            ->select('programa', DB::raw('count(*) as total'))
+            ->groupBy('programa')
+            ->get();
+        // Mapear nombre de programa a id si existe en la tabla programas
+        $programasNombreToId = Programa::pluck('id', 'nombre');
+        foreach ($rechazadosRaw as $row) {
+            $programaNombre = $row->programa;
+            $programaId = $programasNombreToId[$programaNombre] ?? null;
+            if ($programaId) {
+                $rechazadosPorPrograma[$programaId] = $row->total;
             }
         }
 
