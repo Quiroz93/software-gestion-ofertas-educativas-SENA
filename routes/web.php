@@ -126,6 +126,16 @@ Route::middleware(['auth', 'verified', 'can:programas.view'])
             ->parameters(['content_public_programas' => 'content_public_programa']);
     });
 
+/*--------------------------------------------------------------------------
+| Estadísticas de Preinscritos (ADMIN)
+|--------------------------------------------------------------------------*/
+Route::middleware(['auth', 'verified', 'can:preinscritos.estadisticas.view'])
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('estadisticas-preinscritos', [\App\Http\Controllers\Admin\EstadisticasPreinscritosController::class, 'index'])
+            ->name('admin.estadisticas-preinscritos.index');
+    });
+
 /*
 |--------------------------------------------------------------------------
 | Roles (ADMIN)

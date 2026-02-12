@@ -35,6 +35,17 @@
                 <small class="text-uppercase opacity-75">Contenido</small>
             </li>
 
+            {{-- Estadísticas de Preinscritos --}}
+            @can('preinscritos.estadisticas.view')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('admin.estadisticas-preinscritos.index') }}"
+                   class="sidebar-nav-link {{ request()->routeIs('admin.estadisticas-preinscritos.*') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Estadísticas Preinscritos</span>
+                </a>
+            </li>
+            @endcan
+
             {{-- Programas --}}
             <li class="sidebar-nav-item">
                 <a href="{{ route('programas.index') }}"

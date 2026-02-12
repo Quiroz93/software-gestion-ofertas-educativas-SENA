@@ -40,6 +40,7 @@ export default defineConfig({
                 /* JavaScript */
                 'resources/js/common/app.js',
                 'resources/js/admin/admin.js',
+                'resources/js/admin/estadisticas.js',
                 'resources/js/public/public.js'
             ],
             refresh: true,
