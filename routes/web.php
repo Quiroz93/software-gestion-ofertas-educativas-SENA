@@ -37,19 +37,15 @@ use App\Http\Controllers\Admin\NovedadPreinscritoController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\InscripcionController;
 
-/*
-| Respaldo y limpieza de preinscritos (ADMIN)
-|--------------------------------------------------------------------------*/
+
+// Respaldo y limpieza de preinscritos (ADMIN)
 Route::middleware(['auth', 'verified', 'can:preinscritos.admin'])
     ->prefix('admin')
     ->group(function () {
         Route::post('preinscritos/respaldar-limpiar', [\App\Http\Controllers\Admin\PreinscritosHistoricoController::class, 'respaldarYLimpiar'])
             ->name('preinscritos.respaldar-limpiar');
     });
-|--------------------------------------------------------------------------
-| Programa Detalle (ADMIN)
-|--------------------------------------------------------------------------
-*/
+// Programa Detalle (ADMIN)
 
 Route::middleware(['auth', 'can:public_content.edit'])->group(function () {
     Route::get('/public/media/list', [MediaContentController::class, 'list'])

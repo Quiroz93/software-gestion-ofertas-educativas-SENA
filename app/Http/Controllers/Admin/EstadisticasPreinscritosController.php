@@ -8,6 +8,7 @@ use App\Models\Preinscrito;
 use App\Models\Programa;
 use Illuminate\Support\Facades\DB;
 use App\Models\Oferta;
+use Carbon\Carbon;
 
 class EstadisticasPreinscritosController extends Controller
 {
@@ -70,7 +71,7 @@ class EstadisticasPreinscritosController extends Controller
 
         // Sumar rechazados desde preinscritos_rechazados
         $rechazadosPorPrograma = [];
-        $rechazadosRaw = \DB::table('preinscritos_rechazados')
+        $rechazadosRaw = DB::table('preinscritos_rechazados')
             ->select('programa', DB::raw('count(*) as total'))
             ->groupBy('programa')
             ->get();
