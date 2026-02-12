@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Preinscrito;
 use App\Models\Programa;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Models\Oferta;
 
 class EstadisticasPreinscritosController extends Controller
 {
@@ -115,5 +115,84 @@ class EstadisticasPreinscritosController extends Controller
         ], $kpis);
 
         return view('admin.estadisticas.index', compact('kpis', 'programasFicha'));
+    }
+
+    /**
+     * Endpoint para filtros dinámicos de la gráfica.
+     * Devuelve años, ofertas y programas disponibles.
+     */
+    public function filtros(Request $request)
+    {
+        $anios = Oferta::select('año')->distinct()->orderBy('año', 'desc')->pluck('año');
+        $ofertas = Oferta::select('id', 'nombre')->orderBy('nombre')->get();
+        $programas = Programa::select('id', 'nombre')->orderBy('nombre')->get();
+
+        return response()->json([
+            'anios' => $anios,
+            'ofertas' => $ofertas,
+            'programas' => $programas,
+        ]);
+    }
+
+    /**
+     * Endpoint para métricas agregadas de la gráfica.
+     * Valida parámetros y retorna datos agregados.
+     */
+    public function metricas(Request $request)
+    {
+        $anio = $request->input('anio');
+        $ofertaId = $request->input('oferta_id');
+        $programaId = $request->input('programa_id');
+
+        // Validación básica
+        if ($anio && !is_numeric($anio)) {
+            return response()->json(['error' => 'Año inválido'], 422);
+        }
+        if ($ofertaId && !is_numeric($ofertaId)) {
+            return response()->json(['error' => 'Oferta inválida'], 422);
+        }
+        if ($programaId && !is_numeric($programaId)) {
+            return response()->json(['error' => 'Programa inválido'], 422);
+        }
+
+        // Subconsulta: Total de ofertas por año
+        $ofertasPorAnio = DB::table('ofertas')
+            ->select('año', DB::raw('COUNT(DISTINCT id) as total_ofertas'))
+            ->when($anio, fn($q) => $q->where('año', $anio))
+            ->groupBy('año');
+
+        // Subconsulta: Total de inscritos por oferta
+        $inscritosPorOferta = DB::table('inscritos')
+            ->select('oferta_id', DB::raw('COUNT(DISTINCT user_id) as total_inscritos'))
+            ->when($anio, fn($q) => $q->where('anio', $anio))
+            ->when($ofertaId, fn($q) => $q->where('oferta_id', $ofertaId))
+            ->when($programaId, fn($q) => $q->where('programa_id', $programaId))
+            ->groupBy('oferta_id');
+
+        // Subconsulta: Preinscritos rechazados, con novedad, novedades solucionadas y pendientes
+        $preinscritosQuery = DB::table('preinscritos')
+            ->join('programas', 'preinscritos.programa_id', '=', 'programas.id')
+            ->join('oferta_programas', 'programas.id', '=', 'oferta_programas.programa_id')
+            ->join('ofertas', 'oferta_programas.oferta_id', '=', 'ofertas.id')
+            ->select(
+                'ofertas.id as oferta_id',
+                'ofertas.año',
+                'programas.id as programa_id',
+                DB::raw("COUNT(DISTINCT CASE WHEN preinscritos.estado = 'rechazado' THEN preinscritos.id END) as rechazados"),
+                DB::raw("COUNT(DISTINCT CASE WHEN preinscritos.estado = 'con_novedad' THEN preinscritos.id END) as con_novedad"),
+                DB::raw("COUNT(DISTINCT CASE WHEN np.estado = 'resuelta' THEN np.id END) as novedades_solucionadas"),
+                DB::raw("COUNT(DISTINCT CASE WHEN np.estado = 'abierta' OR np.estado = 'en_gestion' THEN np.id END) as novedades_pendientes")
+            )
+            ->leftJoin('novedades_preinscritos as np', 'preinscritos.id', '=', 'np.preinscrito_id')
+            ->when($anio, fn($q) => $q->where('ofertas.año', $anio))
+            ->when($ofertaId, fn($q) => $q->where('ofertas.id', $ofertaId))
+            ->when($programaId, fn($q) => $q->where('programas.id', $programaId))
+            ->groupBy('ofertas.id', 'ofertas.año', 'programas.id');
+
+        return response()->json([
+            'ofertas_por_anio' => $ofertasPorAnio->get(),
+            'inscritos_por_oferta' => $inscritosPorOferta->get(),
+            'preinscritos_metricas' => $preinscritosQuery->get(),
+        ]);
     }
 }

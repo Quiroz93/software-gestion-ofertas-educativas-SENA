@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\Public\PublicCentroController;
@@ -39,6 +38,14 @@ use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\InscripcionController;
 
 /*
+| Respaldo y limpieza de preinscritos (ADMIN)
+|--------------------------------------------------------------------------*/
+Route::middleware(['auth', 'verified', 'can:preinscritos.admin'])
+    ->prefix('admin')
+    ->group(function () {
+        Route::post('preinscritos/respaldar-limpiar', [\App\Http\Controllers\Admin\PreinscritosHistoricoController::class, 'respaldarYLimpiar'])
+            ->name('preinscritos.respaldar-limpiar');
+    });
 |--------------------------------------------------------------------------
 | Programa Detalle (ADMIN)
 |--------------------------------------------------------------------------
@@ -134,6 +141,12 @@ Route::middleware(['auth', 'verified', 'can:preinscritos.estadisticas.view'])
     ->group(function () {
         Route::get('estadisticas-preinscritos', [\App\Http\Controllers\Admin\EstadisticasPreinscritosController::class, 'index'])
             ->name('admin.estadisticas-preinscritos.index');
+        // Endpoint para filtros de la gráfica
+        Route::get('estadisticas-preinscritos/filtros', [\App\Http\Controllers\Admin\EstadisticasPreinscritosController::class, 'filtros'])
+            ->name('admin.estadisticas-preinscritos.filtros');
+        // Endpoint para métricas agregadas
+        Route::get('estadisticas-preinscritos/metricas', [\App\Http\Controllers\Admin\EstadisticasPreinscritosController::class, 'metricas'])
+            ->name('admin.estadisticas-preinscritos.metricas');
     });
 
 /*

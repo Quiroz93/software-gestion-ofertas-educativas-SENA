@@ -32,6 +32,16 @@
                 Consolidaciones
             </a>
         @endcan
+        @can('preinscritos.admin')
+            <form action="{{ route('preinscritos.respaldar-limpiar') }}" method="POST" class="d-inline-block ms-2" onsubmit="return confirm('¿Está seguro de respaldar y limpiar todos los preinscritos? Esta acción no se puede deshacer.')">
+                @csrf
+                <input type="hidden" name="oferta_id" value="{{ request('oferta_id') ?? ($ofertaActual->id ?? '') }}">
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="fas fa-database"></i>
+                    Respaldar y Limpiar
+                </button>
+            </form>
+        @endcan
         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i>
             Volver

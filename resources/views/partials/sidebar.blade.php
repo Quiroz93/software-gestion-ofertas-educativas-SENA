@@ -1,3 +1,12 @@
+            {{-- Respaldo y limpieza de Preinscritos --}}
+            @can('preinscritos.admin')
+            <li class="sidebar-nav-item">
+                <a href="{{ route('preinscritos.index') }}#respaldar-limpiar" class="sidebar-nav-link">
+                    <i class="bi bi-database"></i>
+                    <span>Respaldar/Limpiar Preinscritos</span>
+                </a>
+            </li>
+            @endcan
 {{-- Admin Sidebar con Bootstrap 5 Offcanvas --}}
 <aside class="sidebar d-none d-lg-block" id="sidebar-desktop">
     <div class="sidebar-header">
