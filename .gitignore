@@ -124,4 +124,5 @@ tmp/
 # Keep the storage/.gitignore placeholder if present
 /storage/
 !/storage/.gitignore
+public/uploads/profile-photos/
 
