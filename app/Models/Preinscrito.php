@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * Modelo de Preinscrito
- * Gestiona los aprendices preinscritos en los programas de formación
- */
 class Preinscrito extends Model
 {
+	use HasFactory;
     use SoftDeletes;
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -130,7 +131,7 @@ class NovedadPreinscrito extends Model
 
         // Actualizar estado
         $this->estado = $nuevoEstado;
-        $this->updated_by = $userId ?? auth()->id();
+        $this->updated_by = $userId ?? Auth::id();
         $this->save();
 
         // Registrar en historial
@@ -139,7 +140,7 @@ class NovedadPreinscrito extends Model
             'estado_anterior' => $estadoAnterior,
             'estado_nuevo' => $nuevoEstado,
             'comentario' => $comentario,
-            'changed_by' => $userId ?? auth()->id(),
+            'changed_by' => $userId ?? Auth::id(),
         ]);
 
         return $this;

@@ -191,8 +191,8 @@ class MediaService
             // Leer imagen con Intervention
             $image = $this->imageManager->read($fullPath);
 
-            // Aplicar cover (crop desde el centro) y reducir calidad
-            $image->cover($width, $height, 'center')->quality(85);
+            // Aplicar cover (crop desde el centro)
+            $image->cover($width, $height, 'center');
 
             // Generar ruta para el thumbnail
             $thumbnailPath = $this->getThumbnailPath($filePath);
@@ -203,9 +203,9 @@ class MediaService
                 mkdir($thumbnailDir, 0755, true);
             }
 
-            // Guardar thumbnail
+            // Guardar thumbnail con calidad 85
             $fullThumbPath = Storage::disk($this->disk)->path($thumbnailPath);
-            $image->save($fullThumbPath);
+            $image->save($fullThumbPath, 85);
 
             Log::info("Thumbnail generado exitosamente: {$thumbnailPath}");
             
@@ -261,7 +261,7 @@ class MediaService
 
             // Guardar poster
             $fullPosterPath = Storage::disk($this->disk)->path($posterPath);
-            $poster->quality(85)->save($fullPosterPath);
+            $poster->save($fullPosterPath, 85);
 
             Log::info("Video poster generado exitosamente: {$posterPath}");
             

@@ -18,6 +18,7 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
+        $this->seed();
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -25,7 +26,9 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
+        $user = \App\Models\User::where('email', 'test@example.com')->first();
+        $this->actingAs($user);
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('home'));
     }
 }

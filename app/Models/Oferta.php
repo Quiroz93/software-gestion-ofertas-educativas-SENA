@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\CustomContent;
 
 class Oferta extends Model
 {
+    use HasFactory;
     /**
      * Definir la tabla si no sigue la convención plural
      */

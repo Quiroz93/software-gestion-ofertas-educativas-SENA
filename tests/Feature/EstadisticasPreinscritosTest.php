@@ -22,8 +22,16 @@ class EstadisticasPreinscritosTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        // Crea usuario admin autenticado
-        $this->user = User::factory()->create(['role' => 'admin']);
+        // Ejecutar seeder de roles y permisos
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
+        // Crea usuario admin autenticado con rol
+        $this->user = User::factory()->admin()->create();
+        $this->user->givePermissionTo('admin.view');
+        $this->user->givePermissionTo('dashboard.view');
+        $this->user->givePermissionTo('preinscritos.admin');
+        $this->user->givePermissionTo('preinscritos.consolidaciones.admin');
+        $this->user->givePermissionTo('preinscritos.novedades.admin');
+        $this->user->givePermissionTo('preinscritos.estadisticas.view');
         $this->actingAs($this->user);
     }
 

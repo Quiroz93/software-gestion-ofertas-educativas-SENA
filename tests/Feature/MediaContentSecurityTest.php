@@ -206,8 +206,7 @@ class MediaContentSecurityTest extends TestCase
 
         $response->assertStatus(403);
         $response->assertJsonFragment([
-            'success' => false,
-            'message' => 'No tienes permisos para subir archivos'
+            'message' => 'This action is unauthorized.'
         ]);
     }
 

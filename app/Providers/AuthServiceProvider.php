@@ -51,5 +51,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('profile.delete', function (User $user, User $target) {
             return $user->id === $target->id;
         });
+
+        // Permitir acceso a estadísticas de preinscritos a admin
+        Gate::define('preinscritos.estadisticas.view', function (User $user) {
+            return $user->hasRole('admin');
+        });
     }
 }

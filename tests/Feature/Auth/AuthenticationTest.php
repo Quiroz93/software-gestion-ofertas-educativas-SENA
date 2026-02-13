@@ -27,7 +27,15 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+
+        // Validar redirección según permisos
+        if ($user->can('dashboard.view')) {
+            $response->assertRedirect(route('dashboard'));
+        } elseif ($user->can('ofertas.view')) {
+            $response->assertRedirect(route('ofertas.index'));
+        } else {
+            $response->assertRedirect(route('home'));
+        }
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void

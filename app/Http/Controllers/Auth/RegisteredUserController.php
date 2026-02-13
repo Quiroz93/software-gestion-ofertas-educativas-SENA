@@ -67,7 +67,13 @@ class RegisteredUserController extends Controller
         if ($bootstrap->systemIsInitialized()) {
             event(new Registered($user));
             Auth::login($user);
-
+            // Debug: dump authentication state
+            if (Auth::check()) {
+                
+                info('User authenticated after registration: ' . Auth::id());
+            } else {
+                info('User NOT authenticated after registration');
+            }
             return redirect()->route('home')->with('status', 'Welcome!');
         }
 
@@ -82,7 +88,12 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         Auth::login($user);
-
+        // Debug: dump authentication state
+        if (Auth::check()) {
+            info('User authenticated after registration: ' . Auth::id());
+        } else {
+            info('User NOT authenticated after registration');
+        }
         return redirect()->route('home')->with('status', 'Welcome! You are now a super admin.');
     }
 }

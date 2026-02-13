@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Programa extends Model
 {
+    use HasFactory;
+
     // Definir la tabla si no sigue la convención plural
     protected $table = 'programas';
 
