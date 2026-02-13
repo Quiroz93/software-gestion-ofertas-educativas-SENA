@@ -4,8 +4,10 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Password;
 use Tests\TestCase;
 
 class PasswordResetTest extends TestCase
@@ -24,8 +26,23 @@ class PasswordResetTest extends TestCase
         Notification::fake();
 
         $user = User::factory()->create();
+        $email = $user->email;
+        dump('Email usuario:', $email);
+        $broker = Password::broker();
+        $foundUser = $broker->getUser(['email' => $email]);
+        dump('Usuario encontrado por broker:', $foundUser ? $foundUser->email : null);
 
-        $this->post('/forgot-password', ['email' => $user->email]);
+
+        $response = $this->post('/forgot-password', ['email' => $email]);
+        dump('Email enviado en POST:', $email);
+        dump('POST response:', $response->getContent());
+
+        // Registrar notificaciones enviadas
+        $notifications = Notification::sent($user, ResetPassword::class);
+        dump('Notificaciones fake count:', $notifications->count());
+        foreach ($notifications as $notification) {
+            dump('Notificación:', $notification);
+        }
 
         Notification::assertSentTo($user, ResetPassword::class);
     }

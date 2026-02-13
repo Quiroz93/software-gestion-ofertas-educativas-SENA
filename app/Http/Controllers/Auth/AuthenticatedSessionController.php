@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Gate;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,10 +30,16 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $totalCentros = Centro::count();
-        $totalUsuarios = User::count();
+        $user = Auth::user();
 
-        return redirect()->route('home', compact('totalCentros', 'totalUsuarios'));
+        // Redirección centralizada según permisos
+        if (Gate::allows('dashboard.view')) {
+            return redirect()->route('dashboard');
+        }
+        if (Gate::allows('ofertas.view')) {
+            return redirect()->route('ofertas.index');
+        }
+        return redirect()->route('home');
     }
 
     /**

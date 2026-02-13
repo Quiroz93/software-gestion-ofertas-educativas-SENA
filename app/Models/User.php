@@ -17,6 +17,23 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
     use HasRoles, HasProfilePhoto;
 
+
+    /**
+     * Get the email address for password reset.
+     */
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Override to send password reset notification.
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \Illuminate\Auth\Notifications\ResetPassword($token));
+    }
+
     /**
      * Los atributos que se pueden asignar masivamente.
      *

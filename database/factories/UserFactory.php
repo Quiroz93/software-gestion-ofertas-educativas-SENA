@@ -33,6 +33,16 @@ class UserFactory extends Factory
     }
 
     /**
+     * Asigna el rol admin al usuario creado
+     */
+    public function admin(): static
+    {
+        return $this->afterCreating(function ($user) {
+            $user->assignRole('admin');
+        });
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

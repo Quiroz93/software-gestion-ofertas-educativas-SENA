@@ -144,3 +144,4 @@ echo sprintf("║  Programas con ficha genérica: %-42s║\n", count($noCoincide
 echo sprintf("║  Total de programas únicos: %-45s║\n", count($mapeoCompleto));
 echo sprintf("║  Total de preinscritos: %-49s║\n", array_sum(array_column($mapeoCompleto, 'preinscritos')));
 echo "╚══════════════════════════════════════════════════════════════════════════╝\n";
+
